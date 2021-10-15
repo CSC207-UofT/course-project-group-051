@@ -6,5 +6,5 @@ MD (Markdown) files use [Markdown formatting](https://guides.github.com/features
 these look very much like .txt files, so you can write them in a very similar way.
 
 1. Create a new Intellij project(JavaFX option) instead of directly cloning the repository. Select JDK 1.8x. Give the project a name.
-2. Download ALL files from the src/sample folder and paste them to the Src/Sample directory of the project. Delete the original "Controller" and "Main" class.
+2. Download ALL files(including the sample.fxml) from the src/sample folder and paste them to the Src/Sample directory of the project. Delete the original "Controller" and "Main" class.
 3. Run the main/UserTest class.

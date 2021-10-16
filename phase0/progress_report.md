@@ -26,10 +26,11 @@ Our group mainly questions the extent of our app's ability. We completed Phase 0
 the impression that the app would not implement an AI, or high-quality visuals.
 
 The following are coding style questions:
-* How do we efficiently split up an overloaded entity class (User) without losing clean architecture
+* How do we efficiently split up an overloaded entity class (User) without losing clean architecture?
 * Based on the CRC model diagram in one of the lectures, database is on the outermost layer, but the database we are thinking of seems like more of a
 entity/use case.
-* Difference between controllers and use case, more specifically or an example
+* Does the way we are getting/setting into our entities make sense? 
+* When can something be public?
 
 ## Group 51's Strategies:
 Our team has worked virtually via Discord over live chat and screen share. Additionally,

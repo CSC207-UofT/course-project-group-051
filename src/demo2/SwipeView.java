@@ -1,4 +1,10 @@
 package demo2;
 
-public class SwipeView {
+public class SwipeView implements View{
+
+
+    @Override
+    public String run() {
+        return null;
+    }
 }

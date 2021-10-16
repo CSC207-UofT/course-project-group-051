@@ -23,6 +23,7 @@ public class User {
         this.password = password;
         this.likes = new ArrayList<>();
         this.admirers = new ArrayList<>();
+        this.Matches = new ArrayList<>();
     }
 
     public int getId() {
@@ -71,7 +72,7 @@ public class User {
     }
 
     /**
-     * Retrieve file at given URL and add it to the current working directory
+     * Causes this User to 'like' the given User.
      * @param user is the User to be liked.
      */
     public boolean likeUser(User user){
@@ -140,6 +141,12 @@ public class User {
 
     public ArrayList<User> getMatches() {
         return Matches;
+    }
+
+    //#TODO fix this method.
+    @Override
+    public String toString() {
+        return username;
     }
 }
 

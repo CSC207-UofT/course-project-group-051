@@ -4,7 +4,7 @@ public class SwipeView implements View{
 
 
     @Override
-    public String run() {
-        return null;
+    public void run() {
+
     }
 }

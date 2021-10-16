@@ -26,6 +26,10 @@ public class CurrentUser { // May want a separate messenger class,
         currentUser.setAge(age);
     }
 
+    public void changePassword(String password){
+        currentUser.setPassword(password);
+    }
+
     public void changeUsername(String newName){
         currentUser.setUsername(newName);
     }
@@ -38,6 +42,21 @@ public class CurrentUser { // May want a separate messenger class,
         currentUser.setGenderPreference(newPref);
     }
 
+    public String checkUsername(){
+        return currentUser.getUsername();
+    }
+
+    public String checkPassword(){
+        return currentUser.getPassword();
+    }
+
+    public String checkGender(){
+        return currentUser.getGender();
+    }
+
+    public String checkGenderPreference(){
+        return currentUser.getGenderPreference();
+    }
 
     /**
      * Records that the current user liked another User.

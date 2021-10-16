@@ -45,7 +45,7 @@ public class Login {
             newAcc.generateUser(database);
             loginUser = new CurrentUser(id, database);
 
-        } else {
+        } else if(input.equals("Sign In")){
             while(!(loginUser instanceof CurrentUser)){
             System.out.println("Username:");
             username = scanner.nextLine();
@@ -62,7 +62,7 @@ public class Login {
                 }
             else{
                 System.out.println("Invalid Credential. Please Try Again.");
-                scanner.nextLine();
+                //scanner.nextLine();
 
             }
         }
@@ -71,6 +71,7 @@ public class Login {
 
 
         }
+
         ProfileView profileView = new ProfileView(loginUser, database);
         profileView.run();
 

@@ -29,7 +29,7 @@ public class Database {
     /**
      * @return an Arraylist representing this database.
      */
-    public ArrayList getUsers(){
+    public ArrayList<User> getUsers(){
         return this.users;
     }
 
@@ -51,17 +51,15 @@ public class Database {
     }
 
     public boolean checkEmpty(){
-        if(potential.size() == 0){
-            return true;
-        }
-        return false;
+
+        return potential.isEmpty();
     }
     /**
      * Removes and returns the top User in from the list of possible users IF there is any left.
      * Then it returns a True if it was successful, otherwise False.
      */
     public boolean nextUser(){
-        if(potential.size() == 0){
+        if(this.checkEmpty()){
             return false;
         }
         potential.remove(0);

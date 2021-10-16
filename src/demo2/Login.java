@@ -48,11 +48,13 @@ public class Login {
             //create the User for to make the CurrentUser.
             newAcc.addPassword(password);
             newAcc.addUsername(username);
+            newAcc.addGender(gender);
+            newAcc.addGenderPreference(genderPreference);
             newAcc.generateUser(database);
             loginUser = new CurrentUser(id, database);
 
         } else if(input.equals("Sign In")){
-            while(!(loginUser instanceof CurrentUser)){
+            while(!(loginUser instanceof CurrentUser)){ //Possibly Redundant
             System.out.println("Username:");
             username = scanner.nextLine();
             System.out.println("Password:");

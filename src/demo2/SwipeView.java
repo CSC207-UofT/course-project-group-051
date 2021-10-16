@@ -14,26 +14,35 @@ public class SwipeView extends View{
             System.out.println("You have no more users that match your preference");
         }else{
             System.out.println(database.getPotentialUserInfo());
+            label:
             while(true){
                 System.out.println("Would you like to swipe <Left> , <Right> or <SwitchView>");
                 String input;
                 input = scanner.nextLine();
-                if(input.equals("Left")){
-                    if(!database.nextUser()){
-                        System.out.println("You have no more users that match your preference");
+                switch (input) {
+                    case "Left":
+                        if (!database.nextUser()) {
+                            System.out.println("You have no more users that match your preference");
+                            break label;
+                        }
                         break;
-                    }
-                }else if(input.equals("Right")){
-                    user.likeCurrPotentialUser(database);
-                    if(!database.nextUser()){
-                        System.out.println("You have no more users that match your preference");
+                    case "Right":
+                        user.likeCurrPotentialUser(database);
+                        if (!database.nextUser()) {
+                            System.out.println("You have no more users that match your preference");
+                            break label;
+                        }
                         break;
-                    }
-                }else if(input.equals("SwitchView")){
-                    break;
+                    case "SwitchView":
+                        break label;
+                    default:
+                        System.out.println("not a valid input");
+                        break;
                 }
-                else{
-                    System.out.println("not a valid input");
+
+                if (database.checkEmpty()){
+                    System.out.println("You have no more users that match your preference");
+                    break;
                 }
             }
 

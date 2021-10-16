@@ -155,7 +155,7 @@ public class CurrentUser { // May want a separate messenger class,
         if(pUser.getLikes().contains(this.currentUser)){
             this.currentUser.addMatch(pUser);
             pUser.addMatch(this.currentUser);
-            System.out.println("you matched with" + pUser);
+            System.out.println("you matched with " + pUser);
         }
     }
 

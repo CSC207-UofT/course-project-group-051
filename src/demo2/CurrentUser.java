@@ -13,8 +13,8 @@ public class CurrentUser { // May want a separate messenger class,
 
     User currentUser;
 
-    public CurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public CurrentUser(int id, Database db) {
+        this.currentUser = db.getUser(id);
     }
 
 

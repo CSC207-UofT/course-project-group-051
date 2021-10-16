@@ -65,4 +65,17 @@ public class Database {
     public int generateUniqueID(){
         return users.size();
     }
+
+    public User getUser(int id){
+        return users.get(id);
+    }
+
+    public int findUser(String username, String password){
+        for(User u : users){
+            if (u.getPassword().equals(password) && u.getUsername().equals(username)){
+                return u.getId();
+            }
+        }
+        return -1;
+    }
 }

@@ -30,7 +30,8 @@ public class Login {
         String password;
         if (input.equals("Create Account")) {
 
-            CreateAccount newAcc = new CreateAccount(database.generateUniqueID());
+            int id = database.generateUniqueID();
+            CreateAccount newAcc = new CreateAccount(id);
 
             //Prompt for username and password.
             System.out.println("Username:");
@@ -39,27 +40,23 @@ public class Login {
             password = scanner.nextLine();
 
             //create the User for to make the CurrentUser.
-            //This may be illegal since we are kind of accessing a User object here.
             newAcc.addPassword(password);
             newAcc.addUsername(username);
-            User u = newAcc.generateUser();
-            loginUser = new CurrentUser(u);
-            this.database.addUser(u);
+            newAcc.generateUser(database);
+            loginUser = new CurrentUser(id, database);
 
         } else {
             while(!(loginUser instanceof CurrentUser)){
             System.out.println("Username:");
             username = scanner.nextLine();
-            System.out.println("Password");
+            System.out.println("Password:");
             password = scanner.nextLine();
 
-            for (Object u : database.getUsers()) {
-                if (u instanceof User) {
-                    if (((User) u).getPassword().equals(password)&& ((User) u).getUsername().equals(username)){
-                        loginUser = new CurrentUser((User) u);
-                    }
-                }
+            int currID = database.findUser(username, password);
+            if(currID != -1){
+                loginUser = new CurrentUser(currID, database);
             }
+
             if(loginUser instanceof CurrentUser){
                     break;
                 }
@@ -74,7 +71,7 @@ public class Login {
 
 
         }
-        ProfileView profileView = new ProfileView(loginUser);
+        ProfileView profileView = new ProfileView(loginUser, database);
         profileView.run();
 
     }

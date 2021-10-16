@@ -22,8 +22,8 @@ public class CreateAccount {
         this.username = username;
     }
 
-    public User generateUser(){
+    public void generateUser(Database db){
         User newUser = new User(id, username, password);
-        return newUser;
+        db.addUser(newUser);
     }
 }

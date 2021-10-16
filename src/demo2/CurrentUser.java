@@ -57,10 +57,10 @@ public class CurrentUser {
         }
         return Threads;
     }
-//
-//    public ArrayList<String> DisplayMessages(int threadNum){
-//
-//    }
+
+    public ArrayList<String> DisplayMessages(int threadNum){
+            return currentUser.getThreads().get(threadNum).seeMessages(); //is this excessive??
+    }
 
 
 }

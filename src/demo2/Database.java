@@ -16,7 +16,7 @@ public class Database {
     public void getPotentialUser(User user){
         String preference = user.getGenderPreference();
         for(User u : users){
-            if(u.getGender() == preference){
+            if(u.getGender().equals(preference)){
                 potential.add(u);
             }
         }

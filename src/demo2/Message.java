@@ -26,4 +26,13 @@ public class Message {
     public String getContent() {
         return content;
     }
+
+    /** Returns the string representation of this message
+       *The format of string is sender + ": /n" + content
+       */
+    @Override
+    public String toString() {
+        return String.format(sender + ": /n" + content);
+    }
+
 }

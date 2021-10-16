@@ -37,7 +37,8 @@ public class Database {
      * Fill out the queue of possible matches for a User.
      * @param user the User whose preference we are looking at.
      */
-    public void getPotentialUser(User user){
+    public void getPotentialUser(int id){
+        User user = users.get(id);
         String preference = user.getGenderPreference();
         for(User u : users){
             if(u.getGender().equals(preference)){

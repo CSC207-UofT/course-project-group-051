@@ -9,7 +9,7 @@ public class SwipeView extends View{
 
     @Override
     public void run() {
-
+        database.getPotentialUser();
 
     }
 }

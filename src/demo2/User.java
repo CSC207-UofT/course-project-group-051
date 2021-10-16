@@ -58,6 +58,10 @@ public class User {
         this.age = age;
     }
 
+    public ArrayList<Thread> getThreads() {
+        return Threads;
+    }
+
     public String getGender() {
         return gender;
     }

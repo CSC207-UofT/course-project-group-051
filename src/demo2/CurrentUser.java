@@ -1,6 +1,8 @@
 package demo2;
 
 
+import java.util.ArrayList;
+
 /**
  * Represents the current User who has logged in, and all of their abilities.
  */
@@ -43,6 +45,15 @@ public class CurrentUser {
         user.addAdmirers(currentUser);
     }
 
+    public ArrayList<String> displayThreads(){
+
+        ArrayList<String> Threads = new ArrayList<>();
+
+        for (Thread t: currentUser.getThreads()){
+            Threads.add(t.toString()); //need to implement this toString**
+        }
+        return Threads;
+    }
 
 
 }

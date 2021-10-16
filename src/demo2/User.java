@@ -143,6 +143,7 @@ public class User {
         return Matches;
     }
 
+    public ArrayList<User> getLikes() { return likes; }
     //#TODO fix this method.
     @Override
     public String toString() {

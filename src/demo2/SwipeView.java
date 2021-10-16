@@ -15,7 +15,7 @@ public class SwipeView extends View{
         }else{
             System.out.println(database.getPotentialUserInfo());
             while(true){
-                System.out.println("Would you like to swipe <Left> or <Right> ");
+                System.out.println("Would you like to swipe <Left> , <Right> or <SwitchView>");
                 String input;
                 input = scanner.nextLine();
                 if(input.equals("Left")){
@@ -24,15 +24,21 @@ public class SwipeView extends View{
                         break;
                     }
                 }else if(input.equals("Right")){
-
+                    user.likeCurrPotentialUser(database);
                     if(!database.nextUser()){
                         System.out.println("You have no more users that match your preference");
                         break;
                     }
+                }else if(input.equals("SwitchView")){
+                    break;
+                }
+                else{
+                    System.out.println("not a valid input");
                 }
             }
 
 
         }
+        SwitchView();
     }
 }

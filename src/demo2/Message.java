@@ -32,6 +32,6 @@ public class Message {
      */
     @Override
     public String toString() {
-        return String.format(sender + ": /n" + content);
+        return String.format(sender + ": \n" + content);
     }
 }

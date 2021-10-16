@@ -17,6 +17,21 @@ public class Database {
         this.potential = new ArrayList<>();
     }
 
+    /**
+     * @param u if User u is not in this database, then add u to this database.
+     */
+    public void addUser(User u){
+        if(!this.users.contains(u)){
+            this.users.add(u);
+        }
+    }
+
+    /**
+     * @return an Arraylist representing this database.
+     */
+    public ArrayList getUsers(){
+        return this.users;
+    }
 
     /**
      * Fill out the queue of possible matches for a User.

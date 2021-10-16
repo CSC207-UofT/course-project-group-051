@@ -9,6 +9,8 @@ public class CreateAccount {
 
     private String username;
     private String password;
+    private String gender;
+    private String genderPreference;
     private int id;
     public CreateAccount(int id){
         this.id = id;
@@ -22,8 +24,18 @@ public class CreateAccount {
         this.username = username;
     }
 
+    public void addGender(String gender){
+        this.gender = gender;
+    }
+
+    public void addGenderPreference(String genderPreference){
+        this.genderPreference = genderPreference;
+    }
+
     public void generateUser(Database db){
         User newUser = new User(id, username, password);
+        newUser.setGender(gender);
+        newUser.setGenderPreference(genderPreference);
         db.addUser(newUser);
     }
 }

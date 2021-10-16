@@ -28,6 +28,8 @@ public class Login {
         //determine whether they want to sign in or create account.
         String username;
         String password;
+        String gender;
+        String genderPreference;
         if (input.equals("Create Account")) {
 
             int id = database.generateUniqueID();
@@ -38,6 +40,10 @@ public class Login {
             username = scanner.nextLine();
             System.out.println("Password:");
             password = scanner.nextLine();
+            System.out.println("Gender:");
+            gender = scanner.nextLine();
+            System.out.println("Gender Preference:");
+            genderPreference = scanner.nextLine();
 
             //create the User for to make the CurrentUser.
             newAcc.addPassword(password);

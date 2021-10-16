@@ -35,7 +35,7 @@ public class Login {
             //Prompt for username and password.
             System.out.println("Username:");
             username = scanner.nextLine();
-            System.out.println("Password");
+            System.out.println("Password:");
             password = scanner.nextLine();
 
             //create the User for to make the CurrentUser.

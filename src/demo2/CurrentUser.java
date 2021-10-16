@@ -45,6 +45,9 @@ public class CurrentUser {
         user.addAdmirers(currentUser);
     }
 
+    /**
+     * Returns a String representation of each Thread (related to the currentUser).
+     */
     public ArrayList<String> displayThreads(){
 
         ArrayList<String> Threads = new ArrayList<>();
@@ -54,6 +57,10 @@ public class CurrentUser {
         }
         return Threads;
     }
+//
+//    public ArrayList<String> DisplayMessages(int threadNum){
+//
+//    }
 
 
 }

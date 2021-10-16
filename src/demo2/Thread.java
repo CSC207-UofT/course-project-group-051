@@ -33,4 +33,18 @@ public class Thread {
     public void addMessage(Message msg) {
         messages.add(msg);
     }
+
+    /**
+     * Returns a String representation of all the Messages in this Thread
+     */
+    public ArrayList<String> seeMessages(){
+
+        ArrayList<String> allMessages = new ArrayList<>();
+
+        for (Message m: messages){
+            allMessages.add(m.toString());
+        }
+        return allMessages;
+
+    }
 }

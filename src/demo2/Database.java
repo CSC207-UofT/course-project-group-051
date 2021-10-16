@@ -35,7 +35,7 @@ public class Database {
 
     /**
      * Fill out the queue of possible matches for a User.
-     * @param user the User whose preference we are looking at.
+     * @param id the id of the User whose preference we are looking at.
      */
     public void getPotentialUser(int id){
         User user = users.get(id);
@@ -46,7 +46,16 @@ public class Database {
             }
         }
     }
+    public String getPotentialUserInfo(){
+        return this.getInfo(potential.get(0));
+    }
 
+    public boolean checkEmpty(){
+        if(potential.size() == 0){
+            return true;
+        }
+        return false;
+    }
     /**
      * Removes and returns the top User in from the list of possible users IF there is any left.
      * Then it returns a True if it was successful, otherwise False.
@@ -71,6 +80,10 @@ public class Database {
         return users.get(id);
     }
 
+    public User getCurPotentialUser(){
+        return potential.get(0);
+    }
+
     public int findUser(String username, String password){
         for(User u : users){
             if (u.getPassword().equals(password) && u.getUsername().equals(username)){
@@ -78,5 +91,12 @@ public class Database {
             }
         }
         return -1;
+    }
+
+    private String getInfo(User u){
+        String info;
+        info = "Username: " + u.getUsername() + "\n" + "Gender: " + u.getGender() + "\n" +
+                "Age: " + u.getAge();
+        return info;
     }
 }

@@ -12,11 +12,16 @@ public class CurrentUser { // May want a separate messenger class,
                             // considering the amount of message related methods in this.
 
     User currentUser;
+    int id;
 
     public CurrentUser(int id, Database db) {
+        this.id = id;
         this.currentUser = db.getUser(id);
     }
 
+    public int getId() {
+        return id;
+    }
 
     public User getCurrentUser() {
         return currentUser;

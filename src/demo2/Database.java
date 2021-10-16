@@ -15,13 +15,18 @@ public class Database {
 
     public void getPotentialUser(User user){
         String preference = user.getGenderPreference();
-        for(User)
+        for(User u : users){
+            if(u.getGender() == preference){
+                potential.add(u);
+            }
+        }
     }
 
-    public User nextUser(){
+    public boolean nextUser(){
         if(potential.size() == 0){
             return false;
         }
         potential.remove(0);
+        return true;
     }
 }

@@ -69,14 +69,19 @@ public class CurrentUser { // May want a separate messenger class,
 
     /**
      * Returns a String representation of each Thread (related to the currentUser).
+     * Returns a message in a single length list if there are no Threads.
      */
     public ArrayList<String> displayThreads(){
 
         ArrayList<String> Threads = new ArrayList<>();
 
-        for (Thread t: currentUser.getThreads()){
-            Threads.add(t.toString());
+        if (!currentUser.getThreads().isEmpty()){
+            for (Thread t: currentUser.getThreads()){
+                //#TODO limit the length of the string to 1 line.
+                Threads.add(t.toString(currentUser));
+            }
         }
+
         return Threads;
     }
 

@@ -3,6 +3,7 @@ package demo2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents a thread with messages between 2 users
@@ -59,5 +60,14 @@ public class Thread {
         }
     }
 
-    // #TODO implement toString().
+
+    /**
+     * Returns a string representation of this thread.
+     * @param user this User is viewing the thread so there is no reason to display his name in the String.
+     */
+    public String toString(User user) {
+        String otherUser =  this.getOtherUser(user).toString();
+        String recentMessage = messages.get(messages.size()-1).toString();
+        return otherUser.toUpperCase(Locale.ROOT) + ": \n" + recentMessage; //OtherUser needs some title font
+    }
 }

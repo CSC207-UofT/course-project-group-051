@@ -35,7 +35,7 @@ public class Thread {
     }
 
     /**
-     * Returns a String representation of all the Messages in this Thread
+     * Returns a String representation of all the Messages in this Thread in a list.
      */
     public ArrayList<String> seeMessages(){
 
@@ -47,4 +47,17 @@ public class Thread {
         return allMessages;
 
     }
+
+    /**
+     * Returns the User in this Thread that was NOT given.
+     */
+    public User getOtherUser(User user) {
+        if (user == user1) {
+            return user2;
+        } else {
+            return user1;
+        }
+    }
+
+    // #TODO implement toString().
 }

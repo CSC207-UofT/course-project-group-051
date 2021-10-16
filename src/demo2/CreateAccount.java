@@ -1,6 +1,11 @@
 package demo2;
 
+
+/**
+ * Represents ????.
+ */
 public class CreateAccount {
+
 
     private String username;
     private String password;

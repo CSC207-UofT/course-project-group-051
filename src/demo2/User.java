@@ -24,6 +24,7 @@ public class User {
         this.likes = new ArrayList<>();
         this.admirers = new ArrayList<>();
         this.Matches = new ArrayList<>();
+        this.Threads = new ArrayList<>();
     }
 
     public int getId() {

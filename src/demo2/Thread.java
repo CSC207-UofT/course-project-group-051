@@ -19,7 +19,7 @@ public class Thread {
 
     public Thread(User user1, User user2) {
         this.user1 = user1;
-        this.user2 = user1;
+        this.user2 = user2;
         messages = new ArrayList<>();
     }
 
@@ -67,7 +67,7 @@ public class Thread {
      */
     public String toString(User user) {
         String otherUser =  this.getOtherUser(user).toString();
-        String recentMessage = messages.get(messages.size()-1).toString();
-        return otherUser.toUpperCase(Locale.ROOT) + ": \n" + recentMessage; //OtherUser needs some title font
+        //String recentMessage = messages.get(messages.size()).toString(); Use this line to display a recent message.
+        return otherUser.toUpperCase(Locale.ROOT) + ": \n"; //OtherUser needs some title font
     }
 }

@@ -28,7 +28,7 @@ public class Login {
         //determine whether they want to sign in or create account.
         String username;
         String password;
-        if (input == "Create Account") {
+        if (input.equals("Create Account")) {
 
             CreateAccount newAcc = new CreateAccount(database.generateUniqueID());
 
@@ -42,7 +42,10 @@ public class Login {
             //This may be illegal since we are kind of accessing a User object here.
             newAcc.addPassword(password);
             newAcc.addUsername(username);
-            loginUser = new CurrentUser(newAcc.generateUser());
+            User u = newAcc.generateUser();
+            loginUser = new CurrentUser(u);
+            this.database.addUser(u);
+
         } else {
             while(!(loginUser instanceof CurrentUser)){
             System.out.println("Username:");
@@ -58,8 +61,7 @@ public class Login {
                 }
             }
             if(loginUser instanceof CurrentUser){
-                    ProfileView profileView = new ProfileView(loginUser);
-                    profileView.run();
+                    break;
                 }
             else{
                 System.out.println("Invalid Credential. Please Try Again.");
@@ -70,8 +72,11 @@ public class Login {
 
 
 
+
         }
-        
+        ProfileView profileView = new ProfileView(loginUser);
+        profileView.run();
+
     }
 
 }

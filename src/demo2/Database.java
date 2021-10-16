@@ -29,4 +29,8 @@ public class Database {
         potential.remove(0);
         return true;
     }
+
+    public int generateUniqueID(){
+        return users.size();
+    }
 }

@@ -19,28 +19,31 @@ public class MessageView extends View{
         totalThreads = showThreads();
 
         if (totalThreads == -1) {
-            System.out.println("There are no messages to display.");
+            System.out.println("There are no messages to display. \n");
         } else {
             System.out.println("You can type <View Message> to choose a message to open.");
         }
         System.out.println("You can <Create Message> or change <View>.");
         input = scanner.nextLine();
 
-        if (input.equals("Create Message")) {
-            int matchNum = ListMatches();
-            if (matchNum == -1) {
-                run(); //This can go infinite, so it should be fixed.
-            } else { //Needs error catch
-                System.out.println("Please select a match to send a message to by using its number.");
-                input = scanner.nextLine();
-                selectMatch(Integer.parseInt(input));
+        switch (input) {
+            case "Create Message" -> {
+                int matchNum = ListMatches();
+                if (matchNum == -1) {
+                    run(); //This can go infinite, so it should be fixed.
+                } else { //Needs error catch
+                    System.out.println("Please select a match to send a message to by using its number.");
+                    input = scanner.nextLine();
+                    selectMatch(Integer.parseInt(input));
+                }
             }
-        } else if (input.equals("View")) {
-            SwitchView();
-        } else if (input.equals("View Message")) {
-            input = scanner.nextLine();
-            threadNum = Integer.parseInt(input); //Needs try-catch.
-            selectThread(threadNum);
+            case "View" -> SwitchView();
+            case "View Message" -> {
+                System.out.println("Which message would you like to view.(Input a number):");
+                input = scanner.nextLine();
+                threadNum = Integer.parseInt(input); //Needs try-catch.
+                selectThread(threadNum);
+            }
         }
 
         }
@@ -52,38 +55,41 @@ public class MessageView extends View{
 
     private int ListMatches() {
         ArrayList<String> matches = user.showMatches();
-        String matchList = "";
+        StringBuilder matchList = new StringBuilder();
         int matchNum = 0;
 
         if (matches.isEmpty()) {
-            System.out.println("You have no matches, you will be returned to the Thread screen.");
+            System.out.println("You have no matches, you will be returned to the Thread screen. \n");
             return -1;
         }
 
         for (String u: matches) {
 
-            matchList = matchList + "\n" + matchNum + ". " + u.toUpperCase(Locale.ROOT);
+            matchList.append("\n").append(matchNum).append(". ").append(u.toUpperCase(Locale.ROOT));
             matchNum++;
         }
-        System.out.println(matchList);
+        System.out.println(matchList + "\n");
         return matchNum;
     }
 
 
     private void selectThread(int threadNum) {
         ArrayList<String> messages = user.DisplayMessages(threadNum);
-        String fullThread = "";
+        StringBuilder fullThread = new StringBuilder();
         String input;
 
-        for (String m: messages) {
-            fullThread = fullThread + "\n" + m;
+        if (!messages.isEmpty()) {
+            for (String m : messages) {
+                fullThread.append("\n").append(m);
+            }
         }
         System.out.println(fullThread);
-        System.out.println("Would you like to <Create Message> or <Exit>?");
+        System.out.println("Would you like to <Send Message> or <Exit>?");
         input = scanner.nextLine();
-        if (input.equals("Create Message")) {
+        if (input.equals("Send Message")) {
+            System.out.print("What do you want to send: ");
             user.createMessage(threadNum, scanner.nextLine());
-            selectThread(threadNum); //more infinite recursion that needs to be fixed.
+            selectThread(threadNum);
         } else if (input.equals("Exit")) {
             run();
         }
@@ -92,7 +98,7 @@ public class MessageView extends View{
 
     private int showThreads() {
         ArrayList<String> threads = user.displayThreads();
-        String threadStack = null;
+        StringBuilder threadStack = new StringBuilder();
         int i = -1;
 
         if (threads.isEmpty()) {
@@ -101,7 +107,7 @@ public class MessageView extends View{
 
             for (String t : threads) {
                 i++;
-                threadStack = threadStack + "\n" + i + ". " + t;
+                threadStack.append("\n").append(i).append(". ").append(t);
             }
     }
 

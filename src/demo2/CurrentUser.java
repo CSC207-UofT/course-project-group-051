@@ -137,7 +137,7 @@ public class CurrentUser { // May want a separate messenger class,
         User chosenMatch = currentUser.getMatches().get(matchNum);
         Thread newThread = new Thread(currentUser, chosenMatch);
 
-        currentUser.addThread(newThread);
+        boolean alreadyExists = currentUser.addThread(newThread);
         chosenMatch.addThread(newThread);
     }
 

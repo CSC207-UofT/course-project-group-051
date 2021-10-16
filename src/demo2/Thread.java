@@ -68,6 +68,6 @@ public class Thread {
     public String toString(User user) {
         String otherUser =  this.getOtherUser(user).toString();
         //String recentMessage = messages.get(messages.size()).toString(); Use this line to display a recent message.
-        return otherUser.toUpperCase(Locale.ROOT) + ": \n"; //OtherUser needs some title font
+        return otherUser + ": \n"; //OtherUser needs some title font
     }
 }

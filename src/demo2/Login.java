@@ -44,8 +44,7 @@ public class Login {
             newAcc.addUsername(username);
             loginUser = new CurrentUser(newAcc.generateUser());
         } else {
-            //#TODO create a login feature. Probably using information from a Database.
-
+            while(!(loginUser instanceof CurrentUser)){
             System.out.println("Username:");
             username = scanner.nextLine();
             System.out.println("Password");
@@ -58,13 +57,21 @@ public class Login {
                     }
                 }
             }
+            if(loginUser instanceof CurrentUser){
+                    ProfileView profileView = new ProfileView(loginUser);
+                    profileView.run();
+                }
+            else{
+                System.out.println("Invalid Credential. Please Try Again.");
+                scanner.nextLine();
+
+            }
         }
 
-        //Once the user is logged in, we pass them to the ProfileView.(this is red-underlined because the else hasn't been filled in)
-        if(loginUser instanceof CurrentUser){
-        ProfileView profileView = new ProfileView(loginUser);
-        profileView.run();}
 
+
+        }
+        
     }
 
 }

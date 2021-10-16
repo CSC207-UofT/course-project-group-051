@@ -131,4 +131,11 @@ public class CurrentUser { // May want a separate messenger class,
         chosenMatch.addThread(newThread);
     }
 
+    public String getInfo(){
+        String info;
+        info = "Username: " + currentUser.getUsername() + "\n" + "Gender: " + currentUser.getGender() + "\n" +
+                "Age: " + currentUser.getAge();
+        return info;
+    }
+
 }

@@ -1,6 +1,9 @@
 package demo2;
 import java.util.ArrayList;
 
+/**
+ * Represents a User with preferences, name, bio, etc.
+ */
 public class User {
     private int id;
     private String username;
@@ -67,6 +70,9 @@ public class User {
             return false;
         }
         likes.add(user);
+        user.admirers.add(this); // is this legal, since it is technically accessing a private variable,
+                                // however, it is the same class. If it is legal then addAdmirers() wouldn't be
+                                // necessary
         return true;
     }
 
@@ -78,6 +84,7 @@ public class User {
         return false;
     }
 
+    //remove if the likeUser line is legal.
     public boolean addAdmirers(User user){
         if(admirers.contains(user)){
             return false;

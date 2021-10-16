@@ -1,13 +1,18 @@
 package demo2;
 
+/**
+ * Represents a single message with a sender, receiver, and content.
+ */
 public class Message {
     private User sender;
     private User receiver;
-    private String msg;
-    public Message(User sender, User receiver, String msg){
+    private String content;
+
+
+    public Message(User sender, User receiver, String content){
         this.sender = sender;
         this.receiver = receiver;
-        this.msg = msg;
+        this.content = content;
     }
 
     public User getSender() {
@@ -18,7 +23,7 @@ public class Message {
         return receiver;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getContent() {
+        return content;
     }
 }

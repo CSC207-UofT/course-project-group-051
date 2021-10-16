@@ -11,7 +11,7 @@ public class User {
     private ArrayList<User> likes;
     private ArrayList<User> admirers;
     private ArrayList<User> Matches; //Maybe make a class for these things and the liking methods.
-    private int age;
+    private int age; //Use java.util.date instead of age and calculate age separately.
     private String gender;
     private String genderPreference;
     private ArrayList<Thread> Threads;

@@ -10,6 +10,7 @@ public class User {
     private int age;
     private String gender;
     private String genderPreference;
+    private ArrayList<Thread> Threads;
 
 
     public User(int id, String username, String password){
@@ -99,6 +100,22 @@ public class User {
 
     public void setGenderPreference(String genderPreference) {
         this.genderPreference = genderPreference;
+    }
+
+    public boolean addThread(Thread thread){
+        if(Threads.contains(thread)){
+            return false;
+        }
+        Threads.add(thread);
+        return true;
+    }
+
+    public boolean removeThread(Thread thread){
+        if(Threads.contains(thread)){
+            Threads.remove(thread);
+            return true;
+        }
+        return false;
     }
 }
 

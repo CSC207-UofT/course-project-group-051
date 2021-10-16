@@ -10,6 +10,7 @@ public class User {
     private String password;
     private ArrayList<User> likes;
     private ArrayList<User> admirers;
+    private ArrayList<User> Matches; //Maybe make a class for these things and the liking methods.
     private int age;
     private String gender;
     private String genderPreference;
@@ -65,14 +66,15 @@ public class User {
         this.gender = gender;
     }
 
+    /**
+     * Retrieve file at given URL and add it to the current working directory
+     * @param user is the User to be liked.
+     */
     public boolean likeUser(User user){
         if(likes.contains(user)){
             return false;
         }
         likes.add(user);
-        user.admirers.add(this); // is this legal, since it is technically accessing a private variable,
-                                // however, it is the same class. If it is legal then addAdmirers() wouldn't be
-                                // necessary
         return true;
     }
 
@@ -84,7 +86,6 @@ public class User {
         return false;
     }
 
-    //remove if the likeUser line is legal.
     public boolean addAdmirers(User user){
         if(admirers.contains(user)){
             return false;
@@ -123,6 +124,18 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    public void addMatch(User user){
+        Matches.add(user);
+    }
+
+    public void removeMatch(User user){
+        Matches.remove(user);
+    }
+
+    public ArrayList<User> getMatches() {
+        return Matches;
     }
 }
 

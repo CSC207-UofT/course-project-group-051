@@ -91,6 +91,11 @@ public class Database {
         return -1;
     }
 
+
+    /**
+     * @param u the user whose inforomation we are displaying.
+     * @return a String representation of all the relevant info to display while swiping.
+     */
     private String getInfo(User u){
         String info;
         info = "Username: " + u.getUsername() + "\n" + "Gender: " + u.getGender() + "\n" +

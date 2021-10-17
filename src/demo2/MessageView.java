@@ -22,8 +22,10 @@ public class MessageView extends View{
         int totalThreads;
         String input;
 
+        //Display a list of all the Threads to choose from
         totalThreads = showThreads();
 
+        //determine if there is atleast 1 thread to choose from, and prompt to choose.
         if (totalThreads == -1) {
             System.out.println("There are no messages to display. \n");
         } else {
@@ -33,8 +35,12 @@ public class MessageView extends View{
         input = scanner.nextLine();
 
         switch (input) {
+
+            //In this case we want to create a new message from a list of their matches.
             case "Create Message" -> {
                 int matchNum = ListMatches();
+
+                //Make sure they have more than 1 match to actually display
                 if (matchNum == -1) {
                     run();
                 } else { //Needs error catch

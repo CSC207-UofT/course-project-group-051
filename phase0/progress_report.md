@@ -14,7 +14,7 @@ to ask our TA for advice on cleanly splitting up our User entity into 2 entities
 
 ## Scenario Walk-Through Summary:
 Our walk-through defines the most basic use of the app. Our idea generation of CRC cards used this scenario
-to ensure our specifications were met.
+to ensure our specifications were met. This is also a scenario we made sure to implement in our skeleton code.
 
 ## Skeleton Code:
 Our skeleton code utilizes our CRC cards, by implementing the methods and variables required
@@ -31,6 +31,7 @@ The following are coding style questions:
 entity/use case.
 * Does the way we are getting/setting into our entities make sense? 
 * When can something be public?
+* Should we have full separation of input and output. E.x separate the ProfileView into 2 classes?
 
 ## Group 51's Strategies:
 Our team has worked virtually via Discord over live chat and screen share. Additionally,

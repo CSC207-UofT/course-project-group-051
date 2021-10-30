@@ -1,9 +1,8 @@
-package demo2;
+package Phase0;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Represents a thread with messages between 2 users
@@ -50,7 +49,7 @@ public class Thread {
     }
 
     /**
-     * Returns the User in this Thread that was NOT given.
+     * Returns the Phase1.User in this Thread that was NOT given.
      */
     public User getOtherUser(User user) {
         if (user == user1) {
@@ -63,7 +62,7 @@ public class Thread {
 
     /**
      * Returns a string representation of this thread.
-     * @param user this User is viewing the thread so there is no reason to display his name in the String.
+     * @param user this Phase1.User is viewing the thread so there is no reason to display his name in the String.
      */
     public String toString(User user) {
         String otherUser =  this.getOtherUser(user).toString();

@@ -1,4 +1,4 @@
-package demo2;
+package Phase0;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class Database {
     }
 
     /**
-     * @param u if User u is not in this database, then add u to this database.
+     * @param u if Phase1.User u is not in this database, then add u to this database.
      */
     public void addUser(User u){
         if(!this.users.contains(u)){
@@ -34,8 +34,8 @@ public class Database {
     }
 
     /**
-     * Fill out the queue of possible matches for a User.
-     * @param id the id of the User whose preference we are looking at.
+     * Fill out the queue of possible matches for a Phase1.User.
+     * @param id the id of the Phase1.User whose preference we are looking at.
      */
     public void getPotentialUser(int id){
         User user = users.get(id);
@@ -55,7 +55,7 @@ public class Database {
         return potential.isEmpty();
     }
     /**
-     * Removes and returns the top User in from the list of possible users IF there is any left.
+     * Removes and returns the top Phase1.User in from the list of possible users IF there is any left.
      * Then it returns a True if it was successful, otherwise False.
      */
     public boolean nextUser(){
@@ -67,7 +67,7 @@ public class Database {
     }
 
     /**
-     * Returns an int based on the number of total users in this database. Which can serve as a unique ID for this User.
+     * Returns an int based on the number of total users in this database. Which can serve as a unique ID for this Phase1.User.
      * (so long as we don't have a delete account option)
      */
     public int generateUniqueID(){

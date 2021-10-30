@@ -9,8 +9,8 @@ matches and messages.
 
 ## CRC Summary:
 Our CRC is currently a base to meet our specifications, while ensuring all possible scenarios are accounted for
-via methods and variable names. Additionally, we are aware that our User class is overloaded, but we need
-to ask our TA for advice on cleanly splitting up our User entity into 2 entities.
+via methods and variable names. Additionally, we are aware that our Phase1.User class is overloaded, but we need
+to ask our TA for advice on cleanly splitting up our Phase1.User entity into 2 entities.
 
 ## Scenario Walk-Through Summary:
 Our walk-through defines the most basic use of the app. Our idea generation of CRC cards used this scenario
@@ -26,7 +26,7 @@ Our group mainly questions the extent of our app's ability. We completed Phase 0
 the impression that the app would not implement an AI, or high-quality visuals.
 
 The following are coding style questions:
-* How do we efficiently split up an overloaded entity class (User) without losing clean architecture?
+* How do we efficiently split up an overloaded entity class (Phase1.User) without losing clean architecture?
 * Based on the CRC model diagram in one of the lectures, database is on the outermost layer, but the database we are thinking of seems like more of a
 entity/use case.
 * Does the way we are getting/setting into our entities make sense? 

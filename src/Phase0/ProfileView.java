@@ -1,6 +1,4 @@
-package demo2;
-
-import java.util.Scanner;
+package Phase0;
 
 public class ProfileView extends View {
 

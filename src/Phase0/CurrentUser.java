@@ -1,4 +1,4 @@
-package demo2;
+package Phase0;
 
 
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 /**
- * Represents the current User who has logged in, and all of their abilities.
+ * Represents the current Phase1.User who has logged in, and all of their abilities.
  */
 public class CurrentUser { // May want a separate messenger class,
                             // considering the amount of message related methods in this.
@@ -64,8 +64,8 @@ public class CurrentUser { // May want a separate messenger class,
     }
 
     /**
-     * Records that the current user liked another User.
-     * @param user is the User that was liked by this user.
+     * Records that the current user liked another Phase1.User.
+     * @param user is the Phase1.User that was liked by this user.
      */
     public void newLike(User user) {
         currentUser.likeUser(user);
@@ -99,7 +99,7 @@ public class CurrentUser { // May want a separate messenger class,
     }
 
     /**
-     * Adds (sends) a new Message from the current User to the other User in the selected Thread.
+     * Adds (sends) a new Message from the current Phase1.User to the other Phase1.User in the selected Thread.
      * @param threadNum indicates which Thread in the list of currentUser's Threads is getting the Message.
      * @param content indicates the content of the message.
      */

@@ -1,14 +1,15 @@
-package Phase1.Users;
+package Phase1.DataAccess;
 
 import java.util.ArrayList;
 
-public class Tread {
+public class Thread {
 
     ArrayList<String[]> Messages;
     int firstUser;
     int secondUser;
+    int id;
 
-    public Tread(int idOne, int idTwo){
+    public Thread(int idOne, int idTwo){
         Messages = new ArrayList<>();
         firstUser = idOne;
         secondUser = idTwo;

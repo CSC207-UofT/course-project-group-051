@@ -1,4 +1,4 @@
-package demo2;
+package Phase0;
 
 import java.util.Scanner;
 
@@ -15,7 +15,7 @@ public class Login {
 
     /**
      * #TODO finalize this implementation. Should this have sout  and scan (as it is now) or will we have an input/output class?
-     * this method prompts the user for information then creates a User for them.
+     * this method prompts the user for information then creates a Phase1.User for them.
      */
     public void run() {
 
@@ -45,7 +45,7 @@ public class Login {
             System.out.println("Gender Preference:");
             genderPreference = scanner.nextLine();
 
-            //create the User for to make the CurrentUser.
+            //create the Phase1.User for to make the CurrentUser.
             newAcc.addPassword(password);
             newAcc.addUsername(username);
             newAcc.addGender(gender);

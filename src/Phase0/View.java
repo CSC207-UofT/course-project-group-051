@@ -1,4 +1,4 @@
-package demo2;
+package Phase0;
 
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public abstract class View {
     abstract void run();
 
     /**
-     * Prompts the User to change the current view.
+     * Prompts the Phase1.User to change the current view.
      */
     public void SwitchView() {
         String input;

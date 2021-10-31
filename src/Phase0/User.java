@@ -1,8 +1,8 @@
-package demo2;
+package Phase0;
 import java.util.ArrayList;
 
 /**
- * Represents a User with preferences, name, bio, etc.
+ * Represents a Phase1.User with preferences, name, bio, etc.
  */
 public class User {
     private int id;
@@ -73,8 +73,8 @@ public class User {
     }
 
     /**
-     * Causes this User to 'like' the given User.
-     * @param user is the User to be liked.
+     * Causes this Phase1.User to 'like' the given Phase1.User.
+     * @param user is the Phase1.User to be liked.
      */
     public boolean likeUser(User user){
         if(likes.contains(user)){

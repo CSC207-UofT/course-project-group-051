@@ -1,4 +1,4 @@
-package demo2;
+package Phase0;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -94,7 +94,7 @@ public class MessageView extends View{
 
 
     /**
-     * Opens the selected Thread and allows the User to interact with it.
+     * Opens the selected Thread and allows the Phase1.User to interact with it.
      * @param threadNum indicates the thread to open based on the list of the CurrentUser's threads.
      */
     private void selectThread(int threadNum) {

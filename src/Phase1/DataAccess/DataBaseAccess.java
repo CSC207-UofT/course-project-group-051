@@ -8,7 +8,7 @@ public class DataBaseAccess<T extends UserBuilder> implements DataAccessInterfac
 
 
     @Override
-    public User getUser(int ID) {
+    public User getUser(int id) {
         return null;
     }
 
@@ -24,7 +24,7 @@ public class DataBaseAccess<T extends UserBuilder> implements DataAccessInterfac
 
 
     @Override
-    public Thread getThreads(int ID) {
+    public Thread getThread(int id) {
         return null;
     }
 }

@@ -3,7 +3,7 @@ package Phase1.Users;
 import java.util.ArrayList;
 
 /**
- * Represents a User to be swiped on.
+ * Represents a User to be swiped on. Which is also all the data that the current User can view.
  */
 public class SwipeUser extends User {
 

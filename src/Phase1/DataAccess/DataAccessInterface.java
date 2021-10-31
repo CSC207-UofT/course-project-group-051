@@ -6,17 +6,24 @@ import Phase0.User;
 /**
  * An interface that defines the methods that interact with the database.
  */
-public interface DataAccessInterface<T extends UserBuilder> {
+public interface DataAccessInterface {
 
 
 
-    User getUser(int id);
+    User getProfileUser(int id);
+
+    User getMessageUser(int id);
+
+    User getSwipeUser(int id);
 
     void UpdateUser(User u);
 
     void UpdateThread(Thread t);
 
     Thread getThread(int id);
+
+
+
 
 
 }

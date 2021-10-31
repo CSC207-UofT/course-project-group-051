@@ -6,11 +6,11 @@ package Phase1.Users;
 public class ProfileUser extends User {
 
     private String bio;
-    private String Gender;
-    private int Age;
-    private String Preference;
-    private String Username;
-    private String Password;
+    private String gender;
+    private int age;
+    private String preference;
+    private String username;
+    private String password;
 
     public ProfileUser(int id, String fName, String lName) {
         super(id, fName, lName);
@@ -26,42 +26,42 @@ public class ProfileUser extends User {
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
     public int getAge() {
-        return Age;
+        return age;
     }
 
     public void setAge(int age) {
-        Age = age;
+        this.age = age;
     }
 
     public String getPreference() {
-        return Preference;
+        return preference;
     }
 
     public void setPreference(String preference) {
-        Preference = preference;
+        this.preference = preference;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 }

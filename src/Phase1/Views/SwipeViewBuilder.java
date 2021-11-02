@@ -1,17 +1,19 @@
 package Phase1.Views;
 
+import Phase1.Users.ProfileUser;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -19,17 +21,24 @@ import java.util.ArrayList;
 public class SwipeViewBuilder implements SceneBuilder{
     Scene scene;
     HBox hb1;
+    StackPane sp;
     HBox hb2;
-    Button bt1;
-    Button bt2;
+    Button btn;
+    Button btn1;
+    Button btn2;
+    Button btn3;
     BorderPane bp;
     VBox v;
-    VBox v1;
     ImageView image;
-    public SwipeViewBuilder(ImageView image){
+    javafx.scene.text.Text text;
+    ProfileUser u;
+    public SwipeViewBuilder(ImageView image, ProfileUser u){
         this.bp = new BorderPane();
         this.image = image;
-
+        this.text = new Text(u.getfName() + ", " + Integer.toString(u.getAge()));
+        this.text.setFont(Font.font(null, FontWeight.BOLD, 25));
+        this.text.setFill(Color.WHITE);
+        this.sp = new StackPane();
     }
 
 
@@ -49,10 +58,10 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
-        Button btn = new Button("<");
-        Button btn1 = new Button(">");
-        Button btn2 = new Button("Matches");
-        Button btn3 = new Button("Log Out");
+        this.btn = new Button("<");
+        this.btn1 = new Button(">");
+        this.btn2 = new Button("Matches");
+        this.btn3 = new Button("Log Out");
 
         this.hb1.getChildren().add(btn);
         this.hb1.getChildren().add(this.image);
@@ -88,16 +97,6 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void addTextField() {
-        Label label1 = new Label("Username:");
-        Label label2 = new Label("Password:");
-        TextField textField1 = new TextField ();
-        this.v.getChildren().addAll(label1,
-                textField1);
-        PasswordField textField2 = new PasswordField();
-        this.v.getChildren().addAll(label2, textField2);
-        this.v1.getChildren().add(this.v);
-        this.v1.getChildren().add(this.hb1);
-
     }
 
     /**
@@ -105,10 +104,9 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setSpacing() {
-
-        v.setSpacing(20);
-        hb1.setSpacing(50);
-        v1.setSpacing(50);
+        v.setSpacing(30);
+        hb1.setSpacing(30);
+        hb2.setSpacing(this.image.getFitWidth() - 200);
     }
 
     /**
@@ -116,8 +114,16 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setMargin() {
-        this.bp.setCenter(v1);
-        this.bp.setMargin(this.v1, new Insets(50, 50, 50, 50));
+        this.bp.setCenter(v);
+        this.bp.setLeft(btn);
+        this.bp.setRight(btn1);
+        this.bp.setMargin(this.btn, new Insets(350, 10, 50, 10));
+        this.bp.setMargin(this.btn1, new Insets(350, 10, 50, 10));
+
+        this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
+        this.sp.getChildren().add(this.bp);
+        this.sp.getChildren().add(this.text);
+        this.sp.setMargin(this.text, new Insets(this.image.getFitHeight(), this.image.getFitWidth()- 200, 20, 20 ));
 
     }
 
@@ -126,7 +132,7 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 300);
+        this.scene = new Scene(this.sp, this.image.getFitWidth() + 150, this.image.getFitHeight() + 190);
         stage.setScene(this.scene);
     }
 

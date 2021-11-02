@@ -69,7 +69,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void addTextField() {
-        Label label = new Label("Date of Birth(MM-DD-YYYY):");
+        Label label = new Label("Date of Birth(e.g. Dec,6,1999):");
         Label label1 = new Label("Username:");
         Label label2 = new Label("Password:");
         Label label3 = new Label("Confirm Password:");

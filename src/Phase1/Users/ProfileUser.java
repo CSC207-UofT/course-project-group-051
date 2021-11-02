@@ -1,6 +1,10 @@
 package Phase1.Users;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  *  Represents the User's information that pertains to editing/viewing profile information.
@@ -36,11 +40,12 @@ public class ProfileUser extends User {
     }
 
     public int getAge() {
-        return age;
-    }
+        Date today = new Date();
+        long diff = today.getTime() - this.getBirthdate().getTime();
+        System.out.println(diff);
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-    public void setAge(int age) {
-        this.age = age;
+        return days / 365;
     }
 
     public String getPreference() {

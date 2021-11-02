@@ -73,7 +73,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         Label label1 = new Label("Username:");
         Label label2 = new Label("Password:");
         Label label3 = new Label("Confirm Password:");
-        Label label4 = new Label("Please enter your profile picture path or URL:");
+        Label label4 = new Label("Please enter your profile picture path:");
         Label label5 = new Label("First Name:");
         Label label6 = new Label("Last Name:");
 

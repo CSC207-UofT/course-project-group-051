@@ -81,6 +81,11 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     }
 
+    @Override
+    public void setMargin(Insets inset) {
+
+    }
+
 
     /**
      * Adds textfield to the corresponding box.

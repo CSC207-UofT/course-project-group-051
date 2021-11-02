@@ -76,6 +76,11 @@ class ChatViewBuilder implements SceneBuilder{
     vb.getChildren().add(this.hb2);
     }
 
+    @Override
+    public void setMargin(Insets inset) {
+
+    }
+
 
     /**
      * Sets the spacing for each box.
@@ -108,8 +113,6 @@ class ChatViewBuilder implements SceneBuilder{
         this.scene = new Scene(this.bp, 350, 350);
         stage.setScene(this.scene);
     }
-
-
 
     @Override
     public void build(Stage s, ArrayList<EventHandler> e){

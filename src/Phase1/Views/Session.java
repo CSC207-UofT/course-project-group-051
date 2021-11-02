@@ -57,7 +57,7 @@ public class Session extends Application {
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
-                Image image = new Image(new FileInputStream("C:\\Users\\Fei Guan\\OneDrive\\Desktop\\bond4.jpg"));
+                Image image = new Image(new FileInputStream("/home/guanfei1/Desktop/bond4jpg.jpg"));
 
                 //Setting the image view
                 ImageView imageView = new ImageView(image);

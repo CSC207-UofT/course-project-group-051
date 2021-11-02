@@ -27,6 +27,7 @@ public class SwipeViewBuilder implements SceneBuilder{
     Button btn1;
     Button btn2;
     Button btn3;
+    Button btn4;
     BorderPane bp;
     VBox v;
     ImageView image;
@@ -62,12 +63,15 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.btn1 = new Button(">");
         this.btn2 = new Button("Matches");
         this.btn3 = new Button("Log Out");
+        this.btn4 = new Button("Me");
 
         this.hb1.getChildren().add(btn);
         this.hb1.getChildren().add(this.image);
         this.hb1.getChildren().add(btn1);
         this.hb2.getChildren().add(btn2);
         this.hb2.getChildren().add(btn3);
+        this.hb2.getChildren().add(btn4);
+
 
         if (!e.isEmpty()) {
             EventHandler t = e.get(0);
@@ -106,7 +110,7 @@ public class SwipeViewBuilder implements SceneBuilder{
     public void setSpacing() {
         v.setSpacing(30);
         hb1.setSpacing(30);
-        hb2.setSpacing(this.image.getFitWidth() - 200);
+        hb2.setSpacing(this.image.getFitWidth() - 370);
     }
 
     /**
@@ -123,7 +127,7 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
         this.sp.getChildren().add(this.bp);
         this.sp.getChildren().add(this.text);
-        this.sp.setMargin(this.text, new Insets(this.image.getFitHeight(), this.image.getFitWidth()- 200, 20, 20 ));
+        this.sp.setMargin(this.text, new Insets(this.image.getFitHeight(), this.image.getFitWidth()- 220, 20, 20 ));
 
     }
 

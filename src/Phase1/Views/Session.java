@@ -57,7 +57,7 @@ public class Session extends Application {
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
-                Image image = new Image(new FileInputStream("/home/guanfei1/Desktop/bond4jpg.jpg"));
+                Image image = new Image(new FileInputStream("/home/guanfei1/Downloads/1155925.jpg"));
 
                 //Setting the image view
                 ImageView imageView = new ImageView(image);
@@ -67,11 +67,11 @@ public class Session extends Application {
                 imageView.setY(25);
 
                 //setting the fit height and width of the image view
-                imageView.setFitHeight(455);
-                imageView.setFitWidth(500);
+                imageView.setFitHeight(600);
+                imageView.setFitWidth(600);
 
                 //Setting the preserve ratio of the image view
-                imageView.setPreserveRatio(true);
+                imageView.setPreserveRatio(false);
                 ProfileUser u = new ProfileUser(1, "Madeline",
                         "Swann", new Date("July,9,1989"), "afokl");
                 u.setBio("Insert your best pickup line");
@@ -80,6 +80,8 @@ public class Session extends Application {
                 //Adding scene to the stage
                 sb.build(stage, new ArrayList<>());
                 //Displaying the contents of the stage
+                stage.setResizable(false);
+
                 stage.show();
             }
 

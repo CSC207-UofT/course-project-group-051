@@ -50,8 +50,8 @@ class ChatViewBuilder implements SceneBuilder{
 
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
-        Button ret = new Button("<");
-        Button send = new Button("Send");
+        this.ret = new Button("<");
+        this.send = new Button("Send");
         this.hb1.getChildren().add(ret);
         this.hb1.getChildren().add(new Text(this.name));
         this.hb2.getChildren().add(send);

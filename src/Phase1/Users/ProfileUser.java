@@ -13,7 +13,6 @@ public class ProfileUser extends User {
 
     private String bio;
     private String gender;
-    private int age;
     private String preference;
     private String username;
     private String password;
@@ -42,7 +41,6 @@ public class ProfileUser extends User {
     public int getAge() {
         Date today = new Date();
         long diff = today.getTime() - this.getBirthdate().getTime();
-        System.out.println(diff);
         int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
         return days / 365;

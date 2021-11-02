@@ -65,8 +65,6 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void addVBox() {
-        System.out.println("Working");
-
         this.v = new VBox();
         this.v1 = new VBox();
 

@@ -2,10 +2,13 @@ package Phase1.Users;
 
 import java.util.ArrayList;
 
-/**
- * Represents the User's information that pertains to Messaging other Users.
- */
 public class MessageUser extends User {
+    /**
+     * Represents the User's information that pertains to Messaging other Users.
+     *
+     * @param threads is an ArrayList of all the messaging threads this user has, represented by integers
+     * @param matches is an ArrayList of all the matches this user has, represented by integers
+     */
 
     ArrayList<Integer> threads;
     ArrayList<Integer> matches;
@@ -17,10 +20,10 @@ public class MessageUser extends User {
     }
 
     public ArrayList<Integer> getThreads() {
-        return threads;
+        return this.threads;
     }
 
     public ArrayList<Integer> getMatches() {
-        return matches;
+        return this.matches;
     }
 }

@@ -1,14 +1,17 @@
 package Phase1.Users;
 
-
-/**
- * Is the base class for the different representations of our Users that will be needed.
- */
 public abstract class User {
 
-    int id;
-    String fName;
-    String lName;
+    /**
+     * User is the base class for the different representations of our Users
+     *
+     * @param id is the id associated with user
+     * @param fName is the first name of the user
+     * @param lName is the last name of the user
+     */
+    private int id;
+    private String fName;
+    private String lName;
 
     public User(int id, String fName, String lName) {
         this.id = id;
@@ -17,14 +20,12 @@ public abstract class User {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
-    public String getfName() {
-        return fName;
-    }
+    public String getfName() { return this.fName; }
 
     public String getlName() {
-        return lName;
+        return this.lName;
     }
 }

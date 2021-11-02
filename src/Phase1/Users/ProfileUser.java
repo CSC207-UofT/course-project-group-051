@@ -1,9 +1,17 @@
 package Phase1.Users;
 
-/**
- *  Represents the User's information that pertains to editing/viewing profile information.
- */
 public class ProfileUser extends User {
+
+    /**
+     * Represents the User's information that pertains to editing/viewing profile information.
+     *
+     * @param bio is the bio inputted by the user
+     * @param gender is the gender of the user
+     * @param age is the age of the user
+     * @param preference is the gender preference of the user
+     * @param username is the username of the user
+     * @param password is the password of the user to access their profile
+     */
 
     private String bio;
     private String gender;
@@ -18,7 +26,7 @@ public class ProfileUser extends User {
     }
 
     public String getBio() {
-        return bio;
+        return this.bio;
     }
 
     public void setBio(String bio) {
@@ -26,7 +34,7 @@ public class ProfileUser extends User {
     }
 
     public String getGender() {
-        return gender;
+        return this.gender;
     }
 
     public void setGender(String gender) {
@@ -34,7 +42,7 @@ public class ProfileUser extends User {
     }
 
     public int getAge() {
-        return age;
+        return this.age;
     }
 
     public void setAge(int age) {
@@ -42,7 +50,7 @@ public class ProfileUser extends User {
     }
 
     public String getPreference() {
-        return preference;
+        return this.preference;
     }
 
     public void setPreference(String preference) {
@@ -50,7 +58,7 @@ public class ProfileUser extends User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -58,7 +66,7 @@ public class ProfileUser extends User {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

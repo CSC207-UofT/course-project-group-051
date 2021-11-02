@@ -1,4 +1,4 @@
-package com.example.demoone;
+package Phase1.Views;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -9,12 +9,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 interface SceneBuilder {
 void setScene(Stage stage);
-void addTextField(TextField textfield, Label label);
-void addHBox(HBox hbox);
-void addVBox(VBox vbox);
-void setMargin(Insets inset);
-void setSpacing(HBox hbox, VBox vbox, int spacing);
-void mapEventHandler(Button button, EventHandler handler);
+void addTextField();
+void addHBox();
+void addVBox();
+void setMargin();
+void setSpacing();
+void mapEventHandler(ArrayList<EventHandler> e);
+void build(Stage s, ArrayList<EventHandler> e);
 }

@@ -72,10 +72,10 @@ public class Session extends Application {
 
                 //Setting the preserve ratio of the image view
                 imageView.setPreserveRatio(true);
-
-
-                 SwipeViewBuilder sb = new SwipeViewBuilder(imageView, new ProfileUser(1, "Madeline",
-                         "Swann", new Date("July,9,1989"), "afokl"));
+                ProfileUser u = new ProfileUser(1, "Madeline",
+                        "Swann", new Date("July,9,1989"), "afokl");
+                u.setBio("Insert your best pickup line");
+                 SwipeViewBuilder sb = new SwipeViewBuilder(imageView, u);
 
                 //Adding scene to the stage
                 sb.build(stage, new ArrayList<>());

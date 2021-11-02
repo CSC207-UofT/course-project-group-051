@@ -28,6 +28,7 @@ public class SwipeViewBuilder implements SceneBuilder{
     Button btn2;
     Button btn3;
     Button btn4;
+    Text text1;
     BorderPane bp;
     VBox v;
     ImageView image;
@@ -39,6 +40,9 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.text = new Text(u.getfName() + ", " + Integer.toString(u.getAge()));
         this.text.setFont(Font.font(null, FontWeight.BOLD, 25));
         this.text.setFill(Color.WHITE);
+        this.text1 = new Text(u.getBio());
+        this.text1.setFont(Font.font(null, FontWeight.BOLD, 10));
+        this.text1.setFill(Color.WHITE);
         this.sp = new StackPane();
     }
 
@@ -127,7 +131,13 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
         this.sp.getChildren().add(this.bp);
         this.sp.getChildren().add(this.text);
-        this.sp.setMargin(this.text, new Insets(this.image.getFitHeight(), this.image.getFitWidth()- 220, 20, 20 ));
+        this.sp.getChildren().add(this.text1);
+
+        this.sp.setMargin(this.text, new Insets(this.image.getFitHeight(), this.image.getFitWidth()- 220,
+                20, 20 ));
+        this.sp.setMargin(this.text1, new Insets(this.image.getFitHeight(), 20,
+                20, this.image.getFitWidth()- 220));
+
 
     }
 

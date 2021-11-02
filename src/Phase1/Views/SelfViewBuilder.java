@@ -101,7 +101,6 @@ public class SelfViewBuilder implements SceneBuilder{
     @Override
     public void build(Stage s, ArrayList<EventHandler> e) {
         this.addHBox();
-
         this.mapEventHandler(e);
         this.addVBox();
         this.addTextField();

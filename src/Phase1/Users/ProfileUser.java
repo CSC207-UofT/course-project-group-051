@@ -1,5 +1,8 @@
 package Phase1.Users;
 
+import Phase1.States.LoggedOut;
+import Phase1.States.State;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.Temporal;
@@ -16,10 +19,11 @@ public class ProfileUser extends User {
     private String preference;
     private String username;
     private String password;
+    private State state;
 
     public ProfileUser(int id, String fName, String lName, Date birthdate, String password) {
         super(id, fName, lName, birthdate, password);
-
+        this.state = new LoggedOut();
     }
 
     public String getBio() {

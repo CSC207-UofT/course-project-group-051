@@ -76,10 +76,6 @@ class ChatViewBuilder implements SceneBuilder{
     vb.getChildren().add(this.hb2);
     }
 
-    @Override
-    public void setMargin(Insets inset) {
-
-    }
 
 
     /**

@@ -1,6 +1,7 @@
 package Phase1.Users;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
@@ -14,8 +15,8 @@ public class SwipeUser extends User {
     boolean gotliked;
 
 
-    public SwipeUser(int id, String fName, String lName) {
-        super(id, fName, lName);
+    public SwipeUser(int id, String fName, String lName, Date birthdate, String password) {
+        super(id, fName, lName, birthdate, password);
         swiper = -1;
         gotliked = false;
     }

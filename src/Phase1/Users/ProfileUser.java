@@ -1,5 +1,7 @@
 package Phase1.Users;
 
+import java.util.Date;
+
 /**
  *  Represents the User's information that pertains to editing/viewing profile information.
  */
@@ -12,8 +14,8 @@ public class ProfileUser extends User {
     private String username;
     private String password;
 
-    public ProfileUser(int id, String fName, String lName) {
-        super(id, fName, lName);
+    public ProfileUser(int id, String fName, String lName, Date birthdate, String password) {
+        super(id, fName, lName, birthdate, password);
 
     }
 
@@ -55,10 +57,6 @@ public class ProfileUser extends User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {

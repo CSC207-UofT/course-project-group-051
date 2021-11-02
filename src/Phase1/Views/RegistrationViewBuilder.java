@@ -64,12 +64,6 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     }
 
-    @Override
-    public void setMargin(Insets inset) {
-
-    }
-
-
     /**
      * Adds textfield to the corresponding box.
      */

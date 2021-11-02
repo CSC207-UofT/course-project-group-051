@@ -12,15 +12,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 interface SceneBuilder {
-    void setMargin();
+    public void setMargin();
 
-    void setScene(Stage stage);
-    void addTextField();
-    void addHBox();
-    void addVBox();
-    void setMargin(Insets inset);
-    void setSpacing();
-    void mapEventHandler(ArrayList<EventHandler> e);
-
-    void build(Stage s, ArrayList<EventHandler> e);
+    public void setScene(Stage stage);
+    public void addTextField();
+    public void addHBox();
+    public void addVBox();
+    public void setMargin(Insets inset);
+    public void setSpacing();
+    public void mapEventHandler(ArrayList<EventHandler> e);
+    public void build(Stage s, ArrayList<EventHandler> e);
 }

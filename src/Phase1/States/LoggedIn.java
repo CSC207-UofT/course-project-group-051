@@ -1,6 +1,7 @@
 package Phase1.States;
 
 import Phase1.UserActions.*;
+import Phase1.Views.Controller;
 
 /**
  * Represents the default landing page (or "home" page) of our program, where you are allowed to
@@ -26,6 +27,8 @@ public class LoggedIn extends State {
         else if(s.equals(Actions.VIEWSELF)){
             return States.SelfProfile;
         }
+        Controller.nextProfile();
+        Controller.updateView();
         return States.LoggedIn;
     }
 }

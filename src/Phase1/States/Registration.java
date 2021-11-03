@@ -1,8 +1,7 @@
 package Phase1.States;
 
-import Phase1.UserActions.Action;
-import Phase1.UserActions.LogIn;
 
+import Phase1.UserActions.Actions;
 
 /**
  * Represents the state where the User can register an account in our database.
@@ -13,14 +12,14 @@ public class Registration extends State{
 
     /**
      * Decides which new state should be transitioned to.
-     * @param a the action taken by the user that will determine the state the program will  transition to.
+     * @param s the action taken by the user that will determine the state the program will  transition to.
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof LogIn){
-            return new LoggedIn();
+    public State transition(String s){
+        if (s.equals(Actions.LOGIN)){
+            return States.LoggedIn;
         }
-        return this;
+        return States.Registration;
     }
 }

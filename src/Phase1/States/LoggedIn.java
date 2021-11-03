@@ -12,20 +12,20 @@ public class LoggedIn extends State {
 
     /**
      * Decides which new state should be transitioned to.
-     * @param a the action taken by the user that will determine the state the program will  transition to.
+     * @param s the action taken by the user that will determine the state the program will  transition to.
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof ShowMatches){
-            return new Matches();
+    public State transition(String s){
+        if (s.equals(Actions.SHOWMATCHES)){
+            return States.Matches;
         }
-        else if(a instanceof LogOut){
-            return new LoggedOut();
+        else if(s.equals(Actions.LOGOUT)){
+            return States.LoggedOut;
         }
-        else if(a instanceof ViewSelf){
-            return new SelfProfile();
+        else if(s.equals(Actions.VIEWSELF)){
+            return States.SelfProfile;
         }
-        return this;
+        return States.LoggedIn;
     }
 }

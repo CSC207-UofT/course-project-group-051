@@ -1,8 +1,7 @@
 package Phase1.States;
 
-import Phase1.UserActions.Action;
-import Phase1.UserActions.Back;
 
+import Phase1.UserActions.Actions;
 
 /**
  * Represents the state where the user can message other users.
@@ -13,14 +12,14 @@ public class Messaging extends State{
 
     /**
      * Decides which new state should be transitioned to.
-     * @param a the action taken by the user that will determine the state the program will  transition to.
+     * @param s the action taken by the user that will determine the state the program will  transition to.
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof Back){
-            return new LoggedIn();
+    public State transition(String s){
+        if (s.equals(Actions.BACK)){
+            return States.LoggedIn;
         }
-        return this;
+        return States.Messaging;
     }
 }

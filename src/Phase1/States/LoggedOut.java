@@ -10,7 +10,6 @@ import Phase1.UserActions.Register;
  */
 public class LoggedOut extends State
 {
-
     public LoggedOut(){
         super();
     }

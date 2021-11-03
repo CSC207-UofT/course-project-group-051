@@ -76,13 +76,15 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.hb2.getChildren().add(btn3);
         this.hb2.getChildren().add(btn4);
 
+        EventHandler t = e.get(0);
+        btn4.setOnAction(t);
 
-        if (!e.isEmpty()) {
+        /**if (!e.isEmpty()) {
             EventHandler t = e.get(0);
             EventHandler t1 = e.get(1);
             btn.setOnAction(t);
             btn1.setOnAction(t1);
-        }
+        }*/
 
     }
 

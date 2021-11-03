@@ -1,32 +1,33 @@
 package Phase1.Users;
 
-public class ProfileUser extends User {
+import Phase1.States.LoggedOut;
+import Phase1.States.State;
 
-    /**
-     * Represents the User's information that pertains to editing/viewing profile information.
-     *
-     * @param bio is the bio inputted by the user
-     * @param gender is the gender of the user
-     * @param age is the age of the user
-     * @param preference is the gender preference of the user
-     * @param username is the username of the user
-     * @param password is the password of the user to access their profile
-     */
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.Temporal;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
+/**
+ *  Represents the User's information that pertains to editing/viewing profile information.
+ */
+public class ProfileUser extends User {
 
     private String bio;
     private String gender;
-    private int age;
     private String preference;
     private String username;
     private String password;
+    private State state;
 
-    public ProfileUser(int id, String fName, String lName) {
-        super(id, fName, lName);
-
+    public ProfileUser(int id, String fName, String lName, Date birthdate, String password) {
+        super(id, fName, lName, birthdate, password);
+        this.state = new LoggedOut();
     }
 
     public String getBio() {
-        return this.bio;
+        return bio;
     }
 
     public void setBio(String bio) {
@@ -34,7 +35,7 @@ public class ProfileUser extends User {
     }
 
     public String getGender() {
-        return this.gender;
+        return gender;
     }
 
     public void setGender(String gender) {
@@ -42,15 +43,15 @@ public class ProfileUser extends User {
     }
 
     public int getAge() {
-        return this.age;
-    }
+        Date today = new Date();
+        long diff = today.getTime() - this.getBirthdate().getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-    public void setAge(int age) {
-        this.age = age;
+        return days / 365;
     }
 
     public String getPreference() {
-        return this.preference;
+        return preference;
     }
 
     public void setPreference(String preference) {
@@ -58,15 +59,11 @@ public class ProfileUser extends User {
     }
 
     public String getUsername() {
-        return this.username;
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
     }
 
     public void setPassword(String password) {

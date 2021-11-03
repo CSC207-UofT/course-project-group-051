@@ -27,9 +27,7 @@ public class LogInViewBuilder implements SceneBuilder{
     VBox v1;
     public LogInViewBuilder(){
         this.bp = new BorderPane();
-
     }
-
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -46,16 +44,16 @@ public class LogInViewBuilder implements SceneBuilder{
 
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
-        Button btn = new Button("Create new account");
-        Button btn1 = new Button("Log In");
-        this.hb1.getChildren().add(btn);
-        this.hb1.getChildren().add(btn1);
+        this.bt1 = new Button("Create new account");
+        this.bt2 = new Button("Log In");
+        this.hb1.getChildren().add(this.bt1);
+        this.hb1.getChildren().add(this.bt2);
 
         if (!e.isEmpty()) {
             EventHandler t = e.get(0);
             EventHandler t1 = e.get(1);
-            btn.setOnAction(t);
-            btn1.setOnAction(t1);
+            this.bt1.setOnAction(t);
+            this.bt2.setOnAction(t1);
         }
 
     }
@@ -65,16 +63,8 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void addVBox() {
-        System.out.println("Working");
-
         this.v = new VBox();
         this.v1 = new VBox();
-
-    }
-
-    @Override
-    public void setMargin(Insets inset) {
-
     }
 
 
@@ -92,7 +82,6 @@ public class LogInViewBuilder implements SceneBuilder{
         this.v.getChildren().addAll(label2, textField2);
         this.v1.getChildren().add(this.v);
         this.v1.getChildren().add(this.hb1);
-
     }
 
     /**
@@ -134,9 +123,5 @@ public class LogInViewBuilder implements SceneBuilder{
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
-
-
     }
-
-
 }

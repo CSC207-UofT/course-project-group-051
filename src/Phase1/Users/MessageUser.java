@@ -1,6 +1,7 @@
 package Phase1.Users;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MessageUser extends User {
     /**
@@ -14,7 +15,7 @@ public class MessageUser extends User {
     ArrayList<Integer> matches;
 
     public MessageUser(int id, String fName, String lName, ArrayList<Integer> threads, ArrayList<Integer> matches) {
-        super(id, fName, lName);
+        super(id, fName, lName, new Date(1999,11,7), "dummypasswor");
         this.threads = threads;
         this.matches = matches;
     }

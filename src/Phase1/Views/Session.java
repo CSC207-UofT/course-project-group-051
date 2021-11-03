@@ -3,6 +3,7 @@ package Phase1.Views;
 import Phase1.Users.ProfileUser;
 import Phase1.Users.User;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -57,7 +58,7 @@ public class Session extends Application {
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
-                Image image = new Image(new FileInputStream("/home/guanfei1/Downloads/1155925.jpg"));
+                Image image = new Image(new FileInputStream("C:\\Users\\HP\\Desktop\\myimg.jpg"));
 
                 //Setting the image view
                 ImageView imageView = new ImageView(image);
@@ -67,20 +68,30 @@ public class Session extends Application {
                 imageView.setY(25);
 
                 //setting the fit height and width of the image view
-                imageView.setFitHeight(600);
-                imageView.setFitWidth(600);
+                imageView.setFitHeight(455);
+                imageView.setFitWidth(500);
 
                 //Setting the preserve ratio of the image view
-                imageView.setPreserveRatio(false);
+                imageView.setPreserveRatio(true);
                 ProfileUser u = new ProfileUser(1, "Madeline",
                         "Swann", new Date("July,9,1989"), "afokl");
                 u.setBio("Insert your best pickup line");
                  SwipeViewBuilder sb = new SwipeViewBuilder(imageView, u);
 
+
+
+                EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        System.out.println("Hello World");
+                    }
+                };
+
+                ArrayList<EventHandler> list = new ArrayList<>();
+                list.add(eventHandler);
                 //Adding scene to the stage
-                sb.build(stage, new ArrayList<>());
+                sb.build(stage, list);
                 //Displaying the contents of the stage
-                stage.setResizable(false);
                 stage.show();
             }
 

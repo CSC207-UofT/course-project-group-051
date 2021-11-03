@@ -63,11 +63,8 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
-        this.btn = new Button("No");
-        this.btn1 = new Button("Yes");
-        this.btn1.setPrefSize(50,50);
-        this.btn.setPrefSize(50,50);
-
+        this.btn = new Button("<");
+        this.btn1 = new Button(">");
         this.btn2 = new Button("Matches");
         this.btn3 = new Button("Log Out");
         this.btn4 = new Button("Me");
@@ -79,22 +76,15 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.hb2.getChildren().add(btn3);
         this.hb2.getChildren().add(btn4);
 
+        EventHandler t = e.get(0);
+        btn4.setOnAction(t);
 
-        if (!e.isEmpty()) {
+        /**if (!e.isEmpty()) {
             EventHandler t = e.get(0);
             EventHandler t1 = e.get(1);
-            EventHandler t2 = e.get(2);
-            EventHandler t3 = e.get(3);
-            EventHandler t4 = e.get(4);
-
             btn.setOnAction(t);
             btn1.setOnAction(t1);
-            btn2.setOnAction(t2);
-            btn3.setOnAction(t3);
-            btn4.setOnAction(t4);
-
-
-        }
+        }*/
 
     }
 
@@ -125,8 +115,8 @@ public class SwipeViewBuilder implements SceneBuilder{
     @Override
     public void setSpacing() {
         v.setSpacing(30);
-        hb1.setSpacing(20);
-        hb2.setSpacing(this.image.getFitWidth() - 400);
+        hb1.setSpacing(30);
+        hb2.setSpacing(this.image.getFitWidth() - 370);
     }
 
     /**
@@ -137,8 +127,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setCenter(v);
         this.bp.setLeft(btn);
         this.bp.setRight(btn1);
-        this.bp.setMargin(this.btn, new Insets(350, -40, 50, 90));
-        this.bp.setMargin(this.btn1, new Insets(350, 90, 50, -40));
+        this.bp.setMargin(this.btn, new Insets(350, 10, 50, 10));
+        this.bp.setMargin(this.btn1, new Insets(350, 10, 50, 10));
 
         this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
         this.sp.getChildren().add(this.bp);

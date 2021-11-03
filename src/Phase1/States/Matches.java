@@ -4,7 +4,6 @@ import Phase1.UserActions.Action;
 import Phase1.UserActions.Back;
 import Phase1.UserActions.Message;
 
-
 /**
  * Represents the state where a user can swipe on matches.
  */

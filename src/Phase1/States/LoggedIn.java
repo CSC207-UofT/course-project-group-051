@@ -2,7 +2,6 @@ package Phase1.States;
 
 import Phase1.UserActions.*;
 
-
 /**
  * Represents the default landing page (or "home" page) of our program, where you are allowed to
  * transition of other pages or Logout.

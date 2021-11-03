@@ -1,13 +1,12 @@
 package Phase1.States;
 
-import Phase1.UserActions.Actions;
-import Phase1.UserActions.Back;
+import static Phase1.UserActions.Actions.*;
 
 
 /**
  * Represents the state where the User can view and edit their profile.
  */
-public class SelfProfile extends State{
+public class SelfProfile implements State {
 
     public SelfProfile(){}
 

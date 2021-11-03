@@ -1,15 +1,11 @@
 package Phase1.States;
 
-import Phase1.UserActions.Actions;
-import Phase1.UserActions.LogIn;
-import Phase1.UserActions.Register;
-import Phase1.UserActions.Actions;
+import static Phase1.UserActions.Actions.*;
 
 /**
  * Represents the state before the user has logged in. Which gives them the option to login or register.
  */
-public class LoggedOut extends State
-{
+public class LoggedOut implements State {
     public LoggedOut(){
         super();
     }

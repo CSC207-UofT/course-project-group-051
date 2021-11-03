@@ -1,13 +1,11 @@
 package Phase1.States;
 
-import Phase1.UserActions.Action;
-import Phase1.UserActions.Back;
-import Phase1.UserActions.Message;
+import static Phase1.UserActions.Actions.*;
 
 /**
  * Represents the state where a user can swipe on matches.
  */
-public class Matches extends State{
+public class Matches implements State {
     public Matches(){}
     /**
      * Determines which state the program should transition to.

@@ -1,13 +1,12 @@
 package Phase1.States;
 
-import Phase1.UserActions.Action;
-import Phase1.UserActions.Back;
+import static Phase1.UserActions.Actions.*;
 
 
 /**
  * Represents the state where the user can message other users.
  */
-public class Messaging extends State{
+public class Messaging implements State {
 
     public Messaging(){}
 

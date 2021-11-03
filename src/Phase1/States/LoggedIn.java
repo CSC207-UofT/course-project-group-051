@@ -1,10 +1,12 @@
 package Phase1.States;
-import Phase1.UserActions.Actions;
+
+import static Phase1.UserActions.Actions.*;
+
 /**
  * Represents the default landing page (or "home" page) of our program, where you are allowed to
  * transition of other pages or Logout.
  */
-public class LoggedIn extends State {
+public class LoggedIn implements State {
 
     public LoggedIn(){}
 

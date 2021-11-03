@@ -1,13 +1,12 @@
 package Phase1.States;
 
-import Phase1.UserActions.Actions;
-import Phase1.UserActions.LogIn;
+import static Phase1.UserActions.Actions.*;
 
 
 /**
  * Represents the state where the User can register an account in our database.
  */
-public class Registration extends State{
+public class Registration implements State {
 
     public Registration(){}
 

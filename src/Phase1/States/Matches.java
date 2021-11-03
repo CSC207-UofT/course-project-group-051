@@ -15,11 +15,11 @@ public class Matches extends State{
      * @return the state which the program will transition to.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof Message){
+    public State transition(String a){
+        if (a.equals(MESSAGE)){
             return new Messaging();
         }
-        else if (a instanceof Back){
+        else if (a.equals(BACK)){
             return new LoggedIn();
         }
         return this;

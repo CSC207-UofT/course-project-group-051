@@ -1,6 +1,6 @@
 package Phase1.States;
 
-import Phase1.UserActions.Action;
+import Phase1.UserActions.Actions;
 import Phase1.UserActions.LogIn;
 
 
@@ -17,8 +17,8 @@ public class Registration extends State{
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof LogIn){
+    public State transition(String a){
+        if (a.equals(LOGIN)){
             return new LoggedIn();
         }
         return this;

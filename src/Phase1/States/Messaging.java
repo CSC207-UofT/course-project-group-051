@@ -17,8 +17,8 @@ public class Messaging extends State{
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof Back){
+    public State transition(String a){
+        if (a.equals(BACK)){
             return new LoggedIn();
         }
         return this;

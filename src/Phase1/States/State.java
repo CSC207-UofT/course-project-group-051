@@ -9,7 +9,7 @@ public abstract class State { //seems more like an interface.
 
     public State(){}
 
-    public State transition(Action a){
+    public State transition(String a){
         return null;
     }
 

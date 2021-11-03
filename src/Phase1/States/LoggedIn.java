@@ -1,7 +1,5 @@
 package Phase1.States;
-
-import Phase1.UserActions.*;
-
+import Phase1.UserActions.Actions;
 /**
  * Represents the default landing page (or "home" page) of our program, where you are allowed to
  * transition of other pages or Logout.
@@ -16,14 +14,14 @@ public class LoggedIn extends State {
      * @return the state to which the program will transition.
      */
     @Override
-    public State transition(Action a){
-        if (a instanceof ShowMatches){
+    public State transition(String a){
+        if (a.equals(SHOWMATCHES)){
             return new Matches();
         }
-        else if(a instanceof LogOut){
+        else if(a.equals(LOGOUT)){
             return new LoggedOut();
         }
-        else if(a instanceof ViewSelf){
+        else if(a.equals(VIEWSELF)){
             return new SelfProfile();
         }
         return this;

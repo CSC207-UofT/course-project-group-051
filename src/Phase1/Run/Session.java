@@ -1,48 +1,22 @@
-package Phase1.Views;
+package Phase1.Run;
 
 import Phase1.Users.ProfileUser;
-import Phase1.Users.User;
+import Phase1.Views.SwipeViewBuilder;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import java.io.FileInputStream;
+
 import java.io.FileNotFoundException;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
+
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javax.imageio.ImageIO;
 
 
 //public class Session extends Application {

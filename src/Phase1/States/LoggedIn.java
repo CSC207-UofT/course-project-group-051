@@ -1,7 +1,7 @@
 package Phase1.States;
 
 import Phase1.UserActions.*;
-import Phase1.Views.Controller;
+import Phase1.Run.Controller;
 
 /**
  * Represents the default landing page (or "home" page) of our program, where you are allowed to

@@ -27,9 +27,7 @@ public class LogInViewBuilder implements SceneBuilder{
     VBox v1;
     public LogInViewBuilder(){
         this.bp = new BorderPane();
-
     }
-
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -67,7 +65,6 @@ public class LogInViewBuilder implements SceneBuilder{
     public void addVBox() {
         this.v = new VBox();
         this.v1 = new VBox();
-
     }
 
 
@@ -85,7 +82,6 @@ public class LogInViewBuilder implements SceneBuilder{
         this.v.getChildren().addAll(label2, textField2);
         this.v1.getChildren().add(this.v);
         this.v1.getChildren().add(this.hb1);
-
     }
 
     /**
@@ -127,9 +123,5 @@ public class LogInViewBuilder implements SceneBuilder{
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
-
-
     }
-
-
 }

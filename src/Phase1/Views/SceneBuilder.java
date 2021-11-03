@@ -19,6 +19,5 @@ interface SceneBuilder {
     void setMargin();
     void setSpacing();
     void mapEventHandler(ArrayList<EventHandler> e);
-
     void build(Stage s, ArrayList<EventHandler> e);
 }

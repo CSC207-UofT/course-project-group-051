@@ -23,9 +23,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
     VBox v1;
     public RegistrationViewBuilder(){
         this.bp = new BorderPane();
-
     }
-
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -35,11 +33,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.hb1 = new HBox();
     }
 
-
     /** Maps each button to its corresponding eventhandler.
      * @param e A list of eventhandlers
      */
-
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
         Button btn1 = new Button("Log In");
@@ -49,7 +45,6 @@ public class RegistrationViewBuilder implements SceneBuilder{
             EventHandler t1 = e.get(0);
             btn1.setOnAction(t1);
         }
-
     }
 
     /**
@@ -57,11 +52,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void addVBox() {
-        System.out.println("Working");
-
         this.v = new VBox();
         this.v1 = new VBox();
-
     }
 
     /**
@@ -76,7 +68,6 @@ public class RegistrationViewBuilder implements SceneBuilder{
         Label label4 = new Label("Please enter your profile picture path:");
         Label label5 = new Label("First Name:");
         Label label6 = new Label("Last Name:");
-
         TextField textField = new TextField ();
         TextField textField1 = new TextField ();
         this.v.getChildren().addAll(label,
@@ -88,18 +79,14 @@ public class RegistrationViewBuilder implements SceneBuilder{
         TextField textField6 = new TextField ();
         this.v.getChildren().addAll(label5, textField5);
         this.v.getChildren().addAll(label6, textField6);
-
         this.v.getChildren().addAll(label1,
                 textField1);
         this.v.getChildren().addAll(label2,
                 textField2);
         this.v.getChildren().addAll(label3, textField3);
         this.v.getChildren().addAll(label4, textField4);
-
-
         this.v1.getChildren().add(this.v);
         this.v1.getChildren().add(this.hb1);
-
     }
 
     /**
@@ -145,8 +132,5 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
-
     }
-
-
 }

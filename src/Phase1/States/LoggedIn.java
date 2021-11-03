@@ -9,9 +9,7 @@ import Phase1.UserActions.*;
  */
 public class LoggedIn extends State {
 
-
     public LoggedIn(){}
-
 
     /**
      * Decides which new state should be transitioned to.

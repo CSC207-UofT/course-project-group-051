@@ -9,7 +9,6 @@ import Phase1.UserActions.Back;
  */
 public class Messaging extends State{
 
-
     public Messaging(){}
 
     /**

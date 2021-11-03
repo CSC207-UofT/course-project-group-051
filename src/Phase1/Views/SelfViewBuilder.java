@@ -97,7 +97,6 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
-
     @Override
     public void build(Stage s, ArrayList<EventHandler> e) {
         this.addHBox();

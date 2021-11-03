@@ -1,6 +1,5 @@
 package Phase1.UserActions;
 
-
 /**
  * Represents the login action.
  */

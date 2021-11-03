@@ -9,7 +9,6 @@ import Phase1.UserActions.LogIn;
  */
 public class Registration extends State{
 
-
     public Registration(){}
 
     /**

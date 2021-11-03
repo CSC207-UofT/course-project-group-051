@@ -81,7 +81,6 @@ public class Session extends Application {
                 sb.build(stage, new ArrayList<>());
                 //Displaying the contents of the stage
                 stage.setResizable(false);
-
                 stage.show();
             }
 

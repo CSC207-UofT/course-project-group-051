@@ -46,16 +46,16 @@ public class LogInViewBuilder implements SceneBuilder{
 
     @Override
     public void mapEventHandler(ArrayList<EventHandler> e) {
-        Button btn = new Button("Create new account");
-        Button btn1 = new Button("Log In");
-        this.hb1.getChildren().add(btn);
-        this.hb1.getChildren().add(btn1);
+        this.bt1 = new Button("Create new account");
+        this.bt2 = new Button("Log In");
+        this.hb1.getChildren().add(this.bt1);
+        this.hb1.getChildren().add(this.bt2);
 
         if (!e.isEmpty()) {
             EventHandler t = e.get(0);
             EventHandler t1 = e.get(1);
-            btn.setOnAction(t);
-            btn1.setOnAction(t1);
+            this.bt1.setOnAction(t);
+            this.bt2.setOnAction(t1);
         }
 
     }

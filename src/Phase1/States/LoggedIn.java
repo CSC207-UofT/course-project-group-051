@@ -27,8 +27,8 @@ public class LoggedIn extends State {
         else if(s.equals(Actions.VIEWSELF)){
             return States.SelfProfile;
         }
-        Controller.nextProfile();
-        Controller.updateView();
+        //Controller.nextProfile();
+        //Controller.updateView();
         return States.LoggedIn;
     }
 }

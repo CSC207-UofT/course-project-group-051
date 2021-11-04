@@ -1,11 +1,39 @@
 package Phase1.DataAccess;
 
-import Phase0.User;
 
+import javafx.scene.control.Alert;
+
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DataBaseAccess implements DataAccessInterface{
 
+    private Connection conn = null;
+    private Statement stmt = null;
+
+
+    public DataBaseAccess(){
+        connectDB();
+    }
+
+    private int getNextUser(){
+        int id = -1;
+        try {
+            String h2 = "select count(personID) from user;";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                id = rs.getInt("count(PersonID)");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id + 1;
+    }
 
     @Override
     public int logIn(String username, String password) {
@@ -144,6 +172,36 @@ public class DataBaseAccess implements DataAccessInterface{
 
     @Override
     public int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference) {
-        return 0;
+        int id = this.getNextUser();
+        try {
+            String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '');";
+            boolean rs = stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private void connectDB() {
+        final String JDBC_DRIVER = "org.h2.Driver";
+        final String DB_URL = "jdbc:h2:./DB/USERS";
+        final String USER = "";
+        final String PASS = "";
+
+        System.out.println("Attempting to connect to database");
+        try {
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            System.out.println("Successfully connected to database!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        }
     }
 }

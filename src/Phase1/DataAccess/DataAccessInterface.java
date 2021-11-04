@@ -1,8 +1,6 @@
 package Phase1.DataAccess;
 
 
-import Phase0.User;
-
 import java.util.ArrayList;
 
 /**
@@ -65,4 +63,6 @@ public interface DataAccessInterface {
     int createMessage(int threadID, int sender, int receiver);
 
     int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference);
+
+
 }

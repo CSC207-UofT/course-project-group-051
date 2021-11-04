@@ -10,9 +10,12 @@ public class DBTesting {
     private Statement stmt = null;
 
     public static void main(String[] args) {
-        DBTesting a = new DBTesting();
-        a.initialize();
-        a.loadBikeTable();
+        //DBTesting a = new DBTesting();
+        //a.initialize();
+        //a.loadBikeTable();
+        DataBaseAccess db = new DataBaseAccess();
+        System.out.println(db.createUser("testL", "testF", "password", "testing2", 20, "male", "male"));
+
 
     }
     public void initialize() {

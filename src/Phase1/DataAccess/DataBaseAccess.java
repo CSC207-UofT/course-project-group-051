@@ -141,4 +141,9 @@ public class DataBaseAccess implements DataAccessInterface{
     public int createMessage(int threadID, int sender, int receiver) {
         return 0;
     }
+
+    @Override
+    public int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference) {
+        return 0;
+    }
 }

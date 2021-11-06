@@ -94,11 +94,12 @@ public class Session extends Application {
                         String DOB = r.getDOB();
                         String fName = r.getFirstName();
                         String lName = r.getLastName();
+                        String username = r.userName();
                         String pw1 = r.getPassword();
                         String pw2 = r.getPassword1();
                         String location = r.getPicturePath();
 
-                        if (pw1.equals(pw2)) {
+                        if (pw1.equals(pw2) && !db.contains(username)) {
                             try {
                                 db.createUser(new ProfileUser(db.getSize(), fName, lName, new Date(DOB),
                                         new ImageView(new Image(
@@ -106,7 +107,13 @@ public class Session extends Application {
                             } catch (FileNotFoundException ex) {
                                 ex.printStackTrace();
                             }
-                            c.update(Actions.LOGIN, null, null);
+                        }
+                        else if(db.contains(username)){
+                            r.editMessage(false, true);
+                        }
+
+                        else{
+                            r.editMessage(true, false);
                         }
                     }
                 };
@@ -133,6 +140,10 @@ public class Session extends Application {
                 EventHandler<ActionEvent> SwipeLeft = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.LoggedIn)){
+
+
+                        }
 
                     }
                 };
@@ -147,7 +158,6 @@ public class Session extends Application {
 
                         }
                         else if(c.getState().equals(States.SelfProfile)){
-
                         }
 
                     }

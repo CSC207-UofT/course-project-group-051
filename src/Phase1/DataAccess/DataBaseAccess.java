@@ -37,47 +37,183 @@ public class DataBaseAccess implements DataAccessInterface{
 
     @Override
     public int logIn(String username, String password) {
-        return 0;
+        int id = -1;
+        try {
+            String h2 = "select PERSONID from USER where username = '"+ username +"' and PASSWORD = '"+password+"';";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                id = rs.getInt("PersonID");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+
     }
 
     @Override
     public String getFirstName(int id) {
-        return null;
+        String name = null;
+        try {
+            String h2 = "select FirstName from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                name = rs.getString("FirstName");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 
     @Override
     public String getLastName(int id) {
-        return null;
+        String name = null;
+        try {
+            String h2 = "select LASTNAME from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                name = rs.getString("LASTNAME");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 
     @Override
     public String getUsername(int id) {
-        return null;
+        String username = null;
+        try {
+            String h2 = "select USERNAME from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                username = rs.getString("USERNAME");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return username;
     }
 
     @Override
     public String getPassword(int id) {
-        return null;
+        String password = null;
+        try {
+            String h2 = "select PASSWORD from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                password = rs.getString("PASSWORD");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return password;
     }
 
     @Override
     public String getGender(int id) {
-        return null;
+        String gender = null;
+        try {
+            String h2 = "select gender from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                gender = rs.getString("gender");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gender;
     }
 
     @Override
     public String getBio(int id) {
-        return null;
+        String bio = null;
+        try {
+            String h2 = "select bio from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                bio = rs.getString("bio");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bio;
     }
 
     @Override
     public String getGenderPreference(int id) {
-        return null;
+        String genderPreference = null;
+        try {
+            String h2 = "select genderPreference from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                genderPreference = rs.getString("genderPreference");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return genderPreference;
     }
 
     @Override
     public int getAge(int id) {
-        return 0;
+        int age = -1;
+        try {
+            String h2 = "select age from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                age = rs.getInt("age");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return age;
     }
 
     @Override

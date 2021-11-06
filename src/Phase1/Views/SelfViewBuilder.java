@@ -37,15 +37,9 @@ public class SelfViewBuilder implements SceneBuilder{
     }
 
     @Override
-    public void mapEventHandler(ArrayList<EventHandler> e) {
+    public void addButton() {
         this.bt = new Button("<");
         this.bt1 = new Button("Save");
-        if (!e.isEmpty()){
-            EventHandler t = e.get(0);
-            this.bt.setOnAction(t);
-            EventHandler t1 = e.get(1);
-            this.bt1.setOnAction(t1);
-        }
         this.hb.getChildren().add(this.bt);
         this.hb.getChildren().add(new Text("About"));
     }
@@ -98,9 +92,9 @@ public class SelfViewBuilder implements SceneBuilder{
     }
 
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e) {
+    public void build(Stage s) {
         this.addHBox();
-        this.mapEventHandler(e);
+        this.addButton();
         this.addVBox();
         this.addTextField();
         this.setSpacing();

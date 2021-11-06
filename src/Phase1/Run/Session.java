@@ -1,7 +1,12 @@
 package Phase1.Run;
 
+import Phase1.States.States;
+import Phase1.UserActions.Actions;
 import Phase1.Users.ProfileUser;
+import Phase1.Views.LogInViewBuilder;
+import Phase1.Views.RegistrationViewBuilder;
 import Phase1.Views.SwipeViewBuilder;
+import com.sun.org.apache.bcel.internal.generic.LNEG;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +34,7 @@ import javafx.scene.image.Image;
 public class Session extends Application {
             @Override
             public void start(Stage stage) throws FileNotFoundException {
+                Controller c = new Controller();
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
@@ -47,22 +53,61 @@ public class Session extends Application {
 
                 //Setting the preserve ratio of the image view
                 imageView.setPreserveRatio(true);
+
+
+
+
                 ProfileUser u = new ProfileUser(1, "Madeline",
-                        "Swann", new Date("July,9,1989"), "afokl");
+                        "Swann", new Date("July,9,1989"), "afokl", null);
                 u.setBio("Insert your best pickup line");
-                 SwipeViewBuilder sb = new SwipeViewBuilder(imageView, u);
+                 LogInViewBuilder lb = new LogInViewBuilder();
+                 lb.build(stage, );
 
 
-
-                EventHandler<ActionEvent> eventHandler = new EventHandler<ActionEvent>() {
+                EventHandler<ActionEvent> LogIn = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        System.out.println("Hello World");
+                        String username = lb.getUsername();
+                        String password = lb.getPassword();
+                        if(db.passwordCheck(username, password)){
+                        c.update(Actions.LOGIN, u, null);}
+                        ProfileUser u = db.getUser(username, password);
+                        ArrayList potentialMatches = db.getPotentialMatches(u);
+                        if (!potentialMatches.isEmpty()){
+                        SwipeViewBuilder sb = new SwipeViewBuilder(potentialMatches.get(0),
+                                potentialMatches.get(0).getImage());
+                        potentialMatches.remove(potentialMatches.get(0));
+                    }}
+                };
+
+                EventHandler<ActionEvent> Register = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        c.update(Actions.REGISTER, null, null);
+                        RegistrationViewBuilder r = new RegistrationViewBuilder();
+                        r.build(stage);
+                        String DOB = r.getDOB();
+                        String fName = r.getFirstName();
+                        String lName = r.getLastName();
+                        String pw1 = r.getPassword();
+                        String pw2 = r.getPassword1();
+                        String location = r.getPicturePath();
+
+                        if(pw1.equals(pw2)){
+                            try {
+                                db.createUser(new ProfileUser(db.getSize(), fName, lName, new Date(DOB),
+                                        new ImageView(new Image(
+                                                new FileInputStream("C:\\Users\\HP\\Desktop\\myimg.jpg")))));
+                            } catch (FileNotFoundException ex) {
+                                ex.printStackTrace();
+                            }
+                            c.update(Actions.LOGIN, null, null);}
                     }
                 };
 
+
                 ArrayList<EventHandler> list = new ArrayList<>();
-                list.add(eventHandler);
+                list.add(LogIn);
                 //Adding scene to the stage
                 sb.build(stage, list);
                 //Displaying the contents of the stage

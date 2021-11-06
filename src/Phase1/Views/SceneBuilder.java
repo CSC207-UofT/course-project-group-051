@@ -18,6 +18,6 @@ interface SceneBuilder {
     void addVBox();
     void setMargin();
     void setSpacing();
-    void mapEventHandler(ArrayList<EventHandler> e);
-    void build(Stage s, ArrayList<EventHandler> e);
+    void addButton();
+    void build(Stage s);
 }

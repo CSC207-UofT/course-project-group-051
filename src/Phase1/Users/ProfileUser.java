@@ -2,6 +2,7 @@ package Phase1.Users;
 
 import Phase1.States.LoggedOut;
 import Phase1.States.State;
+import javafx.scene.image.ImageView;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -27,10 +28,13 @@ public class ProfileUser extends User {
     private String username;
     private String password;
     private State state;
+    private ImageView image;
 
-    public ProfileUser(int id, String fName, String lName, Date birthdate, String password) {
+    public ProfileUser(int id, String fName, String lName, Date birthdate, String password, ImageView image) {
         super(id, fName, lName, birthdate, password);
         this.state = new LoggedOut();
+        this.image = image;
+
     }
 
     public String getBio() {
@@ -56,7 +60,9 @@ public class ProfileUser extends User {
 
         return days / 365;
     }
-
+    public ImageView getImage(){
+        return this.image;
+    }
     public String getPreference() {
         return this.preference;
     }

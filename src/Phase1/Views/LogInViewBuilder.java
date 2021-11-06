@@ -25,6 +25,8 @@ public class LogInViewBuilder implements SceneBuilder{
     BorderPane bp;
     VBox v;
     VBox v1;
+    TextField tf1;
+    PasswordField pf1;
     public LogInViewBuilder(){
         this.bp = new BorderPane();
     }
@@ -39,24 +41,17 @@ public class LogInViewBuilder implements SceneBuilder{
 
 
     /** Maps each button to its corresponding eventhandler.
-     * @param e A list of eventhandlers
      */
 
     @Override
-    public void mapEventHandler(ArrayList<EventHandler> e) {
+    public void addButton() {
         this.bt1 = new Button("Create new account");
         this.bt2 = new Button("Log In");
         this.hb1.getChildren().add(this.bt1);
         this.hb1.getChildren().add(this.bt2);
 
-        if (!e.isEmpty()) {
-            EventHandler t = e.get(0);
-            EventHandler t1 = e.get(1);
-            this.bt1.setOnAction(t);
-            this.bt2.setOnAction(t1);
-        }
-
     }
+
 
     /**
      * Creates all the VBoxes necessary for the scene.
@@ -75,11 +70,11 @@ public class LogInViewBuilder implements SceneBuilder{
     public void addTextField() {
         Label label1 = new Label("Username:");
         Label label2 = new Label("Password:");
-        TextField textField1 = new TextField ();
+        this.tf1 = new TextField ();
         this.v.getChildren().addAll(label1,
-                textField1);
-        PasswordField textField2 = new PasswordField();
-        this.v.getChildren().addAll(label2, textField2);
+                this.tf1);
+        this.pf1 = new PasswordField();
+        this.v.getChildren().addAll(label2, this.pf1);
         this.v1.getChildren().add(this.v);
         this.v1.getChildren().add(this.hb1);
     }
@@ -115,13 +110,22 @@ public class LogInViewBuilder implements SceneBuilder{
     }
 
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e){
+    public void build(Stage s){
         this.addHBox();
-        this.mapEventHandler(e);
+        this.addButton();
         this.addVBox();
         this.addTextField();
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
     }
+
+    public String getUsername(){
+        return this.tf1.getText();
+    }
+
+    public String getPassword(){
+        return this.pf1.getText();
+    }
+
 }

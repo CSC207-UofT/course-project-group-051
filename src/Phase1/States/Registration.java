@@ -18,7 +18,7 @@ public class Registration extends State{
     @Override
     public State transition(String s){
         if (s.equals(Actions.LOGIN)){
-            return States.LoggedIn;
+            return States.LoggedOut;
         }
         return States.Registration;
     }

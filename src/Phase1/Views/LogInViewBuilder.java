@@ -52,6 +52,14 @@ public class LogInViewBuilder implements SceneBuilder{
 
     }
 
+    public Button getCreateAccount(){
+        return this.bt1;
+    }
+
+    public Button getLogIn(){
+        return this.bt2;
+    }
+
 
     /**
      * Creates all the VBoxes necessary for the scene.

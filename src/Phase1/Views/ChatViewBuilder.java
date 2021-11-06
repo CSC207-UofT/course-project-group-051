@@ -19,9 +19,22 @@ class ChatViewBuilder implements SceneBuilder{
     HBox hb2;
     BorderPane bp;
     Button send;
+    Button unmatch;
     Button ret;
     Scene scene;
     VBox vb;
+
+    public Button getSend(){
+        return this.send;
+    }
+
+    public Button getUnmatch(){
+        return this.unmatch;
+    }
+
+    public Button getReturn(){
+        return this.ret;
+    }
     public ChatViewBuilder(String firstName){
         this.name = firstName;
         this.bp = new BorderPane();
@@ -51,8 +64,11 @@ class ChatViewBuilder implements SceneBuilder{
     public void addButton() {
         this.ret = new Button("<");
         this.send = new Button("Send");
+        this.unmatch = new Button("Unmatch");
+
         this.hb1.getChildren().add(ret);
         this.hb1.getChildren().add(new Text(this.name));
+        this.hb1.getChildren().add(this.unmatch);
         this.hb2.getChildren().add(send);
 
     }

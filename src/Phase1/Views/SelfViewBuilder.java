@@ -38,10 +38,18 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void addButton() {
-        this.bt = new Button("<");
+        this.bt = new Button("Back");
         this.bt1 = new Button("Save");
         this.hb.getChildren().add(this.bt);
         this.hb.getChildren().add(new Text("About"));
+    }
+
+    public Button getBack(){
+        return this.bt;
+    }
+
+    public Button getSave(){
+        return this.bt1;
     }
 
     @Override

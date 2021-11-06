@@ -49,9 +49,13 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void addButton() {
-        Button btn1 = new Button("Log In");
-        this.hb1.getChildren().add(btn1);
+        this.bt1 = new Button("Log In");
+        this.hb1.getChildren().add(bt1);
 
+    }
+
+    public Button getLogIn(){
+        return this.bt1;
     }
 
     /**
@@ -179,10 +183,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     /** Completes the build of the scene.
      * @param s Primary stage
-     * @param e List of event handlers
      */
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e){
+    public void build(Stage s){
         this.addHBox();
         this.addButton();
         this.addVBox();

@@ -58,7 +58,6 @@ public class SwipeViewBuilder implements SceneBuilder{
 
 
     /** Maps each button to its corresponding eventhandler.
-     * @param e A list of eventhandlers
      */
 
     @Override
@@ -77,6 +76,26 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.hb2.getChildren().add(btn4);
 
 
+    }
+
+    public Button getLeft(){
+        return this.btn;
+    }
+
+    public Button getRight(){
+        return this.btn1;
+    }
+
+    public Button getMatches(){
+        return this.btn2;
+    }
+
+    public Button getLogOut(){
+        return this.btn3;
+    }
+
+    public Button getMe(){
+        return this.btn4;
     }
 
     /**

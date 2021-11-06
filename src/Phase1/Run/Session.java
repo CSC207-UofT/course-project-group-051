@@ -34,7 +34,7 @@ import javafx.scene.image.Image;
 public class Session extends Application {
             @Override
             public void start(Stage stage) throws FileNotFoundException {
-                Controller c = new Controller();
+                StateMachine c = new StateMachine();
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
@@ -55,29 +55,34 @@ public class Session extends Application {
                 imageView.setPreserveRatio(true);
 
 
-
-
                 ProfileUser u = new ProfileUser(1, "Madeline",
                         "Swann", new Date("July,9,1989"), "afokl", null);
                 u.setBio("Insert your best pickup line");
-                 LogInViewBuilder lb = new LogInViewBuilder();
-                 lb.build(stage, );
+                LogInViewBuilder lb = new LogInViewBuilder();
+                lb.build(stage);
 
 
-                EventHandler<ActionEvent> LogIn = new EventHandler<ActionEvent>() {
+              EventHandler<ActionEvent> LogIn = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        String username = lb.getUsername();
-                        String password = lb.getPassword();
-                        if(db.passwordCheck(username, password)){
-                        c.update(Actions.LOGIN, u, null);}
-                        ProfileUser u = db.getUser(username, password);
-                        ArrayList potentialMatches = db.getPotentialMatches(u);
-                        if (!potentialMatches.isEmpty()){
-                        SwipeViewBuilder sb = new SwipeViewBuilder(potentialMatches.get(0),
-                                potentialMatches.get(0).getImage());
-                        potentialMatches.remove(potentialMatches.get(0));
-                    }}
+                        if (c.getState().equals(States.LoggedOut)) {
+                            String username = lb.getUsername();
+                            String password = lb.getPassword();
+                            if (db.passwordCheck(username, password)) {
+                                c.update(Actions.LOGIN, u, null);
+                            }
+                            ProfileUser u = db.getUser(username, password);
+                            ArrayList potentialMatches = db.getPotentialMatches(u);
+                            if (!potentialMatches.isEmpty()) {
+                                SwipeViewBuilder sb = new SwipeViewBuilder(potentialMatches.get(0),
+                                        potentialMatches.get(0).getImage());
+                                potentialMatches.remove(potentialMatches.get(0));
+                            }
+                        } else {
+                            c.update(Actions.LOGIN, null, null);
+                            lb.build(stage);
+                        }
+                    }
                 };
 
                 EventHandler<ActionEvent> Register = new EventHandler<ActionEvent>() {
@@ -93,7 +98,7 @@ public class Session extends Application {
                         String pw2 = r.getPassword1();
                         String location = r.getPicturePath();
 
-                        if(pw1.equals(pw2)){
+                        if (pw1.equals(pw2)) {
                             try {
                                 db.createUser(new ProfileUser(db.getSize(), fName, lName, new Date(DOB),
                                         new ImageView(new Image(
@@ -101,20 +106,127 @@ public class Session extends Application {
                             } catch (FileNotFoundException ex) {
                                 ex.printStackTrace();
                             }
-                            c.update(Actions.LOGIN, null, null);}
+                            c.update(Actions.LOGIN, null, null);
+                        }
                     }
                 };
 
 
-                ArrayList<EventHandler> list = new ArrayList<>();
-                list.add(LogIn);
                 //Adding scene to the stage
-                sb.build(stage, list);
+                sb.build(stage);
                 //Displaying the contents of the stage
-                stage.show();
+
+                //TODO
+                EventHandler<ActionEvent> SwipeRight = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.LoggedIn)){
+                            ProfileUser user = db.getLoggedInUser();
+                            ProfileUser otherUser = db.getPotentialUsers().get(0);
+
+                        }
+
+                    }
+                };
+
+
+                EventHandler<ActionEvent> SwipeLeft = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+
+                    }
+                };
+
+                EventHandler<ActionEvent> Back = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.Messaging)){
+
+                        }
+                        else if(c.getState().equals(States.Matches)){
+
+                        }
+                        else if(c.getState().equals(States.SelfProfile)){
+
+                        }
+
+                    }
+
+
+                };
+
+                EventHandler<ActionEvent> SelfProfile = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.LoggedIn)){
+
+                        }
+
+
+                    }
+
+
+                };
+
+                EventHandler<ActionEvent> Matches = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.LoggedIn)){
+
+                        }
+
+
+                    }
+
+
+                };
+                EventHandler<ActionEvent> Messaging = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.LoggedIn)){
+
+                        }
+
+
+                    }
+
+
+                };
+
+                EventHandler<ActionEvent> Send = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.Messaging)){
+
+                        }
+
+
+                    }
+
+
+                };
+
+                EventHandler<ActionEvent> Unmatch = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent e) {
+                        if (c.getState().equals(States.Messaging)){
+
+                        }
+
+
+                    }
+
+
+                };
+
+
+
+
+
+
+
+
             }
-
-
 
 
 

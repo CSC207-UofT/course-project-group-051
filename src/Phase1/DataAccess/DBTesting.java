@@ -14,9 +14,9 @@ public class DBTesting {
         //a.initialize();
         //a.loadBikeTable();
         DataBaseAccess db = new DataBaseAccess();
-        System.out.println(db.createUser("testL", "testuusssF", "password", "testing666", 20, "male", "male"));
-
-        System.out.println(db.getFirstName(db.logIn("testing666", "password")));
+        //System.out.println(db.createUser("testL", "testuusssF", "password", "testing666", 20, "male", "male"));
+        //db.createDB();
+        //System.out.println(db.getFirstName(db.logIn("testing666", "password")));
 
     }
     public void initialize() {

@@ -24,7 +24,7 @@ public class ProfileUser extends User {
 
     private String bio;
     private String gender;
-    private String preference;
+    private String preference; // should this be a string or a list??
     private String username;
     private String password;
     private State state;
@@ -32,7 +32,7 @@ public class ProfileUser extends User {
 
     public ProfileUser(int id, String fName, String lName, Date birthdate, String password, ImageView image) {
         super(id, fName, lName, birthdate, password);
-        this.state = new LoggedOut();
+        this.state = new LoggedOut(); // why is this logged out?
         this.image = image;
 
     }
@@ -69,7 +69,7 @@ public class ProfileUser extends User {
 
     public void setPreference(String preference) {
         this.preference = preference;
-    }
+    } // if list, change this!
 
     public String getUsername() {
         return this.username;

@@ -43,4 +43,11 @@ public abstract class User {
     public Date getBirthdate(){return this.birthdate;}
 
     public String getPassword(){return this.password;}
+
+    public void setfName(String fName) {this.fName = fName;}
+
+    public void setLName(String lName) { this.lName = lName; }
+
+
+
 }

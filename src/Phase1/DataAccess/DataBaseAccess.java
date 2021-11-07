@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 public class DataBaseAccess implements DataAccessInterface{
 
-    private Connection conn = null;
     private Statement stmt = null;
 
 
@@ -293,8 +292,6 @@ public class DataBaseAccess implements DataAccessInterface{
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 String[] Messages = rs.getString("Messages").split(",", -1);
-                //String userID1 = rs.getString("userID1");
-                //String userID2 = rs.getString("userID1");
                 for(String x: Messages){
                     thread.add(this.getMessage(Integer.parseInt(x)));
                 }
@@ -465,7 +462,7 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public boolean likeUser(int currUser, int likeID) {
         boolean rs = false;
-        String like;
+        StringBuilder like;
         try {
             if(this.getLikes(currUser).contains(likeID)){
                 return false;
@@ -473,9 +470,9 @@ public class DataBaseAccess implements DataAccessInterface{
             else{
                 ArrayList<Integer> likes = this.getLikes(currUser);
                 likes.add(likeID);
-                like = likes.remove(0).toString();
+                like = new StringBuilder(likes.remove(0).toString());
                 for(int x: likes){
-                    like = like + "," + x;
+                    like.append(",").append(x);
                 }
             }
 
@@ -494,7 +491,7 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public boolean unlikeUser(int currUser, int likeID) {
         boolean rs = false;
-        String like = "";
+        StringBuilder like = new StringBuilder();
         try {
             if(!this.getLikes(currUser).contains(likeID)){
                 return false;
@@ -503,9 +500,9 @@ public class DataBaseAccess implements DataAccessInterface{
                 ArrayList<Integer> likes = this.getLikes(currUser);
                 likes.remove(likeID);
                 if(likes.size() != 0){
-                    like = likes.remove(0).toString();
+                    like = new StringBuilder(likes.remove(0).toString());
                     for(int x: likes){
-                        like = like + "," + x;
+                        like.append(",").append(x);
                     }
                 }
             }
@@ -525,7 +522,7 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public boolean admireUser(int currUser, int admirerID) {
         boolean rs = false;
-        String admire;
+        StringBuilder admire;
         try {
             if(this.getAdmires(currUser).contains(admirerID)){
                 return false;
@@ -533,9 +530,9 @@ public class DataBaseAccess implements DataAccessInterface{
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
                 admirer.add(admirerID);
-                admire = admirer.remove(0).toString();
+                admire = new StringBuilder(admirer.remove(0).toString());
                 for(int x: admirer){
-                    admire = admire + "," + x;
+                    admire.append(",").append(x);
                 }
             }
 
@@ -554,7 +551,7 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public boolean stopAdmiringUser(int currUser, int admirerID) {
         boolean rs = false;
-        String admire = "";
+        StringBuilder admire = new StringBuilder();
         try {
             if(!this.getAdmires(currUser).contains(admirerID)){
                 return false;
@@ -563,9 +560,9 @@ public class DataBaseAccess implements DataAccessInterface{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
                 admirer.remove(admirerID);
                 if(admirer.size() != 0){
-                    admire = admirer.remove(0).toString();
+                    admire = new StringBuilder(admirer.remove(0).toString());
                     for(int x: admirer){
-                        admire = admire + "," + x;
+                        admire.append(",").append(x);
                     }
                 }
             }
@@ -587,7 +584,7 @@ public class DataBaseAccess implements DataAccessInterface{
         int id = this.getNewThreadID();
         try {
             String h2 = "insert into THREADS values ("+id+", '', '"+userID1+"', "+userID2+");";
-            boolean rs = stmt.execute(h2);
+            stmt.execute(h2);
             this.addThread(userID1, id);
             this.addThread(userID2, id);
         } catch (SQLException se) {
@@ -601,18 +598,17 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     private void addThread(int userID, int threadID){
-        boolean rs = false;
-        String thread;
+        StringBuilder thread;
         try {
             ArrayList<Integer> threads = this.getThreads(userID);
             threads.add(threadID);
-            thread = threads.remove(0).toString();
+            thread = new StringBuilder(threads.remove(0).toString());
             for(int x: threads){
-                thread = thread + "," + x;
+                thread.append(",").append(x);
             }
 
             String h2 = "update user set THREADS = " + thread +" where PERSONID = " + userID + ";";
-            rs= stmt.execute(h2);
+            stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -646,7 +642,7 @@ public class DataBaseAccess implements DataAccessInterface{
         int id = this.getNewMsgID();
         try {
             String h2 = "insert into MESSAGES values ("+id+", '"+msg+"', '"+sender+"', '"+ receiver +"');";
-            boolean rs = stmt.execute(h2);
+            stmt.execute(h2);
             this.addMessage(id, threadID);
             this.addMessage(id, threadID);
         } catch (SQLException se) {
@@ -660,18 +656,17 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     private void addMessage(int messageID, int threadID){
-        boolean rs = false;
-        String message;
+        StringBuilder message;
         try {
             ArrayList<Integer> messages = this.getThreadMsg(threadID);
             messages.add(messageID);
-            message = messages.remove(0).toString();
+            message = new StringBuilder(messages.remove(0).toString());
             for(int x: messages){
-                message = message + "," + x;
+                message.append(",").append(x);
             }
 
             String h2 = "update THREADS set MESSAGES = " + message +" where THREADID = " + threadID + ";";
-            rs= stmt.execute(h2);
+            stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -727,7 +722,7 @@ public class DataBaseAccess implements DataAccessInterface{
         int id = this.getNextUser();
         try {
             String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '');";
-            boolean rs = stmt.execute(h2);
+            stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -747,7 +742,7 @@ public class DataBaseAccess implements DataAccessInterface{
         System.out.println("Attempting to connect to database");
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             System.out.println("Successfully connected to database!");
         } catch (Exception e) {

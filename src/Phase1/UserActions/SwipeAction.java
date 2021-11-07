@@ -28,6 +28,10 @@ public class SwipeAction implements Transitionable{
 
     }
 
+    public User getNextUser() {
+        return null;
+    }
+
 
 
 

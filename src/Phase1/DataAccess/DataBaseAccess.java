@@ -218,67 +218,265 @@ public class DataBaseAccess implements DataAccessInterface{
 
     @Override
     public ArrayList<Integer> getLikes(int id) {
-        return null;
+        ArrayList<Integer> likes = new ArrayList<>();
+        try {
+            String h2 = "select age from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                String[] temp = rs.getString("Likes").split(",", -1);
+                for(String x: temp){
+                    likes.add(Integer.parseInt(x));
+                }
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return likes;
     }
 
     @Override
     public ArrayList<Integer> getAdmires(int id) {
-        return null;
+        ArrayList<Integer> admires = new ArrayList<>();
+        try {
+            String h2 = "select admires from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                String[] temp = rs.getString("admires").split(",", -1);
+                for(String x: temp){
+                    admires.add(Integer.parseInt(x));
+                }
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return admires;
+    }
+
+    @Override
+    public ArrayList<Integer> getThreads(int id) {
+        ArrayList<Integer> threads = new ArrayList<>();
+        try {
+            String h2 = "select threads from USER where PERSONID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                String[] temp = rs.getString("threads").split(",", -1);
+                for(String x: temp){
+                    threads.add(Integer.parseInt(x));
+                }
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return threads;
     }
 
     @Override
     public ArrayList<String> getThread(int threadID) {
-        return null;
+        ArrayList<String> thread = new ArrayList<>();
+        try {
+            String h2 = "select Messages, userID1, userID2 from threads where threadID = "+ threadID +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                String[] Messages = rs.getString("Messages").split(",", -1);
+                //String userID1 = rs.getString("userID1");
+                //String userID2 = rs.getString("userID1");
+                for(String x: Messages){
+                    thread.add(this.getMessage(Integer.parseInt(x)));
+                }
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return thread;
     }
 
     @Override
     public String getMessage(int messageID) {
-        return null;
+        String message = "";
+        try {
+            String h2 = "select Messages, sender, receiver from messages where messageID = "+ messageID +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                message = rs.getString("Messages");
+                String sender = rs.getString("sender");
+                String receiver = rs.getString("receiver");
+                message = message + "," + sender + "," + receiver;
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return message;
+
     }
 
     @Override
     public boolean setFirstName(int id, String firstName) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set firstName = " + firstName +" where PERSONID = " + id + ";";
+             rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setLastName(int id, String lastName) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set lastName = " + lastName +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setUsername(int id, String username) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set username = " + username +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setPassword(int id, String password) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set password = " + password +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setGender(int id, String gender) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set gender = " + gender +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setBio(int id, String bio) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set bio = " + bio +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setAge(int id, int age) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set age = " + age +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean setGenderPreference(int id, String genderPreference) {
-        return false;
+        boolean rs = false;
+        try {
+            String h2 = "update user set genderPreference = " + genderPreference +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean likeUser(int currUser, int likeID) {
-        return false;
+        boolean rs = false;
+        //not done
+        try {
+            String h2 = "update user set likeID = " + likeID +" where PERSONID = " + currUser + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override

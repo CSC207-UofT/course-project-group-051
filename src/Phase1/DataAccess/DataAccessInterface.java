@@ -30,6 +30,8 @@ public interface DataAccessInterface {
 
     ArrayList<Integer> getAdmires(int id);
 
+    ArrayList<Integer> getThreads(int id);
+
     ArrayList<String> getThread(int threadID);
 
     String getMessage(int messageID);

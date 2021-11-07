@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 public class ProfileAction implements Transitionable{
 
@@ -17,40 +18,45 @@ public class ProfileAction implements Transitionable{
                 db.getBirthday(), db.getPassword(), db.getImage());
 
     }
-    public void updateFirstName(String fName){
-        this.user.setFirstName(); //take input from text field
-        db.setfName(this.user.getfName()); // add these into a save button?
+    private void updateFirstName(String fName){
+        this.user.setfName(fName); //take input from text field
+         // add these into a save button?
     };
 
-    public void updateLastName(String lName){
+    private void updateLastName(String lName){
         db.setlName(this.user.getlName());
     };
 
-    public void updateBirthday(String fName){
+    private void updateBirthday(String fName){
         db.setBirthday(this.user.getfName());
     };
 
-    public void updatePreferences(ArrayList<String> preferences){
+    private void updatePreferences(String preference){
         // take input from text field
-        // set this.user.setPreferences(preferences);
+        // set this.user.setPreferences(preference);
 
     }
 
-    public void updateGender(String gender){
+    private void updateGender(String gender){
         // take input from text field
         // set this.user.setGender(gender);
     }
 
-    public void updateImage(Image image){
+    private void updateImage(Image image){
 
     }
 
-    public void updatePassword(){
+    private void updatePassword(String password){
 
     }
 
-    public void saveProfile(){
-        //bunch of db calls to update attributes from our class
+    public void saveProfile(Map results){
+        db.updateFirstName(results.get("fName"));
+        db.setfName(this.user.getfName());
+        db.update()
+        updateFirstName();
+        db.updateName(fname, lastname)
+    //bunch of db calls to update attributes from our class
     }
 
     public void transition(){};

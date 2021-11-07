@@ -8,8 +8,11 @@ import java.util.ArrayList;
  */
 public interface DataAccessInterface {
 
+    //takes the username and password of a user and return their personID.
+    //if it is not in the database, it will return -1
     int logIn(String username, String password);
 
+    //
     String getFirstName(int id);
 
     String getLastName(int id);
@@ -26,14 +29,18 @@ public interface DataAccessInterface {
 
     int getAge(int id);
 
+    //return an ArrayList of integers representing the id of user's likes
     ArrayList<Integer> getLikes(int id);
 
+    //return an ArrayList of integers representing the id of user's admires
     ArrayList<Integer> getAdmires(int id);
 
     ArrayList<Integer> getThreads(int id);
 
+    //msg,senderID,receiverID
     ArrayList<String> getThread(int threadID);
 
+    //msg,senderID,receiverID
     String getMessage(int messageID);
 
     boolean setFirstName(int id, String firstName);

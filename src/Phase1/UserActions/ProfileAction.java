@@ -1,20 +1,15 @@
 package Phase1.UserActions;
 
 import Phase1.States.State;
+import Phase1.Users.ProfileUser;
 import javafx.scene.image.ImageView;
 
-public class ProfileAction extends UserActions{
+public class ProfileAction implements Transitionable{
 
-    private String bio;
-    private String gender;
-    private String preference;
-    private String username;
-    private String password;
-    private State state;
-    private ImageView image;
+    private ProfileUser user;
 
     public ProfileAction(int id){
-        super(id);
 
     }
+    public void transition(){};
 }

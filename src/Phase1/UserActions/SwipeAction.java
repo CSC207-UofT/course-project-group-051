@@ -1,6 +1,6 @@
 package Phase1.UserActions;
 
-public class SwipeAction {
+public class SwipeAction implements Transitionable{
     public int userID;
     public SwipeAction(int id){
         this.userID = id;
@@ -8,4 +8,5 @@ public class SwipeAction {
     public void like() {
 
     }
+    public void transition(){};
 }

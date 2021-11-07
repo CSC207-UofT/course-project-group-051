@@ -1,12 +1,37 @@
 package Phase1.UserActions;
 
+import Phase1.Users.User;
+
+import java.util.Queue;
+
 public class SwipeAction implements Transitionable{
-    public int userID;
+
+    private int id;
+    private Queue<User> potentialUsers;
+
+
+
     public SwipeAction(int id){
-        this.userID = id;
+        this.id = id;
     }
-    public void like() {
+
+
+    public void like(int otherID) {
 
     }
-    public void transition(){};
+
+    public void dislike() {
+
+    }
+
+    public void viewBio(int otherID) {
+
+    }
+
+
+
+
+
+
+    public void transition(){}
 }

@@ -18,45 +18,29 @@ public class ProfileAction implements Transitionable{
                 db.getBirthday(), db.getPassword(), db.getImage());
 
     }
-    private void updateFirstName(String fName){
-        this.user.setfName(fName); //take input from text field
-         // add these into a save button?
-    };
-
-    private void updateLastName(String lName){
-        db.setlName(this.user.getlName());
-    };
-
-    private void updateBirthday(String fName){
-        db.setBirthday(this.user.getfName());
-    };
-
-    private void updatePreferences(String preference){
-        // take input from text field
-        // set this.user.setPreferences(preference);
-
-    }
-
-    private void updateGender(String gender){
-        // take input from text field
-        // set this.user.setGender(gender);
-    }
-
     private void updateImage(Image image){
-
+        //seperate button that updates the profile picture?
     }
 
-    private void updatePassword(String password){
 
-    }
+    private void updateProfile(Map<String, String> results){
+        // TODO: ADD CHECKS FOR THE FIELDS - HERE OR DB?
+        this.user.setfName(results.get("fName"));
+        this.user.setLName(results.get("lName"));
+        this.user.setBio(results.get("bio"));
+        this.user.setGender(results.get("gender"));
+        this.user.setPreference(results.get("preferences"));
+        this.user.setBirthday(results.get("birthday"));
+        this.user.setPassword(results.get("password"));
 
-    public void saveProfile(Map results){
-        db.updateFirstName(results.get("fName"));
-        db.setfName(this.user.getfName());
-        db.update()
-        updateFirstName();
-        db.updateName(fname, lastname)
-    //bunch of db calls to update attributes from our class
+        db.setFirstName(this.user.getfName());
+        db.setLastName(this.user.getlName());
+        db.setBio(this.user.getBio());
+        db.setGender(this.user.getGender())
+        db.setGenderPreference(this.user.getPreference());
+        db.setBirthday(this.user.getBirthdate());
+        db.setPassword(this.user.getPassword());
+
     }
 
     public void transition(){};

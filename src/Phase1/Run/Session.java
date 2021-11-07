@@ -75,14 +75,12 @@ public class Session extends Application {
                 EventHandler<ActionEvent> SelfProfile = new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
+                        if (c.getState().equals(States.LoggedIn)) {
 
                         }
 
 
                     }
-
-
                 };
 
                 EventHandler<ActionEvent> Matches = new EventHandler<ActionEvent>() {

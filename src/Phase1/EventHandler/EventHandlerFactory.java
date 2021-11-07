@@ -83,7 +83,10 @@ public class EventHandlerFactory {
             //TODO
                 if (c.getState().equals(States.LoggedIn)){
                     ProfileUser user = db.getLoggedInUser();
-                    ProfileUser otherUser = db.getPotentialUsers().get(0);
+                    ProfileUser otherUser = db.getPotentialUsers().get(0); //filter by preferences and get a list
+                    // get current user displayed on swipe
+                    // add admirer and liker
+                    // call a refresh of view/state?
 
                 }
 

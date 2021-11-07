@@ -84,6 +84,8 @@ public class EventHandlerFactory {
                 if (c.getState().equals(States.LoggedIn)){
                     ProfileUser user = db.getLoggedInUser();
                     ProfileUser otherUser = db.getPotentialUsers().get(0);
+                    // get user
+                    // test
 
                 }
 

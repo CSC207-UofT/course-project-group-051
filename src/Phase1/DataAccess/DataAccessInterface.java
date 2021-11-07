@@ -62,7 +62,7 @@ public interface DataAccessInterface {
 
     int createThread(int userID1, int userID2);
 
-    int createMessage(int threadID, int sender, int receiver);
+    int createMessage(int threadID, int sender, int receiver, String msg);
 
     int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference);
 

@@ -465,9 +465,21 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public boolean likeUser(int currUser, int likeID) {
         boolean rs = false;
-        //not done
+        String like;
         try {
-            String h2 = "update user set likeID = " + likeID +" where PERSONID = " + currUser + ";";
+            if(this.getLikes(currUser).contains(likeID)){
+                return false;
+            }
+            else{
+                ArrayList<Integer> likes = this.getLikes(currUser);
+                likes.add(likeID);
+                like = likes.remove(0).toString();
+                for(int x: likes){
+                    like = like + "," + x;
+                }
+            }
+
+            String h2 = "update user set likes = " + like +" where PERSONID = " + currUser + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -481,27 +493,233 @@ public class DataBaseAccess implements DataAccessInterface{
 
     @Override
     public boolean unlikeUser(int currUser, int likeID) {
-        return false;
+        boolean rs = false;
+        String like = "";
+        try {
+            if(!this.getLikes(currUser).contains(likeID)){
+                return false;
+            }
+            else{
+                ArrayList<Integer> likes = this.getLikes(currUser);
+                likes.remove(likeID);
+                if(likes.size() != 0){
+                    like = likes.remove(0).toString();
+                    for(int x: likes){
+                        like = like + "," + x;
+                    }
+                }
+            }
+
+            String h2 = "update user set likes = " + like +" where PERSONID = " + currUser + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean admireUser(int currUser, int admirerID) {
-        return false;
+        boolean rs = false;
+        String admire;
+        try {
+            if(this.getAdmires(currUser).contains(admirerID)){
+                return false;
+            }
+            else{
+                ArrayList<Integer> admirer = this.getAdmires(currUser);
+                admirer.add(admirerID);
+                admire = admirer.remove(0).toString();
+                for(int x: admirer){
+                    admire = admire + "," + x;
+                }
+            }
+
+            String h2 = "update user set ADMIRES = " + admire +" where PERSONID = " + currUser + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public boolean stopAdmiringUser(int currUser, int admirerID) {
-        return false;
+        boolean rs = false;
+        String admire = "";
+        try {
+            if(!this.getAdmires(currUser).contains(admirerID)){
+                return false;
+            }
+            else{
+                ArrayList<Integer> admirer = this.getAdmires(currUser);
+                admirer.remove(admirerID);
+                if(admirer.size() != 0){
+                    admire = admirer.remove(0).toString();
+                    for(int x: admirer){
+                        admire = admire + "," + x;
+                    }
+                }
+            }
+
+            String h2 = "update user set ADMIRES = " + admire +" where PERSONID = " + currUser + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 
     @Override
     public int createThread(int userID1, int userID2) {
-        return 0;
+        int id = this.getNewThreadID();
+        try {
+            String h2 = "insert into THREADS values ("+id+", '', '"+userID1+"', "+userID2+");";
+            boolean rs = stmt.execute(h2);
+            this.addThread(userID1, id);
+            this.addThread(userID2, id);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private void addThread(int userID, int threadID){
+        boolean rs = false;
+        String thread;
+        try {
+            ArrayList<Integer> threads = this.getThreads(userID);
+            threads.add(threadID);
+            thread = threads.remove(0).toString();
+            for(int x: threads){
+                thread = thread + "," + x;
+            }
+
+            String h2 = "update user set THREADS = " + thread +" where PERSONID = " + userID + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getNewThreadID(){
+        int id = -1;
+        try {
+            String h2 = "select count(threadID) from threads;";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                id = rs.getInt("count(PersonID)");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id + 1;
     }
 
     @Override
-    public int createMessage(int threadID, int sender, int receiver) {
-        return 0;
+    public int createMessage(int threadID, int sender, int receiver, String msg) {
+        int id = this.getNewMsgID();
+        try {
+            String h2 = "insert into MESSAGES values ("+id+", '"+msg+"', '"+sender+"', '"+ receiver +"');";
+            boolean rs = stmt.execute(h2);
+            this.addMessage(id, threadID);
+            this.addMessage(id, threadID);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
+    private void addMessage(int messageID, int threadID){
+        boolean rs = false;
+        String message;
+        try {
+            ArrayList<Integer> messages = this.getThreadMsg(threadID);
+            messages.add(messageID);
+            message = messages.remove(0).toString();
+            for(int x: messages){
+                message = message + "," + x;
+            }
+
+            String h2 = "update THREADS set MESSAGES = " + message +" where THREADID = " + threadID + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private int getNewMsgID(){
+        int id = -1;
+        try {
+            String h2 = "select count(MessageID) from Messages;";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                id = rs.getInt("count(PersonID)");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id + 1;
+    }
+
+    public ArrayList<Integer> getThreadMsg(int threadID) {
+        ArrayList<Integer> thread = new ArrayList<>();
+        try {
+            String h2 = "select Messages from threads where threadID = "+ threadID +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                String[] Messages = rs.getString("Messages").split(",", -1);
+                for(String x: Messages){
+                    thread.add(Integer.parseInt(x));
+                }
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return thread;
     }
 
     @Override

@@ -6,6 +6,7 @@ import Phase1.Users.ProfileUser;
 import Phase1.Views.LogInViewBuilder;
 import Phase1.Views.RegistrationViewBuilder;
 import Phase1.Views.SwipeViewBuilder;
+import Phase1.Views.ViewBuilderFactory;
 import com.sun.org.apache.bcel.internal.generic.LNEG;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -58,65 +59,8 @@ public class Session extends Application {
                 ProfileUser u = new ProfileUser(1, "Madeline",
                         "Swann", new Date("July,9,1989"), "afokl", null);
                 u.setBio("Insert your best pickup line");
-                LogInViewBuilder lb = new LogInViewBuilder();
+                LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 lb.build(stage);
-
-
-              EventHandler<ActionEvent> LogIn = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedOut)) {
-                            String username = lb.getUsername();
-                            String password = lb.getPassword();
-                            if (db.passwordCheck(username, password)) {
-                                c.update(Actions.LOGIN, u, null);
-                            }
-                            ProfileUser u = db.getUser(username, password);
-                            ArrayList potentialMatches = db.getPotentialMatches(u);
-                            if (!potentialMatches.isEmpty()) {
-                                SwipeViewBuilder sb = new SwipeViewBuilder(potentialMatches.get(0),
-                                        potentialMatches.get(0).getImage());
-                                potentialMatches.remove(potentialMatches.get(0));
-                            }
-                        } else {
-                            c.update(Actions.LOGIN, null, null);
-                            lb.build(stage);
-                        }
-                    }
-                };
-
-                EventHandler<ActionEvent> Register = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        c.update(Actions.REGISTER, null, null);
-                        RegistrationViewBuilder r = new RegistrationViewBuilder();
-                        r.build(stage);
-                        String DOB = r.getDOB();
-                        String fName = r.getFirstName();
-                        String lName = r.getLastName();
-                        String username = r.userName();
-                        String pw1 = r.getPassword();
-                        String pw2 = r.getPassword1();
-                        String location = r.getPicturePath();
-
-                        if (pw1.equals(pw2) && !db.contains(username)) {
-                            try {
-                                db.createUser(new ProfileUser(db.getSize(), fName, lName, new Date(DOB),
-                                        new ImageView(new Image(
-                                                new FileInputStream("C:\\Users\\HP\\Desktop\\myimg.jpg")))));
-                            } catch (FileNotFoundException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                        else if(db.contains(username)){
-                            r.editMessage(false, true);
-                        }
-
-                        else{
-                            r.editMessage(true, false);
-                        }
-                    }
-                };
 
 
                 //Adding scene to the stage
@@ -124,46 +68,9 @@ public class Session extends Application {
                 //Displaying the contents of the stage
 
                 //TODO
-                EventHandler<ActionEvent> SwipeRight = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
-                            ProfileUser user = db.getLoggedInUser();
-                            ProfileUser otherUser = db.getPotentialUsers().get(0);
-
-                        }
-
-                    }
-                };
 
 
-                EventHandler<ActionEvent> SwipeLeft = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
 
-
-                        }
-
-                    }
-                };
-
-                EventHandler<ActionEvent> Back = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.Messaging)){
-
-                        }
-                        else if(c.getState().equals(States.Matches)){
-
-                        }
-                        else if(c.getState().equals(States.SelfProfile)){
-                        }
-
-                    }
-
-
-                };
 
                 EventHandler<ActionEvent> SelfProfile = new EventHandler<ActionEvent>() {
                     @Override
@@ -228,13 +135,6 @@ public class Session extends Application {
 
 
                 };
-
-
-
-
-
-
-
 
             }
 

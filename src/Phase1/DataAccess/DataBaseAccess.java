@@ -15,77 +15,10 @@ public class DataBaseAccess implements DataAccessInterface{
         connectDB();
     }
 
-    /**public void createDB(){
-        try {
-            String h2 = "create table PUBLIC.THREADS\n" +
-                    "(\n" +
-                    "\tTHREADID INT,\n" +
-                    "\tMESSAGES VARCHAR(1000),\n" +
-                    "\tUSERID1 INT,\n" +
-                    "\tUSERID2 INT\n" +
-                    ");\n" +
-                    "\n";
-            stmt.execute(h2);
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String h2 = "create table PUBLIC.THREADS\n" +
-                    "(\n" +
-                    "\tTHREADID INT,\n" +
-                    "\tMESSAGES VARCHAR(1000),\n" +
-                    "\tUSERID1 INT,\n" +
-                    "\tUSERID2 INT\n" +
-                    ");\n" +
-                    "\n";
-            stmt.execute(h2);
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            String h2 = "create table PUBLIC.USER\n" +
-                    "(\n" +
-                    "\tPERSONID INT,\n" +
-                    "\tLASTNAME VARCHAR(255),\n" +
-                    "\tFIRSTNAME VARCHAR(255),\n" +
-                    "\tUSERNAME VARCHAR(255),\n" +
-                    "\tPASSWORD VARCHAR(255),\n" +
-                    "\tAGE INT,\n" +
-                    "\tGENDER VARCHAR(255),\n" +
-                    "\tGENDERPREFERENCE VARCHAR(255),\n" +
-                    "\tBIO VARCHAR(5000),\n" +
-                    "\tLIKES VARCHAR(1000),\n" +
-                    "\tADMIRES VARCHAR(1000),\n" +
-                    "\tTHREADS VARCHAR(1000)\n" +
-                    ");";
-            stmt.execute(h2);
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-
     private int getNextUser(){
         int id = -1;
         try {
-            String h2 = "create table PUBLIC.MESSAGES\n" +
-                    "(\n" +
-                    "\tMESSAGEID INT,\n" +
-                    "\tMESSAGE VARCHAR(1000),\n" +
-                    "\tSENDER INT,\n" +
-                    "\tRECEIVER INT\n" +
-                    ");";
+            String h2 = "select count(personID) from user;";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 id = rs.getInt("count(PersonID)");

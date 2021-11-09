@@ -1,15 +1,7 @@
 package Phase1.Users;
 
-import java.util.ArrayList;
-import java.util.Date;
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
- *
- * @param age is the age of the user being swiped on
- * @param gender is the gender of the user being swiped on
- * @param bio is the bio of the user being swiped on
- * @param swiper is the ID of the current user who is swiping
- * @param gotLiked is True if the swiper swipes right, and false if swiper swipes left
  */
 
 public class SwipeUser extends User {
@@ -21,12 +13,12 @@ public class SwipeUser extends User {
     private int swiper; //ID of the current User who is swiping.
     private boolean gotliked;
 
+    public SwipeUser(int id) {
 
-    public SwipeUser(int id, String fName, String lName, Date birthdate, String password) {
-        super(id, fName, lName, birthdate, password);
-        this.swiper = -1;
-        this.gotliked = false;
+        super(id);
+        gotliked = false;
     }
+
 
     public int getAge() {
         return age;
@@ -38,5 +30,36 @@ public class SwipeUser extends User {
 
     public String getBio() {
         return bio;
+
     }
+
+    public int getSwiper() {
+        return swiper;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setSwiper(int id) {
+        this.swiper = id;
+    }
+
+    public void like() {
+        gotliked = true;
+    }
+
+    public boolean gotLiked() {
+        return gotliked;
+    }
+
+
 }

@@ -58,11 +58,10 @@ public class SwipeViewBuilder implements SceneBuilder{
 
 
     /** Maps each button to its corresponding eventhandler.
-     * @param e A list of eventhandlers
      */
 
     @Override
-    public void mapEventHandler(ArrayList<EventHandler> e) {
+    public void addButton() {
         this.btn = new Button("<");
         this.btn1 = new Button(">");
         this.btn2 = new Button("Matches");
@@ -76,16 +75,27 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.hb2.getChildren().add(btn3);
         this.hb2.getChildren().add(btn4);
 
-        EventHandler t = e.get(0);
-        btn4.setOnAction(t);
 
-        /**if (!e.isEmpty()) {
-            EventHandler t = e.get(0);
-            EventHandler t1 = e.get(1);
-            btn.setOnAction(t);
-            btn1.setOnAction(t1);
-        }*/
+    }
 
+    public Button getLeft(){
+        return this.btn;
+    }
+
+    public Button getRight(){
+        return this.btn1;
+    }
+
+    public Button getMatches(){
+        return this.btn2;
+    }
+
+    public Button getLogOut(){
+        return this.btn3;
+    }
+
+    public Button getMe(){
+        return this.btn4;
     }
 
     /**
@@ -152,10 +162,11 @@ public class SwipeViewBuilder implements SceneBuilder{
         stage.setScene(this.scene);
     }
 
+
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e){
+    public void build(Stage s){
         this.addHBox();
-        this.mapEventHandler(e);
+        this.addButton();
         this.addVBox();
         this.addTextField();
         this.setSpacing();

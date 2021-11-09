@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -21,8 +24,17 @@ public class RegistrationViewBuilder implements SceneBuilder{
     BorderPane bp;
     VBox v;
     VBox v1;
+    TextField tf;
+    TextField tf1;
+    PasswordField tf2;
+    PasswordField tf3;
+    TextField tf4;
+    TextField tf5;
+    TextField tf6;
+    Text message;
     public RegistrationViewBuilder(){
         this.bp = new BorderPane();
+        this.message = new Text();
     }
 
     /**
@@ -34,17 +46,16 @@ public class RegistrationViewBuilder implements SceneBuilder{
     }
 
     /** Maps each button to its corresponding eventhandler.
-     * @param e A list of eventhandlers
      */
     @Override
-    public void mapEventHandler(ArrayList<EventHandler> e) {
-        Button btn1 = new Button("Log In");
-        this.hb1.getChildren().add(btn1);
+    public void addButton() {
+        this.bt1 = new Button("Log In");
+        this.hb1.getChildren().add(bt1);
 
-        if (!e.isEmpty()) {
-            EventHandler t1 = e.get(0);
-            btn1.setOnAction(t1);
-        }
+    }
+
+    public Button getLogIn(){
+        return this.bt1;
     }
 
     /**
@@ -68,25 +79,76 @@ public class RegistrationViewBuilder implements SceneBuilder{
         Label label4 = new Label("Please enter your profile picture path:");
         Label label5 = new Label("First Name:");
         Label label6 = new Label("Last Name:");
-        TextField textField = new TextField ();
-        TextField textField1 = new TextField ();
+        this.tf = new TextField ();
+        this.tf1 = new TextField ();
         this.v.getChildren().addAll(label,
-                textField);
-        PasswordField textField2 = new PasswordField();
-        PasswordField textField3 = new PasswordField();
-        TextField textField4 = new TextField ();
-        TextField textField5 = new TextField ();
-        TextField textField6 = new TextField ();
-        this.v.getChildren().addAll(label5, textField5);
-        this.v.getChildren().addAll(label6, textField6);
+                this.tf);
+        this.tf2 = new PasswordField();
+        this.tf3 = new PasswordField();
+        this.tf4 = new TextField ();
+        this.tf5 = new TextField ();
+        this.tf6 = new TextField ();
+        this.v.getChildren().addAll(label5, this.tf5);
+        this.v.getChildren().addAll(label6, this.tf6);
         this.v.getChildren().addAll(label1,
-                textField1);
+                this.tf1);
         this.v.getChildren().addAll(label2,
-                textField2);
-        this.v.getChildren().addAll(label3, textField3);
-        this.v.getChildren().addAll(label4, textField4);
+                this.tf2);
+        this.v.getChildren().addAll(label3, this.tf3);
+        this.v.getChildren().addAll(label4, this.tf4);
         this.v1.getChildren().add(this.v);
+        this.v1.getChildren().add(this.message);
+        this.message.setFont(new Font(20));
+        this.message.setFill(Color.RED);
         this.v1.getChildren().add(this.hb1);
+    }
+
+    public void editMessage(boolean passwordMessage, boolean accountExists) {
+    if (passwordMessage){
+        this.message.setText("Your passwords don't match, please try again");
+    }
+    if (accountExists){
+        this.message.setText("Your account already exists in our system. Please log in.");
+    }
+
+    }
+
+    public String getDOB(){
+        return this.tf.getText();
+    }
+
+    public String userName(){
+        return this.tf1.getText();
+    }
+
+    public String getPassword(){
+        return this.tf2.getText();
+    }
+
+    public String getPassword1(){
+        return this.tf3.getText();
+    }
+
+    public String getPicturePath(){
+        return this.tf4.getText();
+    }
+
+    public String getFirstName(){
+        return this.tf5.getText();
+    }
+
+    public String getLastName(){
+        return this.tf6.getText();
+    }
+
+    public void passwordDontMatch(){
+
+        this.editMessage(true, false);
+    }
+
+    public void accountExists(){
+
+        this.editMessage(false, true);
     }
 
     /**
@@ -121,12 +183,11 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     /** Completes the build of the scene.
      * @param s Primary stage
-     * @param e List of event handlers
      */
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e){
+    public void build(Stage s){
         this.addHBox();
-        this.mapEventHandler(e);
+        this.addButton();
         this.addVBox();
         this.addTextField();
         this.setSpacing();

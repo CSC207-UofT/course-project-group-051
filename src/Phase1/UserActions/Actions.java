@@ -6,8 +6,6 @@ package Phase1.UserActions;
  */
 public class Actions {
 
-
-    //#TODO delete the classes
     public static final String BACK = "BACK";
     public static final String LOGIN = "LOGIN";
     public static final String LOGOUT = "LOGOUT";

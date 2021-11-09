@@ -1,11 +1,14 @@
 package Phase1.States;
 
-
 /**
  * Represents a state of our program which determines what actions the user can take and what the user sees.
  */
-public interface State {
+public abstract class State {
 
-    State transition(String a);
+    public State(){}
+
+    public State transition(String s){
+        return null;
+    }
 
 }

@@ -19,9 +19,22 @@ class ChatViewBuilder implements SceneBuilder{
     HBox hb2;
     BorderPane bp;
     Button send;
+    Button unmatch;
     Button ret;
     Scene scene;
     VBox vb;
+
+    public Button getSend(){
+        return this.send;
+    }
+
+    public Button getUnmatch(){
+        return this.unmatch;
+    }
+
+    public Button getReturn(){
+        return this.ret;
+    }
     public ChatViewBuilder(String firstName){
         this.name = firstName;
         this.bp = new BorderPane();
@@ -45,23 +58,18 @@ class ChatViewBuilder implements SceneBuilder{
     }
 
     /** Maps each button to its corresponding eventhandler.
-     * @param e A list of eventhandlers
      */
 
     @Override
-    public void mapEventHandler(ArrayList<EventHandler> e) {
+    public void addButton() {
         this.ret = new Button("<");
         this.send = new Button("Send");
+        this.unmatch = new Button("Unmatch");
+
         this.hb1.getChildren().add(ret);
         this.hb1.getChildren().add(new Text(this.name));
+        this.hb1.getChildren().add(this.unmatch);
         this.hb2.getChildren().add(send);
-
-        if (!e.isEmpty()) {
-            EventHandler t = e.get(0);
-            EventHandler t1 = e.get(1);
-            ret.setOnAction(t);
-            send.setOnAction(t1);
-        }
 
     }
 
@@ -111,10 +119,10 @@ class ChatViewBuilder implements SceneBuilder{
     }
 
     @Override
-    public void build(Stage s, ArrayList<EventHandler> e){
+    public void build(Stage s){
         this.addHBox();
         this.addTextField();
-        this.mapEventHandler(e);
+        this.addButton();
         this.addVBox();
         this.setMargin();
         this.setSpacing();

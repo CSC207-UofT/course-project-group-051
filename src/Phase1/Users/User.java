@@ -4,12 +4,6 @@ import java.util.Date;
 
 /**
  * User is the base class for the different representations of our Users
- *
- * @param id is the id associated with user
- * @param fName is the first name of the user
- * @param lName is the last name of the user
- * @param birthdate is the birth-date of the user
- * @param password is a user-set password
  */
 public abstract class User {
 
@@ -17,15 +11,9 @@ public abstract class User {
     private String fName;
     private String lName;
     private Date birthdate;
-    private String password;
 
-    public User(int id, String fName, String lName, Date birthdate, String password)
-    {
+    public User(int id) {
         this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.birthdate = birthdate;
-        this.password = password;
     }
 
     public int getId() {
@@ -42,5 +30,14 @@ public abstract class User {
 
     public Date getBirthdate(){return this.birthdate;}
 
-    public String getPassword(){return this.password;}
+
+    public void setfName(String fName) {this.fName = fName;}
+
+    public void setLName(String lName) { this.lName = lName; }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+
 }

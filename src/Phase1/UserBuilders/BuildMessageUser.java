@@ -18,9 +18,10 @@ public class BuildMessageUser implements UserBuilder {
 
     public BuildMessageUser(int id) {
         resultUser = new MessageUser(id);
-        db = new DataBaseAccess();
+        this.db = new DataBaseAccess();
     }
 
+    public DataAccessInterface getDB() { return this.db; }
     /**
      * Adds the information from the base User class to the result.
      */

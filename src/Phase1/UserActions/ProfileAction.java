@@ -12,7 +12,7 @@ public class ProfileAction implements Transitionable{
 
     public ProfileAction(int id) {
         BuildProfileUser builder = new BuildProfileUser(id);
-        user = builder.buildUser();
+        this.user = builder.buildUser();
 
     }
     private void updateImage(Image image){

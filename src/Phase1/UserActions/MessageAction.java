@@ -26,7 +26,9 @@ public class MessageAction implements Transitionable {
         this.receiverID = receiverID;
     }
 
-    public int getReceiverID(){ return this.receiverID; }
+    public int getReceiverID(){
+        return this.receiverID;
+    }
 
     public BuildMessageUser getBuilder() {
         return this.builder;

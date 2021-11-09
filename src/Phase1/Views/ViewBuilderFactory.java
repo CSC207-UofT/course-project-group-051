@@ -5,12 +5,14 @@ import Phase1.Users.User;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 public class ViewBuilderFactory {
     public ViewBuilderFactory(){
     }
 
     public ChatViewBuilder cBuilders(ProfileUser u){
-            return new ChatViewBuilder(u.getfName());
+            return new ChatViewBuilder(u.getfName(), u.getId());
         }
 
     public LogInViewBuilder lBuilder(){
@@ -28,5 +30,10 @@ public class ViewBuilderFactory {
     public SwipeViewBuilder svBuilder(ImageView image, ProfileUser u){
         return new SwipeViewBuilder(image, u);
     }
+    
+    public MatchesViewBuilder mBuilder(ProfileUser u, ArrayList m){
+        return new MatchesViewBuilder(u, m);
+    }
+    
 }
 

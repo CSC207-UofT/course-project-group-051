@@ -3,7 +3,6 @@ package Phase1.UserBuilders;
 import Phase1.DataAccess.DataAccessInterface;
 import Phase1.DataAccess.DataBaseAccess;
 import Phase1.Users.ProfileUser;
-import Phase1.Users.User;
 
 
 /**
@@ -76,7 +75,7 @@ public class BuildProfileUser implements UserBuilder {
      * @return the User with fully filled in instance attributes.
      */
     @Override
-    public User getResult() {
+    public ProfileUser Build() {
 
 
         this.buildBaseClass();

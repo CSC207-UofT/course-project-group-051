@@ -6,7 +6,7 @@ import Phase1.Users.User;
 /**
  * Defines the steps needed to build a User.
  */
-public interface UserBuilder {
+public interface    UserBuilder {
 
 
     /**
@@ -24,6 +24,6 @@ public interface UserBuilder {
     /**
      * @return the User with fully filled in instance attributes.
      */
-    User getResult();
+    User Build();
 
 }

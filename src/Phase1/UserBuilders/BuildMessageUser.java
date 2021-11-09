@@ -1,8 +1,7 @@
 package Phase1.UserBuilders;
 
 import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
-import Phase1.Users.*;
+import Phase1.Users.MessageUser;
 
 import java.util.ArrayList;
 
@@ -16,9 +15,9 @@ public class BuildMessageUser implements UserBuilder {
     private DataAccessInterface db;
 
 
-    public BuildMessageUser(int id) {
+    public BuildMessageUser(int id, DataAccessInterface db) {
         resultUser = new MessageUser(id);
-        db = new DataBaseAccess();
+        this.db = db;
     }
 
     /**

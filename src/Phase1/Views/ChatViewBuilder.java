@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-class ChatViewBuilder implements SceneBuilder{
+public class ChatViewBuilder implements SceneBuilder{
     String name;
     TextField tf;
     ScrollPane sp;
@@ -23,10 +23,31 @@ class ChatViewBuilder implements SceneBuilder{
     Button ret;
     Scene scene;
     VBox vb;
+    int id;
+    public ChatViewBuilder(String firstName, int id){
+        this.name = firstName;
+        this.bp = new BorderPane();
+        this.sp = new ScrollPane();
+        this.ret = new Button("Back");
+        this.send = new Button("Send");
+        this.unmatch = new Button("Unmatch");
+        this.hb1 = new HBox();
+        this.hb2 = new HBox();
+        this.vb = new VBox();
+        this.tf = new TextField();
+        this.id = id;
+
+
+
+
+    }
 
     public Button getSend(){
         return this.send;
     }
+
+
+
 
     public Button getUnmatch(){
         return this.unmatch;
@@ -35,11 +56,6 @@ class ChatViewBuilder implements SceneBuilder{
     public Button getReturn(){
         return this.ret;
     }
-    public ChatViewBuilder(String firstName){
-        this.name = firstName;
-        this.bp = new BorderPane();
-        this.sp = new ScrollPane();
-    }
 
 
     /**
@@ -47,30 +63,33 @@ class ChatViewBuilder implements SceneBuilder{
      */
     @Override
     public void addHBox() {
-        this.hb1 = new HBox();
-        this.hb2 = new HBox();
+        this.vb.getChildren().add(this.hb1);
+        this.addScrollPane();
+        this.vb.getChildren().add(this.hb2);
     }
 
     @Override
     public void addTextField() {
-        this.tf = new TextField();
         this.hb2.getChildren().add(tf);
     }
 
     /** Maps each button to its corresponding eventhandler.
      */
+    public void addText(){
+        this.hb1.getChildren().add(new Text(this.name));
+
+    }
 
     @Override
     public void addButton() {
-        this.ret = new Button("<");
-        this.send = new Button("Send");
-        this.unmatch = new Button("Unmatch");
-
         this.hb1.getChildren().add(ret);
-        this.hb1.getChildren().add(new Text(this.name));
+        this.addText();
         this.hb1.getChildren().add(this.unmatch);
-        this.hb2.getChildren().add(send);
+        this.hb2.getChildren().add(this.send);
 
+    }
+    public void addScrollPane(){
+        this.vb.getChildren().add(this.sp);
     }
 
     /**
@@ -78,10 +97,6 @@ class ChatViewBuilder implements SceneBuilder{
      */
     @Override
     public void addVBox() {
-    this.vb = new VBox();
-    vb.getChildren().add(this.hb1);
-    vb.getChildren().add(this.sp);
-    vb.getChildren().add(this.hb2);
     }
 
 

@@ -24,10 +24,36 @@ public class SelfViewBuilder implements SceneBuilder{
     javafx.scene.control.Button bt;
     javafx.scene.control.Button bt1;
     VBox vb;
+    Label l1;
+    Label l2;
+    Label l3;
+    Label l4;
+    TextField tf1;
+    TextField tf;
+    TextField tf2;
+    TextField pw;
+
 
     public SelfViewBuilder(User u){
         this.u = u;
         this.bp = new BorderPane();
+        this.bt = new Button("Back");
+        this.bt1 = new Button("Save");
+        this.l1 = new Label("First Name:");
+        this.l2 = new Label("Last Name:");
+        this.l3 = new Label("Birthdate:");
+        this.l4 = new Label("Password:");
+
+        this.tf = new TextField(u.getfName());
+        this.tf1 = new TextField(u.getlName());
+        this.tf2 = new TextField(u.getBirthdate().toString().substring(3, 7) + "," +
+                u.getBirthdate().toString().substring(8, 10) + "," +
+                u.getBirthdate().toString().substring(u.getBirthdate().toString().length() - 4,
+                        u.getBirthdate().toString().length()));
+        this.pw = new TextField(u.getPassword());
+        this.vb = new VBox();
+        this.hb = new HBox();
+
     }
 
     @Override
@@ -38,10 +64,15 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void addButton() {
-        this.bt = new Button("Back");
-        this.bt1 = new Button("Save");
+
         this.hb.getChildren().add(this.bt);
+        this.vb.getChildren().add(this.bt1);
+
+    }
+
+    public void addText(){
         this.hb.getChildren().add(new Text("About"));
+
     }
 
     public Button getBack(){
@@ -54,57 +85,46 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void addHBox() {
-        this.hb = new HBox();
+        this.vb.getChildren().add(hb);
     }
 
     @Override
     public void addVBox() {
-        this.vb = new VBox();
-        this.vb.getChildren().add(this.hb);
+        this.bp.setCenter(this.vb);
+
     }
     @Override
     public void addTextField() {
-        Label l1 = new Label("First Name:");
-        Label l2 = new Label("Last Name:");
-        Label l3 = new Label("Birthdate:");
-        Label l4 = new Label("Password:");
 
-        TextField tf = new TextField(u.getfName());
-        TextField tf1 = new TextField(u.getlName());
-        TextField tf2 = new TextField(u.getBirthdate().toString().substring(3, 7) + "," +
-                u.getBirthdate().toString().substring(8, 10) + "," +
-                u.getBirthdate().toString().substring(u.getBirthdate().toString().length() - 4,
-                        u.getBirthdate().toString().length()));
-        TextField pw = new TextField(u.getPassword());
-        this.vb.getChildren().addAll(l1, tf);
-        this.vb.getChildren().addAll(l2, tf1);
-        this.vb.getChildren().addAll(l3, tf2);
-        this.vb.getChildren().addAll(l4, pw);
-        this.vb.getChildren().add(this.bt1);
+        this.vb.getChildren().addAll(this.l1, this.tf);
+        this.vb.getChildren().addAll(this.l2, this.tf1);
+        this.vb.getChildren().addAll(this.l3, this.tf2);
+        this.vb.getChildren().addAll(this.l4, this.pw);
 
     }
+
 
 
     @Override
     public void setMargin() {
-        this.bp.setCenter(this.vb);
         this.bp.setMargin(this.vb, new Insets(50, 50, 50, 50));
 
     }
 
     @Override
     public void setSpacing() {
-        this.hb.setSpacing(30);
+        this.hb.setSpacing(90);
         this.vb.setSpacing(20);
 
     }
 
     @Override
     public void build(Stage s) {
-        this.addHBox();
-        this.addButton();
         this.addVBox();
+        this.addHBox();
         this.addTextField();
+        this.addButton();
+        this.addText();
         this.setSpacing();
         this.setMargin();
         this.setScene(s);

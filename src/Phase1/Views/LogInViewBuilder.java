@@ -27,8 +27,20 @@ public class LogInViewBuilder implements SceneBuilder{
     VBox v1;
     TextField tf1;
     PasswordField pf1;
+    Label label1;
+    Label label2;
     public LogInViewBuilder(){
         this.bp = new BorderPane();
+        this.bt1 = new Button("Create new account");
+        this.bt2 = new Button("Log In");
+        this.label1 = new Label("Username:");
+        this.label2 = new Label("Password:");
+        this.tf1 = new TextField ();
+        this.pf1 = new PasswordField();
+        this.v = new VBox();
+        this.v1 = new VBox();
+        this.hb1 = new HBox();
+
     }
 
     /**
@@ -36,7 +48,8 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void addHBox() {
-        this.hb1 = new HBox();
+        this.v1.getChildren().add(this.hb1);
+
     }
 
 
@@ -45,8 +58,6 @@ public class LogInViewBuilder implements SceneBuilder{
 
     @Override
     public void addButton() {
-        this.bt1 = new Button("Create new account");
-        this.bt2 = new Button("Log In");
         this.hb1.getChildren().add(this.bt1);
         this.hb1.getChildren().add(this.bt2);
 
@@ -66,8 +77,9 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void addVBox() {
-        this.v = new VBox();
-        this.v1 = new VBox();
+        this.v1.getChildren().add(this.v);
+
+        this.bp.setCenter(v1);
     }
 
 
@@ -76,15 +88,9 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void addTextField() {
-        Label label1 = new Label("Username:");
-        Label label2 = new Label("Password:");
-        this.tf1 = new TextField ();
-        this.v.getChildren().addAll(label1,
+        this.v.getChildren().addAll(this.label1,
                 this.tf1);
-        this.pf1 = new PasswordField();
-        this.v.getChildren().addAll(label2, this.pf1);
-        this.v1.getChildren().add(this.v);
-        this.v1.getChildren().add(this.hb1);
+        this.v.getChildren().addAll(this.label2, this.pf1);
     }
 
     /**
@@ -103,7 +109,7 @@ public class LogInViewBuilder implements SceneBuilder{
      */
     @Override
     public void setMargin() {
-        this.bp.setCenter(v1);
+
         this.bp.setMargin(this.v1, new Insets(50, 50, 50, 50));
 
     }
@@ -119,21 +125,21 @@ public class LogInViewBuilder implements SceneBuilder{
 
     @Override
     public void build(Stage s){
-        this.addHBox();
         this.addButton();
         this.addVBox();
         this.addTextField();
+        this.addHBox();
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
     }
 
-    public String getUsername(){
-        return this.tf1.getText();
+    public TextField getTextbox(){
+        return this.tf1;
     }
 
-    public String getPassword(){
-        return this.pf1.getText();
+    public PasswordField getPasswordbox(){
+        return this.pf1;
     }
 
 }

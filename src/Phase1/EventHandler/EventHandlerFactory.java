@@ -20,7 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
-
+/**
 public class EventHandlerFactory {
 
     public EventHandlerFactory(){}
@@ -165,5 +165,5 @@ public class EventHandlerFactory {
 
 
 
-}
+}*/
 

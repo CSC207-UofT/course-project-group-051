@@ -1,5 +1,7 @@
 package Phase1.UserActions;
 
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataBaseAccess;
 import Phase1.UserBuilders.BuildProfileUser;
 import Phase1.Users.ProfileUser;
 import javafx.scene.image.Image;
@@ -9,10 +11,13 @@ import java.util.Map;
 public class ProfileAction implements Transitionable{
 
     private ProfileUser user;
+    private DataAccessInterface db;
 
-    public ProfileAction(int id) {
+
+    public ProfileAction(int id, DataAccessInterface db) {
         BuildProfileUser builder = new BuildProfileUser(id);
         user = builder.buildUser();
+        this.db = db;
 
     }
     private void updateImage(Image image){

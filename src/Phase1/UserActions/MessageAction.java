@@ -47,6 +47,7 @@ public class MessageAction implements Transitionable {
             int newThread = this.getBuilder().getDB().createThread(this.sender.getId(), this.getReceiverID());
             int dumbyID = this.getBuilder().getDB().createMessage(newThread, this.sender.getId(), this.getReceiverID(),
                     this.newMessage);
+            return;
         }
         this.getBuilder().getDB().createMessage(threadID, this.sender.getId(), this.getReceiverID(),
                 this.getNewMessage());

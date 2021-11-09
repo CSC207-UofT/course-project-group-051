@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class BuildMessageUser implements UserBuilder {
 
-    MessageUser resultUser;
-    DataAccessInterface db;
+    private MessageUser resultUser;
+    private DataAccessInterface db;
 
 
     public BuildMessageUser(int id) {
@@ -50,9 +50,11 @@ public class BuildMessageUser implements UserBuilder {
 
         int id = resultUser.getId();
 
+        //Data from database
         ArrayList<Integer> threads = db.getThreads(id);
         ArrayList<Integer> matches = findMatches();
 
+        // Set the resultUser's attributes
         resultUser.setMatches(matches);
         resultUser.setThreads(threads);
     }
@@ -81,7 +83,7 @@ public class BuildMessageUser implements UserBuilder {
      * @return the User with fully filled in instance attributes.
      */
     @Override
-    public MessageUser Build() {
+    public MessageUser buildUser() {
 
 
         this.buildBaseClass();

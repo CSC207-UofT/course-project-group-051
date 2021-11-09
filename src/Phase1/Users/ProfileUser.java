@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ProfileUser extends User {
 
+    // #TODO finalize these varables.
     private String bio;
     private String gender;
     private String preference;
@@ -47,6 +48,7 @@ public class ProfileUser extends User {
 
         return days / 365;
     }
+
     public ImageView getImage(){
         return this.image;
     }

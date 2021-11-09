@@ -10,8 +10,8 @@ import Phase1.Users.ProfileUser;
  */
 public class BuildProfileUser implements UserBuilder {
 
-    ProfileUser resultUser;
-    DataAccessInterface db;
+    private ProfileUser resultUser;
+    private DataAccessInterface db;
 
 
     public BuildProfileUser(int id) {
@@ -75,7 +75,7 @@ public class BuildProfileUser implements UserBuilder {
      * @return the User with fully filled in instance attributes.
      */
     @Override
-    public ProfileUser Build() {
+    public ProfileUser buildUser() {
 
 
         this.buildBaseClass();

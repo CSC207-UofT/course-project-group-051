@@ -24,6 +24,6 @@ public interface    UserBuilder {
     /**
      * @return the User with fully filled in instance attributes.
      */
-    User Build();
+    User buildUser();
 
 }

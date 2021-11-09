@@ -1,7 +1,6 @@
 package Phase1.UserBuilders;
 
-import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
+import Phase1.DataAccess.*;
 import Phase1.Users.ProfileUser;
 
 
@@ -14,9 +13,9 @@ public class BuildProfileUser implements UserBuilder {
     private DataAccessInterface db;
 
 
-    public BuildProfileUser(int id) {
+    public BuildProfileUser(int id, DataAccessInterface db) {
         resultUser = new ProfileUser(id);
-        db = new DataBaseAccess();
+        this.db = db;
     }
 
     /**

@@ -1,7 +1,6 @@
 package Phase1.UserBuilders;
 
-import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
+import Phase1.DataAccess.*;
 import Phase1.Users.*;
 
 /**
@@ -13,9 +12,9 @@ public class BuildSwipeUser implements UserBuilder {
     private DataAccessInterface db;
 
 
-    public BuildSwipeUser(int id) {
+    public BuildSwipeUser(int id, DataAccessInterface db) {
         resultUser = new SwipeUser(id);
-        db = new DataBaseAccess();
+        this.db = db;
     }
 
     /**

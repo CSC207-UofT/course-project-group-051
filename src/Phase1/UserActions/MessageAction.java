@@ -3,12 +3,15 @@ import Phase1.UserBuilders.BuildMessageUser;
 import Phase1.Users.MessageUser;
 import javafx.scene.image.Image;
 import Phase1.DataAccess.DataBaseAccess;
-
 import java.util.ArrayList;
 
 /**
  * This class creates a new thread of messages between 2 users. Using MessageUser and BuildMessageUser, a new thread
  * and the necessary functionality for two users to message one another.
+ * @param sender MessageUser instance
+ * @param newMessage String of the new message being sent
+ * @param receiverID int representation of the receiver's ID
+ * @param builder BuildMessageUser used to access db functions
  */
 public class MessageAction implements Transitionable {
     private MessageUser sender;

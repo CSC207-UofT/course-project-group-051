@@ -1,9 +1,9 @@
-package Phase1.DataAccess;
+package Phase1.Tests;
 
+import Phase1.DataAccess.DataBaseAccess;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
-
 public class DBTesting {
 
     private Connection conn = null;

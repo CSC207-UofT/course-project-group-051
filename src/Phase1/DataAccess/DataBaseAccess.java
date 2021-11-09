@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class DataBaseAccess implements DataAccessInterface{
 
@@ -38,7 +39,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public int logIn(String username, String password) {
         int id = -1;
         try {
-            String h2 = "select PERSONID from USER where username = '"+ username +"' and PASSWORD = '"+password+"';";
+            String h2 = "select PersonID from USER where username = '"+ username +"' and PASSWORD = '"+password+"';";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 id = rs.getInt("PersonID");
@@ -59,7 +60,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getFirstName(int id) {
         String name = null;
         try {
-            String h2 = "select FirstName from USER where PERSONID = "+ id +";";
+            String h2 = "select FirstName from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 name = rs.getString("FirstName");
@@ -79,7 +80,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getLastName(int id) {
         String name = null;
         try {
-            String h2 = "select LASTNAME from USER where PERSONID = "+ id +";";
+            String h2 = "select LASTNAME from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 name = rs.getString("LASTNAME");
@@ -99,7 +100,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getUsername(int id) {
         String username = null;
         try {
-            String h2 = "select USERNAME from USER where PERSONID = "+ id +";";
+            String h2 = "select USERNAME from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 username = rs.getString("USERNAME");
@@ -119,7 +120,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getPassword(int id) {
         String password = null;
         try {
-            String h2 = "select PASSWORD from USER where PERSONID = "+ id +";";
+            String h2 = "select PASSWORD from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 password = rs.getString("PASSWORD");
@@ -139,7 +140,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getGender(int id) {
         String gender = null;
         try {
-            String h2 = "select gender from USER where PERSONID = "+ id +";";
+            String h2 = "select gender from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 gender = rs.getString("gender");
@@ -159,7 +160,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getBio(int id) {
         String bio = null;
         try {
-            String h2 = "select bio from USER where PERSONID = "+ id +";";
+            String h2 = "select bio from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 bio = rs.getString("bio");
@@ -179,7 +180,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public String getGenderPreference(int id) {
         String genderPreference = null;
         try {
-            String h2 = "select genderPreference from USER where PERSONID = "+ id +";";
+            String h2 = "select genderPreference from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 genderPreference = rs.getString("genderPreference");
@@ -199,7 +200,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public int getAge(int id) {
         int age = -1;
         try {
-            String h2 = "select age from USER where PERSONID = "+ id +";";
+            String h2 = "select age from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 age = rs.getInt("age");
@@ -216,10 +217,30 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public String getBirthday(int id) {
+        String birthday = null;
+        try {
+            String h2 = "select birthday from USER where PersonID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                birthday = rs.getString("birthday");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return birthday;
+    }
+
+    @Override
     public ArrayList<Integer> getLikes(int id) {
         ArrayList<Integer> likes = new ArrayList<>();
         try {
-            String h2 = "select age from USER where PERSONID = "+ id +";";
+            String h2 = "select age from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 String[] temp = rs.getString("Likes").split(",", -1);
@@ -242,7 +263,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public ArrayList<Integer> getAdmires(int id) {
         ArrayList<Integer> admires = new ArrayList<>();
         try {
-            String h2 = "select admires from USER where PERSONID = "+ id +";";
+            String h2 = "select admires from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 String[] temp = rs.getString("admires").split(",", -1);
@@ -265,7 +286,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public ArrayList<Integer> getThreads(int id) {
         ArrayList<Integer> threads = new ArrayList<>();
         try {
-            String h2 = "select threads from USER where PERSONID = "+ id +";";
+            String h2 = "select threads from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 String[] temp = rs.getString("threads").split(",", -1);
@@ -444,6 +465,22 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public boolean setBirthday(int id, String birthday) {
+        boolean rs = false;
+        try {
+            String h2 = "update user set birthday = " + birthday +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
     public boolean setGenderPreference(int id, String genderPreference) {
         boolean rs = false;
         try {
@@ -583,7 +620,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public int createThread(int userID1, int userID2) {
         int id = this.getNewThreadID();
         try {
-            String h2 = "insert into THREADS values ("+id+", '', '"+userID1+"', "+userID2+");";
+            String h2 = "insert into THREADS values ("+id+", '');";
             stmt.execute(h2);
             this.addThread(userID1, id);
             this.addThread(userID2, id);
@@ -655,6 +692,31 @@ public class DataBaseAccess implements DataAccessInterface{
         return id;
     }
 
+    @Override
+    public ArrayList<String> getSwipeList(int id) {
+        String genderPref;
+        ArrayList<String> swipes = new ArrayList<>();
+        genderPref = this.getGenderPreference(id);
+        if(genderPref != null){
+            try {
+                String h2 = "select personId from user where genderPreference = '"+ genderPref+"' and personId != "+id+";";
+                ResultSet rs = stmt.executeQuery(h2);
+                while (rs.next()) {
+                    String list = rs.getString("genderPreference");
+                    swipes = (ArrayList<String>) Arrays.asList(list.split(","));
+                }
+                rs.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return swipes;
+    }
+
     private void addMessage(int messageID, int threadID){
         StringBuilder message;
         try {
@@ -718,11 +780,12 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
-    public int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference) {
+    public int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference, String birthday) {
         int id = this.getNextUser();
         try {
-            String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '');";
-            stmt.execute(h2);
+            String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '', '"+ birthday+"');";
+            ResultSet rs = stmt.executeQuery(h2);
+
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);

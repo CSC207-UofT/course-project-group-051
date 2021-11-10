@@ -28,7 +28,6 @@ public class SwipeViewBuilder implements SceneBuilder{
     Button btn2;
     Button btn3;
     Button btn4;
-    Text text2;
     Text text1;
     BorderPane bp;
     VBox v;
@@ -37,21 +36,15 @@ public class SwipeViewBuilder implements SceneBuilder{
     ProfileUser u;
 
 
-    public SwipeViewBuilder(ImageView image, SwipeUser u){
+    public SwipeViewBuilder(ImageView image, SwipeUser u) {
         this.bp = new BorderPane();
-        if (!image.equals(null)){
         this.image = image;
-        }
-        if (!u.equals(null)){
         this.text = new Text(u.getfName() + ", " + Integer.toString(u.getAge()));
         this.text.setFont(Font.font(null, FontWeight.BOLD, 25));
         this.text.setFill(Color.WHITE);
         this.text1 = new Text(u.getBio());
         this.text1.setFont(Font.font(null, FontWeight.BOLD, 10));
-        this.text1.setFill(Color.WHITE);}
-        if (u.equals(null)){
-            this.text2 = new Text("There is no possible match currently.");
-        }
+        this.text1.setFill(Color.WHITE);
         this.sp = new StackPane();
         this.btn = new Button("<");
         this.btn1 = new Button(">");
@@ -61,8 +54,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.hb = new HBox();
         this.v = new VBox();
 
-    }
 
+    }
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -177,9 +170,6 @@ public class SwipeViewBuilder implements SceneBuilder{
         stage.setScene(this.scene);
     }
 
-    public void addText1(){
-        this.sp.getChildren().add(this.text2);
-    }
 
 
     @Override
@@ -191,16 +181,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.addTextField();
         this.setSpacing();
         this.addbp();
-        if (!this.u.equals(null)){
-            this.addText();
         this.setMargin();
-        this.addImage();}
-        else{
-
-            this.addText1();
-            //this.setMargin1();
-        }
-
+        this.addImage();
         this.setScene(s);
 
 

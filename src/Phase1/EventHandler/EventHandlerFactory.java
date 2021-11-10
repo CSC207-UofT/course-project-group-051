@@ -51,16 +51,12 @@ public class EventHandlerFactory {
                             new Date(db.getBirthday(id)), password, new ImageView(new
                                 Image(new FileInputStream(db.getImgPath(id)))));
                         c.update(Actions.LOGIN, u, null);
-                        System.out.println("yes");
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
-                        System.out.println("yes");
 
                         if(swipelist.isEmpty()){
-                         System.out.println("Reach");
-                         SwipeViewBuilder sb = new SwipeViewBuilder(null, null);
-                         System.out.println("Reach");
+                         EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
 
-                         sb.build(s);
+                         eb.build(s);
 
                      }
                      else {

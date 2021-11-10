@@ -836,7 +836,7 @@ public class DataBaseAccess implements DataAccessInterface{
         int id = this.getNextUser();
         try {
             String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '', '"+ birthday+"', '');";
-            stmt.executeQuery(h2);
+            stmt.execute(h2);
 
         } catch (SQLException se) {
             se.printStackTrace();

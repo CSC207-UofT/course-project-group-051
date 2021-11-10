@@ -57,7 +57,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.bt1 = new Button("Log In");
         this.v = new VBox();
         this.v1 = new VBox();
-        this.label = new Label("Date of Birth(e.g. Dec,6,1999):");
+        this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
         this.label1 = new Label("Username:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");

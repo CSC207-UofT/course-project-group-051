@@ -10,12 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 /**
- *
+ * Builds the LogIn scene.
  */
 public class LogInViewBuilder implements SceneBuilder{
     Scene scene;
@@ -29,6 +31,7 @@ public class LogInViewBuilder implements SceneBuilder{
     PasswordField pf1;
     Label label1;
     Label label2;
+    Text message;
     public LogInViewBuilder(){
         this.bp = new BorderPane();
         this.bt1 = new Button("Create new account");
@@ -40,13 +43,36 @@ public class LogInViewBuilder implements SceneBuilder{
         this.v = new VBox();
         this.v1 = new VBox();
         this.hb1 = new HBox();
+        this.message = new Text();
 
     }
 
+    /**
+     * Sets the invalid credential message when the credential is invalid.
+     */
+    public void invalidCredential(){
+        this.message.setFill(Color.RED);
+        this.message.setText("Invalid Credential. Please try again.");
+    }
+
+    /**
+     * adds the message to the scene.
+     */
+
+    public void addText(){
+        this.v1.getChildren().add(this.message);
+    }
+
+    /** returns the username inputted in the textfield.
+     * @return the username in String.
+     */
     public String getUserName(){
         return this.tf1.getText();
     }
 
+    /** returns the inputted password in passwordfield.
+     * @return the password in String.
+     */
     public String getPassword(){
         return this.pf1.getText();
     }
@@ -109,7 +135,7 @@ public class LogInViewBuilder implements SceneBuilder{
 
         v.setSpacing(20);
         hb1.setSpacing(50);
-        v1.setSpacing(50);
+        v1.setSpacing(20);
     }
 
     /**
@@ -132,22 +158,19 @@ public class LogInViewBuilder implements SceneBuilder{
     }
 
     @Override
+    /**
+     * @param s the main stage.
+     * builds the scene.
+     */
     public void build(Stage s){
         this.addButton();
         this.addVBox();
         this.addTextField();
+        this.addText();
         this.addHBox();
         this.setSpacing();
         this.setMargin();
         this.setScene(s);
-    }
-
-    public TextField getTextbox(){
-        return this.tf1;
-    }
-
-    public PasswordField getPasswordbox(){
-        return this.pf1;
     }
 
 }

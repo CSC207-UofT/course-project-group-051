@@ -1502,20 +1502,102 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
-2021-11-10 11:37:23 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
-insert into user values (11, 'Guan', 'Fei', 'VK1206', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999'); [21002-199]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+2021-11-10 16:20:08 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-11-10 16:20:31 jdbc[4]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-11-10 16:20:31 jdbc[5]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-11-10 16:27:29 jdbc[6]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:359)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:562)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:796)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:677)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:676)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+2021-11-10 11:53:32 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
+insert into user values (11, 'G', 'F', 'FG', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999', ''); [90002-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
 	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.dml.Insert.prepare(Insert.java:314)
-	at org.h2.command.Parser.prepareCommand(Parser.java:689)
-	at org.h2.engine.Session.prepareLocal(Session.java:627)
-	at org.h2.engine.Session.prepareCommand(Session.java:565)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1292)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:78)
+	at org.h2.command.Prepared.query(Prepared.java:229)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:145)
+	at org.h2.command.Command.executeQuery(Command.java:202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
 	at Phase1.DataAccess.DataBaseAccess.createUser(DataBaseAccess.java:839)
 	at Phase1.EventHandler.EventHandlerFactory.lambda$CreateAccount$3(EventHandlerFactory.java:117)
 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
@@ -1565,23 +1647,21 @@ insert into user values (11, 'Guan', 'Fei', 'VK1206', 'Victor-990612', 21, 'Male
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Thread.java:748)
-2021-11-10 11:37:23 jdbc[3]: exception
+2021-11-10 11:53:33 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE USER SET IMGLOCATION = C:[*]\\USERS\\FEI GUAN\\ONEDRIVE\\DESKTOP\\ASP.JPG WHERE PERSONID = 11; "; SQL statement:
 update user set IMGLOCATION = C:\\Users\\Fei Guan\\OneDrive\\Desktop\\asp.jpg where PERSONID = 11; [42000-199]
-2021-11-10 11:37:34 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
-insert into user values (11, 'Guan', 'Fei', 'VK1206', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999'); [21002-199]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+2021-11-10 11:55:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
+insert into user values (11, 'G', 'F', 'FG', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999', ''); [90002-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
 	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.dml.Insert.prepare(Insert.java:314)
-	at org.h2.command.Parser.prepareCommand(Parser.java:689)
-	at org.h2.engine.Session.prepareLocal(Session.java:627)
-	at org.h2.engine.Session.prepareCommand(Session.java:565)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1292)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:78)
+	at org.h2.command.Prepared.query(Prepared.java:229)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:145)
+	at org.h2.command.Command.executeQuery(Command.java:202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
 	at Phase1.DataAccess.DataBaseAccess.createUser(DataBaseAccess.java:839)
 	at Phase1.EventHandler.EventHandlerFactory.lambda$CreateAccount$3(EventHandlerFactory.java:117)
 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
@@ -1631,23 +1711,21 @@ insert into user values (11, 'Guan', 'Fei', 'VK1206', 'Victor-990612', 21, 'Male
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Thread.java:748)
-2021-11-10 11:37:34 jdbc[3]: exception
+2021-11-10 11:55:35 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE USER SET IMGLOCATION = C:[*]\\USERS\\FEI GUAN\\ONEDRIVE\\DESKTOP\\ASP.JPG WHERE PERSONID = 11; "; SQL statement:
 update user set IMGLOCATION = C:\\Users\\Fei Guan\\OneDrive\\Desktop\\asp.jpg where PERSONID = 11; [42000-199]
-2021-11-10 11:41:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Column count does not match; SQL statement:
-insert into user values (11, 'G', 'F', 'VK12', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999'); [21002-199]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+2021-11-10 11:58:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Method is only allowed for a query. Use execute or executeUpdate instead of executeQuery; SQL statement:
+insert into user values (11, 'GA', 'F', 'GA', 'Victor-990612', 21, 'Male', 'Female', '', '', '', '', 'Dec,06,1999', ''); [90002-199]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
 	at org.h2.message.DbException.get(DbException.java:205)
 	at org.h2.message.DbException.get(DbException.java:181)
 	at org.h2.message.DbException.get(DbException.java:170)
-	at org.h2.command.dml.Insert.prepare(Insert.java:314)
-	at org.h2.command.Parser.prepareCommand(Parser.java:689)
-	at org.h2.engine.Session.prepareLocal(Session.java:627)
-	at org.h2.engine.Session.prepareCommand(Session.java:565)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1292)
-	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:78)
+	at org.h2.command.Prepared.query(Prepared.java:229)
+	at org.h2.command.CommandContainer.query(CommandContainer.java:145)
+	at org.h2.command.Command.executeQuery(Command.java:202)
+	at org.h2.jdbc.JdbcStatement.executeQuery(JdbcStatement.java:85)
 	at Phase1.DataAccess.DataBaseAccess.createUser(DataBaseAccess.java:839)
 	at Phase1.EventHandler.EventHandlerFactory.lambda$CreateAccount$3(EventHandlerFactory.java:117)
 	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
@@ -1697,6 +1775,3 @@ insert into user values (11, 'G', 'F', 'VK12', 'Victor-990612', 21, 'Male', 'Fem
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Thread.java:748)
-2021-11-10 11:41:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE USER SET IMGLOCATION = C:[*]\\USERS\\FEI GUAN\\ONEDRIVE\\DESKTOP\\ASP.JPG WHERE PERSONID = 11; "; SQL statement:
-update user set IMGLOCATION = C:\\Users\\Fei Guan\\OneDrive\\Desktop\\asp.jpg where PERSONID = 11; [42000-199]

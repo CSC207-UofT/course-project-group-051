@@ -217,6 +217,26 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public String getImgPath(int id) {
+        String path = null;
+        try {
+            String h2 = "select imgLocation from USER where PersonID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                path = rs.getString("imgLocation");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return path;
+    }
+
+    @Override
     public String getBirthday(int id) {
         String birthday = null;
         try {
@@ -469,6 +489,22 @@ public class DataBaseAccess implements DataAccessInterface{
         boolean rs = false;
         try {
             String h2 = "update user set birthday = " + birthday +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
+    public boolean setImgPath(int id, String path) {
+        boolean rs = false;
+        try {
+            String h2 = "update user set IMGLOCATION = " + path +" where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();

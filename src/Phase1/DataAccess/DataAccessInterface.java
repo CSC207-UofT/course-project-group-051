@@ -44,6 +44,11 @@ public interface DataAccessInterface {
     //return -1 if id doesn't exist
     int getAge(int id);
 
+    //return the imgLocation of the user with the id
+    //return null if id doesn't exist
+    String getImgPath(int id);
+
+
     //return the birthday of the user with the id
     //return null if id doesn't exist
     String getBirthday(int id);
@@ -97,6 +102,10 @@ public interface DataAccessInterface {
     //takes the user's id and the birthday and set said user's birthday as birthday
     //return false if failed
     boolean setBirthday(int id, String birthday);
+
+    //takes the user's id and the path and set said user's imgLocation as path
+    //return false if failed
+    boolean setImgPath(int id, String path);
 
     //takes the user's id and the genderPreference and set said user's gender preference as genderPreference
     //return false if failed

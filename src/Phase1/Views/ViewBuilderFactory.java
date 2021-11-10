@@ -1,6 +1,8 @@
 package Phase1.Views;
 
+import Phase1.DataAccess.DataBaseAccess;
 import Phase1.Users.ProfileUser;
+import Phase1.Users.SwipeUser;
 import Phase1.Users.User;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,8 +13,8 @@ public class ViewBuilderFactory {
     public ViewBuilderFactory(){
     }
 
-    public static ChatViewBuilder cBuilders(ProfileUser u){
-            return new ChatViewBuilder(u.getfName(), u.getId());
+    public static ChatViewBuilder cBuilders(ProfileUser u, SwipeUser secondary){
+            return new ChatViewBuilder(u.getfName(), u.getId(), secondary.getId());
         }
 
     public static LogInViewBuilder lBuilder(){
@@ -27,12 +29,12 @@ public class ViewBuilderFactory {
         return new SelfViewBuilder(u);
     }
 
-    public static SwipeViewBuilder svBuilder(ImageView image, ProfileUser u){
+    public static SwipeViewBuilder svBuilder(ImageView image, SwipeUser u){
         return new SwipeViewBuilder(image, u);
     }
     
-    public static MatchesViewBuilder mBuilder(ProfileUser u, ArrayList m){
-        return new MatchesViewBuilder(u, m);
+    public static MatchesViewBuilder mBuilder(ProfileUser u, ArrayList m, DataBaseAccess db){
+        return new MatchesViewBuilder(u, m, db);
     }
     
 }

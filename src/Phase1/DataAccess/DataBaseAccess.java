@@ -217,6 +217,26 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public String getImgPath(int id) {
+        String path = null;
+        try {
+            String h2 = "select imgLocation from USER where PersonID = "+ id +";";
+            ResultSet rs = stmt.executeQuery(h2);
+            while (rs.next()) {
+                path = rs.getString("imgLocation");
+            }
+            rs.close();
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return path;
+    }
+
+    @Override
     public String getBirthday(int id) {
         String birthday = null;
         try {
@@ -481,6 +501,22 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public boolean setImgPath(int id, String path) {
+        boolean rs = false;
+        try {
+            String h2 = "update user set IMGLOCATION = " + path +" where PERSONID = " + id + ";";
+            rs= stmt.execute(h2);
+        } catch (SQLException se) {
+            se.printStackTrace();
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    @Override
     public boolean setGenderPreference(int id, String genderPreference) {
         boolean rs = false;
         try {
@@ -617,7 +653,22 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
+    public int checkConversation(int userID1, int userID12) {
+        ArrayList<Integer> threads1 = this.getThreads(userID1);
+        ArrayList<Integer> threads2 = this.getThreads(userID12);
+        for(int x: threads1){
+            if(threads2.contains(x)){
+                return x;
+            }
+        }
+        return -1;
+    }
+
+    @Override
     public int createThread(int userID1, int userID2) {
+        if(this.checkConversation(userID1, userID2) != -1){
+            return -1;
+        }
         int id = this.getNewThreadID();
         try {
             String h2 = "insert into THREADS values ("+id+", '');";
@@ -675,7 +726,7 @@ public class DataBaseAccess implements DataAccessInterface{
     }
 
     @Override
-    public int createMessage(int threadID, int sender, int receiver, String msg) {
+    public void createMessage(int threadID, int sender, int receiver, String msg) {
         int id = this.getNewMsgID();
         try {
             String h2 = "insert into MESSAGES values ("+id+", '"+msg+"', '"+sender+"', '"+ receiver +"');";
@@ -689,13 +740,12 @@ public class DataBaseAccess implements DataAccessInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
     }
 
     @Override
-    public ArrayList<String> getSwipeList(int id) {
+    public ArrayList<Integer> getSwipeList(int id) {
         String genderPref;
-        ArrayList<String> swipes = new ArrayList<>();
+        ArrayList<Integer> swipes = new ArrayList<>();
         genderPref = this.getGenderPreference(id);
         if(genderPref != null){
             try {
@@ -703,7 +753,9 @@ public class DataBaseAccess implements DataAccessInterface{
                 ResultSet rs = stmt.executeQuery(h2);
                 while (rs.next()) {
                     String list = rs.getString("genderPreference");
-                    swipes = (ArrayList<String>) Arrays.asList(list.split(","));
+                    for(String x : list.split(",")){
+                        swipes.add(Integer.parseInt(x));
+                    }
                 }
                 rs.close();
             } catch (SQLException se) {
@@ -784,7 +836,7 @@ public class DataBaseAccess implements DataAccessInterface{
         int id = this.getNextUser();
         try {
             String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '', '"+ birthday+"');";
-            ResultSet rs = stmt.executeQuery(h2);
+            stmt.executeQuery(h2);
 
         } catch (SQLException se) {
             se.printStackTrace();

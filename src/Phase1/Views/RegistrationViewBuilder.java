@@ -79,7 +79,10 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.btn2 = new Button("Create Account");
 
     }
-
+    public void pathInvalid(){
+        this.message.setFill(Color.RED);
+        this.message.setText("Image path invalid. Please try again.");
+    }
     /**
      * Creates the HBoxes necessary for the scene.
      */

@@ -11,6 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.io.IOError;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class EventHandlerFactory {
 
     public EventHandlerFactory(){}
@@ -93,26 +97,38 @@ public class EventHandlerFactory {
             String gender = rb.getGender().getText();
             String preference = rb.getPreference().getText();
             String location = rb.getPicturePath().getText();
+
+            try{
             if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")){
                 rb.fillIn();
 
             }
 
 
-           else if (pw1.equals(pw2) ){// !db.userExists(username)) {
-                db.createUser(lName, fName, pw1, username, 19, gender, preference, "Dec,06,1999");
-                rb.success();
-                s.show();
-            }
-           // else if(db.userExists(username)){
+           else if (pw1.equals(pw2) && db.logIn(username, pw1) == -1){
+               Date today = new Date();
+               long diff = today.getTime() - new Date(DOB).getTime();
+               int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-             //   rb.accountExists();
-            //}
+               db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+               rb.success();
+               s.show();
+
+            }
+           else if(db.logIn(username, pw1) != -1){
+
+             rb.accountExists();
+            }
 
             else if (!pw1.equals(pw2)){
                 rb.passwordDontMatch();
             }
-        };
+        }
+
+            catch(Exception e){
+                rb.pathInvalid();
+            }};
+
     }
 
     public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataBaseAccess db){

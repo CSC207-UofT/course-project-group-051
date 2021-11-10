@@ -11,27 +11,27 @@ public class ViewBuilderFactory {
     public ViewBuilderFactory(){
     }
 
-    public ChatViewBuilder cBuilders(ProfileUser u){
+    public static ChatViewBuilder cBuilders(ProfileUser u){
             return new ChatViewBuilder(u.getfName(), u.getId());
         }
 
-    public LogInViewBuilder lBuilder(){
+    public static LogInViewBuilder lBuilder(){
         return new LogInViewBuilder();
     }
 
-    public RegistrationViewBuilder rBuilder(){
+    public static RegistrationViewBuilder rBuilder(){
         return new RegistrationViewBuilder();
     }
 
-    public SelfViewBuilder sBuilder(ProfileUser u){
+    public static SelfViewBuilder sBuilder(ProfileUser u){
         return new SelfViewBuilder(u);
     }
 
-    public SwipeViewBuilder svBuilder(ImageView image, ProfileUser u){
+    public static SwipeViewBuilder svBuilder(ImageView image, ProfileUser u){
         return new SwipeViewBuilder(image, u);
     }
     
-    public MatchesViewBuilder mBuilder(ProfileUser u, ArrayList m){
+    public static MatchesViewBuilder mBuilder(ProfileUser u, ArrayList m){
         return new MatchesViewBuilder(u, m);
     }
     

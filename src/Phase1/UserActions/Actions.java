@@ -15,6 +15,7 @@ public class Actions {
     public static final String SWIPELEFT = "SWIPELEFT";
     public static final String SWIPERIGHT = "SWIPERIGHT";
     public static final String VIEWSELF = "VIEWSELF";
+    public static final String UNMATCH = "UNMATCH";
 
 
 }

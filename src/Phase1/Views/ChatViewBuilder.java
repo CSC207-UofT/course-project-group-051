@@ -1,5 +1,7 @@
 package Phase1.Views;
 
+import Phase1.EventHandler.EventHandlerFactory;
+import Phase1.Users.ProfileUser;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -44,6 +46,9 @@ public class ChatViewBuilder implements SceneBuilder{
 
     public Button getSend(){
         return this.send;
+    }
+    public int getId(){
+        return this.id;
     }
 
 
@@ -142,7 +147,6 @@ public class ChatViewBuilder implements SceneBuilder{
         this.setMargin();
         this.setSpacing();
         this.setScene(s);
-
 
     }
 }

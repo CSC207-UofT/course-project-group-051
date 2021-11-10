@@ -25,8 +25,9 @@ public class ChatViewBuilder implements SceneBuilder{
     Button ret;
     Scene scene;
     VBox vb;
-    int id;
-    public ChatViewBuilder(String firstName, int id){
+    int primaryid;
+    int secondaryid;
+    public ChatViewBuilder(String firstName, int primaryid, int secondaryid){
         this.name = firstName;
         this.bp = new BorderPane();
         this.sp = new ScrollPane();
@@ -37,7 +38,8 @@ public class ChatViewBuilder implements SceneBuilder{
         this.hb2 = new HBox();
         this.vb = new VBox();
         this.tf = new TextField();
-        this.id = id;
+        this.primaryid = primaryid;
+        this.secondaryid = secondaryid;
 
 
 
@@ -47,8 +49,11 @@ public class ChatViewBuilder implements SceneBuilder{
     public Button getSend(){
         return this.send;
     }
-    public int getId(){
-        return this.id;
+    public int getPrimaryId(){
+        return this.primaryid;
+    }
+    public int getSecondaryid(){
+        return this.secondaryid;
     }
 
 

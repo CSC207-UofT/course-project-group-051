@@ -66,15 +66,15 @@ public class LogInViewBuilder implements SceneBuilder{
     /** returns the username inputted in the textfield.
      * @return the username in String.
      */
-    public TextField getUserName(){
-        return this.tf1;
+    public String getUserName(){
+        return this.tf1.getText();
     }
 
     /** returns the inputted password in passwordfield.
      * @return the password in String.
      */
-    public TextField getPassword(){
-        return this.pf1;
+    public String getPassword(){
+        return this.pf1.getText();
     }
 
     /**

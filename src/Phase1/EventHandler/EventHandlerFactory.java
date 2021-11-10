@@ -114,7 +114,8 @@ public class EventHandlerFactory {
                long diff = today.getTime() - new Date(DOB).getTime();
                int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
-               db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+               int id = db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+               db.setImgPath(id, location);
                rb.success();
                s.show();
 

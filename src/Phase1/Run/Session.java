@@ -1,5 +1,7 @@
 package Phase1.Run;
 
+import Phase1.DataAccess.DataBaseAccess;
+import Phase1.EventHandler.EventHandlerMapper;
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
 import Phase1.Users.ProfileUser;
@@ -39,102 +41,38 @@ public class Session extends Application {
                 //Creating an image
                 FXMLLoader fxmlLoader = new FXMLLoader(Session.class.getResource("hello-view.fxml"));
                 stage.setTitle("UofT Tinder");
-                Image image = new Image(new FileInputStream("C:\\Users\\HP\\Desktop\\myimg.jpg"));
 
                 //Setting the image view
-                ImageView imageView = new ImageView(image);
 
                 //Setting the position of the image
-                imageView.setX(50);
-                imageView.setY(25);
+                //imageView.setX(50);
+               // imageView.setY(25);
 
                 //setting the fit height and width of the image view
-                imageView.setFitHeight(455);
-                imageView.setFitWidth(500);
+               // imageView.setFitHeight(455);
+              //  imageView.setFitWidth(500);
 
                 //Setting the preserve ratio of the image view
-                imageView.setPreserveRatio(true);
+              //  imageView.setPreserveRatio(true);
 
 
-                ProfileUser u = new ProfileUser(1, "Madeline",
-                        "Swann", new Date("July,9,1989"), "afokl", null);
-                u.setBio("Insert your best pickup line");
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
+                RegistrationViewBuilder rb = new RegistrationViewBuilder();
                 lb.build(stage);
+                EventHandlerMapper em = new EventHandlerMapper(c, stage, new DataBaseAccess());
+                em.mapRegistration(lb, rb);
+                em.mapLogIn(lb, rb,null );
+                em.mapCreateAccount(rb);
+                stage.show();
 
 
                 //Adding scene to the stage
-                sb.build(stage);
                 //Displaying the contents of the stage
 
                 //TODO
 
 
 
-
-                EventHandler<ActionEvent> SelfProfile = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
-
-                        }
-
-
-                    }
-
-
-                };
-
-                EventHandler<ActionEvent> Matches = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
-
-                        }
-
-
-                    }
-
-
-                };
-                EventHandler<ActionEvent> Messaging = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.LoggedIn)){
-
-                        }
-
-
-                    }
-
-
-                };
-
-                EventHandler<ActionEvent> Send = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.Messaging)){
-
-                        }
-
-
-                    }
-
-
-                };
-
-                EventHandler<ActionEvent> Unmatch = new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        if (c.getState().equals(States.Messaging)){
-
-                        }
-
-
-                    }
-
-
-                };
 
             }
 

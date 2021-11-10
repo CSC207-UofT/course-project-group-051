@@ -41,6 +41,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
     Label label4;
     Label label5;
     Label label6;
+    Button btn2;
 
 
 
@@ -55,7 +56,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.label1 = new Label("Username:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
-        this.label4 = new Label("Please enter your profile picture path:");
+        this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
         this.tf = new TextField ();
@@ -66,6 +67,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.tf4 = new TextField ();
         this.tf5 = new TextField ();
         this.tf6 = new TextField ();
+        this.btn2 = new Button("Create Account");
 
     }
 
@@ -77,12 +79,21 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.v1.getChildren().add(this.hb1);
 
     }
+    public void fillIn(){
+        this.message.setFill(Color.RED);
+        this.message.setText("Please fill in every blank");
+    }
+
+    public Button createAccount(){
+        return this.btn2;
+    }
 
     /** Maps each button to its corresponding eventhandler.
      */
     @Override
     public void addButton() {
-        this.hb1.getChildren().add(bt1);
+        this.hb1.getChildren().add(this.bt1);
+        this.hb1.getChildren().add(this.btn2);
 
     }
 
@@ -161,12 +172,13 @@ public class RegistrationViewBuilder implements SceneBuilder{
     }
 
     public void passwordDontMatch(){
+        this.message.setFill(Color.RED);
         this.message.setText("Your passwords don't match, please try again");
 
     }
 
     public void accountExists(){
-
+        this.message.setFill(Color.RED);
         this.message.setText("Your account already exists in our system. Please log in.");
     }
 
@@ -198,6 +210,13 @@ public class RegistrationViewBuilder implements SceneBuilder{
     public void setScene(Stage stage) {
         this.scene = new Scene(this.bp, 450, 800);
         stage.setScene(this.scene);
+    }
+
+
+
+    public void success(){
+        this.message.setFill(Color.GREEN);
+        this.message.setText("Sucess!");
     }
 
     /** Completes the build of the scene.

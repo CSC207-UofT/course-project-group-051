@@ -19,7 +19,6 @@ public class MatchesViewBuilder implements SceneBuilder{
     Button back;
     ScrollPane scrollPane;
     VBox vb;
-    VBox vb1;
     BorderPane bp;
     ArrayList<ProfileUser> matches;
     public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<ProfileUser> matches){
@@ -32,6 +31,15 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.hb = new HBox();
 
     }
+
+    public Button getBack(){
+        return this.back;
+    }
+    public ArrayList getMatches(){
+        return this.matches;
+    }
+
+
     @Override
     public void addVBox() {
 
@@ -46,12 +54,14 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.hb.getChildren().add(new Text("Matches"));
     }
 
-    public void matchButtons(){
+    public ArrayList<Button> matchButtons(){
+        ArrayList a = new ArrayList();
         for(ProfileUser i: this.matches){
-            this.vb.getChildren().add(new Button(i.getfName()));
+            Button b = new Button(i.getfName());
+            this.vb.getChildren().add(b);
+            a.add(b);
         }
-
-
+        return a;
     }
 
     public void addScrollPane(){

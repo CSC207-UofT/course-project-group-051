@@ -17,7 +17,7 @@ public class Messaging extends State{
      */
     @Override
     public State transition(String s){
-        if (s.equals(Actions.BACK)){
+        if (s.equals(Actions.BACK) || s.equals(Actions.UNMATCH)){
             return States.LoggedIn;
         }
         return States.Messaging;

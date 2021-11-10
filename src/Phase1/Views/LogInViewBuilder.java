@@ -43,6 +43,14 @@ public class LogInViewBuilder implements SceneBuilder{
 
     }
 
+    public String getUserName(){
+        return this.tf1.getText();
+    }
+
+    public String getPassword(){
+        return this.pf1.getText();
+    }
+
     /**
      * Creates the HBoxes necessary for the scene.
      */

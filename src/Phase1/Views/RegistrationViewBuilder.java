@@ -236,9 +236,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
 
 
-    public void success(){
+    public void success(int id){
         this.message.setFill(Color.GREEN);
-        this.message.setText("Sucess!");
+        this.message.setText("Sucess! ID: " + Integer.toString(id));
     }
 
     /** Completes the build of the scene.

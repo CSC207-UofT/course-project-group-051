@@ -37,35 +37,47 @@ public class EventHandlerFactory {
     }
 
 
-    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataBaseAccess db){
+    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataBaseAccess db, LogInViewBuilder lb){
         return (EventHandler<ActionEvent>) event -> {
-            System.out.println(c.getState());
-            LogInViewBuilder lb = new LogInViewBuilder();
-            lb.build(s);
-
 
             if (c.getState().equals(States.LoggedOut)) {
-                String username = lb.getUserName();
-                String password = lb.getPassword();
+                String username = lb.getUserName().getText();
+                String password = lb.getPassword().getText();
                 int id = db.logIn(username, password);
                 if (id != -1) {
                     try{
-                    ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), password, new ImageView(new Image(db.getImgPath(id))));
-                     c.update(Actions.LOGIN, u, null);
+
+                        ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
+                            new Date(db.getBirthday(id)), password, new ImageView(new
+                                Image(new FileInputStream(db.getImgPath(id)))));
+                        c.update(Actions.LOGIN, u, null);
+                        System.out.println("yes");
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
-                     int nextid = swipelist.get(0);
-                     SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
-                             new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
-                     FileInputStream f = new FileInputStream(db.getImgPath(nextid));
-                     SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
-                     sb.build(s);
-                     sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u, EventHandlerFactory.getMatches(user.getId(), db)));
-                    }
+                        System.out.println("yes");
+
+                        if(swipelist.isEmpty()){
+                         System.out.println("Reach");
+                         SwipeViewBuilder sb = new SwipeViewBuilder(null, null);
+                         System.out.println("Reach");
+
+                         sb.build(s);
+
+                     }
+                     else {
+                         int nextid = swipelist.get(0);
+                         SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
+                                 new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
+                         System.out.println(db.getImgPath(id));
+                         FileInputStream f = new FileInputStream(db.getImgPath(nextid));
+                         SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
+                         sb.build(s);
+                         sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,
+                                 EventHandlerFactory.getMatches(user.getId(), db)));
+                     }}
                     catch (Exception io){
                         System.out.println("Invalid image path");
-                    }
-                }
+                    }}
+
 
                 else if(id == -1){
                     lb.invalidCredential();
@@ -82,7 +94,7 @@ public class EventHandlerFactory {
                     System.out.println(c.getState());
                 LogInViewBuilder lb1 = new LogInViewBuilder();
                 RegistrationViewBuilder reg1 = new RegistrationViewBuilder();
-                lb1.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db));
+                lb1.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, lb1));
                 lb1.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, s, db));
                 lb1.build(s);
                 s.show();
@@ -114,7 +126,7 @@ public class EventHandlerFactory {
             c.update(Actions.REGISTER, null, null);
             RegistrationViewBuilder rb = new RegistrationViewBuilder();
             rb.build(s);
-            rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db));
+            rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, new LogInViewBuilder()));
             rb.createAccount().setOnAction(EventHandlerFactory.CreateAccount(c, s, rb, db));
             }
                   };
@@ -147,13 +159,17 @@ public class EventHandlerFactory {
                FileInputStream file = new FileInputStream(location);
                int id = db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
                db.setImgPath(id, location);
-               rb.success();
+               rb.success(id);
                s.show();
 
             }
            else if(db.logIn(username, pw1) != -1){
 
              rb.accountExists();
+             rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, new LogInViewBuilder()));
+             rb.createAccount().setOnAction(EventHandlerFactory.Registration(c,s,db));
+             System.out.println(db.getGenderPreference(db.logIn(username, pw1)));
+
             }
 
             else if (!pw1.equals(pw2)){

@@ -504,7 +504,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setImgPath(int id, String path) {
         boolean rs = false;
         try {
-            String h2 = "update user set IMGLOCATION = " + path +" where PERSONID = " + id + ";";
+            String h2 = "update user set IMGLOCATION = '" + path +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();

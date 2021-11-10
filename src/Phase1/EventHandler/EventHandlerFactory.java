@@ -31,6 +31,10 @@ public class EventHandlerFactory {
                     // c.update(Actions.LOGIN, new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
                     //       db.getBirthDate(id), password, new ImageView(db.getImage(id)));
                 }
+
+                else if(id == -1){
+                    lb.invalidCredential();
+                }
                 // ArrayList potentialMatches = db.getPotentialMatches(u);
                 //if (!potentialMatches.isEmpty()) {
                 //  SwipeViewBuilder sb1 = new SwipeViewBuilder(potentialMatches.get(0),

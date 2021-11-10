@@ -90,6 +90,8 @@ public class EventHandlerFactory {
             String username = rb.userName().getText();
             String pw1 = rb.getPassword().getText();
             String pw2 = rb.getPassword1().getText();
+            String gender = rb.getGender().getText();
+            String preference = rb.getPreference().getText();
             String location = rb.getPicturePath().getText();
             if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")){
                 rb.fillIn();
@@ -98,7 +100,7 @@ public class EventHandlerFactory {
 
 
            else if (pw1.equals(pw2) ){// !db.userExists(username)) {
-                db.createUser(lName, fName, pw1, username, 19, "Female", "Female", "Dec,06,1999");
+                db.createUser(lName, fName, pw1, username, 19, gender, preference, "Dec,06,1999");
                 rb.success();
                 s.show();
             }

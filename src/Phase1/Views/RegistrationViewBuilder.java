@@ -31,6 +31,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
     TextField tf4;
     TextField tf5;
     TextField tf6;
+    TextField tf7;
+    TextField tf8;
+
     Text message;
     Label label;
     Label label1;
@@ -41,6 +44,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
     Label label4;
     Label label5;
     Label label6;
+    Label label7;
+    Label label8;
     Button btn2;
 
 
@@ -59,6 +64,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
+        this.label7 = new Label("Gender");
+        this.label8 = new Label("Orientation");
         this.tf = new TextField ();
         this.tf1 = new TextField ();
 
@@ -67,6 +74,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.tf4 = new TextField ();
         this.tf5 = new TextField ();
         this.tf6 = new TextField ();
+        this.tf7 = new TextField ();
+        this.tf8 = new TextField ();
         this.btn2 = new Button("Create Account");
 
     }
@@ -126,6 +135,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
                 this.tf2);
         this.v.getChildren().addAll(label3, this.tf3);
         this.v.getChildren().addAll(label4, this.tf4);
+        this.v.getChildren().addAll(label7, this.tf7);
+        this.v.getChildren().addAll(label8, this.tf8);
 
     }
 
@@ -169,6 +180,14 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     public TextField getLastName(){
         return this.tf6;
+    }
+
+    public TextField getGender(){
+        return this.tf7;
+    }
+
+    public TextField getPreference(){
+        return this.tf8;
     }
 
     public void passwordDontMatch(){

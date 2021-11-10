@@ -52,6 +52,7 @@ public interface DataAccessInterface {
     //return an ArrayList of integers representing the id of user's admires
     ArrayList<Integer> getAdmires(int id);
 
+    //return an ArrayList of integers representing the id of user's Threads
     ArrayList<Integer> getThreads(int id);
 
     //msg,senderID,receiverID
@@ -90,9 +91,8 @@ public interface DataAccessInterface {
 
     int createMessage(int threadID, int sender, int receiver, String msg);
 
-    ArrayList<String> getSwipeList(int id);
+    ArrayList<Integer> getSwipeList(int id);
 
     int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference, String birthday);
-
 
 }

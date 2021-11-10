@@ -36,6 +36,9 @@ public class SwipeUser extends User {
 
     }
 
+    public ImageView getImage() {
+        return image;
+    }
 
 
     public int getSwiper() {

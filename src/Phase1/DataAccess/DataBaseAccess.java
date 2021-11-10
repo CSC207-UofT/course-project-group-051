@@ -376,7 +376,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setFirstName(int id, String firstName) {
         boolean rs = false;
         try {
-            String h2 = "update user set firstName = " + firstName +" where PERSONID = " + id + ";";
+            String h2 = "update user set firstName = '" + firstName +"' where PERSONID = " + id + ";";
              rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -392,7 +392,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setLastName(int id, String lastName) {
         boolean rs = false;
         try {
-            String h2 = "update user set lastName = " + lastName +" where PERSONID = " + id + ";";
+            String h2 = "update user set lastName = '" + lastName +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -408,7 +408,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setUsername(int id, String username) {
         boolean rs = false;
         try {
-            String h2 = "update user set username = " + username +" where PERSONID = " + id + ";";
+            String h2 = "update user set username = '" + username +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -424,7 +424,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setPassword(int id, String password) {
         boolean rs = false;
         try {
-            String h2 = "update user set password = " + password +" where PERSONID = " + id + ";";
+            String h2 = "update user set password = '" + password +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -440,7 +440,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setGender(int id, String gender) {
         boolean rs = false;
         try {
-            String h2 = "update user set gender = " + gender +" where PERSONID = " + id + ";";
+            String h2 = "update user set gender = '" + gender +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -456,7 +456,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setBio(int id, String bio) {
         boolean rs = false;
         try {
-            String h2 = "update user set bio = " + bio +" where PERSONID = " + id + ";";
+            String h2 = "update user set bio = '" + bio +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -488,7 +488,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setBirthday(int id, String birthday) {
         boolean rs = false;
         try {
-            String h2 = "update user set birthday = " + birthday +" where PERSONID = " + id + ";";
+            String h2 = "update user set birthday = '" + birthday +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -520,7 +520,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public boolean setGenderPreference(int id, String genderPreference) {
         boolean rs = false;
         try {
-            String h2 = "update user set genderPreference = " + genderPreference +" where PERSONID = " + id + ";";
+            String h2 = "update user set genderPreference = '" + genderPreference +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -549,7 +549,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 }
             }
 
-            String h2 = "update user set likes = " + like +" where PERSONID = " + currUser + ";";
+            String h2 = "update user set likes = '" + like +"' where PERSONID = " + currUser + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -580,7 +580,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 }
             }
 
-            String h2 = "update user set likes = " + like +" where PERSONID = " + currUser + ";";
+            String h2 = "update user set likes = '" + like +"' where PERSONID = " + currUser + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -609,7 +609,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 }
             }
 
-            String h2 = "update user set ADMIRES = " + admire +" where PERSONID = " + currUser + ";";
+            String h2 = "update user set ADMIRES = '" + admire +"' where PERSONID = " + currUser + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -640,7 +640,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 }
             }
 
-            String h2 = "update user set ADMIRES = " + admire +" where PERSONID = " + currUser + ";";
+            String h2 = "update user set ADMIRES = '" + admire +"' where PERSONID = " + currUser + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -695,7 +695,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 thread.append(",").append(x);
             }
 
-            String h2 = "update user set THREADS = " + thread +" where PERSONID = " + userID + ";";
+            String h2 = "update user set THREADS = '" + thread +"' where PERSONID = " + userID + ";";
             stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();

@@ -1,5 +1,7 @@
 package Phase1.Users;
 
+import javafx.scene.image.ImageView;
+
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
  */
@@ -10,6 +12,7 @@ public class SwipeUser extends User {
     private int age;
     private String gender;
     private String bio;
+    private ImageView image;
     private int swiper; //ID of the current User who is swiping.
     private boolean gotliked;
 
@@ -32,6 +35,8 @@ public class SwipeUser extends User {
         return bio;
 
     }
+
+
 
     public int getSwiper() {
         return swiper;

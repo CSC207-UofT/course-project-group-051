@@ -57,15 +57,15 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.bt1 = new Button("Log In");
         this.v = new VBox();
         this.v1 = new VBox();
-        this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
+        this.label = new Label("Date of Birth(e.g. Dec,6,1999):");
         this.label1 = new Label("Username:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
         this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
-        this.label7 = new Label("Gender(Male or Female):");
-        this.label8 = new Label("Gender Preference:");
+        this.label7 = new Label("Gender");
+        this.label8 = new Label("Orientation");
         this.tf = new TextField ();
         this.tf1 = new TextField ();
 
@@ -186,7 +186,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         return this.tf7;
     }
 
-    public TextField getPreference   (){
+    public TextField getPreference(){
         return this.tf8;
     }
 
@@ -227,7 +227,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 900);
+        this.scene = new Scene(this.bp, 450, 800);
         stage.setScene(this.scene);
     }
 

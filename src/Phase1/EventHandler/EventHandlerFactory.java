@@ -294,14 +294,18 @@ public class EventHandlerFactory {
                 db.setPassword(id, pw);
                 db.setFirstName(id, fname);
                 db.setLastName(id, lname);
-                sb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
-                sb.getPW().setText(pw);
-                sb.getBirthday().setText(dob);
-                sb.getImagePath().setText(image);
-                sb.getGender().setText(gender);
-                sb.getPreference().setText(preference);
-                sb.getfName().setText(fname);
-                sb.getlName().setText(lname);
+                SelfViewBuilder sv = new SelfViewBuilder(primary);
+                sv.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, primary, sv));
+                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                sv.getBirthday().setText(dob);
+                sv.getPW().setText(pw);
+                sv.getBirthday().setText(dob);
+                sv.getImagePath().setText(image);
+                sv.getGender().setText(gender);
+                sv.getPreference().setText(preference);
+                sv.getfName().setText(fname);
+                sv.getlName().setText(lname);
                 primary.setfName(fname);
                 primary.setLName(lname);
                 primary.setPreference(preference);
@@ -310,10 +314,8 @@ public class EventHandlerFactory {
                 primary.setGender(gender);
                 primary.setPassword(pw);
                 primary.setUsername(username);
-                SelfViewBuilder sv = new SelfViewBuilder(primary);
                 sv.build(s);
-                sv.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, primary, sv));
-                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+
                 try{db.setImgPath(primary.getId(), image);}
                 catch(Exception io){
                     sb.invalidPath();

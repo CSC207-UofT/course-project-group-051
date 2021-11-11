@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -47,11 +48,13 @@ public class SelfViewBuilder implements SceneBuilder{
     TextField tf7;
     TextField pw;
     Text message;
+    ScrollPane sp;
 
 
     public SelfViewBuilder(ProfileUser u){
         this.u = u;
         this.bp = new BorderPane();
+        this.sp = new ScrollPane();
         this.bt = new Button("Back");
         this.bt1 = new Button("Save");
         this.l1 = new Label("First Name:");
@@ -86,9 +89,14 @@ public class SelfViewBuilder implements SceneBuilder{
 
 
     }
-    public String getusername(){
-        return u.getUsername();
+
+    public void setSP(){
+        this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        this.bp.setCenter(this.sp);
+
     }
+
 
     public TextField getUsername(){
         return this.tf6;
@@ -162,7 +170,7 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void addVBox() {
-        this.bp.setCenter(this.vb);
+        this.sp.setContent(this.vb);
 
     }
     @Override
@@ -188,7 +196,8 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void setMargin() {
-        this.bp.setMargin(this.vb, new Insets(50, 50, 50, 50));
+        this.bp.setMargin(this.sp, new Insets(50, 50, 50, 50));
+
 
     }
 
@@ -203,6 +212,7 @@ public class SelfViewBuilder implements SceneBuilder{
     public void build(Stage s) {
         this.addVBox();
         this.addHBox();
+        this.setSP();
         this.addTextField();
         this.addButton();
         this.addText();

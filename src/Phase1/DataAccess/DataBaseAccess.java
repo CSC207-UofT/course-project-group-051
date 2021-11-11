@@ -183,7 +183,7 @@ public class DataBaseAccess implements DataAccessInterface{
             String h2 = "select genderPreference from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
-                genderPreference = rs.getString("genderPreference");
+                genderPreference = rs.getString("GENDERPREFERENCE");
             }
             rs.close();
         } catch (SQLException se) {
@@ -260,7 +260,7 @@ public class DataBaseAccess implements DataAccessInterface{
     public ArrayList<Integer> getLikes(int id) {
         ArrayList<Integer> likes = new ArrayList<>();
         try {
-            String h2 = "select age from USER where PersonID = "+ id +";";
+            String h2 = "select likes from USER where PersonID = "+ id +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
                 String[] temp = rs.getString("Likes").split(",", -1);

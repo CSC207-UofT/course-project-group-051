@@ -57,18 +57,17 @@ public class EventHandlerFactory {
                     try{
 
                         ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), password, new ImageView(new
-                                Image(new FileInputStream(db.getImgPath(id)))));
+                            new Date(db.getBirthday(id)), password, db.getImgPath(id));
                         c.update(Actions.LOGIN, u, null);
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
 
                         if(swipelist.isEmpty()){
 
                             EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                         eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
-
-                         ArrayList matches = new ArrayList();
+                            eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                         ArrayList matches = new ArrayList<>();
                          if (!EventHandlerFactory.getMatches(u.getId(), db).isEmpty()){
+
                              matches = EventHandlerFactory.getMatches(u.getId(), db);
 
                          }
@@ -86,12 +85,23 @@ public class EventHandlerFactory {
                          FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                          SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
                          sb.build(s);
-                         sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,
-                                 EventHandlerFactory.getMatches(user.getId(), db)));
+                            ArrayList matches = new ArrayList();
+                            if (!EventHandlerFactory.getMatches(u.getId(), db).isEmpty()){
+                                matches = EventHandlerFactory.getMatches(u.getId(), db);
+
+                            }
+
+                            sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,
+                                 matches));
                      }}
-                    catch (Exception io){
-                        System.out.println("Invalid image path");
-                    }}
+                  //  catch (NumberFormatException io){
+                    //    System.out.println("Invalid image path");
+                    //}
+                    catch (FileNotFoundException io){
+
+                    }
+
+                }
 
 
                 else if(id == -1){
@@ -214,7 +224,6 @@ public class EventHandlerFactory {
              rb.accountExists();
              rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, new LogInViewBuilder()));
              rb.createAccount().setOnAction(EventHandlerFactory.Registration(c,s,db));
-             System.out.println(db.getGenderPreference(db.logIn(username, pw1)));
 
             }
 
@@ -255,14 +264,52 @@ public class EventHandlerFactory {
         };
 
     }
+    public static EventHandler<ActionEvent> Save(StateMachine c, Stage s, DataBaseAccess db,
+                                                 ProfileUser primary, SelfViewBuilder sb){
 
-    public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataBaseAccess db,
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.LoggedIn)){
+                c.update(Actions.VIEWSELF, primary, null);
+                String fname = sb.getfName().getText();
+                String lname = sb.getlName().getText();
+                String dob = sb.getBirthday().getText();
+                String pw = sb.getPW().getText();
+                String image = sb.getImagePath().getText();
+                String gender = sb.getGender().getText();
+                String preference = sb.getPreference().getText();
+                try{db.setImgPath(primary.getId(), image);}
+                catch(Exception io){
+                    sb.invalidPath();
+                }
+                int id = primary.getId();
+                db.setGender(id, gender);
+                db.setGenderPreference(id, preference);
+                db.setBirthday(id, dob);
+                db.setPassword(id, pw);
+                db.setFirstName(id, fname);
+                db.setLastName(id, lname);
+
+            }
+
+        };
+
+
+    }
+
+
+
+        public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataBaseAccess db,
                                                  ProfileUser primary, ChatViewBuilder cv){
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.Messaging)){
-                MatchesViewBuilder mb = new MatchesViewBuilder(primary, EventHandlerFactory.getMatches(primary.getId(), db), db);
+                ArrayList matches = new ArrayList();
+                if (!EventHandlerFactory.getMatches(primary.getId(), db).isEmpty()){
+                    matches = EventHandlerFactory.getMatches(primary.getId(), db);
+
+                }
+
                 c.update(Actions.BACK, primary, null);
-                MatchesViewBuilder mb1 = new MatchesViewBuilder(primary, mb.getMatches(), db);
+                MatchesViewBuilder mb1 = new MatchesViewBuilder(primary, matches, db);
                 mb1.build(s);
 
             }
@@ -272,7 +319,7 @@ public class EventHandlerFactory {
                 if (swipelist.isEmpty()){
                     c.update(Actions.BACK, primary, null);
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(primary);
-
+                    try{
                     ArrayList list = new ArrayList();
                     if (!EventHandlerFactory.getMatches(id, db).isEmpty()){
                         list = EventHandlerFactory.getMatches(id, db);
@@ -282,6 +329,9 @@ public class EventHandlerFactory {
                     eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, primary));
                     eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
                     eb.build(s);
+                }
+                    catch(NumberFormatException e){
+                    }
                 }
                 else{
                 int nextid = swipelist.get(0);
@@ -295,7 +345,11 @@ public class EventHandlerFactory {
                     c.update(Actions.BACK, null, null);
                     sb.build(s);
                     swipelist.remove(nextid);
-                } catch (FileNotFoundException e) {
+                }
+                catch (NumberFormatException e){
+
+                }
+                catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
 
@@ -337,14 +391,11 @@ public class EventHandlerFactory {
             mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, user, null));
             for (int i = 0; i < matchesButtons.size(); i++){
                 int id = matches.get(i);
-                try {
-                    ImageView ig = new ImageView(new Image(new FileInputStream(db.getImgPath(id))));
+
                     matchesButtons.get(i).setOnAction(EventHandlerFactory.Message(c, s, db, user,
                             new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), db.getPassword(id), ig), matches));
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                            new Date(db.getBirthday(id)), db.getPassword(id), db.getImgPath(id)), matches));
+
             }
 
         }};

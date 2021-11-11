@@ -769,12 +769,10 @@ public class DataBaseAccess implements DataAccessInterface{
                 String h2 = "select personId from user where genderPreference = '"+ genderPref+"' and personId != "+id+";";
                 ResultSet rs = stmt.executeQuery(h2);
                 while (rs.next()) {
-                    String list = rs.getString("genderPreference");
-                    for(String x : list.split(",")){
-                        if(!x.equals(""))
-                        {
-                            swipes.add(Integer.parseInt(x));
-                        }
+                    String ids = rs.getString("personId");
+                    if(!ids.equals(""))
+                    {
+                        swipes.add(Integer.parseInt(ids));
                     }
                 }
                 rs.close();

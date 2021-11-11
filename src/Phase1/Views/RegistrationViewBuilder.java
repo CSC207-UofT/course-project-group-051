@@ -3,10 +3,7 @@ package Phase1.Views;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,7 +46,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
     Label label9;
     Button btn2;
     TextField tf9;
-
+    ScrollPane sp;
 
     public RegistrationViewBuilder(){
         this.bp = new BorderPane();
@@ -72,6 +69,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.tf1 = new TextField ();
         this.message = new Text();
         this.message.setFont(new Font(15));
+        this.sp = new ScrollPane();
 
         this.tf2 = new PasswordField();
         this.tf3 = new PasswordField();
@@ -83,6 +81,10 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.tf9 = new TextField();
         this.btn2 = new Button("Create Account");
 
+    }
+
+    public void setSP(){
+        this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
     public void pathInvalid(){
@@ -126,6 +128,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
     @Override
     public void addVBox() {
         this.v1.getChildren().add(this.v);
+        this.sp.setContent(this.v1);
 
     }
 
@@ -232,8 +235,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void setMargin() {
-        this.bp.setCenter(v1);
-        this.bp.setMargin(this.v1, new Insets(50, 50, 50, 50));
+        this.bp.setCenter(this.sp);
+        this.bp.setMargin(this.sp, new Insets(50, 50, 50, 50));
 
     }
 
@@ -242,7 +245,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 900);
+        this.scene = new Scene(this.bp, 550, 500);
         stage.setScene(this.scene);
     }
 
@@ -262,6 +265,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addMessage();
         this.addHBox();
+        this.setSP();
         this.setMessageFill();
         this.setMessageFont();
         this.addTextField();

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
@@ -196,7 +198,9 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void setMargin() {
-        this.bp.setMargin(this.sp, new Insets(50, 50, 50, 50));
+        this.bp.setMargin(this.sp, new Insets(50, 50, 20,20));
+        this.sp.setBorder(Border.EMPTY);
+        this.bp.setBorder(Border.EMPTY);
 
 
     }

@@ -294,6 +294,7 @@ public class EventHandlerFactory {
                 db.setPassword(id, pw);
                 db.setFirstName(id, fname);
                 db.setLastName(id, lname);
+                db.setBio(id, bio);
                 SelfViewBuilder sv = new SelfViewBuilder(primary);
                 sv.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, primary, sv));
                 sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
@@ -306,6 +307,8 @@ public class EventHandlerFactory {
                 sv.getPreference().setText(preference);
                 sv.getfName().setText(fname);
                 sv.getlName().setText(lname);
+                sv.getBio().setText(bio);
+
                 primary.setfName(fname);
                 primary.setLName(lname);
                 primary.setPreference(preference);

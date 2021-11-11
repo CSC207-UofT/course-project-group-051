@@ -40,14 +40,12 @@ public class Session extends Application {
                 //Setting the preserve ratio of the image view
               //  imageView.setPreserveRatio(true);
                 DataBaseAccess db = new DataBaseAccess();
-
-
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 RegistrationViewBuilder rb = new RegistrationViewBuilder();
                 lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, stage, db, lb));
                 lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, stage, db));
                 lb.build(stage);
-                stage.setResizable(false);
+                stage.setResizable(true);
                 stage.show();
 
 

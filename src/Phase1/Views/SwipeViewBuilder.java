@@ -40,6 +40,8 @@ public class SwipeViewBuilder implements SceneBuilder{
     public SwipeViewBuilder(ImageView image, SwipeUser u) {
         this.bp = new BorderPane();
         this.image = image;
+        this.image.setFitHeight(500);
+        this.image.setFitWidth(500);
         this.text = new Text(u.getfName() + ", " + Integer.toString(u.getAge()));
         this.text.setFont(Font.font(null, FontWeight.BOLD, 25));
         this.text.setFill(Color.WHITE);
@@ -129,16 +131,17 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setSpacing() {
-        v.setSpacing(30);
-        hb.setSpacing(this.image.getFitWidth() - 370);
+
+        System.out.println(this.image.getFitWidth());
+        hb.setSpacing(this.image.getFitWidth() / 4);
     }
 
     /**
      * Sets the margin of the biggest box in the borderpane.
      */
 
-    public void addbp(){
-        this.sp.getChildren().add(this.bp);
+    public void addsp(){
+        this.bp.setCenter(this.sp);
 
     }
 
@@ -168,7 +171,7 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.sp, this.image.getFitWidth() + 250, this.image.getFitHeight() + 190);
+        this.scene = new Scene(this.bp, this.image.getFitWidth() + 250, this.image.getFitHeight() + 190);
         stage.setScene(this.scene);
     }
 
@@ -182,7 +185,7 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addTextField();
         this.setSpacing();
-        this.addbp();
+        this.addsp();
         this.setMargin();
         this.addImage();
         this.setScene(s);

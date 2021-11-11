@@ -83,7 +83,9 @@ public class EventHandlerFactory {
 
                      }
                      else {
-                         int nextid = swipelist.get(0);
+                            System.out.println("True");
+
+                            int nextid = swipelist.get(0);
                          SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
                                  new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
                          FileInputStream f = new FileInputStream(db.getImgPath(nextid));

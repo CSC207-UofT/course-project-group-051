@@ -10,15 +10,11 @@ import java.util.Arrays;
 public class DataBaseAccess implements DataAccessInterface{
 
     private Statement stmt = null;
-    Connection conn;
 
 
     public DataBaseAccess(){
         connectDB();
     }
-
-
-
 
     private int getNextUser(){
         int id = -1;
@@ -295,7 +291,9 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] temp = rs.getString("admires").split(",", -1);
                 for(String x: temp){
-                    if(!x.equals("")) {
+                    admires.add(Integer.parseInt(x));
+                    if(!x.equals(""))
+                    {
                         admires.add(Integer.parseInt(x));
                     }
                 }
@@ -878,17 +876,13 @@ public class DataBaseAccess implements DataAccessInterface{
         System.out.println("Attempting to connect to database");
         try {
             Class.forName(JDBC_DRIVER);
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             System.out.println("Successfully connected to database!");
         } catch (Exception e) {
             e.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.show();
-
         }
-    }
-    public void closeDB() throws SQLException {
-        conn.close();
     }
 }

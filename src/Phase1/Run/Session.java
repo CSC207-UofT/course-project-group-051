@@ -47,6 +47,7 @@ public class Session extends Application {
                 lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, stage, db, lb));
                 lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, stage, db));
                 lb.build(stage);
+                stage.setResizable(false);
                 stage.show();
 
 

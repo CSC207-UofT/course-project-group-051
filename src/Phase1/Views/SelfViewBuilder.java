@@ -118,7 +118,7 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 800);
+        this.scene = new Scene(this.bp, 450, 500);
         stage.setScene(this.scene);
     }
 

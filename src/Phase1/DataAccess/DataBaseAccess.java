@@ -10,6 +10,7 @@ import java.util.Arrays;
 public class DataBaseAccess implements DataAccessInterface{
 
     private Statement stmt = null;
+    Connection conn;
 
 
     public DataBaseAccess(){
@@ -876,13 +877,17 @@ public class DataBaseAccess implements DataAccessInterface{
         System.out.println("Attempting to connect to database");
         try {
             Class.forName(JDBC_DRIVER);
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             stmt = conn.createStatement();
             System.out.println("Successfully connected to database!");
         } catch (Exception e) {
             e.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.show();
+
         }
+    }
+    public void closeDB() throws SQLException {
+        conn.close();
     }
 }

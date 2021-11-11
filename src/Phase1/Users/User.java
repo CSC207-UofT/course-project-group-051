@@ -13,11 +13,11 @@ import java.util.Date;
  */
 public abstract class User {
 
-    private int id;
-    private String fName;
-    private String lName;
-    private Date birthdate;
-    private String password;
+    int id;
+    String fName;
+    String lName;
+    Date birthdate;
+    String password;
 
     public User(int id, String fName, String lName, Date birthdate, String password)
     {
@@ -27,6 +27,7 @@ public abstract class User {
         this.birthdate = birthdate;
         this.password = password;
     }
+
 
     public int getId() {
         return this.id;

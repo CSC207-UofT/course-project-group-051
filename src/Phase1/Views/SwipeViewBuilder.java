@@ -1,5 +1,6 @@
 package Phase1.Views;
 
+import Phase1.States.SelfProfile;
 import Phase1.Users.ProfileUser;
 import Phase1.Users.SwipeUser;
 import javafx.event.EventHandler;
@@ -33,7 +34,7 @@ public class SwipeViewBuilder implements SceneBuilder{
     VBox v;
     ImageView image;
     javafx.scene.text.Text text;
-    ProfileUser u;
+    SwipeUser u;
 
 
     public SwipeViewBuilder(ImageView image, SwipeUser u) {
@@ -53,6 +54,7 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.btn4 = new Button("Me");
         this.hb = new HBox();
         this.v = new VBox();
+        this.u = u;
 
 
     }

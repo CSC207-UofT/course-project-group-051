@@ -46,7 +46,8 @@ public class EventHandlerFactory {
     }
 
 
-    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataBaseAccess db, LogInViewBuilder lb){
+    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataBaseAccess db,
+                                                         LogInViewBuilder lb){
         return (EventHandler<ActionEvent>) event -> {
 
             if (c.getState().equals(States.LoggedOut)) {
@@ -57,7 +58,10 @@ public class EventHandlerFactory {
                     try{
 
                         ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), password, db.getImgPath(id));
+                            new Date(db.getBirthday(id)), username, password, db.getImgPath(id));
+                        u.setBio(db.getBio(u.getId()));
+                        u.setGender(db.getGender(u.getId()));
+                        u.setPreference(db.getGenderPreference(u.getId()));
                         c.update(Actions.LOGIN, u, null);
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
 
@@ -200,6 +204,7 @@ public class EventHandlerFactory {
             String gender = rb.getGender().getText();
             String preference = rb.getPreference().getText();
             String location = rb.getPicturePath().getText();
+            String bio = rb.getBio().getText();
 
             try{
             if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")){
@@ -214,6 +219,8 @@ public class EventHandlerFactory {
                int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
                FileInputStream file = new FileInputStream(location);
                int id = db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+               db.setUsername(id, username);
+               db.setBio(id, bio);
                db.setImgPath(id, location);
                rb.success(id);
                s.show();
@@ -268,7 +275,7 @@ public class EventHandlerFactory {
                                                  ProfileUser primary, SelfViewBuilder sb){
 
         return (EventHandler<ActionEvent>) event -> {
-            if (c.getState().equals(States.LoggedIn)){
+            if (c.getState().equals(States.SelfProfile)){
                 c.update(Actions.VIEWSELF, primary, null);
                 String fname = sb.getfName().getText();
                 String lname = sb.getlName().getText();
@@ -276,11 +283,10 @@ public class EventHandlerFactory {
                 String pw = sb.getPW().getText();
                 String image = sb.getImagePath().getText();
                 String gender = sb.getGender().getText();
+                String username = sb.getUsername().getText();
                 String preference = sb.getPreference().getText();
-                try{db.setImgPath(primary.getId(), image);}
-                catch(Exception io){
-                    sb.invalidPath();
-                }
+                String bio = sb.getBio().getText();
+
                 int id = primary.getId();
                 db.setGender(id, gender);
                 db.setGenderPreference(id, preference);
@@ -288,6 +294,36 @@ public class EventHandlerFactory {
                 db.setPassword(id, pw);
                 db.setFirstName(id, fname);
                 db.setLastName(id, lname);
+                db.setBio(id, bio);
+                SelfViewBuilder sv = new SelfViewBuilder(primary);
+                sv.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, primary, sv));
+                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                sv.getBirthday().setText(dob);
+                sv.getPW().setText(pw);
+                sv.getBirthday().setText(dob);
+                sv.getImagePath().setText(image);
+                sv.getGender().setText(gender);
+                sv.getPreference().setText(preference);
+                sv.getfName().setText(fname);
+                sv.getlName().setText(lname);
+                sv.getBio().setText(bio);
+
+                primary.setfName(fname);
+                primary.setLName(lname);
+                primary.setPreference(preference);
+                primary.setBio(bio);
+                primary.setDOB(dob);
+                primary.setGender(gender);
+                primary.setPassword(pw);
+                primary.setUsername(username);
+                sv.build(s);
+
+                try{db.setImgPath(primary.getId(), image);}
+                catch(Exception io){
+                    sb.invalidPath();
+                }
+
 
             }
 
@@ -305,7 +341,6 @@ public class EventHandlerFactory {
                 ArrayList matches = new ArrayList();
                 if (!EventHandlerFactory.getMatches(primary.getId(), db).isEmpty()){
                     matches = EventHandlerFactory.getMatches(primary.getId(), db);
-
                 }
 
                 c.update(Actions.BACK, primary, null);
@@ -313,8 +348,13 @@ public class EventHandlerFactory {
                 mb1.build(s);
 
             }
-            else if(c.getState().equals(States.Matches) || c.getState().equals(States.SelfProfile)){
+
+            else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
+                 {
+                System.out.println(c.getState());
+
                 int id = primary.getId();
+
                 ArrayList<Integer> swipelist = db.getSwipeList(id);
                 if (swipelist.isEmpty()){
                     c.update(Actions.BACK, primary, null);
@@ -370,6 +410,7 @@ public class EventHandlerFactory {
                 c.update(Actions.VIEWSELF, user, null);
                 sb.build(s);
                 sb.getBack().setOnAction(EventHandlerFactory.Back(c,s,db, user,null));
+                sb.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, user, sb));
             }
 
 
@@ -391,10 +432,12 @@ public class EventHandlerFactory {
             mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, user, null));
             for (int i = 0; i < matchesButtons.size(); i++){
                 int id = matches.get(i);
-
-                    matchesButtons.get(i).setOnAction(EventHandlerFactory.Message(c, s, db, user,
-                            new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), db.getPassword(id), db.getImgPath(id)), matches));
+                ProfileUser u = new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
+                        new Date(db.getBirthday(id)), user.getUsername(), db.getImgPath(id), db.getPassword(id));
+                u.setBio(db.getBio(u.getId()));
+                u.setGender(db.getGender(u.getId()));
+                u.setPreference(db.getGenderPreference(u.getId()));
+                    matchesButtons.get(i).setOnAction(EventHandlerFactory.Message(c, s, db, user, u, matches));
 
             }
 

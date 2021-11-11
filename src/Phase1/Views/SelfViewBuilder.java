@@ -7,7 +7,9 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.scene.text.Text;
 
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
@@ -35,19 +38,25 @@ public class SelfViewBuilder implements SceneBuilder{
     Label l5;
     Label l6;
     Label l7;
+    Label l8;
+    Label l9;
     TextField tf1;
     TextField tf;
     TextField tf2;
     TextField tf3;
     TextField tf4;
     TextField tf5;
+    TextField tf6;
+    TextField tf7;
     TextField pw;
     Text message;
+    ScrollPane sp;
 
 
     public SelfViewBuilder(ProfileUser u){
         this.u = u;
         this.bp = new BorderPane();
+        this.sp = new ScrollPane();
         this.bt = new Button("Back");
         this.bt1 = new Button("Save");
         this.l1 = new Label("First Name:");
@@ -57,6 +66,9 @@ public class SelfViewBuilder implements SceneBuilder{
         this.l5 = new Label("Profile Image Path:");
         this.l6 = new Label("Gender:");
         this.l7 = new Label("Preference:");
+        this.l8 = new Label("Username:");
+        this.l9 = new Label("Bio:");
+
 
         this.tf = new TextField(u.getfName());
         this.tf1 = new TextField(u.getlName());
@@ -68,6 +80,9 @@ public class SelfViewBuilder implements SceneBuilder{
         this.tf3 = new TextField(u.getImagePath());
         this.tf4 = new TextField(u.getGender());
         this.tf5 = new TextField(u.getPreference());
+        this.tf6 = new TextField(u.getUsername());
+        this.tf7 = new TextField(u.getBio());
+
         this.vb = new VBox();
         this.hb = new HBox();
         this.message = new Text();
@@ -77,6 +92,21 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
+    public void setSP(){
+        this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        this.sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        this.bp.setCenter(this.sp);
+
+    }
+
+
+    public TextField getUsername(){
+        return this.tf6;
+    }
+
+    public TextField getBio(){
+        return this.tf7;
+    }
 
     public TextField getGender(){
         return this.tf4;
@@ -142,7 +172,7 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void addVBox() {
-        this.bp.setCenter(this.vb);
+        this.sp.setContent(this.vb);
 
     }
     @Override
@@ -151,8 +181,15 @@ public class SelfViewBuilder implements SceneBuilder{
         this.vb.getChildren().addAll(this.l1, this.tf);
         this.vb.getChildren().addAll(this.l2, this.tf1);
         this.vb.getChildren().addAll(this.l3, this.tf2);
+        this.vb.getChildren().addAll(this.l8, this.tf6);
         this.vb.getChildren().addAll(this.l4, this.pw);
         this.vb.getChildren().addAll(this.l5, this.tf3);
+        this.vb.getChildren().addAll(this.l9, this.tf7);
+        this.vb.getChildren().addAll(this.l6, this.tf4);
+        this.vb.getChildren().addAll(this.l7, this.tf5);
+
+
+
         this.vb.getChildren().add(this.message);
 
     }
@@ -161,7 +198,10 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void setMargin() {
-        this.bp.setMargin(this.vb, new Insets(50, 50, 50, 50));
+        this.bp.setMargin(this.sp, new Insets(50, 50, 20,20));
+        this.sp.setBorder(Border.EMPTY);
+        this.bp.setBorder(Border.EMPTY);
+
 
     }
 
@@ -176,6 +216,7 @@ public class SelfViewBuilder implements SceneBuilder{
     public void build(Stage s) {
         this.addVBox();
         this.addHBox();
+        this.setSP();
         this.addTextField();
         this.addButton();
         this.addText();

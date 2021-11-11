@@ -4667,3 +4667,6 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "genderPreference" not found [42
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Thread.java:748)
+2021-11-11 15:33:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "update user set bio = 'hello it's a me[*]' where PERSONID = 13;"; SQL statement:
+update user set bio = 'hello it's a me' where PERSONID = 13; [42000-200]

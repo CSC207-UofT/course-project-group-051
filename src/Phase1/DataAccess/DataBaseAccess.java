@@ -5,7 +5,6 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class DataBaseAccess implements DataAccessInterface{
 

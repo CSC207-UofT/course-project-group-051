@@ -35,12 +35,16 @@ public class SelfViewBuilder implements SceneBuilder{
     Label l5;
     Label l6;
     Label l7;
+    Label l8;
+    Label l9;
     TextField tf1;
     TextField tf;
     TextField tf2;
     TextField tf3;
     TextField tf4;
     TextField tf5;
+    TextField tf6;
+    TextField tf7;
     TextField pw;
     Text message;
 
@@ -57,6 +61,9 @@ public class SelfViewBuilder implements SceneBuilder{
         this.l5 = new Label("Profile Image Path:");
         this.l6 = new Label("Gender:");
         this.l7 = new Label("Preference:");
+        this.l8 = new Label("Username:");
+        this.l9 = new Label("Bio:");
+
 
         this.tf = new TextField(u.getfName());
         this.tf1 = new TextField(u.getlName());
@@ -68,6 +75,10 @@ public class SelfViewBuilder implements SceneBuilder{
         this.tf3 = new TextField(u.getImagePath());
         this.tf4 = new TextField(u.getGender());
         this.tf5 = new TextField(u.getPreference());
+        System.out.println(u.getUsername());
+        this.tf6 = new TextField(u.getUsername());
+        this.tf7 = new TextField(u.getBio());
+
         this.vb = new VBox();
         this.hb = new HBox();
         this.message = new Text();
@@ -76,7 +87,17 @@ public class SelfViewBuilder implements SceneBuilder{
 
 
     }
+    public String getusername(){
+        return u.getUsername();
+    }
 
+    public TextField getUsername(){
+        return this.tf6;
+    }
+
+    public TextField getBio(){
+        return this.tf7;
+    }
 
     public TextField getGender(){
         return this.tf4;
@@ -88,7 +109,7 @@ public class SelfViewBuilder implements SceneBuilder{
 
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 500);
+        this.scene = new Scene(this.bp, 450, 800);
         stage.setScene(this.scene);
     }
 
@@ -151,8 +172,15 @@ public class SelfViewBuilder implements SceneBuilder{
         this.vb.getChildren().addAll(this.l1, this.tf);
         this.vb.getChildren().addAll(this.l2, this.tf1);
         this.vb.getChildren().addAll(this.l3, this.tf2);
+        this.vb.getChildren().addAll(this.l8, this.tf6);
         this.vb.getChildren().addAll(this.l4, this.pw);
         this.vb.getChildren().addAll(this.l5, this.tf3);
+        this.vb.getChildren().addAll(this.l9, this.tf7);
+        this.vb.getChildren().addAll(this.l6, this.tf4);
+        this.vb.getChildren().addAll(this.l7, this.tf5);
+
+
+
         this.vb.getChildren().add(this.message);
 
     }

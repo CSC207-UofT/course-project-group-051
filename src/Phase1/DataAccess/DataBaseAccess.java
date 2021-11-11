@@ -16,6 +16,10 @@ public class DataBaseAccess implements DataAccessInterface{
         connectDB();
     }
 
+
+
+
+
     private int getNextUser(){
         int id = -1;
         try {
@@ -291,9 +295,7 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] temp = rs.getString("admires").split(",", -1);
                 for(String x: temp){
-                    admires.add(Integer.parseInt(x));
-                    if(!x.equals(""))
-                    {
+                    if(!x.equals("")) {
                         admires.add(Integer.parseInt(x));
                     }
                 }

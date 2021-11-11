@@ -1,5 +1,6 @@
 package Phase1.Views;
 
+import Phase1.States.SelfProfile;
 import Phase1.Users.ProfileUser;
 import Phase1.Users.SwipeUser;
 import javafx.event.EventHandler;
@@ -33,8 +34,10 @@ public class SwipeViewBuilder implements SceneBuilder{
     VBox v;
     ImageView image;
     javafx.scene.text.Text text;
-    ProfileUser u;
-    public SwipeViewBuilder(ImageView image, SwipeUser u){
+    SwipeUser u;
+
+
+    public SwipeViewBuilder(ImageView image, SwipeUser u) {
         this.bp = new BorderPane();
         this.image = image;
         this.text = new Text(u.getfName() + ", " + Integer.toString(u.getAge()));
@@ -51,9 +54,10 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.btn4 = new Button("Me");
         this.hb = new HBox();
         this.v = new VBox();
+        this.u = u;
+
 
     }
-
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -169,20 +173,18 @@ public class SwipeViewBuilder implements SceneBuilder{
     }
 
 
+
     @Override
     public void build(Stage s){
         this.addButton();
 
         this.addHBox();
         this.addVBox();
-
         this.addTextField();
         this.setSpacing();
         this.addbp();
-        this.addText();
         this.setMargin();
         this.addImage();
-
         this.setScene(s);
 
 

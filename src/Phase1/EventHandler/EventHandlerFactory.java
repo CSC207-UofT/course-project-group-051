@@ -343,8 +343,13 @@ public class EventHandlerFactory {
                 mb1.build(s);
 
             }
-            else if(c.getState().equals(States.Matches) || c.getState().equals(States.SelfProfile)){
+
+            else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
+                 {
+                System.out.println(c.getState());
+
                 int id = primary.getId();
+
                 ArrayList<Integer> swipelist = db.getSwipeList(id);
                 if (swipelist.isEmpty()){
                     c.update(Actions.BACK, primary, null);

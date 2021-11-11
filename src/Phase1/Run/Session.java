@@ -44,7 +44,7 @@ public class Session extends Application {
 
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 RegistrationViewBuilder rb = new RegistrationViewBuilder();
-                lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, stage, db));
+                lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, stage, db, lb));
                 lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, stage, db));
                 lb.build(stage);
                 stage.show();

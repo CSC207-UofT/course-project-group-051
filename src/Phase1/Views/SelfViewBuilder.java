@@ -75,7 +75,6 @@ public class SelfViewBuilder implements SceneBuilder{
         this.tf3 = new TextField(u.getImagePath());
         this.tf4 = new TextField(u.getGender());
         this.tf5 = new TextField(u.getPreference());
-        System.out.println(u.getUsername());
         this.tf6 = new TextField(u.getUsername());
         this.tf7 = new TextField(u.getBio());
 

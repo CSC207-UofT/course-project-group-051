@@ -20,12 +20,14 @@ public class SwipeUser extends User {
     private String bio;
     private int swiper; //ID of the current User who is swiping.
     private boolean gotliked;
+    private String imgPath;
 
 
-    public SwipeUser(int id, String fName, String lName, Date birthdate, String password) {
+    public SwipeUser(int id, String fName, String lName, Date birthdate, String password, String imgPath) {
         super(id, fName, lName, birthdate, password);
         this.swiper = -1;
         this.gotliked = false;
+        this.imgPath = imgPath;
     }
 
     public int getAge() {

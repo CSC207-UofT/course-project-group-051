@@ -1,5 +1,6 @@
 package Phase1.Views;
 
+import Phase1.DataAccess.DataBaseAccess;
 import javafx.geometry.Insets;
 import Phase1.Users.ProfileUser;
 import javafx.scene.Scene;
@@ -19,10 +20,11 @@ public class MatchesViewBuilder implements SceneBuilder{
     Button back;
     ScrollPane scrollPane;
     VBox vb;
-    VBox vb1;
     BorderPane bp;
-    ArrayList<ProfileUser> matches;
-    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<ProfileUser> matches){
+    ArrayList<Integer> matches;
+    int secondary;
+    DataBaseAccess db;
+    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataBaseAccess db){
         this.user = primaryUser;
         this.matches = matches;
         this.scrollPane = new ScrollPane();
@@ -30,8 +32,25 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.vb = new VBox();
         this.back = new Button("Back");
         this.hb = new HBox();
+        this.db = db;
 
     }
+
+    public void pop(int secondary){
+        if (this.matches.contains(secondary)){
+            this.matches.remove(secondary);
+        }
+    }
+
+    public ArrayList<Integer> getMatches(){
+        return this.matches;
+    }
+
+    public Button getBack(){
+        return this.back;
+    }
+
+
     @Override
     public void addVBox() {
 
@@ -46,12 +65,14 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.hb.getChildren().add(new Text("Matches"));
     }
 
-    public void matchButtons(){
-        for(ProfileUser i: this.matches){
-            this.vb.getChildren().add(new Button(i.getfName()));
+    public ArrayList<Button> matchButtons(DataBaseAccess db){
+        ArrayList a = new ArrayList();
+        for(Integer i: this.matches){
+            Button b = new Button(db.getFirstName(i));
+            this.vb.getChildren().add(b);
+            a.add(b);
         }
-
-
+        return a;
     }
 
     public void addScrollPane(){
@@ -108,7 +129,7 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addButton();
         this.addText();
-        this.matchButtons();
+        this.matchButtons(this.db);
         this.addScrollPane();
         this.orientScrollPane();
         this.addHBox();

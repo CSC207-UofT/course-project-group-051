@@ -3,10 +3,7 @@ package Phase1.Views;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -31,6 +28,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
     TextField tf4;
     TextField tf5;
     TextField tf6;
+    TextField tf7;
+    TextField tf8;
+
     Text message;
     Label label;
     Label label1;
@@ -41,8 +41,12 @@ public class RegistrationViewBuilder implements SceneBuilder{
     Label label4;
     Label label5;
     Label label6;
-
-
+    Label label7;
+    Label label8;
+    Label label9;
+    Button btn2;
+    TextField tf9;
+    ScrollPane sp;
 
     public RegistrationViewBuilder(){
         this.bp = new BorderPane();
@@ -51,22 +55,41 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.bt1 = new Button("Log In");
         this.v = new VBox();
         this.v1 = new VBox();
-        this.label = new Label("Date of Birth(e.g. Dec,6,1999):");
+        this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
         this.label1 = new Label("Username:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
-        this.label4 = new Label("Please enter your profile picture path:");
+        this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
+        this.label7 = new Label("Gender(Male or Female):");
+        this.label8 = new Label("Gender Preference:");
+        this.label9 = new Label("Bio:");
         this.tf = new TextField ();
         this.tf1 = new TextField ();
+        this.message = new Text();
+        this.message.setFont(new Font(15));
+        this.sp = new ScrollPane();
 
         this.tf2 = new PasswordField();
         this.tf3 = new PasswordField();
         this.tf4 = new TextField ();
         this.tf5 = new TextField ();
         this.tf6 = new TextField ();
+        this.tf7 = new TextField ();
+        this.tf8 = new TextField ();
+        this.tf9 = new TextField();
+        this.btn2 = new Button("Create Account");
 
+    }
+
+    public void setSP(){
+        this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+    }
+
+    public void pathInvalid(){
+        this.message.setFill(Color.RED);
+        this.message.setText("Invalid file path. Please try again.");
     }
 
     /**
@@ -77,12 +100,21 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.v1.getChildren().add(this.hb1);
 
     }
+    public void fillIn(){
+        this.message.setFill(Color.RED);
+        this.message.setText("Please fill in every blank");
+    }
+
+    public Button createAccount(){
+        return this.btn2;
+    }
 
     /** Maps each button to its corresponding eventhandler.
      */
     @Override
     public void addButton() {
-        this.hb1.getChildren().add(bt1);
+        this.hb1.getChildren().add(this.bt1);
+        this.hb1.getChildren().add(this.btn2);
 
     }
 
@@ -96,6 +128,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
     @Override
     public void addVBox() {
         this.v1.getChildren().add(this.v);
+        this.sp.setContent(this.v1);
 
     }
 
@@ -115,7 +148,14 @@ public class RegistrationViewBuilder implements SceneBuilder{
                 this.tf2);
         this.v.getChildren().addAll(label3, this.tf3);
         this.v.getChildren().addAll(label4, this.tf4);
+        this.v.getChildren().addAll(label7, this.tf7);
+        this.v.getChildren().addAll(label8, this.tf8);
+        this.v.getChildren().addAll(label9, this.tf9);
 
+    }
+
+    public TextField getBio(){
+        return this.tf9;
     }
 
     public void addMessage(){
@@ -160,13 +200,22 @@ public class RegistrationViewBuilder implements SceneBuilder{
         return this.tf6;
     }
 
+    public TextField getGender(){
+        return this.tf7;
+    }
+
+    public TextField getPreference   (){
+        return this.tf8;
+    }
+
     public void passwordDontMatch(){
+        this.message.setFill(Color.RED);
         this.message.setText("Your passwords don't match, please try again");
 
     }
 
     public void accountExists(){
-
+        this.message.setFill(Color.RED);
         this.message.setText("Your account already exists in our system. Please log in.");
     }
 
@@ -186,8 +235,8 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void setMargin() {
-        this.bp.setCenter(v1);
-        this.bp.setMargin(this.v1, new Insets(50, 50, 50, 50));
+        this.bp.setCenter(this.sp);
+        this.bp.setMargin(this.sp, new Insets(50, 50, 50, 50));
 
     }
 
@@ -196,8 +245,15 @@ public class RegistrationViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 800);
+        this.scene = new Scene(this.bp, 550, 500);
         stage.setScene(this.scene);
+    }
+
+
+
+    public void success(int id){
+        this.message.setFill(Color.GREEN);
+        this.message.setText("Sucess! ID: " + Integer.toString(id));
     }
 
     /** Completes the build of the scene.
@@ -209,6 +265,7 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addMessage();
         this.addHBox();
+        this.setSP();
         this.setMessageFill();
         this.setMessageFont();
         this.addTextField();

@@ -19,6 +19,26 @@ public class DataBaseAccess implements DataAccessInterface{
 
 
 
+    public static ArrayList getMatches(int id, DataBaseAccess db){
+        try{
+            ArrayList<Integer> liked = db.getLikes(id);
+            ArrayList<Integer> admirers = db.getAdmires(id);
+            if (liked.isEmpty() || admirers.isEmpty()){
+                return new ArrayList();
+            }
+            ArrayList<Integer> matches = new ArrayList();
+            for (Integer i: liked){
+                if (admirers.contains(i)){
+                    matches.add(i);
+                }
+            }
+            return matches;
+        }
+        catch(Exception io){
+            System.out.println(true);
+        }
+        return new ArrayList();
+    }
 
     private int getNextUser(){
         int id = -1;
@@ -558,14 +578,18 @@ public class DataBaseAccess implements DataAccessInterface{
             else{
                 ArrayList<Integer> likes = this.getLikes(currUser);
                 likes.add(likeID);
-                like = new StringBuilder(likes.remove(0).toString());
+                if (!likes.isEmpty()){
+                    like = new StringBuilder(likes.remove(0).toString());
                 for(int x: likes){
                     like.append(",").append(x);
                 }
+
+                    String h2 = "update user set likes = '" + like +"' where PERSONID = " + currUser + ";";
+                    rs= stmt.execute(h2);
+                }
             }
 
-            String h2 = "update user set likes = '" + like +"' where PERSONID = " + currUser + ";";
-            rs= stmt.execute(h2);
+
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -586,7 +610,6 @@ public class DataBaseAccess implements DataAccessInterface{
             }
             else{
                 ArrayList<Integer> likes = this.getLikes(currUser);
-                likes.remove(likeID);
                 if(likes.size() != 0){
                     like = new StringBuilder(likes.remove(0).toString());
                     for(int x: likes){

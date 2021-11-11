@@ -764,7 +764,7 @@ public class DataBaseAccess implements DataAccessInterface{
         genderPref = this.getGenderPreference(id);
         if(genderPref != null){
             try {
-                String h2 = "select personId from user where genderPreference = '"+ genderPref+"' and personId != "+id+";";
+                String h2 = "select personId from user where gender = '"+ genderPref+"' and personId != "+id+";";
                 ResultSet rs = stmt.executeQuery(h2);
                 while (rs.next()) {
                     String ids = rs.getString("personId");

@@ -28,13 +28,15 @@ public class BuildSwipeUser implements UserBuilder {
         // get data from database
         String fName = db.getFirstName(id);
         String lName = db.getLastName(id);
-        // Date birthdate = db.getbirthdate(id);
+        int age = db.getAge(id);
+        String image = db.getImage(id);
 
 
         //set this User's attributes
         resultUser.setfName(fName);
         resultUser.setLName(lName);
-        // resultUser.setBirthdate(birthdate);
+        resultUser.setAge(age);
+        resultUser.setImage(image);
 
     }
 
@@ -47,31 +49,15 @@ public class BuildSwipeUser implements UserBuilder {
         int id = resultUser.getId();
 
         //data from database
-        int age = calculateAge();
         String gender = db.getGender(id);
         String bio = db.getBio(id);
-        // ImageView image = db.getImage(id); TODO image in database
 
         //Input into the SwipeUser
-        resultUser.setAge(age);
         resultUser.setGender(gender);
         resultUser.setBio(bio);
-        // resultUser.setImage(image);
 
     }
 
-
-    /**
-     * Finds the age of the resultUser from the database.
-     * @return the Age of the resultUser.
-     */
-    private int calculateAge() {
-
-
-        //TODO
-        return 5;
-
-    }
 
     /**
      * @return the User with fully filled in instance attributes.

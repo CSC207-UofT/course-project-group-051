@@ -3,7 +3,6 @@ package Phase1.UserActions;
 import Phase1.DataAccess.DataAccessInterface;
 import Phase1.UserBuilders.BuildSwipeUser;
 import Phase1.Users.SwipeUser;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -60,7 +59,7 @@ public class SwipeAction implements Transitionable{
         int age = currentTarget.getAge();
         String gender = currentTarget.getGender();
         String bio = currentTarget.getBio();
-        ImageView image = currentTarget.getImage();
+        String image = currentTarget.getImage();
 
         //is there a better way to do this kind of list.
 

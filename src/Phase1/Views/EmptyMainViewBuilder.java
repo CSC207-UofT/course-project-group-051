@@ -35,8 +35,8 @@ public class EmptyMainViewBuilder implements SceneBuilder{
         this.bp = new BorderPane();
         this.sp = new StackPane();
         this.btn1 = new Button("Matches");
-        this.btn2 = new Button("Log Out");
-        this.btn3 = new Button("Me");
+        this.btn2 = new Button("Me");
+        this.btn3 = new Button("Log Out");
         this.btn4 = new Button("Refresh");
         this.hb = new HBox();
         this.v = new VBox();
@@ -70,7 +70,7 @@ public class EmptyMainViewBuilder implements SceneBuilder{
 
 
     public Button getMatches(){
-        return this.btn2;
+        return this.btn1;
     }
 
     public Button getLogOut(){
@@ -78,11 +78,11 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     }
 
     public Button getMe(){
-        return this.btn4;
+        return this.btn2;
     }
 
     public Button getRefresh(){
-        return this.btn5;
+        return this.btn4;
     }
 
     /**

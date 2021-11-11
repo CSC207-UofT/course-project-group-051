@@ -24,9 +24,13 @@ public class EventHandlerFactory {
 
     public EventHandlerFactory(){}
 
-    public static ArrayList<Integer> getMatches(int id, DataBaseAccess db){
+    public static ArrayList getMatches(int id, DataBaseAccess db){
+        try{
         ArrayList<Integer> liked = db.getLikes(id);
         ArrayList<Integer> admirers = db.getAdmires(id);
+        if (liked.isEmpty() || admirers.isEmpty()){
+            return new ArrayList();
+        }
         ArrayList<Integer> matches = new ArrayList();
         for (Integer i: liked){
             if (admirers.contains(i)){
@@ -34,6 +38,11 @@ public class EventHandlerFactory {
             }
         }
         return matches;
+    }
+    catch(Exception io){
+            System.out.println(true);
+    }
+        return new ArrayList();
     }
 
 
@@ -54,8 +63,19 @@ public class EventHandlerFactory {
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
 
                         if(swipelist.isEmpty()){
-                         EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
 
+                            EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
+                         eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+
+                         ArrayList matches = new ArrayList();
+                         if (!EventHandlerFactory.getMatches(u.getId(), db).isEmpty()){
+                             matches = EventHandlerFactory.getMatches(u.getId(), db);
+
+                         }
+
+                         eb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,matches
+                                ));
+                         eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
                          eb.build(s);
 
                      }
@@ -63,7 +83,6 @@ public class EventHandlerFactory {
                          int nextid = swipelist.get(0);
                          SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
                                  new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
-                         System.out.println(db.getImgPath(id));
                          FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                          SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
                          sb.build(s);
@@ -97,16 +116,47 @@ public class EventHandlerFactory {
 
             }
 
-
-
-
-
-
         };}
 
-    public static EventHandler LogOutHandler(StateMachine c, Stage s, LogInViewBuilder lb, DataBaseAccess db){
+    public static EventHandler RefreshHandler(StateMachine c, Stage s, DataBaseAccess db, ProfileUser user){
+
+     return (EventHandler<ActionEvent>) event -> {
+         if (c.getState().equals(States.LoggedIn)){
+             ArrayList<Integer> potential = db.getSwipeList(user.getId());
+             if (potential.isEmpty()){
+
+             }
+             else{
+                 try{
+                 int next = potential.get(0);
+                 SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
+                         FileInputStream(db.getImgPath(next)))),
+                         new SwipeUser(next, db.getFirstName(next), db.getLastName(next),
+                                 new Date(db.getBirthday(next)), db.getPassword(next), db.getImgPath(next)));
+                 sb.build(s);
+                 ArrayList matches = new ArrayList();
+                 if(!EventHandlerFactory.getMatches(user.getId(), db).isEmpty()){
+                     matches = EventHandlerFactory.getMatches(user.getId(), db);
+                 }
+                 sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, user, matches));
+                 sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, user));
+                 sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+             }
+             catch(Exception io){
+
+             }
+             }
+         }
+     };
+
+    }
+
+    public static EventHandler LogOutHandler(StateMachine c, Stage s, DataBaseAccess db){
+        LogInViewBuilder lb = new LogInViewBuilder();
         return e -> {
             if (c.getState().equals(States.LoggedIn)) {
+                lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, lb));
+                lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, s, db));
                 c.update(Actions.LOGOUT, null, null);
                 lb.build(s);
 
@@ -206,11 +256,12 @@ public class EventHandlerFactory {
 
     }
 
-    public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataBaseAccess db, MatchesViewBuilder mb,
+    public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataBaseAccess db,
                                                  ProfileUser primary, ChatViewBuilder cv){
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.Messaging)){
-                c.update(Actions.BACK, null, null);
+                MatchesViewBuilder mb = new MatchesViewBuilder(primary, EventHandlerFactory.getMatches(primary.getId(), db), db);
+                c.update(Actions.BACK, primary, null);
                 MatchesViewBuilder mb1 = new MatchesViewBuilder(primary, mb.getMatches(), db);
                 mb1.build(s);
 
@@ -218,6 +269,21 @@ public class EventHandlerFactory {
             else if(c.getState().equals(States.Matches) || c.getState().equals(States.SelfProfile)){
                 int id = primary.getId();
                 ArrayList<Integer> swipelist = db.getSwipeList(id);
+                if (swipelist.isEmpty()){
+                    c.update(Actions.BACK, primary, null);
+                    EmptyMainViewBuilder eb = new EmptyMainViewBuilder(primary);
+
+                    ArrayList list = new ArrayList();
+                    if (!EventHandlerFactory.getMatches(id, db).isEmpty()){
+                        list = EventHandlerFactory.getMatches(id, db);
+                    }
+                    eb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, primary, list));
+                    eb.getRefresh().setOnAction(EventHandlerFactory.RefreshHandler(c, s, db, primary));
+                    eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, primary));
+                    eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                    eb.build(s);
+                }
+                else{
                 int nextid = swipelist.get(0);
                 try {
                     FileInputStream f = new FileInputStream(db.getImgPath(nextid));
@@ -236,17 +302,20 @@ public class EventHandlerFactory {
 
 
             }
-        };
 
-
+        };};
     }
 
-    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, SelfViewBuilder sb, DataBaseAccess db){
 
+
+
+    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataBaseAccess db, ProfileUser user){
+        SelfViewBuilder sb = new SelfViewBuilder(user);
         return (EventHandler<ActionEvent>) event ->{
             if(c.getState().equals(States.LoggedIn)){
-                c.update(Actions.VIEWSELF, null, null);
+                c.update(Actions.VIEWSELF, user, null);
                 sb.build(s);
+                sb.getBack().setOnAction(EventHandlerFactory.Back(c,s,db, user,null));
             }
 
 
@@ -255,17 +324,20 @@ public class EventHandlerFactory {
 
     }
 
-    public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataBaseAccess db, ProfileUser user, ArrayList<Integer> matches){
+    public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataBaseAccess db, ProfileUser user,
+                                                    ArrayList<Integer> matches){
+
         MatchesViewBuilder mb = new MatchesViewBuilder(user, matches, db);
+
         ArrayList<Button> matchesButtons= mb.matchButtons(db);
         return (EventHandler<ActionEvent>) event ->{
             if (c.getState().equals(States.LoggedIn)){
-            c.update(Actions.SHOWMATCHES, null, null);
+            c.update(Actions.SHOWMATCHES, user, null);
             mb.build(s);
+            mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, user, null));
             for (int i = 0; i < matchesButtons.size(); i++){
                 int id = matches.get(i);
                 try {
-
                     ImageView ig = new ImageView(new Image(new FileInputStream(db.getImgPath(id))));
                     matchesButtons.get(i).setOnAction(EventHandlerFactory.Message(c, s, db, user,
                             new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
@@ -299,9 +371,10 @@ public class EventHandlerFactory {
                 c.update(Actions.UNMATCH, null, null);
                 mb.build(s);
                 mb.pop(secondary);
-                mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, mb, primary, null));
+                mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
                 ArrayList<Button> matchButtons = mb.matchButtons(db);
                 for (int i = 0; i < matchButtons.size(); i++){
+
 
                 }
             }

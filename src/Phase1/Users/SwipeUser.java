@@ -2,6 +2,8 @@ package Phase1.Users;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
  *
@@ -30,15 +32,16 @@ public class SwipeUser extends User {
         this.imgPath = imgPath;
     }
 
-    public int getAge() {
-        return age;
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
-    public String getGender() {
-        return gender;
-    }
+
+
 
     public String getBio() {
-        return bio;
+        return this.bio;
+
     }
 }

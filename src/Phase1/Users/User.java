@@ -1,6 +1,7 @@
 package Phase1.Users;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User is the base class for the different representations of our Users
@@ -18,6 +19,8 @@ public abstract class User {
     String lName;
     Date birthdate;
     String password;
+    String bio;
+    int age;
 
     public User(int id, String fName, String lName, Date birthdate, String password)
     {
@@ -27,6 +30,8 @@ public abstract class User {
         this.birthdate = birthdate;
         this.password = password;
     }
+
+
 
 
     public int getId() {
@@ -44,4 +49,13 @@ public abstract class User {
     public Date getBirthdate(){return this.birthdate;}
 
     public String getPassword(){return this.password;}
+
+
+    public int getAge() {
+        Date today = new Date();
+        long diff = today.getTime() - this.getBirthdate().getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        return days / 365;
+    }
 }

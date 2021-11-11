@@ -58,12 +58,12 @@ public class ProfileUser extends User {
         return this.bio;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 
     public String getGender() {
         return this.gender;
+    }
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public void setDOB(String dob){
@@ -74,13 +74,6 @@ public class ProfileUser extends User {
         this.gender = gender;
     }
 
-    public int getAge() {
-        Date today = new Date();
-        long diff = today.getTime() - this.getBirthdate().getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-        return days / 365;
-    }
     public boolean setImagePath(String path){
         try{
             FileInputStream f = new FileInputStream(path);

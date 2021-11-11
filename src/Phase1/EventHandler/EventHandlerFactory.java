@@ -64,7 +64,7 @@ public class EventHandlerFactory {
                         u.setPreference(db.getGenderPreference(u.getId()));
                         c.update(Actions.LOGIN, u, null);
                      ArrayList<Integer> swipelist = db.getSwipeList(id);
-
+                        System.out.println(swipelist);
                         if(swipelist.isEmpty()){
 
                             EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
@@ -83,11 +83,11 @@ public class EventHandlerFactory {
 
                      }
                      else {
-                            System.out.println("True");
 
                             int nextid = swipelist.get(0);
                          SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
                                  new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
+                         user.setBio(db.getBio(user.getId()));
                          FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                          SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
                          sb.build(s);
@@ -99,6 +99,8 @@ public class EventHandlerFactory {
 
                             sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,
                                  matches));
+                            sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                            sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
                      }}
                   //  catch (NumberFormatException io){
                     //    System.out.println("Invalid image path");
@@ -145,10 +147,11 @@ public class EventHandlerFactory {
              else{
                  try{
                  int next = potential.get(0);
+                     SwipeUser u = new SwipeUser(next, db.getFirstName(next), db.getLastName(next),
+                             new Date(db.getBirthday(next)), db.getPassword(next), db.getImgPath(next));
+                     u.setBio(db.getBio(u.getId()));
                  SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
-                         FileInputStream(db.getImgPath(next)))),
-                         new SwipeUser(next, db.getFirstName(next), db.getLastName(next),
-                                 new Date(db.getBirthday(next)), db.getPassword(next), db.getImgPath(next)));
+                         FileInputStream(db.getImgPath(next)))), u);
                  sb.build(s);
                  ArrayList matches = new ArrayList();
                  if(!EventHandlerFactory.getMatches(user.getId(), db).isEmpty()){
@@ -353,8 +356,6 @@ public class EventHandlerFactory {
 
             else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
                  {
-                System.out.println(c.getState());
-
                 int id = primary.getId();
 
                 ArrayList<Integer> swipelist = db.getSwipeList(id);
@@ -376,17 +377,23 @@ public class EventHandlerFactory {
                     }
                 }
                 else{
+                    ArrayList matches = EventHandlerFactory.getMatches(primary.getId(), db);
                 int nextid = swipelist.get(0);
                 try {
                     FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                     Image image = new Image(f);
                     ImageView iv = new ImageView(image);
-                    SwipeViewBuilder sb = new SwipeViewBuilder(iv, new SwipeUser(nextid, db.getFirstName(nextid),
+                    SwipeUser u = new SwipeUser(nextid, db.getFirstName(nextid),
                             db.getLastName(nextid), new Date(db.getBirthday(nextid)), db.getPassword(nextid),
-                            db.getImgPath(nextid)));
+                            db.getImgPath(nextid));
+                    u.setBio(db.getBio(u.getId()));
+                    SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
                     c.update(Actions.BACK, null, null);
                     sb.build(s);
-                    swipelist.remove(nextid);
+                    sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                    sb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db, primary, matches));
+                    sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, primary));
+                   // swipelist.remove(nextid);
                 }
                 catch (NumberFormatException e){
 

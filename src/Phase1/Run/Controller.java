@@ -1,7 +1,6 @@
-package Phase1.EventHandler;
+package Phase1.Run;
 
 import Phase1.DataAccess.DataBaseAccess;
-import Phase1.Run.StateMachine;
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
 import Phase1.Users.ProfileUser;
@@ -20,11 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class EventHandlerFactory {
+public class Controller {
 
-    public EventHandlerFactory(){}
-
-
+    public Controller(){}
 
     public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataBaseAccess db,
                                                          LogInViewBuilder lb){
@@ -47,7 +44,7 @@ public class EventHandlerFactory {
                         if(swipelist.isEmpty()){
 
                             EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                            eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                            eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
                          ArrayList matches = new ArrayList<>();
                          if (!db.getMatches(u.getId(), db).isEmpty()){
 
@@ -55,9 +52,9 @@ public class EventHandlerFactory {
 
                          }
 
-                         eb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,matches
+                         eb.getMatches().setOnAction(Controller.Matches(c, s, db, u,matches
                                 ));
-                         eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
+                         eb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
                          eb.build(s);
 
                      }
@@ -79,12 +76,12 @@ public class EventHandlerFactory {
 
                             }
 
-                            sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, u,
+                            sb.getMatches().setOnAction(Controller.Matches(c, s, db, u,
                                  matches));
-                            sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
-                            sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
-                           sb.getRight().setOnAction(EventHandlerFactory.SwipeRight(c, s, db, swipelist, u));
-                           sb.getLeft().setOnAction(EventHandlerFactory.SwipeLeft(c, s, db, swipelist, u));
+                            sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
+                            sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
+                           sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
+                           sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, db, swipelist, u));
                      }}
                   //  catch (NumberFormatException io){
                     //    System.out.println("Invalid image path");
@@ -111,8 +108,8 @@ public class EventHandlerFactory {
                     System.out.println(c.getState());
                 LogInViewBuilder lb1 = new LogInViewBuilder();
                 RegistrationViewBuilder reg1 = new RegistrationViewBuilder();
-                lb1.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, lb1));
-                lb1.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, s, db));
+                lb1.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, lb1));
+                lb1.getCreateAccount().setOnAction(Controller.Registration(c, s, db));
                 lb1.build(s);
                 s.show();
 
@@ -141,11 +138,11 @@ public class EventHandlerFactory {
                  if(!db.getMatches(user.getId(), db).isEmpty()){
                      matches = db.getMatches(user.getId(), db);
                  }
-                 sb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, user, matches));
-                 sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, user));
-                 sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
-                 sb.getLeft().setOnAction(EventHandlerFactory.SwipeLeft(c, s, db, db.getSwipeList(user.getId()), user));
-                 sb.getRight().setOnAction(EventHandlerFactory.SwipeRight(c, s, db, db.getSwipeList(user.getId()), user));
+                 sb.getMatches().setOnAction(Controller.Matches(c, s, db, user, matches));
+                 sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, user));
+                 sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
+                 sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, db, db.getSwipeList(user.getId()), user));
+                 sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, db.getSwipeList(user.getId()), user));
 
                  }
              catch(Exception io){
@@ -161,8 +158,8 @@ public class EventHandlerFactory {
         LogInViewBuilder lb = new LogInViewBuilder();
         return e -> {
             if (c.getState().equals(States.LoggedIn)) {
-                lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, lb));
-                lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, s, db));
+                lb.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, lb));
+                lb.getCreateAccount().setOnAction(Controller.Registration(c, s, db));
                 c.update(Actions.LOGOUT, null, null);
                 lb.build(s);
 
@@ -178,8 +175,8 @@ public class EventHandlerFactory {
             c.update(Actions.REGISTER, null, null);
             RegistrationViewBuilder rb = new RegistrationViewBuilder();
             rb.build(s);
-            rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, new LogInViewBuilder()));
-            rb.createAccount().setOnAction(EventHandlerFactory.CreateAccount(c, s, rb, db));
+            rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, new LogInViewBuilder()));
+            rb.createAccount().setOnAction(Controller.CreateAccount(c, s, rb, db));
             }
                   };
     }
@@ -221,8 +218,8 @@ public class EventHandlerFactory {
            else if(db.logIn(username, pw1) != -1){
 
              rb.accountExists();
-             rb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, s, db, new LogInViewBuilder()));
-             rb.createAccount().setOnAction(EventHandlerFactory.Registration(c,s,db));
+             rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, new LogInViewBuilder()));
+             rb.createAccount().setOnAction(Controller.Registration(c,s,db));
 
             }
 
@@ -243,10 +240,10 @@ public class EventHandlerFactory {
                 if (c.getState().equals(States.LoggedIn)){
                     if(swipelist.isEmpty()){
                         EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                        eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c,s,db));
-                        eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c,s,db,u));
-                        eb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
-                        eb.getRefresh().setOnAction(EventHandlerFactory.RefreshHandler(c,s,db,u));
+                        eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,db));
+                        eb.getMe().setOnAction(Controller.SelfProfile(c,s,db,u));
+                        eb.getMatches().setOnAction(Controller.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
+                        eb.getRefresh().setOnAction(Controller.RefreshHandler(c,s,db,u));
                         eb.build(s);
 
                     }
@@ -261,11 +258,11 @@ public class EventHandlerFactory {
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                             db.likeUser(u.getId(), (Integer) swipelist.get(0));
                             swipelist.remove(0);
-                            sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
-                            sb.getRight().setOnAction(EventHandlerFactory.SwipeRight(c, s, db, swipelist, u));
-                            sb.getLeft().setOnAction(EventHandlerFactory.SwipeLeft(c,s,db,swipelist, u));
-                            sb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
-                            sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                            sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
+                            sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
+                            sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,db,swipelist, u));
+                            sb.getMatches().setOnAction(Controller.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
+                            sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
                             sb.build(s);
                         }
                         catch(Exception i){
@@ -291,10 +288,10 @@ public class EventHandlerFactory {
             if (c.getState().equals(States.LoggedIn)){
                 if(swipelist.isEmpty()){
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                    eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c,s,db));
-                    eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c,s,db,u));
-                    eb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
-                    eb.getRefresh().setOnAction(EventHandlerFactory.RefreshHandler(c,s,db,u));
+                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,db));
+                    eb.getMe().setOnAction(Controller.SelfProfile(c,s,db,u));
+                    eb.getMatches().setOnAction(Controller.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
+                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c,s,db,u));
                     eb.build(s);
 
                 }
@@ -309,11 +306,11 @@ public class EventHandlerFactory {
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                         db.unlikeUser(u.getId(), (Integer) swipelist.get(0));
                         swipelist.remove(0);
-                        sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, u));
-                        sb.getRight().setOnAction(EventHandlerFactory.SwipeRight(c, s, db, swipelist, u));
-                        sb.getLeft().setOnAction(EventHandlerFactory.SwipeLeft(c,s,db,swipelist, u));
-                        sb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
-                        sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                        sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,db,swipelist, u));
+                        sb.getMatches().setOnAction(Controller.Matches(c,s,db,u,db.getMatches(u.getId(), db)));
+                        sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
                     }
                     catch(Exception i){
 
@@ -356,9 +353,9 @@ public class EventHandlerFactory {
                 db.setLastName(id, lname);
                 db.setBio(id, bio);
                 SelfViewBuilder sv = new SelfViewBuilder(primary);
-                sv.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, primary, sv));
-                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
-                sv.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                sv.getSave().setOnAction(Controller.Save(c, s, db, primary, sv));
+                sv.getBack().setOnAction(Controller.Back(c, s, db, primary, null));
+                sv.getBack().setOnAction(Controller.Back(c, s, db, primary, null));
                 sv.getBirthday().setText(dob);
                 sv.getPW().setText(pw);
                 sv.getBirthday().setText(dob);
@@ -422,10 +419,10 @@ public class EventHandlerFactory {
                     if (!db.getMatches(id, db).isEmpty()){
                         list = db.getMatches(id, db);
                     }
-                    eb.getMatches().setOnAction(EventHandlerFactory.Matches(c, s, db, primary, list));
-                    eb.getRefresh().setOnAction(EventHandlerFactory.RefreshHandler(c, s, db, primary));
-                    eb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, primary));
-                    eb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
+                    eb.getMatches().setOnAction(Controller.Matches(c, s, db, primary, list));
+                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, db, primary));
+                    eb.getMe().setOnAction(Controller.SelfProfile(c, s, db, primary));
+                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
                     eb.build(s);
                 }
                     catch(NumberFormatException e){
@@ -445,9 +442,9 @@ public class EventHandlerFactory {
                     SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
                     c.update(Actions.BACK, null, null);
                     sb.build(s);
-                    sb.getLogOut().setOnAction(EventHandlerFactory.LogOutHandler(c, s, db));
-                    sb.getMatches().setOnAction(EventHandlerFactory.Matches(c,s,db, primary, matches));
-                    sb.getMe().setOnAction(EventHandlerFactory.SelfProfile(c, s, db, primary));
+                    sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
+                    sb.getMatches().setOnAction(Controller.Matches(c,s,db, primary, matches));
+                    sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, primary));
                    swipelist.remove(0);
                 }
                 catch (NumberFormatException e){
@@ -473,8 +470,8 @@ public class EventHandlerFactory {
             if(c.getState().equals(States.LoggedIn)){
                 c.update(Actions.VIEWSELF, user, null);
                 sb.build(s);
-                sb.getBack().setOnAction(EventHandlerFactory.Back(c,s,db, user,null));
-                sb.getSave().setOnAction(EventHandlerFactory.Save(c, s, db, user, sb));
+                sb.getBack().setOnAction(Controller.Back(c,s,db, user,null));
+                sb.getSave().setOnAction(Controller.Save(c, s, db, user, sb));
             }
 
 
@@ -493,7 +490,7 @@ public class EventHandlerFactory {
             if (c.getState().equals(States.LoggedIn)){
             c.update(Actions.SHOWMATCHES, user, null);
             mb.build(s);
-            mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, user, null));
+            mb.getBack().setOnAction(Controller.Back(c, s, db, user, null));
             for (int i = 0; i < matchesButtons.size(); i++){
                 int id = matches.get(i);
                 ProfileUser u = new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
@@ -501,7 +498,7 @@ public class EventHandlerFactory {
                 u.setBio(db.getBio(u.getId()));
                 u.setGender(db.getGender(u.getId()));
                 u.setPreference(db.getGenderPreference(u.getId()));
-                    matchesButtons.get(i).setOnAction(EventHandlerFactory.Message(c, s, db, user, u, matches));
+                    matchesButtons.get(i).setOnAction(Controller.Message(c, s, db, user, u, matches));
 
             }
 
@@ -515,8 +512,8 @@ public class EventHandlerFactory {
             if (c.getState().equals(States.Matches)){
                 c.update(Actions.MESSAGE, primary, secondary);
                 cb.build(s);
-                cb.getUnmatch().setOnAction(EventHandlerFactory.Unmatch(c, s, db, primary, matches, secondary.getId()));
-                cb.getReturn().setOnAction(EventHandlerFactory.Matches(c, s, db, primary, matches));
+                cb.getUnmatch().setOnAction(Controller.Unmatch(c, s, db, primary, matches, secondary.getId()));
+                cb.getReturn().setOnAction(Controller.Matches(c, s, db, primary, matches));
             }
         };
     }
@@ -529,7 +526,7 @@ public class EventHandlerFactory {
                 c.update(Actions.UNMATCH, null, null);
                 mb.build(s);
                 mb.pop(secondary);
-                mb.getBack().setOnAction(EventHandlerFactory.Back(c, s, db, primary, null));
+                mb.getBack().setOnAction(Controller.Back(c, s, db, primary, null));
                 ArrayList<Button> matchButtons = mb.matchButtons(db);
                 for (int i = 0; i < matchButtons.size(); i++){
 

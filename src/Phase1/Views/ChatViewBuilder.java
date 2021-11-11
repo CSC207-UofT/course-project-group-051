@@ -1,8 +1,5 @@
 package Phase1.Views;
 
-import Phase1.EventHandler.EventHandlerFactory;
-import Phase1.Users.ProfileUser;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,7 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 public class ChatViewBuilder implements SceneBuilder{
     String name;
     TextField tf;

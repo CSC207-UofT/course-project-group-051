@@ -265,7 +265,10 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] temp = rs.getString("Likes").split(",", -1);
                 for(String x: temp){
-                    likes.add(Integer.parseInt(x));
+                    if(!x.equals(""))
+                    {
+                        likes.add(Integer.parseInt(x));
+                    }
                 }
             }
             rs.close();
@@ -289,6 +292,10 @@ public class DataBaseAccess implements DataAccessInterface{
                 String[] temp = rs.getString("admires").split(",", -1);
                 for(String x: temp){
                     admires.add(Integer.parseInt(x));
+                    if(!x.equals(""))
+                    {
+                        admires.add(Integer.parseInt(x));
+                    }
                 }
             }
             rs.close();
@@ -311,7 +318,10 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] temp = rs.getString("threads").split(",", -1);
                 for(String x: temp){
-                    threads.add(Integer.parseInt(x));
+                    if(!x.equals(""))
+                    {
+                        threads.add(Integer.parseInt(x));
+                    }
                 }
             }
             rs.close();
@@ -334,7 +344,10 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] Messages = rs.getString("Messages").split(",", -1);
                 for(String x: Messages){
-                    thread.add(this.getMessage(Integer.parseInt(x)));
+                    if(!x.equals(""))
+                    {
+                        thread.add(this.getMessage(Integer.parseInt(x)));
+                    }
                 }
             }
             rs.close();
@@ -754,7 +767,10 @@ public class DataBaseAccess implements DataAccessInterface{
                 while (rs.next()) {
                     String list = rs.getString("genderPreference");
                     for(String x : list.split(",")){
-                        swipes.add(Integer.parseInt(x));
+                        if(!x.equals(""))
+                        {
+                            swipes.add(Integer.parseInt(x));
+                        }
                     }
                 }
                 rs.close();
@@ -817,7 +833,10 @@ public class DataBaseAccess implements DataAccessInterface{
             while (rs.next()) {
                 String[] Messages = rs.getString("Messages").split(",", -1);
                 for(String x: Messages){
-                    thread.add(Integer.parseInt(x));
+                    if(!x.equals(""))
+                    {
+                        thread.add(Integer.parseInt(x));
+                    }
                 }
             }
             rs.close();

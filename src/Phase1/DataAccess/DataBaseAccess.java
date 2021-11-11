@@ -890,6 +890,8 @@ public class DataBaseAccess implements DataAccessInterface{
 
         }
     }
+
+    @Override
     public void closeDB() throws SQLException {
         conn.close();
     }

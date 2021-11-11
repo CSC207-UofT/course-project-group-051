@@ -1,6 +1,7 @@
 package Phase1.DataAccess;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -149,5 +150,6 @@ public interface DataAccessInterface {
     int createUser(String lastName, String firstName, String password, String username, int age, String gender,
                    String genderPreference, String birthday);
 
+    void closeDB() throws SQLException;
 
 }

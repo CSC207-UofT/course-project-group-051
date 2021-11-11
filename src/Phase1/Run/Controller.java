@@ -253,11 +253,11 @@ public class Controller {
                             Image image = new Image(f);
                             ImageView i = new ImageView(image);
                             int id = (Integer)swipelist.get(0);
+                            swipelist.remove(0);
                             SwipeUser sw = new SwipeUser(id, db.getFirstName(id), db.getLastName(id), new Date(db.getBirthday(id)),
                                 db.getPassword(id), db.getImgPath(id));
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
-                            db.likeUser(u.getId(), (Integer) swipelist.get(0));
-                            swipelist.remove(0);
+                            db.likeUser(u.getId(), id);
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
                             sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
                             sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,db,swipelist, u));
@@ -301,11 +301,11 @@ public class Controller {
                         Image image = new Image(f);
                         ImageView i = new ImageView(image);
                         int id = (Integer)swipelist.get(0);
+                        swipelist.remove(0);
                         SwipeUser sw = new SwipeUser(id, db.getFirstName(id), db.getLastName(id), new Date(db.getBirthday(id)),
                                 db.getPassword(id), db.getImgPath(id));
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
-                        db.unlikeUser(u.getId(), (Integer) swipelist.get(0));
-                        swipelist.remove(0);
+                        db.unlikeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,db,swipelist, u));
@@ -431,7 +431,9 @@ public class Controller {
                 else{
                     ArrayList matches = db.getMatches(primary.getId(), db);
                 int nextid = swipelist.get(0);
-                try {
+                    swipelist.remove(0);
+
+                    try {
                     FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                     Image image = new Image(f);
                     ImageView iv = new ImageView(image);
@@ -441,11 +443,14 @@ public class Controller {
                     u.setBio(db.getBio(u.getId()));
                     SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
                     c.update(Actions.BACK, null, null);
-                    sb.build(s);
                     sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
                     sb.getMatches().setOnAction(Controller.Matches(c,s,db, primary, matches));
                     sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, primary));
-                   swipelist.remove(0);
+                    sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, primary));
+                    sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, db, swipelist, primary));
+
+                    sb.build(s);
+
                 }
                 catch (NumberFormatException e){
 

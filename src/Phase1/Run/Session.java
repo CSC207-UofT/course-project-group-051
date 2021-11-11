@@ -44,7 +44,7 @@ public class Session extends Application {
                 lb.getLogIn().setOnAction(Controller.LogInHandler(c, stage, db, lb));
                 lb.getCreateAccount().setOnAction(Controller.Registration(c, stage, db));
                 lb.build(stage);
-                stage.setResizable(true);
+                stage.setResizable(false);
                 stage.show();
 
 

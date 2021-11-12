@@ -17,16 +17,17 @@ public class SwipeAction implements Transitionable{
     private SwipeUser currentTarget; //User currently displayed (null if there are none left)
     private DataAccessInterface db;
 
-
-
+    /**
+     * Constructs an instance of SwipeAction to allow users to swipe on other users
+     * @param currentUser an integer representing the unique ID of the user swiping
+     * @param db a DataAccessInterface instance to use the functionality of DataBase
+     */
     public SwipeAction(int currentUser, DataAccessInterface db){
         this.currentUser = currentUser;
         this.db = db;
 
         swipeList = filterSwipeList();
         currentTarget = swipeList.poll();
-
-
     }
 
 

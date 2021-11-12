@@ -14,7 +14,11 @@ public class BuildMessageUser implements UserBuilder {
     private MessageUser resultUser;
     private DataAccessInterface db;
 
-
+    /**
+     * Construct an instance of BuildMessageUser using a unique ID to access other information about the sender
+     * @param id an integer representation of the unique ID of the sender
+     * @param db a variable used to facilitate the implementation of messaging via the DataBase
+     */
     public BuildMessageUser(int id, DataAccessInterface db) {
         resultUser = new MessageUser(id);
         this.db = db;

@@ -12,6 +12,11 @@ public class ProfileAction implements Transitionable{
     private ProfileUser user;
     private DataAccessInterface db;
 
+    /**
+     * Constructs an instance of ProfileAction to allow users the add their information to the database
+     * @param id an integer of the user's unique identification
+     * @param db a DataAccessInterface variable used to facilitate the functionality of the DataBase
+     */
 
     public ProfileAction(int id, DataAccessInterface db) {
         BuildProfileUser builder = new BuildProfileUser(id, db);

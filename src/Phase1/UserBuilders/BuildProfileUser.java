@@ -12,7 +12,11 @@ public class BuildProfileUser implements UserBuilder {
     private ProfileUser resultUser;
     private DataAccessInterface db;
 
-
+    /**
+     * Construct an instance of BuildProfileUser using a unique ID to add information to the DataBase
+     * @param id an integer representation of the unique ID of the user creating a profile
+     * @param db a variable used to facilitate the implementation of creating a profile via the DataBase
+     */
     public BuildProfileUser(int id, DataAccessInterface db) {
         resultUser = new ProfileUser(id);
         this.db = db;

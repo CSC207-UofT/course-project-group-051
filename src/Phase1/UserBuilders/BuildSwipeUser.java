@@ -11,6 +11,11 @@ public class BuildSwipeUser implements UserBuilder {
     private SwipeUser resultUser;
     private DataAccessInterface db;
 
+    /**
+     * Construct an instance of BuildSwipeUser using a unique ID to access other information about the swiper
+     * @param id an integer representation of the unique ID of the swiper
+     * @param db a variable used to facilitate the implementation of swiping via the DataBase
+     */
 
     public BuildSwipeUser(int id, DataAccessInterface db) {
         resultUser = new SwipeUser(id);

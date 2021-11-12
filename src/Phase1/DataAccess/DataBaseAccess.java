@@ -19,14 +19,14 @@ public class DataBaseAccess implements DataAccessInterface{
 
 
 
-    public static ArrayList getMatches(int id, DataBaseAccess db){
+    public static ArrayList<Integer> getMatches(int id, DataBaseAccess db){
         try{
             ArrayList<Integer> liked = db.getLikes(id);
             ArrayList<Integer> admirers = db.getAdmires(id);
             if (liked.isEmpty() || admirers.isEmpty()){
-                return new ArrayList();
+                return new ArrayList<>();
             }
-            ArrayList<Integer> matches = new ArrayList();
+            ArrayList<Integer> matches = new ArrayList<>();
             for (Integer i: liked){
                 if (admirers.contains(i)){
                     matches.add(i);
@@ -37,7 +37,7 @@ public class DataBaseAccess implements DataAccessInterface{
         catch(Exception io){
             System.out.println(true);
         }
-        return new ArrayList();
+        return new ArrayList<>();
     }
 
     private int getNextUser(){

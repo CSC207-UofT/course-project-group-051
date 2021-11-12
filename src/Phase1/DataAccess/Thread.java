@@ -1,6 +1,7 @@
 package Phase1.DataAccess;
 
 import java.util.ArrayList;
+// TODO Delete if not used
 
 public class Thread {
 

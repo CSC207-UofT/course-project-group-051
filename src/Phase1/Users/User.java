@@ -1,5 +1,10 @@
 package Phase1.Users;
 
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataBaseAccess;
+
+import java.util.Date;
+
 /**
  * User is the base class for the different representations of our Users
  */
@@ -32,6 +37,11 @@ public abstract class User {
 
     public void setlName(String lName) {
         this.lName = lName;
+    }
+
+    public String getBirthdate() {
+        DataAccessInterface db = new DataBaseAccess();
+        return db.getBirthday(this.getId());
     }
 }
 

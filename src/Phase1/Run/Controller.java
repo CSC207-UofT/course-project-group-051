@@ -37,8 +37,7 @@ public class Controller {
                 int id = db.logIn(username, password);
                 if (id != -1) {
                     try{
-                        ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                            new Date(db.getBirthday(id)), username, password, db.getImgPath(id));
+                        ProfileUser u =  new ProfileUser(id);
                         u.setBio(db.getBio(u.getId()));
                         u.setGender(db.getGender(u.getId()));
                         u.setPreference(db.getGenderPreference(u.getId()));
@@ -67,8 +66,7 @@ public class Controller {
                          int nextid = swipelist.get(0);
                          swipelist.remove(0);
 
-                            SwipeUser user = new SwipeUser(nextid, db.getFirstName(nextid), db.getLastName(nextid),
-                                 new Date(db.getBirthday(nextid)), db.getPassword(nextid), db.getImgPath(nextid));
+                            SwipeUser user = new SwipeUser(nextid);
                          user.setBio(db.getBio(user.getId()));
                          FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                          SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
@@ -138,8 +136,7 @@ public class Controller {
                  try{
                  int next = potential.get(0);
                  potential.remove(0);
-                     SwipeUser u = new SwipeUser(next, db.getFirstName(next), db.getLastName(next),
-                             new Date(db.getBirthday(next)), db.getPassword(next), db.getImgPath(next));
+                     SwipeUser u = new SwipeUser(next);
                      u.setBio(db.getBio(u.getId()));
                  SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
                          FileInputStream(db.getImgPath(next)))), u);
@@ -253,8 +250,7 @@ public class Controller {
                             ImageView i = new ImageView(image);
                             int id = (Integer)swipelist.get(0);
                             swipelist.remove(0);
-                            SwipeUser sw = new SwipeUser(id, db.getFirstName(id), db.getLastName(id), new Date(db.getBirthday(id)),
-                                db.getPassword(id), db.getImgPath(id));
+                            SwipeUser sw = new SwipeUser(id);
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                             db.likeUser(u.getId(), id);
                             System.out.println(db.getAdmires(id));
@@ -302,8 +298,7 @@ public class Controller {
                         ImageView i = new ImageView(image);
                         int id = (Integer)swipelist.get(0);
                         swipelist.remove(0);
-                        SwipeUser sw = new SwipeUser(id, db.getFirstName(id), db.getLastName(id), new Date(db.getBirthday(id)),
-                                db.getPassword(id), db.getImgPath(id));
+                        SwipeUser sw = new SwipeUser(id);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                         db.unlikeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
@@ -367,7 +362,7 @@ public class Controller {
                 sv.getBio().setText(bio);
 
                 primary.setfName(fname);
-                primary.setLName(lname);
+                primary.setlName(lname);
                 primary.setPreference(preference);
                 primary.setBio(bio);
                 primary.setDOB(dob);
@@ -395,8 +390,8 @@ public class Controller {
                                                  ProfileUser primary, ChatViewBuilder cv){
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.Messaging)){
-                ArrayList matches = new ArrayList();
-                if (!db.getMatches(primary.getId(), db).isEmpty()){
+                ArrayList<Integer> matches = new ArrayList<>();
+                if ((!(db.getMatches(primary.getId(), db)).isEmpty())){
                     matches = db.getMatches(primary.getId(), db);
                 }
 
@@ -437,9 +432,7 @@ public class Controller {
                     FileInputStream f = new FileInputStream(db.getImgPath(nextid));
                     Image image = new Image(f);
                     ImageView iv = new ImageView(image);
-                    SwipeUser u = new SwipeUser(nextid, db.getFirstName(nextid),
-                            db.getLastName(nextid), new Date(db.getBirthday(nextid)), db.getPassword(nextid),
-                            db.getImgPath(nextid));
+                    SwipeUser u = new SwipeUser(nextid);
                     u.setBio(db.getBio(u.getId()));
                     SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
                     c.update(Actions.BACK, null, null);
@@ -452,7 +445,7 @@ public class Controller {
                     sb.build(s);
 
                 }
-                catch (NumberFormatException e){
+                catch (NumberFormatException e){ // FIXME: empty catch?
 
                 }
                 catch (FileNotFoundException e) {
@@ -500,8 +493,7 @@ public class Controller {
             mb.getBack().setOnAction(Controller.Back(c, s, db, user, null));
             for (int i = 0; i < matchesButtons.size(); i++){
                 int id = matches.get(i);
-                ProfileUser u = new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
-                        new Date(db.getBirthday(id)), user.getUsername(), db.getImgPath(id), db.getPassword(id));
+                ProfileUser u = new ProfileUser(id);
                 u.setBio(db.getBio(u.getId()));
                 u.setGender(db.getGender(u.getId()));
                 u.setPreference(db.getGenderPreference(u.getId()));

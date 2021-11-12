@@ -53,9 +53,13 @@ public class ProfileUser extends User {
 //        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 //
 //        return days / 365;}
-
-
-    //TODO javadoc for these because they are not just getters/setters.
+    /**
+     * A function to upload and set the image of a user
+     *
+     * @param path a string representation of the directory path of the image to be uploaded
+     * @return boolean set to true if the image was successfully added, and false if not (never used, but allows
+     * try/catch)
+     */
     public boolean setImage(String path){
         try{
             FileInputStream f = new FileInputStream(path);

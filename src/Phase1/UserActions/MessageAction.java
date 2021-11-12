@@ -43,7 +43,7 @@ public class MessageAction implements Transitionable {
      */
     public void conversationAction(){
         int threadID = this.getBuilder().getDB().checkConversation(sender.getId(), this.getReceiverID());
-        if (threadID.equals(-1)) {
+        if (threadID == -1) {
             int newThread = this.getBuilder().getDB().createThread(this.sender.getId(), this.getReceiverID());
             int dumbyID = this.getBuilder().getDB().createMessage(newThread, this.sender.getId(), this.getReceiverID(),
                     this.newMessage);

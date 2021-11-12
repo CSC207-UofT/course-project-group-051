@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @param receiverID int representation of the receiver's ID
  * @param builder BuildMessageUser used to access db functions
  */
+
 public class MessageAction implements Transitionable {
     private MessageUser sender;
     private String newMessage;
@@ -42,7 +43,9 @@ public class MessageAction implements Transitionable {
 
     /**
      * Determines if a new thread is needing to be created, or if a message needs to be added to an existing thread.
+     * Dummy id line 51: dead code - needs fixing
      */
+
     public void conversationAction(){
         int threadID = this.getBuilder().getDB().checkConversation(sender.getId(), this.getReceiverID());
         if (threadID == -1) {
@@ -56,6 +59,6 @@ public class MessageAction implements Transitionable {
     }
 
     public void transition(){
-    };
+    }
 
 }

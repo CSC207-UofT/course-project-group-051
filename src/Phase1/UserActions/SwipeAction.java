@@ -35,6 +35,7 @@ public class SwipeAction implements Transitionable{
     public boolean like() {
 
         db.likeUser(currentUser, currentTarget.getId());
+        db.admireUser(currentTarget.getId(), currentUser);
 
         ArrayList<Integer> admirers = db.getAdmires(currentUser);
 

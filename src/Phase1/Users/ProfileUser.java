@@ -16,14 +16,20 @@ public class ProfileUser extends User {
     private String preference;
     private String username;
     private String password;
-    private State state;
     private String image;
-    private String birthdate;
+    private int age;
 
     public ProfileUser(int id) {
         super(id);
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getBio() {
         return this.bio;
@@ -86,4 +92,6 @@ public class ProfileUser extends User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPassword(String password) { return this.password; }
 }

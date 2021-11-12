@@ -1,38 +1,21 @@
 package Phase1.Users;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * User is the base class for the different representations of our Users
- *
- * @param id is the id associated with user
- * @param fName is the first name of the user
- * @param lName is the last name of the user
- * @param birthdate is the birth-date of the user
- * @param password is a user-set password
  */
 public abstract class User {
 
-    int id;
-    String fName;
-    String lName;
-    Date birthdate;
-    String password;
-    String bio;
-    int age;
+    private int id;
+    private String fName;
+    private String lName;
+    private int age;
+    private String image;
 
-    public User(int id, String fName, String lName, Date birthdate, String password)
-    {
+    public User(int id) {
         this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.birthdate = birthdate;
-        this.password = password;
     }
-
-
-
 
     public int getId() {
         return this.id;
@@ -46,16 +29,26 @@ public abstract class User {
         return this.lName;
     }
 
-    public Date getBirthdate(){return this.birthdate;}
 
-    public String getPassword(){return this.password;}
+
+    public void setfName(String fName) {this.fName = fName;}
+
+    public void setLName(String lName) { this.lName = lName; }
 
 
     public int getAge() {
-        Date today = new Date();
-        long diff = today.getTime() - this.getBirthdate().getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        return age;
+    }
 
-        return days / 365;
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

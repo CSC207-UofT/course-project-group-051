@@ -3,6 +3,8 @@ package Phase1.Run;
 import Phase1.DataAccess.DataBaseAccess;
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
+import Phase1.UserActions.RegistrationResults;
+import Phase1.UserActions.Registrator;
 import Phase1.Users.ProfileUser;
 import Phase1.Users.SwipeUser;
 import Phase1.Views.*;
@@ -17,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class Controller {
@@ -191,54 +195,42 @@ public class Controller {
 
         return (EventHandler<ActionEvent>) event -> {
 
-            String DOB = rb.getDOB().getText();
-            String fName = rb.getFirstName().getText();
-            String lName = rb.getLastName().getText();
-            String username = rb.userName().getText();
-            String pw1 = rb.getPassword().getText();
-            String pw2 = rb.getPassword1().getText();
-            String gender = rb.getGender().getText();
-            String preference = rb.getPreference().getText();
-            String location = rb.getPicturePath().getText();
-            String bio = rb.getBio().getText();
+            Map<String, String> data = new HashMap<>();
+            data.put("DOB", rb.getDOB().getText());
+            data.put("fName", rb.getFirstName().getText());
+            data.put("lName", rb.getLastName().getText());
+            data.put("username", rb.userName().getText());
+            data.put("pw1", rb.getPassword().getText());
+            data.put("pw2", rb.getPassword1().getText());
+            data.put("gender", rb.getGender().getText());
+            data.put("preference", rb.getPreference().getText());
+            data.put("imagePath", rb.getPicturePath().getText());
+            data.put("bio", rb.getBio().getText());
 
             try{
-            if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")){
-                rb.fillIn();
+                Registrator registrator = new Registrator(db);
+                String results = registrator.createUser(data);
+                if (results.equals(RegistrationResults.MISSING)){
+                    rb.fillIn();
+                }
 
+                else if (results.equals(RegistrationResults.PASSWORDMATCH)){
+                    rb.passwordDontMatch();
+                    }
+
+                else if (results.equals(RegistrationResults.EXISTS)) {
+                    rb.accountExists();
+                    rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, new LogInViewBuilder()));
+                    rb.createAccount().setOnAction(Controller.Registration(c,s,db));
+                }
+               else {
+                   rb.success(id);
+                   s.show();
+                }
             }
-
-
-           else if (pw1.equals(pw2) && db.logIn(username, pw1) == -1){
-               Date today = new Date();
-               long diff = today.getTime() - new Date(DOB).getTime();
-               int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-               FileInputStream file = new FileInputStream(location);
-               int id = db.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
-               db.setUsername(id, username);
-               db.setBio(id, bio);
-               db.setImgPath(id, location);
-               rb.success(id);
-               s.show();
-
-            }
-           else if(db.logIn(username, pw1) != -1){
-
-             rb.accountExists();
-             rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, db, new LogInViewBuilder()));
-             rb.createAccount().setOnAction(Controller.Registration(c,s,db));
-
-            }
-
-            else if (!pw1.equals(pw2)){
-                rb.passwordDontMatch();
-            }
-        }
-
             catch(Exception e){
                 rb.pathInvalid();
             }};
-
     }
 
     public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataBaseAccess db, ArrayList swipelist,

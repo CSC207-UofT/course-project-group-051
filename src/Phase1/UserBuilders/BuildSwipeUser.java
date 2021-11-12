@@ -29,7 +29,7 @@ public class BuildSwipeUser implements UserBuilder {
         String fName = db.getFirstName(id);
         String lName = db.getLastName(id);
         int age = db.getAge(id);
-        String image = db.getImage(id);
+        String image = db.getImgPath(id);
 
 
         //set this User's attributes

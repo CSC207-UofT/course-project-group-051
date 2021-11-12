@@ -1,7 +1,10 @@
 package Phase1.Users;
 
 import Phase1.States.State;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +24,6 @@ public class ProfileUser extends User {
 
     public ProfileUser(int id) {
         super(id);
-    }
-
-    public int getAge() {
-        return age;
     }
 
     public void setAge(int age) {
@@ -47,12 +46,13 @@ public class ProfileUser extends User {
         this.gender = gender;
     }
 
-    public int getAge() { // do this in builder if its needed.
-        Date today = new Date();
-        long diff = today.getTime() - this.getBirthdate().getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-        return days / 365;}
+//    public int getAge() { // do this in builder if its needed.
+//        Date today = new Date();
+//        long diff = today.getTime() - this.getBirthdate().getTime();
+//        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//
+//        return days / 365;}
+    public int getAge(){return this.age;}
 
     public boolean setImage(String path){
         try{

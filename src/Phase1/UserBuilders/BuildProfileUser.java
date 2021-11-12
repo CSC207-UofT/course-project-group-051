@@ -30,7 +30,7 @@ public class BuildProfileUser implements UserBuilder {
         String fName = db.getFirstName(id);
         String lName = db.getLastName(id);
         int age = db.getAge(id);
-        String image = db.getImage(id);
+        String image = db.getImgPath(id);
 
 
         //set this User's attributes
@@ -53,7 +53,7 @@ public class BuildProfileUser implements UserBuilder {
         // get data from database
         String bio = db.getBio(id);
         String gender = db.getGender(id); //#TODO make genders be constants.
-        String preference = db.getPreference(id);
+        String preference = db.getGenderPreference(id);
         String username = db.getUsername(id);
         String password = db.getPassword(id);
         // State ???? #TODO figure this out

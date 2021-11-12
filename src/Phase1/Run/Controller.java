@@ -122,18 +122,25 @@ public class Controller {
      return (EventHandler<ActionEvent>) event -> {
          if (c.getState().equals(States.LoggedIn)){
              ArrayList<Integer> potential = db.getSwipeList(user.getId());
+             System.out.println(potential);
              if (potential.isEmpty()){
-
+                EmptyMainViewBuilder eb = new EmptyMainViewBuilder(user);
+                eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, db, user));
+                eb.getMe().setOnAction(Controller.SelfProfile(c, s, db, user));
+                eb.getMatches().setOnAction(Controller.Matches(c, s, db, user, db.getMatches(user.getId(), db)));
+                eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,db));
+                eb.build(s);
              }
              else{
                  try{
                  int next = potential.get(0);
+                 potential.remove(0);
                      SwipeUser u = new SwipeUser(next, db.getFirstName(next), db.getLastName(next),
                              new Date(db.getBirthday(next)), db.getPassword(next), db.getImgPath(next));
                      u.setBio(db.getBio(u.getId()));
                  SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
                          FileInputStream(db.getImgPath(next)))), u);
-                 sb.build(s);
+
                  ArrayList matches = new ArrayList();
                  if(!db.getMatches(user.getId(), db).isEmpty()){
                      matches = db.getMatches(user.getId(), db);
@@ -141,8 +148,9 @@ public class Controller {
                  sb.getMatches().setOnAction(Controller.Matches(c, s, db, user, matches));
                  sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, user));
                  sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, db));
-                 sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, db, db.getSwipeList(user.getId()), user));
-                 sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, db.getSwipeList(user.getId()), user));
+                 sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, db, potential, user));
+                 sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, potential, user));
+                 sb.build(s);
 
                  }
              catch(Exception io){
@@ -409,7 +417,7 @@ public class Controller {
             else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
                  {
                 int id = primary.getId();
-
+                c.update(Actions.BACK, primary, null);
                 ArrayList<Integer> swipelist = db.getSwipeList(id);
                 if (swipelist.isEmpty()){
                     c.update(Actions.BACK, primary, null);

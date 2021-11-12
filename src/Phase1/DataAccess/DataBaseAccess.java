@@ -791,7 +791,7 @@ public class DataBaseAccess implements DataAccessInterface{
                 ResultSet rs = stmt.executeQuery(h2);
                 while (rs.next()) {
                     String ids = rs.getString("personId");
-                    if(!ids.equals(""))
+                    if(!ids.equals("") && !swipes.contains(Integer.parseInt(ids)))
                     {
                         swipes.add(Integer.parseInt(ids));
                     }

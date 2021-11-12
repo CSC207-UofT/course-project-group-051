@@ -33,7 +33,6 @@ public class Controller {
                 int id = db.logIn(username, password);
                 if (id != -1) {
                     try{
-
                         ProfileUser u =  new ProfileUser(id, db.getFirstName(id), db.getLastName(id),
                             new Date(db.getBirthday(id)), username, password, db.getImgPath(id));
                         u.setBio(db.getBio(u.getId()));
@@ -122,7 +121,7 @@ public class Controller {
      return (EventHandler<ActionEvent>) event -> {
          if (c.getState().equals(States.LoggedIn)){
              ArrayList<Integer> potential = db.getSwipeList(user.getId());
-             System.out.println(potential);
+
              if (potential.isEmpty()){
                 EmptyMainViewBuilder eb = new EmptyMainViewBuilder(user);
                 eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, db, user));
@@ -266,6 +265,7 @@ public class Controller {
                                 db.getPassword(id), db.getImgPath(id));
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                             db.likeUser(u.getId(), id);
+                            System.out.println(db.getAdmires(id));
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, db, u));
                             sb.getRight().setOnAction(Controller.SwipeRight(c, s, db, swipelist, u));
                             sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,db,swipelist, u));
@@ -497,6 +497,8 @@ public class Controller {
                                                     ArrayList<Integer> matches){
 
         MatchesViewBuilder mb = new MatchesViewBuilder(user, matches, db);
+        System.out.println(db.getMatches(user.getId(), db));
+        System.out.println(db.getAdmires(user.getId()));
 
         ArrayList<Button> matchesButtons= mb.matchButtons(db);
         return (EventHandler<ActionEvent>) event ->{

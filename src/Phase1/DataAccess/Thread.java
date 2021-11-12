@@ -24,5 +24,13 @@ public class Thread {
         this.secondUser = idTwo;
     }
 
+    public int getFirstUser(){
+        return this.firstUser;
+    }
+
+    public int getSecondUser(){
+        return this.secondUser;
+    }
+
 
 }

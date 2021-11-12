@@ -1,7 +1,6 @@
 package Phase1.UserActions;
 
 import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
 import Phase1.UserBuilders.BuildProfileUser;
 import Phase1.Users.ProfileUser;
 import javafx.scene.image.Image;
@@ -26,22 +25,28 @@ public class ProfileAction implements Transitionable{
 
 
     private void updateProfile(Map<String, String> results){
+
+        // TODO Image here or in the updateImage() method.
         // TODO: ADD CHECKS FOR THE FIELDS - HERE OR DB?
         this.user.setfName(results.get("fName"));
-        this.user.setLName(results.get("lName"));
+        this.user.setlName(results.get("lName"));
         this.user.setBio(results.get("bio"));
         this.user.setGender(results.get("gender"));
         this.user.setPreference(results.get("preferences"));
-        this.user.setBirthday(results.get("birthday"));
+        this.user.setAge(Integer.parseInt(results.get("age")));
+        this.user.setUsername(results.get("username"));
         this.user.setPassword(results.get("password"));
 
-        db.setFirstName(this.user.getfName());
-        db.setLastName(this.user.getlName());
-        db.setBio(this.user.getBio());
-        db.setGender(this.user.getGender());
-        db.setGenderPreference(this.user.getPreference());
-        db.setBirthday(this.user.getBirthdate());
-        db.setPassword(this.user.getPassword());
+        int id = user.getId();
+
+        db.setFirstName(id, user.getfName());
+        db.setLastName(id, user.getlName());
+        db.setBio(id, user.getBio());
+        db.setGender(id, user.getGender());
+        db.setGenderPreference(id, user.getPreference());
+        db.setAge(id, user.getAge());
+        db.setUsername(id, user.getUsername());
+        db.setPassword(id, user.getPassword());
 
     }
 

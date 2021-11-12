@@ -35,15 +35,11 @@ public class BuildMessageUser implements UserBuilder {
         // get data from database
         String fName = db.getFirstName(id);
         String lName = db.getLastName(id);
-        int age = db.getAge(id);
-        String image = db.getImgPath(id);
 
 
         //set this User's attributes
         resultUser.setfName(fName);
-        resultUser.setLName(lName);
-        resultUser.setAge(age);
-        resultUser.setImage(image);
+        resultUser.setlName(lName);
 
     }
 

@@ -1,9 +1,11 @@
 package Phase1.Users;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.FileInputStream;
+
+
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
  */
@@ -31,14 +33,6 @@ public class SwipeUser extends User {
 
     }
 
-    public ImageView getImage(){
-        try{
-            return new ImageView(new Image(new FileInputStream(this.image)));}
-        catch(Exception io){
-            return new ImageView();
-        }
-    }
-
     public boolean setImage(String path){
         try{
             FileInputStream f = new FileInputStream(path);
@@ -50,19 +44,28 @@ public class SwipeUser extends User {
         }
     }
 
-    public String getGender() {
-        return gender;
+    public ImageView getImage(){
+        try{
+            return new ImageView(new Image(new FileInputStream(this.image)));}
+        catch(Exception io){
+            return new ImageView();
+        }
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public int getAge() {
-        return age;
+    public String getGender() {
+        return gender;
     }
 
     public void setAge(int age) {
         this.age = age;
     }
+
+    public int getAge() {
+        return age;
+    }
+
 }

@@ -1,7 +1,5 @@
 package Phase1.Users;
 
-import java.util.Date;
-
 /**
  * User is the base class for the different representations of our Users
  */
@@ -28,7 +26,12 @@ public abstract class User {
         return this.lName;
     }
 
-    public void setfName(String fName) {this.fName = fName;}
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
 
-    public void setLName(String lName) { this.lName = lName; }
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+}
 

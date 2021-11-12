@@ -29,15 +29,10 @@ public class BuildProfileUser implements UserBuilder {
         // get data from database
         String fName = db.getFirstName(id);
         String lName = db.getLastName(id);
-        int age = db.getAge(id);
-        String image = db.getImgPath(id);
-
 
         //set this User's attributes
         resultUser.setfName(fName);
-        resultUser.setLName(lName);
-        resultUser.setAge(age);
-        resultUser.setImage(image);
+        resultUser.setlName(lName);
 
     }
 
@@ -56,7 +51,6 @@ public class BuildProfileUser implements UserBuilder {
         String preference = db.getGenderPreference(id);
         String username = db.getUsername(id);
         String password = db.getPassword(id);
-        // State ???? #TODO figure this out
 
 
         //set this User's attributes
@@ -65,7 +59,6 @@ public class BuildProfileUser implements UserBuilder {
         resultUser.setPreference(preference);
         resultUser.setUsername(username);
         resultUser.setPassword(password);
-        // State ???
 
 
     }

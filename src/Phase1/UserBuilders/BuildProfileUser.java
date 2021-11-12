@@ -51,6 +51,8 @@ public class BuildProfileUser implements UserBuilder {
         String preference = db.getGenderPreference(id);
         String username = db.getUsername(id);
         String password = db.getPassword(id);
+        String image = db.getImgPath(id);
+        int age = db.getAge(id);
 
 
         //set this User's attributes
@@ -59,6 +61,8 @@ public class BuildProfileUser implements UserBuilder {
         resultUser.setPreference(preference);
         resultUser.setUsername(username);
         resultUser.setPassword(password);
+        resultUser.setImage(image);
+        resultUser.setAge(age);
 
 
     }

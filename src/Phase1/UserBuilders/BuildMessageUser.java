@@ -20,6 +20,10 @@ public class BuildMessageUser implements UserBuilder {
         this.db = db;
     }
 
+    public DataAccessInterface getDB(){
+        return this.db;
+    }
+
     /**
      * Adds the information from the base User class to the result.
      */

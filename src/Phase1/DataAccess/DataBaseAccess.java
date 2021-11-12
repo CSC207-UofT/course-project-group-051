@@ -3,8 +3,13 @@ package Phase1.DataAccess;
 
 import javafx.scene.control.Alert;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Date;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class DataBaseAccess implements DataAccessInterface{
 
@@ -572,6 +577,7 @@ public class DataBaseAccess implements DataAccessInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.admireUser(likeID, currUser);
         return rs;
     }
 
@@ -603,6 +609,7 @@ public class DataBaseAccess implements DataAccessInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.stopAdmiringUser(likeID, currUser);
         return rs;
     }
 
@@ -866,6 +873,16 @@ public class DataBaseAccess implements DataAccessInterface{
         return id;
     }
 
+    @Override
+    public int createUser(Map<String, String> data) throws FileNotFoundException {
+        Date today = new Date();
+        long diff = today.getTime() - new Date(data.get("DOB")).getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+        FileInputStream file = new FileInputStream(data.get("imagePath"));
+        return this.createUser(data.get("lName"), data.get("fName"), data.get("pw1"), data.get("username"),
+                days / 365, data.get("gender"), data.get("preference"), data.get("DOB"));
+    }
+
     private void connectDB() {
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./DB/USERS";
@@ -889,5 +906,6 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public void closeDB() throws SQLException {
         conn.close();
+
     }
 }

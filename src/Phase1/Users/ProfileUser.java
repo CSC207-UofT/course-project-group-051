@@ -1,7 +1,6 @@
 package Phase1.Users;
 
 import Phase1.States.State;
-import javafx.scene.image.ImageView;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -11,14 +10,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class ProfileUser extends User {
 
-    // #TODO finalize these varables.
+    // TODO finalize these variables.
     private String bio;
     private String gender;
     private String preference;
     private String username;
     private String password;
     private State state;
-    private ImageView image;
+    private String image;
 
     public ProfileUser(int id) {
         super(id);
@@ -41,7 +40,7 @@ public class ProfileUser extends User {
         this.gender = gender;
     }
 
-    public int getAge() {
+    public int getAge() { // do this in builder if its needed.
         Date today = new Date();
         long diff = today.getTime() - this.getBirthdate().getTime();
         int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
@@ -49,7 +48,7 @@ public class ProfileUser extends User {
         return days / 365;
     }
 
-    public ImageView getImage(){
+    public String getImage(){
         return this.image;
     }
     public String getPreference() {
@@ -70,5 +69,9 @@ public class ProfileUser extends User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

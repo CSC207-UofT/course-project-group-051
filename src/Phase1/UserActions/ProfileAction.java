@@ -15,7 +15,7 @@ public class ProfileAction implements Transitionable{
 
 
     public ProfileAction(int id, DataAccessInterface db) {
-        BuildProfileUser builder = new BuildProfileUser(id);
+        BuildProfileUser builder = new BuildProfileUser(id, db);
         user = builder.buildUser();
         this.db = db;
 
@@ -45,5 +45,5 @@ public class ProfileAction implements Transitionable{
 
     }
 
-    public void transition(){};
+    public void transition(){}
 }

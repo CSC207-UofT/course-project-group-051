@@ -7,21 +7,13 @@ package Phase1.Users;
 public class SwipeUser extends User {
 
 
-    private int age;
     private String gender;
     private String bio;
-    private int swiper; //ID of the current User who is swiping.
-    private boolean gotliked;
+
 
     public SwipeUser(int id) {
 
         super(id);
-        gotliked = false;
-    }
-
-
-    public int getAge() {
-        return age;
     }
 
     public String getGender() {
@@ -33,32 +25,12 @@ public class SwipeUser extends User {
 
     }
 
-    public int getSwiper() {
-        return swiper;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public void setGender(String gender) {
         this.gender = gender;
     }
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public void setSwiper(int id) {
-        this.swiper = id;
-    }
-
-    public void like() {
-        gotliked = true;
-    }
-
-    public boolean gotLiked() {
-        return gotliked;
     }
 
 

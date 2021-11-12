@@ -1,4 +1,5 @@
 package Phase1.UserActions;
+import Phase1.DataAccess.DataAccessInterface;
 import Phase1.UserBuilders.BuildMessageUser;
 import Phase1.Users.MessageUser;
 import javafx.scene.image.Image;
@@ -18,9 +19,10 @@ public class MessageAction implements Transitionable {
     private String newMessage;
     private int receiverID;
     private BuildMessageUser builder;
+    private DataAccessInterface db;
 
     public MessageAction(int senderID, int receiverID, String newMessage) {
-        this.builder = new BuildMessageUser(senderID);
+        this.builder = new BuildMessageUser(senderID, db);
         this.sender = builder.buildUser();
         this.newMessage = newMessage;
         this.receiverID = receiverID;

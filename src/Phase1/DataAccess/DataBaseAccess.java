@@ -7,22 +7,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DataBaseAccess implements DataAccessInterface{
+public class DataBaseAccess extends DataAccessMechanism {
 
     private Statement stmt = null;
     Connection conn;
 
 
     public DataBaseAccess(){
+        super();
         connectDB();
     }
 
+    @Override
+    public ArrayList getMatches(int id){
 
-
-    public static ArrayList getMatches(int id, DataBaseAccess db){
         try{
-            ArrayList<Integer> liked = db.getLikes(id);
-            ArrayList<Integer> admirers = db.getAdmires(id);
+            ArrayList<Integer> liked = this.getLikes(id);
+            ArrayList<Integer> admirers = this.getAdmires(id);
             if (liked.isEmpty() || admirers.isEmpty()){
                 return new ArrayList();
             }
@@ -535,6 +536,7 @@ public class DataBaseAccess implements DataAccessInterface{
         return rs;
     }
 
+
     @Override
     public boolean setImgPath(int id, String path) {
         boolean rs = false;
@@ -566,6 +568,8 @@ public class DataBaseAccess implements DataAccessInterface{
         }
         return rs;
     }
+
+
 
     @Override
     public boolean likeUser(int currUser, int likeID) {

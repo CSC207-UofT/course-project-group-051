@@ -1,5 +1,6 @@
 package Phase1.Views;
 
+import Phase1.DataAccess.DataAccessMechanism;
 import Phase1.DataAccess.DataBaseAccess;
 import javafx.geometry.Insets;
 import Phase1.Users.ProfileUser;
@@ -23,8 +24,8 @@ public class MatchesViewBuilder implements SceneBuilder{
     BorderPane bp;
     ArrayList<Integer> matches;
     int secondary;
-    DataBaseAccess db;
-    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataBaseAccess db){
+    DataAccessMechanism dm;
+    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataAccessMechanism dm){
         this.user = primaryUser;
         this.matches = matches;
         this.scrollPane = new ScrollPane();
@@ -32,7 +33,7 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.vb = new VBox();
         this.back = new Button("Back");
         this.hb = new HBox();
-        this.db = db;
+        this.dm = dm;
 
     }
 
@@ -65,10 +66,10 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.hb.getChildren().add(new Text("Matches"));
     }
 
-    public ArrayList<Button> matchButtons(DataBaseAccess db){
+    public ArrayList<Button> matchButtons(DataAccessMechanism dm){
         ArrayList a = new ArrayList();
         for(Integer i: this.matches){
-            Button b = new Button(db.getFirstName(i));
+            Button b = new Button(dm.getFirstName(i));
             this.vb.getChildren().add(b);
             a.add(b);
         }
@@ -129,7 +130,7 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addButton();
         this.addText();
-        this.matchButtons(this.db);
+        this.matchButtons(this.dm);
         this.addScrollPane();
         this.orientScrollPane();
         this.addHBox();

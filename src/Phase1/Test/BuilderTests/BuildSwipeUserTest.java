@@ -1,4 +1,4 @@
-package Phase1.Test;
+package Phase1.Test.BuilderTests;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,16 +1,15 @@
-package Phase1.Test;
+package Phase1.Test.BuilderTests;
 
 import Phase1.DataAccess.DataAccessInterface;
 import Phase1.DataAccess.DataBaseAccess;
 import Phase1.UserBuilders.BuildMessageUser;
 import Phase1.Users.MessageUser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
 
 class BuildMessageUserTest {
 
@@ -35,7 +34,7 @@ class BuildMessageUserTest {
         ArrayList<Integer> threads = result.getThreads();
         ArrayList<Integer> matches = result.getMatches();
 
-        assertEquals(db.getThreads(result.getId()), threads);
+        Assertions.assertEquals(db.getThreads(result.getId()), threads);
 
 
     }
@@ -45,15 +44,14 @@ class BuildMessageUserTest {
 
         int id = result.getId();
 
-        assertEquals(1, id);
+        Assertions.assertEquals(1, id);
 
         String fname = result.getfName();
         String lname = result.getlName();
-        int age = result.getAge();
 
-        assertEquals(db.getFirstName(result.getId()), fname);
-        assertEquals(db.getLastName(result.getId()), lname);
-        assertEquals(db.getAge(result.getId()), age);
+
+        Assertions.assertEquals(db.getFirstName(result.getId()), fname);
+        Assertions.assertEquals(db.getLastName(result.getId()), lname);
 
 
     }

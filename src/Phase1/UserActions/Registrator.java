@@ -30,7 +30,7 @@ public class Registrator implements Transitionable {
                     days / 365, data.get("gender"), data.get("preference"), data.get("DOB")); // BENNY TODO : Create User
             db.setBio(id, data.get("bio")); // FIXME: Move to Profile View and Actions
             db.setImgPath(id, data.get("imagePath")); // FIXME: Move to Profile View and Actions
-            return RegistrationResults.SUCCESS;
+            return Integer.toString(id);
 
         }
 

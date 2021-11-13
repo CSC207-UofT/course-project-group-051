@@ -1,6 +1,6 @@
 package Phase1.Run;
 
-import Phase1.DataAccess.DataBaseAccess;
+import Phase1.DataAccess.DataBaseAccess; //TODO switch this to Interface reference instead
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
 import Phase1.UserActions.RegistrationResults;
@@ -175,8 +175,12 @@ public class Controller {
         };}
 
 
-
-
+    /**
+     * @param c
+     * @param s
+     * @param db
+     * @return An EventHandler that
+     */
     public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataBaseAccess db){
         return (EventHandler<ActionEvent>) event -> {
             if(c.getState().equals(States.LoggedOut)){
@@ -188,6 +192,15 @@ public class Controller {
             }
                   };
     }
+
+    /**
+     * TODO
+     * @param c
+     * @param s
+     * @param rb
+     * @param db An instance of our database.
+     * @return An EventHandler that processes the registration process.
+     */
     public static EventHandler<ActionEvent> CreateAccount(StateMachine c, Stage s, RegistrationViewBuilder rb, DataBaseAccess db){
 
         return (EventHandler<ActionEvent>) event -> {
@@ -207,6 +220,7 @@ public class Controller {
             try{
                 Registrator registrator = new Registrator(db);
                 String results = registrator.createUser(data);
+
                 if (results.equals(RegistrationResults.MISSING)){
                     rb.fillIn();
                 }
@@ -221,7 +235,7 @@ public class Controller {
                     rb.createAccount().setOnAction(Controller.Registration(c,s,db));
                 }
                else {
-                   rb.success(id);
+                   rb.success(Integer.parseInt(results));
                    s.show();
                 }
             }

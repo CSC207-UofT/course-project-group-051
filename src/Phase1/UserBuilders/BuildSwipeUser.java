@@ -50,13 +50,13 @@ public class BuildSwipeUser implements UserBuilder {
         //data from database
         String gender = db.getGender(id);
         String bio = db.getBio(id);
-        String image = db.getImgPath(id);
+        String imagePath = db.getImgPath(id);
         int age = db.getAge(id);
 
         //Input into the SwipeUser
         resultUser.setGender(gender);
         resultUser.setBio(bio);
-        resultUser.setImage(image);
+        resultUser.setImagePath(imagePath);
         resultUser.setAge(age);
 
     }

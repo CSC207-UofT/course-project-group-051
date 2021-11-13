@@ -13,9 +13,9 @@ public class BuildProfileUser implements UserBuilder {
     private DataAccessInterface db;
 
     /**
-     * Construct an instance of BuildProfileUser using a unique ID to add information to the DataBase
-     * @param id an integer representation of the unique ID of the user creating a profile
-     * @param db a variable used to facilitate the implementation of creating a profile via the DataBase
+     * Construct an instance of BuildProfileUser using a unique ID, to build an instance of ProfileUser
+     * @param id an integer representation of the unique ID of the user.
+     * @param db an implementation of our database interface so that we can access our database.
      */
     public BuildProfileUser(int id, DataAccessInterface db) {
         resultUser = new ProfileUser(id);
@@ -25,6 +25,8 @@ public class BuildProfileUser implements UserBuilder {
     public DataAccessInterface getDB(){
         return this.db;
     }
+
+
     /**
      * Adds the information from the base User class to the result.
      */
@@ -58,7 +60,7 @@ public class BuildProfileUser implements UserBuilder {
         String preference = db.getGenderPreference(id);
         String username = db.getUsername(id);
         String password = db.getPassword(id);
-        String image = db.getImgPath(id);
+        String imagePath = db.getImgPath(id);
         int age = db.getAge(id);
 
 
@@ -68,7 +70,7 @@ public class BuildProfileUser implements UserBuilder {
         resultUser.setPreference(preference);
         resultUser.setUsername(username);
         resultUser.setPassword(password);
-        resultUser.setImage(image);
+        resultUser.setImagePath(imagePath);
         resultUser.setAge(age);
 
 

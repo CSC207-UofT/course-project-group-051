@@ -1,8 +1,5 @@
 package Phase1.Users;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.FileInputStream;
 
 
@@ -15,7 +12,7 @@ public class SwipeUser extends User {
 
     private String gender;
     private String bio;
-    private String image;
+    private String imagePath;
     private int age;
 
 
@@ -33,10 +30,10 @@ public class SwipeUser extends User {
 
     }
 
-    public boolean setImage(String path){
+    public boolean setImagePath(String path){
         try{
             FileInputStream f = new FileInputStream(path);
-            this.image = path;
+            this.imagePath = path;
             return true;
         }
         catch(Exception e){
@@ -44,13 +41,10 @@ public class SwipeUser extends User {
         }
     }
 
-    public ImageView getImage(){
-        try{
-            return new ImageView(new Image(new FileInputStream(this.image)));}
-        catch(Exception io){
-            return new ImageView();
-        }
+    public String getImagePath() {
+        return imagePath;
     }
+
 
     public void setGender(String gender) {
         this.gender = gender;
@@ -67,5 +61,6 @@ public class SwipeUser extends User {
     public int getAge() {
         return age;
     }
+
 
 }

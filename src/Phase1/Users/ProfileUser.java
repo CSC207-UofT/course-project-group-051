@@ -1,8 +1,5 @@
 package Phase1.Users;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.FileInputStream;
 
 /**
@@ -16,7 +13,7 @@ public class ProfileUser extends User {
     private String preference;
     private String username;
     private String password;
-    private String image;
+    private String imagePath;
     private int age;
 
     public ProfileUser(int id) {
@@ -60,10 +57,10 @@ public class ProfileUser extends User {
      * @return boolean set to true if the image was successfully added, and false if not (never used, but allows
      * try/catch)
      */
-    public boolean setImage(String path){
+    public boolean setImagePath(String path){
         try{
             FileInputStream f = new FileInputStream(path);
-            this.image = path;
+            this.imagePath = path;
             return true;
         }
         catch(Exception e){
@@ -71,12 +68,8 @@ public class ProfileUser extends User {
         }
     }
 
-    public ImageView getImage(){
-        try{
-        return new ImageView(new Image(new FileInputStream(this.image)));}
-        catch(Exception io){
-            return new ImageView();
-        }
+    public String getImagePath(){
+        return imagePath;
     }
 
     public void setPreference(String preference) {

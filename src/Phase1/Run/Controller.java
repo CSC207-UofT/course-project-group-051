@@ -179,7 +179,7 @@ public class Controller {
      * @param c
      * @param s
      * @param db
-     * @return An EventHandler that
+     * @return An EventHandler that catches a submission to create a user account
      */
     public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataBaseAccess db){
         return (EventHandler<ActionEvent>) event -> {
@@ -199,7 +199,7 @@ public class Controller {
      * @param s
      * @param rb
      * @param db An instance of our database.
-     * @return An EventHandler that processes the registration process.
+     * @return An EventHandler that processes the registration process by creating a user and adding it to db.
      */
     public static EventHandler<ActionEvent> CreateAccount(StateMachine c, Stage s, RegistrationViewBuilder rb, DataBaseAccess db){
 

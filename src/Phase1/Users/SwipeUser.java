@@ -58,8 +58,8 @@ public class SwipeUser extends User {
         this.age = age;
     }
 
-    public int getAge() {
-        return age;
+    public String getAge() {
+        return Integer.toString(age);
     }
 
 

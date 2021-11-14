@@ -3,7 +3,6 @@ package Phase1.UserActions;
 import Phase1.DataAccess.DataAccessInterface;
 import Phase1.UserBuilders.BuildSwipeUser;
 import Phase1.Users.SwipeUser;
-import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -47,10 +46,10 @@ public class SwipeAction implements Transitionable{
 
     /**
      * This method gets the next user to swipe on from the queue.
-     * @return an array representing the data of the next user to swipe on, in the order [age, gender, bio, image],
-     * or null if there are none left.
+     * @return an array representing the data of the next user to swipe on, in the
+     * order [fname, lname, age, gender, bio, image], or null if there are none left.
      */
-    public Object[] getNextUser() {
+    public String[] getNextUser() {
 
         currentTarget = swipeList.poll();
 
@@ -59,14 +58,16 @@ public class SwipeAction implements Transitionable{
         }
 
         //get currentTarget data.
-        int age = currentTarget.getAge();
+        String fName = currentTarget.getfName();
+        String lName = currentTarget.getlName();
+        String age = currentTarget.getAge();
         String gender = currentTarget.getGender();
         String bio = currentTarget.getBio();
-        ImageView image = currentTarget.getImage();
+        String image = currentTarget.getImagePath();
 
         //is there a better way to do this kind of list.
 
-        return new Object[]{age, gender, bio, image};
+        return new String[]{fName, lName, age, gender, bio, image};
 
     }
 

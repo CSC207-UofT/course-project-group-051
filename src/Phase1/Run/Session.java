@@ -1,5 +1,6 @@
 package Phase1.Run;
 
+import Phase1.DataAccess.DataAccessInterface;
 import Phase1.DataAccess.DataBaseAccess;
 import Phase1.Views.LogInViewBuilder;
 import Phase1.Views.RegistrationViewBuilder;
@@ -38,7 +39,7 @@ public class Session extends Application {
 
                 //Setting the preserve ratio of the image view
               //  imageView.setPreserveRatio(true);
-                DataBaseAccess db = new DataBaseAccess();
+                DataAccessInterface db = new DataBaseAccess();
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 RegistrationViewBuilder rb = new RegistrationViewBuilder();
                 lb.getLogIn().setOnAction(Controller.LogInHandler(c, stage, db, lb));

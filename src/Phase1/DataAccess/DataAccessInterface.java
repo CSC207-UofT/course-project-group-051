@@ -1,8 +1,10 @@
 package Phase1.DataAccess;
 
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * An interface that defines the methods that interact with the database.
@@ -149,6 +151,8 @@ public interface DataAccessInterface {
     //returns their PersonID and -1 if invalid parameters are given.
     int createUser(String lastName, String firstName, String password, String username, int age, String gender,
                    String genderPreference, String birthday);
+
+    int createUser(Map<String, String> data) throws FileNotFoundException;
 
     void closeDB() throws SQLException;
 

@@ -1,4 +1,4 @@
-package Phase1.Tests;
+package Phase1.Test.DataBaseTests;
 
 import Phase1.DataAccess.DataBaseAccess;
 import javafx.scene.control.Alert;

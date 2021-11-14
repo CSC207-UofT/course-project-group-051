@@ -1,122 +1,96 @@
 package Phase1.Users;
 
-import Phase1.States.LoggedOut;
-import Phase1.States.State;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-
 import java.io.FileInputStream;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.temporal.Temporal;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Represents the User's information that pertains to editing/viewing profile information.
- *
- * @param bio is the bio inputted by the user
- * @param gender is the gender of the user
- * @param age is the age of the user
- * @param preference is the gender preference of the user
- * @param username is the username of the user
- * @param password is the password of the user to access their profile
  */
 public class ProfileUser extends User {
 
-    String bio;
-    String gender;
-    String preference;
-    String username;
-    String password;
-    State state;
-    String image;
-    String birthdate;
+    // TODO finalize these variables.
+    private String bio;
+    private String gender;
+    private String preference;
+    private String username;
+    private String password;
+    private String imagePath;
+    private int age;
 
-    public ProfileUser(int id, String fName, String lName, Date birthdate, String username, String password, String image) {
-        super(id, fName, lName, birthdate, password);
-        this.state = new LoggedOut();
-        this.image = image;
-        this.username = username;
+    public ProfileUser(int id) {
+        super(id);
     }
 
-    public void setfName(String s){
-        this.fName = s;
-    }
-    public void setLName(String s){
-        this.lName = s;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getImagePath(){
-        return this.image;
+    public int getAge(){return this.age;}
+
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
     public String getBio() {
         return this.bio;
     }
 
-    public void setBio(String bio) {
-        this.bio = bio;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getGender() {
         return this.gender;
     }
 
-    public void setDOB(String dob){
-        this.birthdate = dob;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        Date today = new Date();
-        long diff = today.getTime() - this.getBirthdate().getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-        return days / 365;
-    }
+    //probably not necessary anymore since we take date in sign up and then save age in the database.
+//    public int getAge() {
+//        Date today = new Date();
+//        long diff = today.getTime() - this.getBirthdate().getTime();
+//        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//
+//        return days / 365;}
+    /**
+     * A function to upload and set the image of a user
+     *
+     * @param path a string representation of the directory path of the image to be uploaded
+     * @return boolean set to true if the image was successfully added, and false if not (never used, but allows
+     * try/catch)
+     */
     public boolean setImagePath(String path){
         try{
             FileInputStream f = new FileInputStream(path);
-        this.image = path;
-        return true;
+            this.imagePath = path;
+            return true;
         }
         catch(Exception e){
             return false;
         }
     }
-    public ImageView getImage(){
-        try{
-        return new ImageView(new Image(new FileInputStream(this.image)));}
-        catch(Exception io){
-            return new ImageView();
-        }
-    }
 
-
-    public String getPreference() {
-        return this.preference;
+    public String getImagePath(){
+        return imagePath;
     }
 
     public void setPreference(String preference) {
         this.preference = preference;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getPreference() {
+        return this.preference;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    public String getUsername() {
+        return this.username;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getPassword() { return this.password; }
 }

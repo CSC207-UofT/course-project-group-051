@@ -1,33 +1,23 @@
 package Phase1.Users;
 
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataBaseAccess;
+
 import java.util.Date;
 
 /**
  * User is the base class for the different representations of our Users
- *
- * @param id is the id associated with user
- * @param fName is the first name of the user
- * @param lName is the last name of the user
- * @param birthdate is the birth-date of the user
- * @param password is a user-set password
  */
 public abstract class User {
 
-    int id;
-    String fName;
-    String lName;
-    Date birthdate;
-    String password;
+    private int id;
+    private String fName;
+    private String lName;
 
-    public User(int id, String fName, String lName, Date birthdate, String password)
-    {
+
+    public User(int id) {
         this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.birthdate = birthdate;
-        this.password = password;
     }
-
 
     public int getId() {
         return this.id;
@@ -41,7 +31,17 @@ public abstract class User {
         return this.lName;
     }
 
-    public Date getBirthdate(){return this.birthdate;}
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
 
-    public String getPassword(){return this.password;}
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public String getBirthdate() {
+        DataAccessInterface db = new DataBaseAccess();
+        return db.getBirthday(this.getId());
+    }
 }
+

@@ -1,44 +1,66 @@
 package Phase1.Users;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.io.FileInputStream;
+
+
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
- *
- * @param age is the age of the user being swiped on
- * @param gender is the gender of the user being swiped on
- * @param bio is the bio of the user being swiped on
- * @param swiper is the ID of the current user who is swiping
- * @param gotLiked is True if the swiper swipes right, and false if swiper swipes left
  */
 
 public class SwipeUser extends User {
 
 
-    private int age;
     private String gender;
     private String bio;
-    private int swiper; //ID of the current User who is swiping.
-    private boolean gotliked;
-    private String imgPath;
+    private String imagePath;
+    private int age;
 
 
-    public SwipeUser(int id, String fName, String lName, Date birthdate, String password, String imgPath) {
-        super(id, fName, lName, birthdate, password);
-        this.swiper = -1;
-        this.gotliked = false;
-        this.imgPath = imgPath;
+    public SwipeUser(int id) {
+
+        super(id);
     }
 
-    public int getAge() {
-        return age;
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getBio() {
+        return bio;
+
+    }
+
+    public boolean setImagePath(String path){
+        try{
+            FileInputStream f = new FileInputStream(path);
+            this.imagePath = path;
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getGender() {
         return gender;
     }
 
-    public String getBio() {
-        return bio;
+    public void setAge(int age) {
+        this.age = age;
     }
+
+    public int getAge() {
+        return age;
+    }
+
+
 }

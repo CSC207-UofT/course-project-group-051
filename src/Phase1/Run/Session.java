@@ -1,7 +1,6 @@
 package Phase1.Run;
 
 import Phase1.DataAccess.DataBaseAccess;
-import Phase1.EventHandler.EventHandlerFactory;
 import Phase1.Views.LogInViewBuilder;
 import Phase1.Views.RegistrationViewBuilder;
 import Phase1.Views.ViewBuilderFactory;
@@ -42,10 +41,10 @@ public class Session extends Application {
                 DataBaseAccess db = new DataBaseAccess();
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 RegistrationViewBuilder rb = new RegistrationViewBuilder();
-                lb.getLogIn().setOnAction(EventHandlerFactory.LogInHandler(c, stage, db, lb));
-                lb.getCreateAccount().setOnAction(EventHandlerFactory.Registration(c, stage, db));
+                lb.getLogIn().setOnAction(Controller.LogInHandler(c, stage, db, lb));
+                lb.getCreateAccount().setOnAction(Controller.Registration(c, stage, db));
                 lb.build(stage);
-                stage.setResizable(true);
+                stage.setResizable(false);
                 stage.show();
 
 

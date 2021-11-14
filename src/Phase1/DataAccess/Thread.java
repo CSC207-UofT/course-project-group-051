@@ -1,6 +1,7 @@
 package Phase1.DataAccess;
 
 import java.util.ArrayList;
+// TODO Delete if not used
 
 public class Thread {
 
@@ -22,6 +23,14 @@ public class Thread {
         this.Messages = new ArrayList<>();
         this.firstUser = idOne;
         this.secondUser = idTwo;
+    }
+
+    public int getFirstUser(){
+        return this.firstUser;
+    }
+
+    public int getSecondUser(){
+        return this.secondUser;
     }
 
 

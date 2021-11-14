@@ -10,10 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -47,8 +44,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.image.setFitHeight(500);
         this.image.setFitWidth(500);
         this.sp = new StackPane();
-        this.btn = new Button("<");
-        this.btn1 = new Button(">");
+        this.btn = new Button("Nah");
+        this.btn1 = new Button("Like");
         this.btn2 = new Button("Matches");
         this.btn3 = new Button("Log Out");
         this.btn4 = new Button("Me");
@@ -57,6 +54,7 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.u = u;
         this.hb2 = new HBox();
         this.fnameage = new Label(u.getfName() + ", " + Integer.toString(u.getAge()));
+        this.fnameage.setMinWidth(Region.USE_PREF_SIZE);
         this.fnameage.setFont(new Font(20));
         this.fnameage.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );

@@ -6,8 +6,10 @@ import javafx.scene.control.Alert;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-public class DataBaseAccess extends DataAccessMechanism {
+public class DataBaseAccess implements DataAccessInterface {
 
     private Statement stmt = null;
     Connection conn;
@@ -17,11 +19,9 @@ public class DataBaseAccess extends DataAccessMechanism {
         super();
         connectDB();
     }
-
     @Override
     public ArrayList getMatches(int id){
 
-        try{
             ArrayList<Integer> liked = this.getLikes(id);
             ArrayList<Integer> admirers = this.getAdmires(id);
             if (liked.isEmpty() || admirers.isEmpty()){
@@ -34,11 +34,7 @@ public class DataBaseAccess extends DataAccessMechanism {
                 }
             }
             return matches;
-        }
-        catch(Exception io){
-            System.out.println(true);
-        }
-        return new ArrayList();
+
     }
 
     private int getNextUser(){
@@ -223,22 +219,11 @@ public class DataBaseAccess extends DataAccessMechanism {
 
     @Override
     public int getAge(int id) {
-        int age = -1;
-        try {
-            String h2 = "select age from USER where PersonID = "+ id +";";
-            ResultSet rs = stmt.executeQuery(h2);
-            while (rs.next()) {
-                age = rs.getInt("age");
-            }
-            rs.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return age;
+        java.util.Date today = new Date();
+        long diff = today.getTime() - new Date(this.getBirthday(id)).getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        return days / 365;
     }
 
     @Override

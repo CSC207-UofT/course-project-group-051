@@ -1,7 +1,9 @@
 package Phase1.Run;
 
-import Phase1.DataAccess.DataAccessMechanism;
-import Phase1.DataAccess.DataAccessMechanism;
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataAccessInterface;
+import Phase1.DataAccess.DataBaseAccess;
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
 import Phase1.Users.ProfileUser;
@@ -25,7 +27,7 @@ public class Controller {
     }
 
 
-    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataAccessMechanism dm,
+    public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataAccessInterface dm,
                                                          LogInViewBuilder lb){
         return (EventHandler<ActionEvent>) event -> {
 
@@ -60,7 +62,6 @@ public class Controller {
 
                      }
                      else {
-                         System.out.println(true);
 
                          int nextid = swipelist.get(0);
                          swipelist.remove(0);
@@ -107,7 +108,6 @@ public class Controller {
            else if(c.getState().equals(States.Registration)){
 
                 c.update(Actions.LOGIN, null, null);
-                    System.out.println(c.getState());
                 LogInViewBuilder lb1 = new LogInViewBuilder();
                 RegistrationViewBuilder reg1 = new RegistrationViewBuilder();
                 lb1.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, lb1));
@@ -119,7 +119,7 @@ public class Controller {
 
         };}
 
-    public static EventHandler RefreshHandler(StateMachine c, Stage s, DataAccessMechanism dm, ProfileUser user){
+    public static EventHandler RefreshHandler(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user){
 
      return (EventHandler<ActionEvent>) event -> {
          if (c.getState().equals(States.LoggedIn)){
@@ -164,7 +164,7 @@ public class Controller {
 
     }
 
-    public static EventHandler LogOutHandler(StateMachine c, Stage s, DataAccessMechanism dm){
+    public static EventHandler LogOutHandler(StateMachine c, Stage s, DataAccessInterface dm){
         LogInViewBuilder lb = new LogInViewBuilder();
         return e -> {
             if (c.getState().equals(States.LoggedIn)) {
@@ -179,7 +179,7 @@ public class Controller {
 
 
 
-    public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataAccessMechanism dm){
+    public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataAccessInterface dm){
         return (EventHandler<ActionEvent>) event -> {
             if(c.getState().equals(States.LoggedOut)){
             c.update(Actions.REGISTER, null, null);
@@ -191,7 +191,7 @@ public class Controller {
                   };
     }
     public static EventHandler<ActionEvent> CreateAccount(StateMachine c, Stage s, RegistrationViewBuilder rb,
-                                                          DataAccessMechanism dm){
+                                                          DataAccessInterface dm){
 
         return (EventHandler<ActionEvent>) event -> {
 
@@ -245,7 +245,7 @@ public class Controller {
 
     }
 
-    public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessMechanism dm, ArrayList swipelist,
+    public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
                                                        ProfileUser u){
         return (EventHandler<ActionEvent>) event -> {
                 if (c.getState().equals(States.LoggedIn)){
@@ -269,7 +269,6 @@ public class Controller {
                                     new Date(dm.getBirthday(id)), dm.getPassword(id), dm.getImgPath(id));
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                             dm.likeUser(u.getId(), id);
-                            System.out.println(dm.getAdmires(id));
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                             sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
                             sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,dm,swipelist, u));
@@ -293,7 +292,7 @@ public class Controller {
         };
 
     }
-    public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessMechanism dm, ArrayList swipelist,
+    public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
                                                       ProfileUser u){
         return (EventHandler<ActionEvent>) event -> {
             //TODO
@@ -342,7 +341,7 @@ public class Controller {
         };
 
     }
-    public static EventHandler<ActionEvent> Save(StateMachine c, Stage s, DataAccessMechanism dm,
+    public static EventHandler<ActionEvent> Save(StateMachine c, Stage s, DataAccessInterface dm,
                                                  ProfileUser primary, SelfViewBuilder sb){
 
         return (EventHandler<ActionEvent>) event -> {
@@ -405,7 +404,7 @@ public class Controller {
 
 
 
-        public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataAccessMechanism dm,
+        public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataAccessInterface dm,
                                                  ProfileUser primary, ChatViewBuilder cv){
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.Messaging)){
@@ -482,7 +481,7 @@ public class Controller {
 
 
 
-    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessMechanism dm, ProfileUser user){
+    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user){
         SelfViewBuilder sb = new SelfViewBuilder(user);
         return (EventHandler<ActionEvent>) event ->{
             if(c.getState().equals(States.LoggedIn)){
@@ -498,12 +497,10 @@ public class Controller {
 
     }
 
-    public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataAccessMechanism dm, ProfileUser user,
+    public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user,
                                                     ArrayList<Integer> matches){
 
         MatchesViewBuilder mb = new MatchesViewBuilder(user, matches, dm);
-        System.out.println(dm.getMatches(user.getId()));
-        System.out.println(dm.getAdmires(user.getId()));
 
         ArrayList<Button> matchesButtons= mb.matchButtons(dm);
         return (EventHandler<ActionEvent>) event ->{
@@ -525,7 +522,7 @@ public class Controller {
         }};
 
     }
-    public static EventHandler<ActionEvent> Message(StateMachine c, Stage s, DataAccessMechanism dm, ProfileUser primary,
+    public static EventHandler<ActionEvent> Message(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
                                                     ProfileUser secondary, ArrayList<Integer> matches){
         ChatViewBuilder cb = new ChatViewBuilder(secondary.getfName(), primary.getId(), secondary.getId());
         return (EventHandler<ActionEvent>) event ->{
@@ -537,7 +534,7 @@ public class Controller {
             }
         };
     }
-    public static EventHandler<ActionEvent> Unmatch(StateMachine c, Stage s, DataAccessMechanism dm, ProfileUser primary,
+    public static EventHandler<ActionEvent> Unmatch(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
                                                     ArrayList<Integer> matches, int secondary){
         return (EventHandler<ActionEvent>) event ->{
             if(c.getState().equals(States.Messaging)){
@@ -556,7 +553,7 @@ public class Controller {
         };
     }
 
-    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessMechanism dm){
+    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessInterface dm){
 
         return (EventHandler<ActionEvent>) event ->{
             //TODO

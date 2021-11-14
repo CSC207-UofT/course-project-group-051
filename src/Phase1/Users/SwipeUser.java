@@ -44,4 +44,7 @@ public class SwipeUser extends User {
         return this.bio;
 
     }
+
+
+
 }

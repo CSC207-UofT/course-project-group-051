@@ -1,7 +1,6 @@
 package Phase1.Views;
 
-import Phase1.DataAccess.DataAccessMechanism;
-import Phase1.DataAccess.DataBaseAccess;
+import Phase1.DataAccess.DataAccessInterface;
 import javafx.geometry.Insets;
 import Phase1.Users.ProfileUser;
 import javafx.scene.Scene;
@@ -24,8 +23,8 @@ public class MatchesViewBuilder implements SceneBuilder{
     BorderPane bp;
     ArrayList<Integer> matches;
     int secondary;
-    DataAccessMechanism dm;
-    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataAccessMechanism dm){
+    DataAccessInterface dm;
+    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataAccessInterface dm){
         this.user = primaryUser;
         this.matches = matches;
         this.scrollPane = new ScrollPane();
@@ -66,7 +65,7 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.hb.getChildren().add(new Text("Matches"));
     }
 
-    public ArrayList<Button> matchButtons(DataAccessMechanism dm){
+    public ArrayList<Button> matchButtons(DataAccessInterface dm){
         ArrayList a = new ArrayList();
         for(Integer i: this.matches){
             Button b = new Button(dm.getFirstName(i));

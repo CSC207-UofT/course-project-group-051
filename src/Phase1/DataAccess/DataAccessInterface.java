@@ -152,4 +152,5 @@ public interface DataAccessInterface {
 
     void closeDB() throws SQLException;
 
+    ArrayList getMatches(int id);
 }

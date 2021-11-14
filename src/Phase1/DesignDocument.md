@@ -3,11 +3,11 @@
 ---
 **CSC207H1F-2021 Group 51:**
 * Juliana Dellaviola 1004145436
-* Senan Kassem
-* Anjian Chen
-* Fei Yu Guan
-* Sheng He Xiao
-* Alexander Mathioudakis
+* Senan Kassem 1004500514
+* Anjian Chen 1007340584
+* Fei Yu Guan 1004765550
+* Sheng He Xiao 1006070494
+* Alexander Mathioudakis 1007359109
 * Artur Kuramshin (Teaching Assistant)
 ---
 
@@ -50,10 +50,10 @@ commencing this document, not the implementation of a fully functioning dating a
 ## Clean Architecture
 As defined in Phase 0 via our CRC cards, entities, use cases, interfaces, and controllers have explicit relationships 
 and dependencies. The project utilizes its entities without relying directly on them for functionality via controllers 
-and use cases. The 'DataAccess' classes act as our entities which are encompassed by the use cases, interfaces, and 
-controllers. The Controller class then directly uses data from the entities to implement use cases in 'UserActions'.
-Upcoming is how SOLID design principles are upheld in the project, and these explanations directly enforce
-clean architecture. 
+and use cases. The Phase1.Users package classes act as our entities which are encompassed by the use cases, interfaces, and 
+controllers. The Phase1.DataAccess package classes then directly uses data from the entities to implement
+use cases in Phase1.UserActions. Upcoming is how SOLID design principles are upheld in the project, and these 
+explanations directly enforce clean architecture. 
 
 ## SOLID Design
 The building of this application was centred at the implementation and adherence to clean architecture and SOLID design 
@@ -91,7 +91,14 @@ do not change, and are the root of each class. By creating interfaces based on o
 is used effectively without the need to add or adjust the interface. This not only increases stability, but avoids
 time-consuming coupling in the architecture.
 ## Packaging
-idk
+Our project packages by layers. By design of our project, we have an integral entity layer that all other packages 
+must make requests to. This is our Phase1.Users package, and is the base to our organization. Our application's 
+interface relies on the desired state/view that the user requests, which is the
+top layer of our packaging; defined by Phase1.Run. No other packages between the Phase1.Users and Phase1.Run request 
+information from an upper layer. This allows each class to abide by the clean architecture, and ensures coupling and 
+over-dependence do not occur. One important issue to be solved in phase 2 is insuring merging does not lose the structure
+of our layered packages.
+
 ## Design Patterns
 The following identified design patterns are either currently implemented or can potentially be added. The project may
 have others implemented without notice, but should be enhanced for Phase 2 to reem the benefits of each pattern. This
@@ -110,19 +117,33 @@ algorithm/strategy involved can enhance the efficiency/readability of the projec
 ###Facade Design Pattern
 The most utilized pattern in our code is the facade. Via Controller.java, an event handler allocates parameters to be 
 used in each use case without forcing the class to be responsible for each one individually. This also prevents 
-repetitive changes to multiple lines of code in different classes to be made. 
+repetitive changes to multiple lines of code in different classes to be made. The implementation of Controller.java 
+needs to be refactored, since there are parts that break clean architecture. This is a goal for phase 2.
 
+### Builder Design Pattern
+The use-cases are aided by 'builders' to avoid duplicating code, and allowing changes to be made without any damage to 
+other classes. This design makes requests to Phase1.Users which then allows the actual functionality of features to be
+used in the application.
+### Factory Method Design Pattern
+This is used in order for users to view the interface while delegating which scene is needed. This works in unison with 
+the above design pattern, which then allows different actions to change the view the user sees. This allows for easy 
+additions to functionality.
 ## Progress Report
 Our team has completed more than expected for Phase 1, and are focused on more efficient functionality, refactoring, and
 implementing/identifying design patterns for Phase 2.
 
 ### Questions
+* We need advice on how to refactor effectively, without completely destroying our code.
+* How can we more effectively use testing? 
+  * We need a better understanding of the process for implementing tests
 ### Problems
 * Healthy communication between _all_ team members
 * Using ideas from other CSC courses that other members do not know/understand
 * Code smells: data clumps, dead code, duplicate code
   * Result of lack of due diligence when merging, old code not being removed, and the aftermath of refactoring
 * Creating multiple branches, but not fully merging to update main with all effective code from the individual branches
+* The largest setback was due to lack of communication which lead to dead code, gaps in clean architecture, and wasted 
+time
 ### Successes
 Our design presents clean architecture mainly in our class definition, insurance of privacy, and explicit required
 dependency. Each member is able to identify and code smells, the importance of git-branches, and generally abides
@@ -139,15 +160,31 @@ addition of mandatory meetings each week, has also promoted the effectiveness of
   responsibilities
 
 * Senan Kassem
-  * 
+  * Implementation of use-cases and entity classes
+  * Writing and tidying Javadocs
+  * Organization of team meetings and communications
+  * Aiding Alex in adhering to clean architecture
+  * Phase 2: Implementation of use cases, refactoring Controller.java, messaging functionality,
+  and continued responsibilities from phase 1
 * Anjian Chen
-  * 
+  * Identifying design patterns to be implemented
+  * Refactoring use-cases
+  * Phase 2: Implementation and continuing use-case refactoring
 * Fei Yu Guan
-  * 
+  * Controller
+  * ViewBuilder (Interface functionality)
+  * Main
+  * Phase 2: Implementation and messaging functionality
 * Sheng He Xiao
-  * 
+  * Data Base functionality
+  * Documentation for how the data base (entity classes)
+  * Phase 2: Designing messaging functionality, and continuing the implementation of design patterns and clean
+  architecture
 * Alexander Mathioudakis
-  * 
+  * Ensuring the rpoject abides by clean architecture 
+  * Ensuring SOLID design principles are used
+  * Implementation of Use-Cases
+  * Phase 2: Refactoring controller and creating use-cases
 
 
 

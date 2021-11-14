@@ -46,7 +46,6 @@ public class MessageAction implements Transitionable {
 
     /**
      * Determines if a new thread is needing to be created, or if a message needs to be added to an existing thread.
-     * Dummy id line 51: dead code - needs fixing
      */
 
     public void conversationAction(){

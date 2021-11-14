@@ -245,7 +245,6 @@ public class Controller {
                     }
                     else{
                         try {
-                            FileInputStream f = new FileInputStream(u.getImagePath());
                             Image image = new Image(f);
                             ImageView i = new ImageView(image);
                             int id = (Integer)swipelist.get(0);

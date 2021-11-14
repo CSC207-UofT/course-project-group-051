@@ -1,9 +1,6 @@
 package Phase1.Run;
 
 import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
 import Phase1.States.States;
 import Phase1.UserActions.Actions;
 import Phase1.Users.ProfileUser;
@@ -15,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

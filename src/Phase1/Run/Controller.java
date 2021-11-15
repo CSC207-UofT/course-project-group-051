@@ -357,7 +357,6 @@ public class Controller {
                     eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                     eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, u));
                     eb.build(s);
-
                 } else {
                     try {
                         dm.unlikeUser(u.getId(), currTarget);

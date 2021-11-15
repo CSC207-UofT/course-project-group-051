@@ -49,6 +49,7 @@ public class Controller {
 
                              matches = dm.getMatches(u.getId());
 
+
                          }
 
                          eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u,matches
@@ -209,24 +210,23 @@ public class Controller {
             }
 
 
-           else if (pw1.equals(pw2) && dm.logIn(username, pw1) == -1){
-               Date today = new Date();
-               long diff = today.getTime() - new Date(DOB).getTime();
-               int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-               FileInputStream file = new FileInputStream(location);
-               int id = dm.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
-               dm.setUsername(id, username);
-               dm.setBio(id, bio);
-               dm.setImgPath(id, location);
-               rb.success(id);
-               s.show();
+            else if (pw1.equals(pw2) && dm.logIn(username, pw1) == -1){
+                Date today = new Date();
+                long diff = today.getTime() - new Date(DOB).getTime();
+                int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                FileInputStream file = new FileInputStream(location);
+                int id = dm.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+                dm.setUsername(id, username);
+                dm.setBio(id, bio);
+                dm.setImgPath(id, location);
+                rb.success(id);
+                s.show();
 
             }
-           else if(dm.logIn(username, pw1) != -1){
-
-             rb.accountExists();
-             rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
-             rb.createAccount().setOnAction(Controller.Registration(c,s,dm));
+            else if(dm.logIn(username, pw1) != -1){
+                rb.accountExists();
+                rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
+                rb.createAccount().setOnAction(Controller.Registration(c,s,dm));
 
             }
 
@@ -237,7 +237,8 @@ public class Controller {
 
             catch(Exception e){
                 rb.pathInvalid();
-            }};
+            }
+        };
 
     }
 
@@ -256,13 +257,18 @@ public class Controller {
                     }
                     else{
                         try {
-                            FileInputStream f = new FileInputStream(u.getImagePath());
-                            Image image = new Image(f);
-                            ImageView i = new ImageView(image);
+//                            FileInputStream f = new FileInputStream(u.getImagePath());
+//                            System.out.println(u.getImagePath());
+//                            Image image = new Image(f);
+//                            ImageView i = new ImageView(image);
                             int id = (Integer)swipelist.get(0);
                             swipelist.remove(0);
                             SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
                                     new Date(dm.getBirthday(id)), dm.getPassword(id), dm.getImgPath(id));
+                            FileInputStream f = new FileInputStream(dm.getImgPath(id));
+                            System.out.println(u.getImagePath());
+                            Image image = new Image(f);
+                            ImageView i = new ImageView(image);
                             SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
                             dm.likeUser(u.getId(), id);
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
@@ -304,21 +310,27 @@ public class Controller {
                 }
                 else{
                     try {
-                        FileInputStream f = new FileInputStream(u.getImagePath());
-                        Image image = new Image(f);
-                        ImageView i = new ImageView(image);
+//                        FileInputStream f = new FileInputStream(u.getImagePath());
+//                        Image image = new Image(f);
+//                        ImageView i = new ImageView(image);
                         int id = (Integer)swipelist.get(0);
                         swipelist.remove(0);
                         SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
                                 new Date(dm.getBirthday(id)),
                                 dm.getPassword(id), dm.getImgPath(id));
+                        FileInputStream f = new FileInputStream(dm.getImgPath(id));
+                        System.out.println(u.getImagePath());
+                        Image image = new Image(f);
+                        ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
+
                         dm.unlikeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,dm,swipelist, u));
                         sb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        sb.build(s);
                     }
                     catch(Exception i){
                         System.out.println("SwipeUser image path invalid.");

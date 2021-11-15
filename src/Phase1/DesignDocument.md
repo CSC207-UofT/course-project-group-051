@@ -91,13 +91,9 @@ do not change, and are the root of each class. By creating interfaces based on o
 is used effectively without the need to add or adjust the interface. This not only increases stability, but avoids
 time-consuming coupling in the architecture.
 ## Packaging
-Our project packages by layers. By design of our project, we have an integral entity layer that all other packages 
-must make requests to. This is our Phase1.Users package, and is the base to our organization. Our application's 
-interface relies on the desired state/view that the user requests, which is the
-top layer of our packaging; defined by Phase1.Run. No other packages between the Phase1.Users and Phase1.Run request 
-information from an upper layer. This allows each class to abide by the clean architecture, and ensures coupling and 
-over-dependence do not occur. One important issue to be solved in phase 2 is insuring merging does not lose the structure
-of our layered packages.
+Our project packages by the inside/outside pattern. We have the separation of the outer layers of our program and the inner layers outlined by our packaging. 
+For example, our Users class are our most inner classes which are purely information, this is why they are in their own package. They are separate from packages like "Views" and "Run" which are both outer layers of our program that directly output feedback to our user. This also helps us abide by clean architecture because clean architecture uses a 
+simliar philosophy, where you want to segregate the client side stuff from the back end processing and implementation for more easil
 
 ## Design Patterns
 The following identified design patterns are either currently implemented or can potentially be added. The project may

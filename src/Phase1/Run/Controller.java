@@ -61,7 +61,6 @@ public class Controller {
 
                                 matches = dm.getMatches(u.getId());
 
-
                             }
 
                             eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, matches

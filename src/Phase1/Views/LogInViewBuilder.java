@@ -32,6 +32,10 @@ public class LogInViewBuilder implements SceneBuilder{
     Label label1;
     Label label2;
     Text message;
+
+    /**
+     * Creates the LogInViewBuilder object
+     */
     public LogInViewBuilder(){
         this.bp = new BorderPane();
         this.bt1 = new Button("Create new account");

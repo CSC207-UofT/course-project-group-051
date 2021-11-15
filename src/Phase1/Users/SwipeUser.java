@@ -6,12 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a User to be swiped on. Which is also all the data that the current User can view.
- *
- * @param age is the age of the user being swiped on
- * @param gender is the gender of the user being swiped on
- * @param bio is the bio of the user being swiped on
- * @param swiper is the ID of the current user who is swiping
- * @param gotLiked is True if the swiper swipes right, and false if swiper swipes left
  */
 
 public class SwipeUser extends User {
@@ -24,7 +18,15 @@ public class SwipeUser extends User {
     private boolean gotliked;
     private String imgPath;
 
-
+    /**
+     * Creates a swipe user object
+     * @param id the user's ID
+     * @param fName the user's first name
+     * @param lName the user's last name
+     * @param birthdate the user's birthday
+     * @param password the user's password
+     * @param imgPath the user's image path
+     */
     public SwipeUser(int id, String fName, String lName, Date birthdate, String password, String imgPath) {
         super(id, fName, lName, birthdate, password);
         this.swiper = -1;
@@ -32,14 +34,17 @@ public class SwipeUser extends User {
         this.imgPath = imgPath;
     }
 
-
+    /**
+     * Sets the bio
+     * @param bio the user's bio in String
+     */
     public void setBio(String bio) {
         this.bio = bio;
     }
 
-
-
-
+    /**
+     * @return the bio
+     */
     public String getBio() {
         return this.bio;
 

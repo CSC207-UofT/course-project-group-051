@@ -19,6 +19,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * The builder for Swiping view
+ */
 public class SwipeViewBuilder implements SceneBuilder{
     Scene scene;//the scene object
     HBox hb;//the hb containing the buttons
@@ -62,6 +65,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.fnameage.setFont(new Font(20));
         this.fnameage.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
+        this.image.setFitHeight(500);
+        this.image.setFitHeight(500);
        this.bio = new Label(u.getBio());
         this.bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
@@ -79,13 +84,15 @@ public class SwipeViewBuilder implements SceneBuilder{
     }
 
 
-    /** Maps each button to its corresponding eventhandler.
+    /**
+     * Adds the imageview to the view.
      */
-
     public void addImage(){
         this.sp.getChildren().add(this.image);
     }
 
+    /** Adds the buttons to the scene
+     */
     @Override
     public void addButton() {
         this.bp.setLeft(btn);
@@ -197,12 +204,12 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, this.image.getFitWidth() + 250, this.image.getFitHeight() + 190);
+        this.scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
         stage.setScene(this.scene);
     }
 
 
-    /**
+    /** Builds the view on given stage
      * @param s the main stage.
      */
     @Override

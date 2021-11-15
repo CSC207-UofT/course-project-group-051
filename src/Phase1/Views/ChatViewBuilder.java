@@ -9,6 +9,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The builder for chat view
+ */
 public class ChatViewBuilder implements SceneBuilder{
     String name;
     TextField tf;
@@ -23,6 +26,13 @@ public class ChatViewBuilder implements SceneBuilder{
     VBox vb;
     int primaryid;
     int secondaryid;
+
+    /**
+     * Creates a ChatViewBuilder object
+     * @param firstName first name of the person being messaged to
+     * @param primaryid the logged in user's ID
+     * @param secondaryid the other user's ID
+     */
     public ChatViewBuilder(String firstName, int primaryid, int secondaryid){
         this.name = firstName;
         this.bp = new BorderPane();
@@ -42,12 +52,23 @@ public class ChatViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * @return the Send button
+     */
     public Button getSend(){
         return this.send;
     }
+
+    /**
+     * @return the ID of primary user
+     */
     public int getPrimaryId(){
         return this.primaryid;
     }
+
+    /**
+     * @return the secondary user's ID
+     */
     public int getSecondaryid(){
         return this.secondaryid;
     }
@@ -74,6 +95,9 @@ public class ChatViewBuilder implements SceneBuilder{
         this.vb.getChildren().add(this.hb2);
     }
 
+    /**
+     * Adds the textfield which sends the message.
+     */
     @Override
     public void addTextField() {
         this.hb2.getChildren().add(tf);
@@ -86,6 +110,9 @@ public class ChatViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Adds the buttons to the view
+     */
     @Override
     public void addButton() {
         this.hb1.getChildren().add(ret);
@@ -139,6 +166,10 @@ public class ChatViewBuilder implements SceneBuilder{
         stage.setScene(this.scene);
     }
 
+    /**
+     * Builds the scene on given stage
+     * @param s the main stage
+     */
     @Override
     public void build(Stage s){
         this.addHBox();

@@ -5,12 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * User is the base class for the different representations of our Users
- *
- * @param id is the id associated with user
- * @param fName is the first name of the user
- * @param lName is the last name of the user
- * @param birthdate is the birth-date of the user
- * @param password is a user-set password
  */
 public abstract class User {
 
@@ -22,6 +16,14 @@ public abstract class User {
     String bio;
     int age;
 
+    /**
+     * Creates a User object
+     * @param id the user's ID
+     * @param fName the user's first name
+     * @param lName the user's last name
+     * @param birthdate the user's birthdate
+     * @param password the password
+     */
     public User(int id, String fName, String lName, Date birthdate, String password)
     {
         this.id = id;
@@ -31,23 +33,40 @@ public abstract class User {
         this.password = password;
     }
 
+    /**
+     * @return the ID of this user
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * @return the first name of this user
+     */
     public String getfName() {
         return this.fName;
     }
 
+    /**
+     * @return the last name of this user
+     */
     public String getlName() {
         return this.lName;
     }
 
+    /**
+     * @return the birthday of this user
+     */
     public Date getBirthdate(){return this.birthdate;}
 
+    /**
+     * @return the password
+     */
     public String getPassword(){return this.password;}
 
-
+    /**
+     * @return the age of the user
+     */
     public int getAge() {
         Date today = new Date();
         long diff = today.getTime() - this.getBirthdate().getTime();

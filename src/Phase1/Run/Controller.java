@@ -134,8 +134,9 @@ public class Controller {
                         SwipeUser u = new SwipeUser(next, dm.getFirstName(next), dm.getLastName(next),
                                 new Date(dm.getBirthday(next)), dm.getPassword(next), dm.getImgPath(next));
                         u.setBio(dm.getBio(u.getId()));
-                        SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
-                                FileInputStream(dm.getImgPath(next)))), u);
+                        ImageView ig = new ImageView(new Image(new
+                                FileInputStream(dm.getImgPath(next))));
+                        SwipeViewBuilder sb = new SwipeViewBuilder(ig, u);
 
                         ArrayList matches = new ArrayList();
                         if (!dm.getMatches(user.getId()).isEmpty()) {

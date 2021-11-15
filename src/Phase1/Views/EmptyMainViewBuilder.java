@@ -14,6 +14,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * The builder for Empty swipe view
+ */
 public class EmptyMainViewBuilder implements SceneBuilder{
     ProfileUser primary;
     HBox hb;
@@ -29,7 +32,9 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     Effect effect;
     Text text;
 
-
+    /**
+     * @param user the current user
+     */
     public EmptyMainViewBuilder(ProfileUser user){
         this.primary = user;
         this.bp = new BorderPane();
@@ -68,19 +73,30 @@ public class EmptyMainViewBuilder implements SceneBuilder{
 
     }
 
-
+    /**
+     * @return the Matches button
+     */
     public Button getMatches(){
         return this.btn1;
     }
 
+    /**
+     * @return the LogOut button
+     */
     public Button getLogOut(){
         return this.btn3;
     }
 
+    /**
+     * @return the Me button.
+     */
     public Button getMe(){
         return this.btn2;
     }
 
+    /**
+     * @return the refresh button.
+     */
     public Button getRefresh(){
         return this.btn4;
     }
@@ -115,16 +131,16 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     }
 
     /**
-     * Sets the margin of the biggest box in the borderpane.
+     * Adds the border pane to the stack pane.
      */
-
     public void addbp(){
         this.sp.getChildren().add(this.bp);
 
     }
 
-
-
+    /**
+     * Sets the margin of the biggest box in the borderpane.
+     */
     @Override
     public void setMargin() {
         this.bp.setMargin(this.hb, new Insets(40, 20, 0, 70));
@@ -146,25 +162,29 @@ public class EmptyMainViewBuilder implements SceneBuilder{
         stage.setScene(this.scene);
     }
 
+    /**
+     * Adds the title to the scene
+     */
     public void setText(){
         this.v.getChildren().add(this.text);
 
     }
 
 
-
+    /**
+     * Builds the scene on given stage
+     * @param s the main stage
+     */
     @Override
     public void build(Stage s){
         this.setText();
         this.addButton();
         this.addHBox();
         this.addVBox();
-       this.setSpacing();
-       this.addbp();
+        this.setSpacing();
+        this.addbp();
         this.setMargin();
         this.setScene(s);
-
-
     }
 
 }

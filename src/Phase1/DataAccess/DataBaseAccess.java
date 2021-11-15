@@ -19,6 +19,7 @@ public class DataBaseAccess implements DataAccessInterface {
         super();
         connectDB();
     }
+
     @Override
     public ArrayList getMatches(int id){
 
@@ -365,8 +366,8 @@ public class DataBaseAccess implements DataAccessInterface {
         return thread;
     }
 
-    @Override
-    public String getMessage(int messageID) {
+    //@Override
+    private String getMessage(int messageID) {
         String message = "";
         try {
             String h2 = "select Messages, sender, receiver from messages where messageID = "+ messageID +";";

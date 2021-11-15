@@ -1,47 +1,77 @@
 package Phase1.Users;
 
-import Phase1.DataAccess.DataAccessInterface;
-import Phase1.DataAccess.DataBaseAccess;
-
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User is the base class for the different representations of our Users
  */
 public abstract class User {
 
-    private int id;
-    private String fName;
-    private String lName;
+    int id;
+    String fName;
+    String lName;
+    Date birthdate;
+    String password;
+    String bio;
+    int age;
 
-
-    public User(int id) {
+    /**
+     * Creates a User object
+     * @param id the user's ID
+     * @param fName the user's first name
+     * @param lName the user's last name
+     * @param birthdate the user's birthdate
+     * @param password the password
+     */
+    public User(int id, String fName, String lName, Date birthdate, String password)
+    {
         this.id = id;
+        this.fName = fName;
+        this.lName = lName;
+        this.birthdate = birthdate;
+        this.password = password;
     }
 
+    /**
+     * @return the ID of this user
+     */
     public int getId() {
         return this.id;
     }
 
+    /**
+     * @return the first name of this user
+     */
     public String getfName() {
         return this.fName;
     }
 
+    /**
+     * @return the last name of this user
+     */
     public String getlName() {
         return this.lName;
     }
 
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
+    /**
+     * @return the birthday of this user
+     */
+    public Date getBirthdate(){return this.birthdate;}
 
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
+    /**
+     * @return the password
+     */
+    public String getPassword(){return this.password;}
 
-    public String getBirthdate() {
-        DataAccessInterface db = new DataBaseAccess();
-        return db.getBirthday(this.getId());
+    /**
+     * @return the age of the user
+     */
+    public int getAge() {
+        Date today = new Date();
+        long diff = today.getTime() - this.getBirthdate().getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        return days / 365;
     }
 }
-

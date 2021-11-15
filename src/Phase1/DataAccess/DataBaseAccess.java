@@ -3,45 +3,35 @@ package Phase1.DataAccess;
 
 import javafx.scene.control.Alert;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.Date;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class DataBaseAccess implements DataAccessInterface{
+public class DataBaseAccess implements DataAccessInterface {
 
     private Statement stmt = null;
     Connection conn;
 
 
     public DataBaseAccess(){
+        super();
         connectDB();
     }
 
+    @Override
+    public ArrayList getMatches(int id){
 
-
-    public static ArrayList<Integer> getMatches(int id, DataBaseAccess db){
-        try{
-            ArrayList<Integer> liked = db.getLikes(id);
-            ArrayList<Integer> admirers = db.getAdmires(id);
-            if (liked.isEmpty() || admirers.isEmpty()){
-                return new ArrayList<>();
-            }
-            ArrayList<Integer> matches = new ArrayList<>();
+            ArrayList<Integer> liked = this.getAdmires(id);
+            ArrayList<Integer> matches = new ArrayList();
             for (Integer i: liked){
-                if (admirers.contains(i)){
+                if (getAdmires(i).contains(id) && !matches.contains(i)){
                     matches.add(i);
                 }
             }
             return matches;
-        }
-        catch(Exception io){
-            System.out.println(true);
-        }
-        return new ArrayList<>();
+
     }
 
     private int getNextUser(){
@@ -226,22 +216,11 @@ public class DataBaseAccess implements DataAccessInterface{
 
     @Override
     public int getAge(int id) {
-        int age = -1;
-        try {
-            String h2 = "select age from USER where PersonID = "+ id +";";
-            ResultSet rs = stmt.executeQuery(h2);
-            while (rs.next()) {
-                age = rs.getInt("age");
-            }
-            rs.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return age;
+        java.util.Date today = new Date();
+        long diff = today.getTime() - new Date(this.getBirthday(id)).getTime();
+        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+        return days / 365;
     }
 
     @Override
@@ -387,8 +366,8 @@ public class DataBaseAccess implements DataAccessInterface{
         return thread;
     }
 
-    @Override
-    public String getMessage(int messageID) {
+    //@Override
+    private String getMessage(int messageID) {
         String message = "";
         try {
             String h2 = "select Messages, sender, receiver from messages where messageID = "+ messageID +";";
@@ -539,6 +518,7 @@ public class DataBaseAccess implements DataAccessInterface{
         return rs;
     }
 
+
     @Override
     public boolean setImgPath(int id, String path) {
         boolean rs = false;
@@ -571,6 +551,8 @@ public class DataBaseAccess implements DataAccessInterface{
         return rs;
     }
 
+
+
     @Override
     public boolean likeUser(int currUser, int likeID) {
         boolean rs = false;
@@ -601,7 +583,6 @@ public class DataBaseAccess implements DataAccessInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.admireUser(likeID, currUser);
         return rs;
     }
 
@@ -632,7 +613,6 @@ public class DataBaseAccess implements DataAccessInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.stopAdmiringUser(likeID, currUser);
         return rs;
     }
 
@@ -675,7 +655,7 @@ public class DataBaseAccess implements DataAccessInterface{
             }
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
-                admirer.remove(admirerID);
+                admirer.remove(admirer.indexOf(admirerID));
                 if(admirer.size() != 0){
                     admire = new StringBuilder(admirer.remove(0).toString());
                     for(int x: admirer){
@@ -896,16 +876,6 @@ public class DataBaseAccess implements DataAccessInterface{
         return id;
     }
 
-    @Override
-    public int createUser(Map<String, String> data) throws FileNotFoundException {
-        Date today = new Date();
-        long diff = today.getTime() - new Date(data.get("DOB")).getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-        FileInputStream file = new FileInputStream(data.get("imagePath"));
-        return this.createUser(data.get("lName"), data.get("fName"), data.get("pw1"), data.get("username"),
-                days / 365, data.get("gender"), data.get("preference"), data.get("DOB"));
-    }
-
     private void connectDB() {
         final String JDBC_DRIVER = "org.h2.Driver";
         final String DB_URL = "jdbc:h2:./DB/USERS";
@@ -929,7 +899,6 @@ public class DataBaseAccess implements DataAccessInterface{
     @Override
     public void closeDB() throws SQLException {
         conn.close();
-
     }
 
     public void resetDB(){
@@ -949,8 +918,9 @@ public class DataBaseAccess implements DataAccessInterface{
 
     public void setUpDB(){
         try {
-            String h2 = "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (1, 'person1L', 'person1F', 'user1', 'password', 1, 'Male', 'Female', 'hi', '2', '2', '', 'Dec,01,2021', '.\\img\\im2.jpg');\n" +
-                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (2, 'person2L', 'person2F', 'user2', 'password', 1, 'Female', 'Male', 'hi', '1', '1', '', 'Dec,01,2021', '.\\img\\im2.jpg');";
+            String h2 = "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (1, 'person1L', 'person1F', 'user1', 'password', 1, 'Male', 'Female', 'hi', '2', '2', '', 'Dec,01,2021', '.\\img\\img2.jpg');\n" +
+                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (2, 'person2L', 'person2F', 'user2', 'password', 1, 'Female', 'Male', 'hi', '1', '1', '', 'Dec,01,2021', '.\\img\\img2.jpg');\n" +
+                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (3, 'person3L', 'person3F', 'user3', 'password', 1, 'Female', 'Male', 'hi', '', '', '', 'Dec,01,2021', '.\\img\\img2.jpg');";
             stmt.execute(h2);
 
         } catch (SQLException se) {

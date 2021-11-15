@@ -23,6 +23,9 @@ import javax.swing.*;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
+/**
+ * The view builder for the user's personal info
+ */
 public class SelfViewBuilder implements SceneBuilder{
     ProfileUser u;
     Scene scene;
@@ -52,7 +55,10 @@ public class SelfViewBuilder implements SceneBuilder{
     Text message;
     ScrollPane sp;
 
-
+    /**
+     * Creates a SelfViewBuilder object
+     * @param u
+     */
     public SelfViewBuilder(ProfileUser u){
         this.u = u;
         this.bp = new BorderPane();
@@ -68,8 +74,6 @@ public class SelfViewBuilder implements SceneBuilder{
         this.l7 = new Label("Preference:");
         this.l8 = new Label("Username:");
         this.l9 = new Label("Bio:");
-
-
         this.tf = new TextField(u.getfName());
         this.tf1 = new TextField(u.getlName());
         this.tf2 = new TextField(u.getBirthdate().toString().substring(3, 7) + "," +
@@ -82,7 +86,6 @@ public class SelfViewBuilder implements SceneBuilder{
         this.tf5 = new TextField(u.getPreference());
         this.tf6 = new TextField(u.getUsername());
         this.tf7 = new TextField(u.getBio());
-
         this.vb = new VBox();
         this.hb = new HBox();
         this.message = new Text();
@@ -92,6 +95,10 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Sets the scroll pane to the scene
+     */
+
     public void setSP(){
         this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         this.sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
@@ -99,33 +106,53 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
-
+    /**
+     * @return the username textfield
+     */
     public TextField getUsername(){
         return this.tf6;
     }
 
+    /**
+     * @return the bio textfield
+     */
     public TextField getBio(){
         return this.tf7;
     }
 
+    /**
+     * @return the gender textfield
+     */
     public TextField getGender(){
         return this.tf4;
     }
 
+    /**
+     * @return the gender preference textfield
+     */
     public TextField getPreference(){
         return this.tf5;
     }
 
+    /** Sets the scene on the stage
+     * @param stage the main stage
+     */
     @Override
     public void setScene(Stage stage) {
         this.scene = new Scene(this.bp, 450, 500);
         stage.setScene(this.scene);
     }
 
+    /**
+     * Displays the invalid path message
+     */
     public void invalidPath(){
         this.message.setText("Invalid file path. Please try again.");
     }
 
+    /**
+     * Adds the buttons to the scene
+     */
     @Override
     public void addButton() {
 
@@ -134,47 +161,81 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Adds the "About" text on the scene
+     */
     public void addText(){
         this.hb.getChildren().add(new Text("About"));
 
     }
+
+    /**
+     * @return the image path textfield
+     */
     public TextField getImagePath(){
         return this.tf3;
     }
+
+    /**
+     * @return the first name textfield
+     */
     public TextField getfName(){
         return this.tf;
     }
 
+    /**
+     * @return the last name textfield
+     */
     public TextField getlName(){
         return this.tf1;
     }
 
+    /**
+     * @return the birthday textfield
+     */
     public TextField getBirthday(){
         return this.tf2;
     }
 
+    /**
+     * @return the password textfield
+     */
     public TextField getPW(){
         return this.pw;
     }
 
+    /**
+     * @return the Back button
+     */
     public Button getBack(){
         return this.bt;
     }
 
+    /**
+     * @return the Save button
+     */
     public Button getSave(){
         return this.bt1;
     }
-
+    /**
+     * Adds the HBoxes necessary for the scene.
+     */
     @Override
     public void addHBox() {
         this.vb.getChildren().add(hb);
     }
 
+    /** Adds the vboxes to the scene.
+     */
     @Override
     public void addVBox() {
         this.sp.setContent(this.vb);
 
     }
+
+    /**
+     * Adds all the textfields to the scene.
+     */
     @Override
     public void addTextField() {
 
@@ -187,15 +248,14 @@ public class SelfViewBuilder implements SceneBuilder{
         this.vb.getChildren().addAll(this.l9, this.tf7);
         this.vb.getChildren().addAll(this.l6, this.tf4);
         this.vb.getChildren().addAll(this.l7, this.tf5);
-
-
-
         this.vb.getChildren().add(this.message);
 
     }
 
 
-
+    /**
+     * Sets the margin for the scene.
+     */
     @Override
     public void setMargin() {
         this.bp.setMargin(this.sp, new Insets(50, 50, 20,20));
@@ -205,6 +265,9 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Sets the internal spacing for each box.
+     */
     @Override
     public void setSpacing() {
         this.hb.setSpacing(90);
@@ -212,6 +275,9 @@ public class SelfViewBuilder implements SceneBuilder{
 
     }
 
+    /** Builds the view on given stage
+     * @param s main stage
+     */
     @Override
     public void build(Stage s) {
         this.addVBox();

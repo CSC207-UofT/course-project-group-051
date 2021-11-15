@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * The view builder for the Registration view
+ */
 public class RegistrationViewBuilder implements SceneBuilder{
     Scene scene;
     HBox hb1;
@@ -30,13 +33,10 @@ public class RegistrationViewBuilder implements SceneBuilder{
     TextField tf6;
     TextField tf7;
     TextField tf8;
-
     Text message;
     Label label;
     Label label1;
-
     Label label2;
-
     Label label3;
     Label label4;
     Label label5;
@@ -48,6 +48,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
     TextField tf9;
     ScrollPane sp;
 
+    /**
+     * Creates a Registration view builder object
+     */
     public RegistrationViewBuilder(){
         this.bp = new BorderPane();
         this.message = new Text();
@@ -83,10 +86,16 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Sets the Vbar policy for the scroll pane.
+     */
     public void setSP(){
         this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
 
+    /**
+     * Displays the Path Invalid warning.
+     */
     public void pathInvalid(){
         this.message.setFill(Color.RED);
         this.message.setText("Invalid file path. Please try again.");
@@ -100,11 +109,18 @@ public class RegistrationViewBuilder implements SceneBuilder{
         this.v1.getChildren().add(this.hb1);
 
     }
+
+    /**
+     * Creates the empty textfield warning.
+     */
     public void fillIn(){
         this.message.setFill(Color.RED);
         this.message.setText("Please fill in every blank");
     }
 
+    /**
+     * @return the createAccount button.
+     */
     public Button createAccount(){
         return this.btn2;
     }
@@ -118,6 +134,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * @return the log in button.
+     */
     public Button getLogIn(){
         return this.bt1;
     }
@@ -154,66 +173,111 @@ public class RegistrationViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * @return the Bio textfield
+     */
     public TextField getBio(){
         return this.tf9;
     }
 
+    /**
+     * Adds the message board to the scene
+     */
     public void addMessage(){
         this.v1.getChildren().add(this.message);
 
     }
 
+    /**
+     * Sets the message font for the scene
+     */
     public void setMessageFont(){
         this.message.setFont(new Font(15));
     }
 
+    /**
+     * Sets the message color for the scene
+     */
     public void setMessageFill(){
         this.message.setFill(Color.RED);
 
     }
 
+    /**
+     * @return the birthday textfield
+     */
     public TextField getDOB(){
         return this.tf;
     }
 
+    /**
+     * @return the username textfield
+     */
     public TextField userName(){
         return this.tf1;
     }
 
+    /**
+     * @return the password textfield
+     */
     public TextField getPassword(){
         return this.tf2;
     }
 
+    /**
+     * @return the second password textfield
+     */
     public TextField getPassword1(){
         return this.tf3;
     }
 
+    /**
+     * @return the picture path textfield
+     */
     public TextField getPicturePath(){
         return this.tf4;
     }
 
+    /**
+     * @return the first name textfield
+     */
     public TextField getFirstName(){
         return this.tf5;
     }
 
+    /**
+     * @return the last name textfield
+     */
     public TextField getLastName(){
         return this.tf6;
     }
 
+    /**
+     * @return the gender textfield
+     */
     public TextField getGender(){
         return this.tf7;
     }
 
+    /**
+     * @return the gender preference textfield
+     */
     public TextField getPreference   (){
         return this.tf8;
     }
 
+    /**
+     * Displays password dont match message
+     */
     public void passwordDontMatch(){
         this.message.setFill(Color.RED);
         this.message.setText("Your passwords don't match, please try again");
 
     }
 
+    /**
+     * Displays the message that the account exists
+     */
     public void accountExists(){
         this.message.setFill(Color.RED);
         this.message.setText("Your account already exists in our system. Please log in.");
@@ -249,7 +313,9 @@ public class RegistrationViewBuilder implements SceneBuilder{
         stage.setScene(this.scene);
     }
 
-
+    /** Displays the success message
+     * @param id the ID of the user
+     */
 
     public void success(int id){
         this.message.setFill(Color.GREEN);

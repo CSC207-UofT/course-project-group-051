@@ -10,10 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -22,23 +19,30 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+/**
+ * The builder for Swiping view
+ */
 public class SwipeViewBuilder implements SceneBuilder{
-    Scene scene;
-    HBox hb;
-    StackPane sp;
-    Button btn;
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
-    Text text1;
-    BorderPane bp;
-    VBox v;
-    ImageView image;
-    SwipeUser u;
+    Scene scene;//the scene object
+    HBox hb;//the hb containing the buttons
+    StackPane sp;//the stack pane for the photo, first name and bio
+    Button btn;//the Nah button
+    Button btn1;//the yes button
+    Button btn2;//the matches button
+    Button btn3;//the log out button
+    Button btn4;//the me button
+    BorderPane bp;//the borderpane containing the vbox
+    VBox v; // the vbox containing the scroll pane
+    ImageView image;// the profile Image View of the swipeuser
+    SwipeUser u;//the swipeuser
     HBox hb2;
     Label fnameage;
     Label bio;
+
+    /**
+     * @param image the image of SwipeUser
+     * @param u the SwipeUser
+     */
 
 
     public SwipeViewBuilder(ImageView image, SwipeUser u) {
@@ -47,8 +51,8 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.image.setFitHeight(500);
         this.image.setFitWidth(500);
         this.sp = new StackPane();
-        this.btn = new Button("<");
-        this.btn1 = new Button(">");
+        this.btn = new Button("Nah");
+        this.btn1 = new Button("Like");
         this.btn2 = new Button("Matches");
         this.btn3 = new Button("Log Out");
         this.btn4 = new Button("Me");
@@ -57,9 +61,12 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.u = u;
         this.hb2 = new HBox();
         this.fnameage = new Label(u.getfName() + ", " + Integer.toString(u.getAge()));
+        this.fnameage.setMinWidth(Region.USE_PREF_SIZE);
         this.fnameage.setFont(new Font(20));
         this.fnameage.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
+        this.image.setFitHeight(500);
+        this.image.setFitHeight(500);
        this.bio = new Label(u.getBio());
         this.bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
@@ -77,13 +84,15 @@ public class SwipeViewBuilder implements SceneBuilder{
     }
 
 
-    /** Maps each button to its corresponding eventhandler.
+    /**
+     * Adds the imageview to the view.
      */
-
     public void addImage(){
         this.sp.getChildren().add(this.image);
     }
 
+    /** Adds the buttons to the scene
+     */
     @Override
     public void addButton() {
         this.bp.setLeft(btn);
@@ -95,14 +104,24 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * @return the swipe left button.
+     */
+
     public Button getLeft(){
         return this.btn;
     }
 
+    /**
+     * @return the swipe right button.
+     */
     public Button getRight(){
         return this.btn1;
     }
 
+    /**
+     * @return the matches button.
+     */
     public Button getMatches(){
         return this.btn2;
     }
@@ -140,7 +159,6 @@ public class SwipeViewBuilder implements SceneBuilder{
     public void setSpacing() {
 
         hb.setSpacing(this.image.getFitWidth() / 4);
-        this.hb2.setSpacing(50);
     }
 
     /**
@@ -152,11 +170,18 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     }
 
+    /**
+     * Adds the text elements to the Scrollpane.
+     */
     public void addchildsp(){
         this.sp.getChildren().add(this.fnameage);
         this.sp.getChildren().add(this.bio);
 
     }
+
+    /**
+     * Sets the margin for the view.
+     */
     @Override
     public void setMargin() {
         this.bp.setMargin(this.hb, new Insets(40, 20, 0, 150));
@@ -164,9 +189,6 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setMargin(this.btn1, new Insets(320, 50, 50, 10));
 
         this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
-
-        this.bp.setMargin(this.hb2, new Insets(0, 50,
-                50, this.image.getFitWidth()/2 ));
 
         this.sp.setMargin(this.fnameage, new Insets(this.image.getFitHeight()*0.75, this.image.getFitWidth()*7/8,
                 50, this.image.getFitWidth()/8));
@@ -182,12 +204,14 @@ public class SwipeViewBuilder implements SceneBuilder{
      */
     @Override
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, this.image.getFitWidth() + 250, this.image.getFitHeight() + 190);
+        this.scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
         stage.setScene(this.scene);
     }
 
 
-
+    /** Builds the view on given stage
+     * @param s the main stage.
+     */
     @Override
     public void build(Stage s){
         this.addButton();

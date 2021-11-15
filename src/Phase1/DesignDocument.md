@@ -20,8 +20,8 @@
   * view a list of their matches,
   * view the profile of a match,
   * unmatch users, 
-  * send messages to another user, and/or
-  * retrieve/view past messages.
+  * send messages to another user, and/or (Phase 2)
+  * retrieve/view past messages. (Phase 2)
 * The application must store, adjust, and actively update the database with new matches, admirers, unmatches, 
 and messaging threads.
 ### Updates 

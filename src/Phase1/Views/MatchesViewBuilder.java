@@ -186,7 +186,6 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.addVBox();
         this.addButton();
         this.addText();
-        this.matchButtons(this.dm);
         this.addScrollPane();
         this.orientScrollPane();
         this.addHBox();

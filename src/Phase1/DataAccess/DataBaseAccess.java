@@ -25,7 +25,7 @@ public class DataBaseAccess implements DataAccessInterface {
             ArrayList<Integer> liked = this.getAdmires(id);
             ArrayList<Integer> matches = new ArrayList();
             for (Integer i: liked){
-                if (getAdmires(i).contains(id)){
+                if (getAdmires(i).contains(id) && !matches.contains(i)){
                     matches.add(i);
                 }
             }
@@ -654,7 +654,7 @@ public class DataBaseAccess implements DataAccessInterface {
             }
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
-                admirer.remove(admirerID);
+                admirer.remove(admirer.indexOf(admirerID));
                 if(admirer.size() != 0){
                     admire = new StringBuilder(admirer.remove(0).toString());
                     for(int x: admirer){

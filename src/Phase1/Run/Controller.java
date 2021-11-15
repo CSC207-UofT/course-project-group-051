@@ -91,7 +91,7 @@ public class Controller {
                             sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                             sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, nextid));
-                            sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                            sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u, nextid));
 
                         }
                     }
@@ -167,7 +167,7 @@ public class Controller {
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, user, matches));
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, potential, user));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, potential, user, next));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, potential, user, next));
                         sb.build(s);
 
@@ -241,7 +241,8 @@ public class Controller {
             String bio = rb.getBio().getText();
 
             try {
-                if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")) {
+                if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") ||
+                        location.equals("")) {
                     rb.fillIn();
 
                 } else if (pw1.equals(pw2) && dm.logIn(username, pw1) == -1) {
@@ -281,8 +282,8 @@ public class Controller {
      * @param currTarget the user who is currently on the swipeview
      * @return the event that is mapped to the swipe right button
      */
-    public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
-                                                       ProfileUser u, int currTarget) {
+    public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm,
+                                                       ArrayList swipelist, ProfileUser u, int currTarget) {
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.LoggedIn)) {
                 dm.likeUser(u.getId(), currTarget);
@@ -316,7 +317,7 @@ public class Controller {
                         //dm.likeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, id));
-                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u, currTarget));
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                         sb.build(s);
@@ -344,8 +345,8 @@ public class Controller {
      * @param u the current profile user
      * @return the event that is mapped to the swipe right button
      */
-    public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
-                                                      ProfileUser u) {
+    public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessInterface dm,
+                                                      ArrayList swipelist, ProfileUser u, int currTarget) {
         return (EventHandler<ActionEvent>) event -> {
             //TODO
             if (c.getState().equals(States.LoggedIn)) {
@@ -359,6 +360,9 @@ public class Controller {
 
                 } else {
                     try {
+                        dm.unlikeUser(u.getId(), currTarget);
+//                        dm.stopAdmiringUser(u.getId(), currTarget);
+
 //                        FileInputStream f = new FileInputStream(u.getImagePath());
 //                        Image image = new Image(f);
 //                        ImageView i = new ImageView(image);
@@ -372,11 +376,9 @@ public class Controller {
                         ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
 
-                        dm.unlikeUser(u.getId(), id);
-                        dm.stopAdmiringUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, id));
-                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, currTarget));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u, currTarget));
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                         sb.build(s);
@@ -527,7 +529,7 @@ public class Controller {
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, primary, matches));
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, primary, nextid));
-                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, primary));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, primary, nextid));
 
                         sb.build(s);
 
@@ -550,7 +552,8 @@ public class Controller {
      * @return the event that is mapped to the Me button
      */
 
-    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user) {
+    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm,
+                                                        ProfileUser user) {
         SelfViewBuilder sb = new SelfViewBuilder(user);
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.LoggedIn)) {

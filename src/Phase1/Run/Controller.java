@@ -327,7 +327,7 @@ public class Controller {
                 //  ProfileUser user = dm.getLoggedInUser();
                 //  ProfileUser otherUser = dm.getPotentialUsers().get(0);
                 // get user
-                // test
+                // test//
 
             }
 

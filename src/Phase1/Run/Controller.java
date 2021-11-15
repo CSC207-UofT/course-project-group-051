@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -19,12 +20,12 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Controller {
-    public Controller(){
+    public Controller() {
     }
 
 
     public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataAccessInterface dm,
-                                                         LogInViewBuilder lb){
+                                                         LogInViewBuilder lb) {
         return (EventHandler<ActionEvent>) event -> {
 
             if (c.getState().equals(States.LoggedOut)) {
@@ -32,65 +33,65 @@ public class Controller {
                 String password = lb.getPassword().getText();
                 int id = dm.logIn(username, password);
                 if (id != -1) {
-                    try{
-                        ProfileUser u =  new ProfileUser(id, dm.getFirstName(id), dm.getLastName(id),
-                            new Date(dm.getBirthday(id)), username, password, dm.getImgPath(id));
+                    try {
+                        ProfileUser u = new ProfileUser(id, dm.getFirstName(id), dm.getLastName(id),
+                                new Date(dm.getBirthday(id)), username, password, dm.getImgPath(id));
                         u.setBio(dm.getBio(u.getId()));
                         u.setGender(dm.getGender(u.getId()));
                         u.setPreference(dm.getGenderPreference(u.getId()));
                         c.update(Actions.LOGIN, u, null);
-                     ArrayList<Integer> swipelist = dm.getSwipeList(id);
-                        if(swipelist.isEmpty()){
+                        ArrayList<Integer> swipelist = dm.getSwipeList(id);
+                        if (swipelist.isEmpty()) {
 
                             EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
                             eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                         ArrayList matches = new ArrayList<>();
-                         if (!dm.getMatches(u.getId()).isEmpty()){
+                            ArrayList matches = new ArrayList<>();
+                            if (!dm.getMatches(u.getId()).isEmpty()) {
 
-                             matches = dm.getMatches(u.getId());
+                                matches = dm.getMatches(u.getId());
 
-                         }
 
-                         eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u,matches
-                                ));
-                         eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                         eb.build(s);
+                            }
 
-                     }
-                     else {int nextid = swipelist.get(0);
-                         swipelist.remove(0);
+                            eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, matches
+                            ));
+                            eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
+                            eb.build(s);
+
+                        } else {
+
+                            int nextid = swipelist.get(0);
+                            swipelist.remove(0);
 
                             SwipeUser user = new SwipeUser(nextid, dm.getFirstName(nextid), dm.getLastName(nextid),
-                                 new Date(dm.getBirthday(nextid)), dm.getPassword(nextid), dm.getImgPath(nextid));
-                         user.setBio(dm.getBio(user.getId()));
-                         FileInputStream f = new FileInputStream(dm.getImgPath(nextid));
-                         SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
-                         sb.build(s);
+                                    new Date(dm.getBirthday(nextid)), dm.getPassword(nextid), dm.getImgPath(nextid));
+                            user.setBio(dm.getBio(user.getId()));
+                            FileInputStream f = new FileInputStream(dm.getImgPath(nextid));
+                            SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(f)), user);
+                            sb.build(s);
                             ArrayList matches = new ArrayList();
-                            if (!dm.getMatches(u.getId()).isEmpty()){
+                            if (!dm.getMatches(u.getId()).isEmpty()) {
                                 matches = dm.getMatches(u.getId());
 
                             }
 
                             sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u,
-                                 matches));
+                                    matches));
                             sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                           sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
-                           sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
-                     }}
-                  //  catch (NumberFormatException io){
+                            sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
+                            sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                        }
+                    }
+                    //  catch (NumberFormatException io){
                     //    System.out.println("Invalid image path");
                     //}
-                    catch (FileNotFoundException io){
+                    catch (FileNotFoundException io) {
                         lb.invalidCredential();
 
                     }
 
-                }
-
-
-                else if(id == -1){
+                } else if (id == -1) {
                     lb.invalidCredential();
                 }
                 // ArrayList potentialMatches = dm.getPotentialMatches(u);
@@ -98,8 +99,7 @@ public class Controller {
                 //  SwipeViewBuilder sb1 = new SwipeViewBuilder(potentialMatches.get(0),
                 //        potentialMatches.get(0).getImage());
                 // potentialMatches.remove(potentialMatches.get(0));
-            }
-           else if(c.getState().equals(States.Registration)){
+            } else if (c.getState().equals(States.Registration)) {
 
                 c.update(Actions.LOGIN, null, null);
                 LogInViewBuilder lb1 = new LogInViewBuilder();
@@ -111,54 +111,53 @@ public class Controller {
 
             }
 
-        };}
+        };
+    }
 
-    public static EventHandler RefreshHandler(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user){
+    public static EventHandler RefreshHandler(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user) {
 
-     return (EventHandler<ActionEvent>) event -> {
-         if (c.getState().equals(States.LoggedIn)){
-             ArrayList<Integer> potential = dm.getSwipeList(user.getId());
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.LoggedIn)) {
+                ArrayList<Integer> potential = dm.getSwipeList(user.getId());
 
-             if (potential.isEmpty()){
-                EmptyMainViewBuilder eb = new EmptyMainViewBuilder(user);
-                eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, user));
-                eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
-                eb.getMatches().setOnAction(Controller.Matches(c, s, dm, user, dm.getMatches(user.getId())));
-                eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,dm));
-                eb.build(s);
-             }
-             else{
-                 try{
-                 int next = potential.get(0);
-                 potential.remove(0);
-                     SwipeUser u = new SwipeUser(next, dm.getFirstName(next), dm.getLastName(next),
-                             new Date(dm.getBirthday(next)), dm.getPassword(next), dm.getImgPath(next));
-                     u.setBio(dm.getBio(u.getId()));
-                 SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
-                         FileInputStream(dm.getImgPath(next)))), u);
+                if (potential.isEmpty()) {
+                    EmptyMainViewBuilder eb = new EmptyMainViewBuilder(user);
+                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, user));
+                    eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
+                    eb.getMatches().setOnAction(Controller.Matches(c, s, dm, user, dm.getMatches(user.getId())));
+                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                    eb.build(s);
+                } else {
+                    try {
+                        int next = potential.get(0);
+                        potential.remove(0);
+                        SwipeUser u = new SwipeUser(next, dm.getFirstName(next), dm.getLastName(next),
+                                new Date(dm.getBirthday(next)), dm.getPassword(next), dm.getImgPath(next));
+                        u.setBio(dm.getBio(u.getId()));
+                        SwipeViewBuilder sb = new SwipeViewBuilder(new ImageView(new Image(new
+                                FileInputStream(dm.getImgPath(next)))), u);
 
-                 ArrayList matches = new ArrayList();
-                 if(!dm.getMatches(user.getId()).isEmpty()){
-                     matches = dm.getMatches(user.getId());
-                 }
-                 sb.getMatches().setOnAction(Controller.Matches(c, s, dm, user, matches));
-                 sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
-                 sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                 sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, potential, user));
-                 sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, potential, user));
-                 sb.build(s);
+                        ArrayList matches = new ArrayList();
+                        if (!dm.getMatches(user.getId()).isEmpty()) {
+                            matches = dm.getMatches(user.getId());
+                        }
+                        sb.getMatches().setOnAction(Controller.Matches(c, s, dm, user, matches));
+                        sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
+                        sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, potential, user));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, potential, user));
+                        sb.build(s);
 
-                 }
-             catch(Exception io){
-                System.out.println("Invalid image path for the SwipeUser");
-             }
-             }
-         }
-     };
+                    } catch (Exception io) {
+                        System.out.println("Invalid image path for the SwipeUser");
+                    }
+                }
+            }
+        };
 
     }
 
-    public static EventHandler LogOutHandler(StateMachine c, Stage s, DataAccessInterface dm){
+    public static EventHandler LogOutHandler(StateMachine c, Stage s, DataAccessInterface dm) {
         LogInViewBuilder lb = new LogInViewBuilder();
         return e -> {
             if (c.getState().equals(States.LoggedIn)) {
@@ -168,24 +167,24 @@ public class Controller {
                 lb.build(s);
 
             }
-        };}
-
-
-
-
-    public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataAccessInterface dm){
-        return (EventHandler<ActionEvent>) event -> {
-            if(c.getState().equals(States.LoggedOut)){
-            c.update(Actions.REGISTER, null, null);
-            RegistrationViewBuilder rb = new RegistrationViewBuilder();
-            rb.build(s);
-            rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
-            rb.createAccount().setOnAction(Controller.CreateAccount(c, s, rb, dm));
-            }
-                  };
+        };
     }
+
+
+    public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataAccessInterface dm) {
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.LoggedOut)) {
+                c.update(Actions.REGISTER, null, null);
+                RegistrationViewBuilder rb = new RegistrationViewBuilder();
+                rb.build(s);
+                rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
+                rb.createAccount().setOnAction(Controller.CreateAccount(c, s, rb, dm));
+            }
+        };
+    }
+
     public static EventHandler<ActionEvent> CreateAccount(StateMachine c, Stage s, RegistrationViewBuilder rb,
-                                                          DataAccessInterface dm){
+                                                          DataAccessInterface dm) {
 
         return (EventHandler<ActionEvent>) event -> {
 
@@ -200,127 +199,125 @@ public class Controller {
             String location = rb.getPicturePath().getText();
             String bio = rb.getBio().getText();
 
-            try{
-            if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")){
-                rb.fillIn();
+            try {
+                if (DOB.equals("") || fName.equals("") || lName.equals("") || username.equals("") || location.equals("")) {
+                    rb.fillIn();
 
-            }
+                } else if (pw1.equals(pw2) && dm.logIn(username, pw1) == -1) {
+                    Date today = new Date();
+                    long diff = today.getTime() - new Date(DOB).getTime();
+                    int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    FileInputStream file = new FileInputStream(location);
+                    int id = dm.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
+                    dm.setUsername(id, username);
+                    dm.setBio(id, bio);
+                    dm.setImgPath(id, location);
+                    rb.success(id);
+                    s.show();
 
+                } else if (dm.logIn(username, pw1) != -1) {
+                    rb.accountExists();
+                    rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
+                    rb.createAccount().setOnAction(Controller.Registration(c, s, dm));
 
-           else if (pw1.equals(pw2) && dm.logIn(username, pw1) == -1){
-               Date today = new Date();
-               long diff = today.getTime() - new Date(DOB).getTime();
-               int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-               FileInputStream file = new FileInputStream(location);
-               int id = dm.createUser(lName, fName, pw1, username, days / 365, gender, preference, DOB);
-               dm.setUsername(id, username);
-               dm.setBio(id, bio);
-               dm.setImgPath(id, location);
-               rb.success(id);
-               s.show();
-
-            }
-           else if(dm.logIn(username, pw1) != -1){
-
-             rb.accountExists();
-             rb.getLogIn().setOnAction(Controller.LogInHandler(c, s, dm, new LogInViewBuilder()));
-             rb.createAccount().setOnAction(Controller.Registration(c,s,dm));
-
-            }
-
-            else if (!pw1.equals(pw2)){
-                rb.passwordDontMatch();
-            }
-        }
-
-            catch(Exception e){
+                } else if (!pw1.equals(pw2)) {
+                    rb.passwordDontMatch();
+                }
+            } catch (Exception e) {
                 rb.pathInvalid();
-            }};
+            }
+        };
 
     }
 
     public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
-                                                       ProfileUser u){
+                                                       ProfileUser u) {
         return (EventHandler<ActionEvent>) event -> {
-                if (c.getState().equals(States.LoggedIn)){
-                    if(swipelist.isEmpty()){
-                        EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                        eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,dm));
-                        eb.getMe().setOnAction(Controller.SelfProfile(c,s,dm,u));
-                        eb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
-                        eb.getRefresh().setOnAction(Controller.RefreshHandler(c,s,dm,u));
-                        eb.build(s);
+            if (c.getState().equals(States.LoggedIn)) {
+                if (swipelist.isEmpty()) {
+                    EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
+                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                    eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
+                    eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
+                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, u));
+                    eb.build(s);
+
+                } else {
+                    try {
+//                            FileInputStream f = new FileInputStream(u.getImagePath());
+//                            System.out.println(u.getImagePath());
+//                            Image image = new Image(f);
+//                            ImageView i = new ImageView(image);
+                        int id = (Integer) swipelist.get(0);
+                        swipelist.remove(0);
+                        SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
+                                new Date(dm.getBirthday(id)), dm.getPassword(id), dm.getImgPath(id));
+                        FileInputStream f = new FileInputStream(dm.getImgPath(id));
+                        System.out.println(u.getImagePath());
+                        Image image = new Image(f);
+                        ImageView i = new ImageView(image);
+                        SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
+                        dm.likeUser(u.getId(), id);
+                        sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                        sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
+                        sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        sb.build(s);
+                    } catch (Exception i) {
+                        System.out.println("SwipeUser image path invalid.");
 
                     }
-                    else{
-                        try {
-                            FileInputStream f = new FileInputStream(u.getImagePath());
-                            Image image = new Image(f);
-                            ImageView i = new ImageView(image);
-                            int id = (Integer)swipelist.get(0);
-                            swipelist.remove(0);
-                            SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
-                                    new Date(dm.getBirthday(id)), dm.getPassword(id), dm.getImgPath(id));
-                            SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
-                            dm.likeUser(u.getId(), id);
-                            sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                            sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
-                            sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,dm,swipelist, u));
-                            sb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
-                            sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                            sb.build(s);
-                        }
-                        catch(Exception i){
-                            System.out.println("SwipeUser image path invalid.");
-
-                        }
-
-                    }
-                  //  ProfileUser user = dm.getLoggedInUser();
-                  //  ProfileUser otherUser = dm.getPotentialUsers().get(0);
-                    // get user
-                    // test
 
                 }
+                //  ProfileUser user = dm.getLoggedInUser();
+                //  ProfileUser otherUser = dm.getPotentialUsers().get(0);
+                // get user
+                // test
+
+            }
 
         };
 
     }
+
     public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
-                                                      ProfileUser u){
+                                                      ProfileUser u) {
         return (EventHandler<ActionEvent>) event -> {
             //TODO
-            if (c.getState().equals(States.LoggedIn)){
-                if(swipelist.isEmpty()){
+            if (c.getState().equals(States.LoggedIn)) {
+                if (swipelist.isEmpty()) {
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
-                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c,s,dm));
-                    eb.getMe().setOnAction(Controller.SelfProfile(c,s,dm,u));
-                    eb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
-                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c,s,dm,u));
+                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                    eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
+                    eb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
+                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, u));
                     eb.build(s);
 
-                }
-                else{
+                } else {
                     try {
-                        FileInputStream f = new FileInputStream(u.getImagePath());
-                        Image image = new Image(f);
-                        ImageView i = new ImageView(image);
-                        System.out.println(swipelist);
-                        int id = (Integer)swipelist.get(0);
+//                        FileInputStream f = new FileInputStream(u.getImagePath());
+//                        Image image = new Image(f);
+//                        ImageView i = new ImageView(image);
+                        int id = (Integer) swipelist.get(0);
                         swipelist.remove(0);
                         SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
                                 new Date(dm.getBirthday(id)),
                                 dm.getPassword(id), dm.getImgPath(id));
+                        FileInputStream f = new FileInputStream(dm.getImgPath(id));
+                        System.out.println(u.getImagePath());
+                        Image image = new Image(f);
+                        ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
+
                         dm.unlikeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
-                        sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,dm,swipelist, u));
-                        sb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+                        sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                         sb.build(s);
-                    }
-                    catch(Exception i){
+                    } catch (Exception i) {
                         System.out.println("SwipeUser image path invalid.");
 
 
@@ -337,11 +334,12 @@ public class Controller {
         };
 
     }
+
     public static EventHandler<ActionEvent> Save(StateMachine c, Stage s, DataAccessInterface dm,
-                                                 ProfileUser primary, SelfViewBuilder sb){
+                                                 ProfileUser primary, SelfViewBuilder sb) {
 
         return (EventHandler<ActionEvent>) event -> {
-            if (c.getState().equals(States.SelfProfile)){
+            if (c.getState().equals(States.SelfProfile)) {
                 c.update(Actions.VIEWSELF, primary, null);
                 String fname = sb.getfName().getText();
                 String lname = sb.getlName().getText();
@@ -385,8 +383,9 @@ public class Controller {
                 primary.setUsername(username);
                 sv.build(s);
 
-                try{dm.setImgPath(primary.getId(), image);}
-                catch(Exception io){
+                try {
+                    dm.setImgPath(primary.getId(), image);
+                } catch (Exception io) {
                     sb.invalidPath();
                 }
 
@@ -399,13 +398,12 @@ public class Controller {
     }
 
 
-
-        public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataAccessInterface dm,
-                                                 ProfileUser primary, ChatViewBuilder cv){
+    public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataAccessInterface dm,
+                                                 ProfileUser primary, ChatViewBuilder cv) {
         return (EventHandler<ActionEvent>) event -> {
-            if (c.getState().equals(States.Messaging)){
+            if (c.getState().equals(States.Messaging)) {
                 ArrayList matches = new ArrayList();
-                if (!dm.getMatches(primary.getId()).isEmpty()){
+                if (!dm.getMatches(primary.getId()).isEmpty()) {
                     matches = dm.getMatches(primary.getId());
                 }
 
@@ -413,77 +411,71 @@ public class Controller {
                 MatchesViewBuilder mb1 = new MatchesViewBuilder(primary, matches, dm);
                 mb1.build(s);
 
-            }
-
-            else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
-                 {
+            } else //if(c.getState().equals(States.SelfProfile) || c.getState().equals(States.Matches))
+            {
                 int id = primary.getId();
                 c.update(Actions.BACK, primary, null);
                 ArrayList<Integer> swipelist = dm.getSwipeList(id);
-                if (swipelist.isEmpty()){
+                if (swipelist.isEmpty()) {
                     c.update(Actions.BACK, primary, null);
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(primary);
-                    try{
-                    ArrayList list = new ArrayList();
-                    if (!dm.getMatches(id).isEmpty()){
-                        list = dm.getMatches(id);
-                    }
-                    eb.getMatches().setOnAction(Controller.Matches(c, s, dm, primary, list));
-                    eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, primary));
-                    eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
-                    eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                    eb.build(s);
-                }
-                    catch(NumberFormatException e){
+                    try {
+                        ArrayList list = new ArrayList();
+                        if (!dm.getMatches(id).isEmpty()) {
+                            list = dm.getMatches(id);
+                        }
+                        eb.getMatches().setOnAction(Controller.Matches(c, s, dm, primary, list));
+                        eb.getRefresh().setOnAction(Controller.RefreshHandler(c, s, dm, primary));
+                        eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
+                        eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        eb.build(s);
+                    } catch (NumberFormatException e) {
                         System.out.println("SwipeUser image path invalid.");
 
                     }
-                }
-                else{
+                } else {
                     ArrayList matches = dm.getMatches(primary.getId());
-                int nextid = swipelist.get(0);
+                    int nextid = swipelist.get(0);
                     swipelist.remove(0);
 
                     try {
-                    FileInputStream f = new FileInputStream(dm.getImgPath(nextid));
-                    Image image = new Image(f);
-                    ImageView iv = new ImageView(image);
-                    SwipeUser u = new SwipeUser(nextid, dm.getFirstName(nextid),
-                            dm.getLastName(nextid), new Date(dm.getBirthday(nextid)), dm.getPassword(nextid),
-                            dm.getImgPath(nextid));
-                    u.setBio(dm.getBio(u.getId()));
-                    SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
-                    c.update(Actions.BACK, null, null);
-                    sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
-                    sb.getMatches().setOnAction(Controller.Matches(c,s,dm, primary, matches));
-                    sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
-                    sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, primary));
-                    sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, primary));
+                        FileInputStream f = new FileInputStream(dm.getImgPath(nextid));
+                        Image image = new Image(f);
+                        ImageView iv = new ImageView(image);
+                        SwipeUser u = new SwipeUser(nextid, dm.getFirstName(nextid),
+                                dm.getLastName(nextid), new Date(dm.getBirthday(nextid)), dm.getPassword(nextid),
+                                dm.getImgPath(nextid));
+                        u.setBio(dm.getBio(u.getId()));
+                        SwipeViewBuilder sb = new SwipeViewBuilder(iv, u);
+                        c.update(Actions.BACK, null, null);
+                        sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        sb.getMatches().setOnAction(Controller.Matches(c, s, dm, primary, matches));
+                        sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, primary));
+                        sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, primary));
 
-                    sb.build(s);
+                        sb.build(s);
+
+                    } catch (FileNotFoundException e) {
+                        System.out.println("SwipeUser image path invalid.");
+                    }
+
 
                 }
-                catch (FileNotFoundException e) {
-                    System.out.println("SwipeUser image path invalid.");
-                }
-
-
 
             }
-
-        };};
+            ;
+        };
     }
 
 
-
-
-    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user){
+    public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user) {
         SelfViewBuilder sb = new SelfViewBuilder(user);
-        return (EventHandler<ActionEvent>) event ->{
-            if(c.getState().equals(States.LoggedIn)){
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.LoggedIn)) {
                 c.update(Actions.VIEWSELF, user, null);
                 sb.build(s);
-                sb.getBack().setOnAction(Controller.Back(c,s,dm, user,null));
+                sb.getBack().setOnAction(Controller.Back(c, s, dm, user, null));
                 sb.getSave().setOnAction(Controller.Save(c, s, dm, user, sb));
             }
 
@@ -494,35 +486,37 @@ public class Controller {
     }
 
     public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user,
-                                                    ArrayList<Integer> matches){
+                                                    ArrayList<Integer> matches) {
 
         MatchesViewBuilder mb = new MatchesViewBuilder(user, matches, dm);
 
-        ArrayList<Button> matchesButtons= mb.matchButtons(dm);
-        return (EventHandler<ActionEvent>) event ->{
-            if (c.getState().equals(States.LoggedIn)){
-            c.update(Actions.SHOWMATCHES, user, null);
-            mb.build(s);
-            mb.getBack().setOnAction(Controller.Back(c, s, dm, user, null));
-            for (int i = 0; i < matchesButtons.size(); i++){
-                int id = matches.get(i);
-                ProfileUser u = new ProfileUser(id, dm.getFirstName(id), dm.getLastName(id),
-                        new Date(dm.getBirthday(id)), user.getUsername(), dm.getImgPath(id), dm.getPassword(id));
-                u.setBio(dm.getBio(u.getId()));
-                u.setGender(dm.getGender(u.getId()));
-                u.setPreference(dm.getGenderPreference(u.getId()));
+        ArrayList<Button> matchesButtons = mb.matchButtons(dm);
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.LoggedIn)) {
+                c.update(Actions.SHOWMATCHES, user, null);
+                mb.build(s);
+                mb.getBack().setOnAction(Controller.Back(c, s, dm, user, null));
+                for (int i = 0; i < matchesButtons.size(); i++) {
+                    int id = matches.get(i);
+                    ProfileUser u = new ProfileUser(id, dm.getFirstName(id), dm.getLastName(id),
+                            new Date(dm.getBirthday(id)), user.getUsername(), dm.getImgPath(id), dm.getPassword(id));
+                    u.setBio(dm.getBio(u.getId()));
+                    u.setGender(dm.getGender(u.getId()));
+                    u.setPreference(dm.getGenderPreference(u.getId()));
                     matchesButtons.get(i).setOnAction(Controller.Message(c, s, dm, user, u, matches));
 
-            }
+                }
 
-        }};
+            }
+        };
 
     }
+
     public static EventHandler<ActionEvent> Message(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
-                                                    ProfileUser secondary, ArrayList<Integer> matches){
+                                                    ProfileUser secondary, ArrayList<Integer> matches) {
         ChatViewBuilder cb = new ChatViewBuilder(secondary.getfName(), primary.getId(), secondary.getId());
-        return (EventHandler<ActionEvent>) event ->{
-            if (c.getState().equals(States.Matches)){
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.Matches)) {
                 c.update(Actions.MESSAGE, primary, secondary);
                 cb.build(s);
                 cb.getUnmatch().setOnAction(Controller.Unmatch(c, s, dm, primary, matches, secondary.getId()));
@@ -530,10 +524,11 @@ public class Controller {
             }
         };
     }
+
     public static EventHandler<ActionEvent> Unmatch(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
-                                                    ArrayList<Integer> matches, int secondary){
-        return (EventHandler<ActionEvent>) event ->{
-            if(c.getState().equals(States.Messaging)){
+                                                    ArrayList<Integer> matches, int secondary) {
+        return (EventHandler<ActionEvent>) event -> {
+            if (c.getState().equals(States.Messaging)) {
                 MatchesViewBuilder mb = new MatchesViewBuilder(primary, matches, dm);
                 dm.unlikeUser(primary.getId(), secondary);
                 c.update(Actions.UNMATCH, null, null);
@@ -541,7 +536,7 @@ public class Controller {
                 mb.pop(secondary);
                 mb.getBack().setOnAction(Controller.Back(c, s, dm, primary, null));
                 ArrayList<Button> matchButtons = mb.matchButtons(dm);
-                for (int i = 0; i < matchButtons.size(); i++){
+                for (int i = 0; i < matchButtons.size(); i++) {
 
 
                 }
@@ -549,15 +544,12 @@ public class Controller {
         };
     }
 
-    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessInterface dm){
+    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessInterface dm) {
 
-        return (EventHandler<ActionEvent>) event ->{
+        return (EventHandler<ActionEvent>) event -> {
             //TODO
         };
     }
-
-
-
 
 
 }

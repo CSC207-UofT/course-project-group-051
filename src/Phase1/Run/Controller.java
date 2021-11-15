@@ -309,7 +309,6 @@ public class Controller {
                         SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
                                 new Date(dm.getBirthday(id)), dm.getPassword(id), dm.getImgPath(id));
                         FileInputStream f = new FileInputStream(dm.getImgPath(id));
-                        System.out.println(u.getImagePath());
                         Image image = new Image(f);
                         ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);

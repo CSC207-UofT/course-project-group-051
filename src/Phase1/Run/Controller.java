@@ -92,18 +92,22 @@ public class Controller {
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                             sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, nextid));
                             sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
+
                         }
                     }
                     //  catch (NumberFormatException io){
                     //    System.out.println("Invalid image path");
                     //}
                     catch (FileNotFoundException io) {
-                        lb.invalidCredential();
-
+                        System.out.println("Invalid image path");
                     }
 
                 } else if (id == -1) {
-                    lb.invalidCredential();
+                    LogInViewBuilder lb1 = new LogInViewBuilder();
+                    lb1.invalidCredential();
+                    lb1.getCreateAccount().setOnAction(Controller.Registration(c,s,dm));
+                    lb1.getLogIn().setOnAction(Controller.LogInHandler(c,s,dm, new LogInViewBuilder()));
+                    lb1.build(s);
                 }
                 // ArrayList potentialMatches = dm.getPotentialMatches(u);
                 //if (!potentialMatches.isEmpty()) {
@@ -282,7 +286,7 @@ public class Controller {
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.LoggedIn)) {
                 dm.likeUser(u.getId(), currTarget);
-                System.out.println(currTarget);
+                dm.admireUser(u.getId(), currTarget);
                 if (swipelist.isEmpty()) {
 
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
@@ -365,7 +369,6 @@ public class Controller {
                                 new Date(dm.getBirthday(id)),
                                 dm.getPassword(id), dm.getImgPath(id));
                         FileInputStream f = new FileInputStream(dm.getImgPath(id));
-                        System.out.println(u.getImagePath());
                         Image image = new Image(f);
                         ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
@@ -573,7 +576,6 @@ public class Controller {
                                                     ArrayList<Integer> matches) {
 
         MatchesViewBuilder mb = new MatchesViewBuilder(user, matches, dm);
-
         ArrayList<Button> matchesButtons = mb.matchButtons(dm);
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.LoggedIn)) {

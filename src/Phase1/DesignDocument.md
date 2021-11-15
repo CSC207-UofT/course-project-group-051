@@ -124,7 +124,7 @@ needs to be refactored, since there are parts that break clean architecture. Thi
 The use-cases are aided by 'builders' to avoid duplicating code, and allowing changes to be made without any damage to 
 other classes. This design makes requests to Phase1.Users which then allows the actual functionality of features to be
 used in the application.
-### Factory Method Design Pattern
+### Template Method Design Pattern
 This is used in order for users to view the interface while delegating which scene is needed. This works in unison with 
 the above design pattern, which then allows different actions to change the view the user sees. This allows for easy 
 additions to functionality.

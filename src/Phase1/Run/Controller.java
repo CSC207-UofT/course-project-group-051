@@ -12,18 +12,29 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The FSA controller class
+ */
 public class Controller {
+    /**
+     * Creates a new Controller object
+     */
     public Controller() {
     }
 
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param lb the initial log in view builder
+     * @return the event that is mapped to the log in button
+     */
     public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataAccessInterface dm,
                                                          LogInViewBuilder lb) {
         return (EventHandler<ActionEvent>) event -> {
@@ -114,6 +125,13 @@ public class Controller {
         };
     }
 
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param user the current profile user
+     * @return the event that is mapped to the refresh button
+     */
     public static EventHandler RefreshHandler(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user) {
 
         return (EventHandler<ActionEvent>) event -> {
@@ -158,6 +176,12 @@ public class Controller {
 
     }
 
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @return the event that is mapped to the logout button
+     */
     public static EventHandler LogOutHandler(StateMachine c, Stage s, DataAccessInterface dm) {
         LogInViewBuilder lb = new LogInViewBuilder();
         return e -> {
@@ -171,6 +195,12 @@ public class Controller {
         };
     }
 
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @return the event that is mapped to the registration button
+     */
 
     public static EventHandler<ActionEvent> Registration(StateMachine c, Stage s, DataAccessInterface dm) {
         return (EventHandler<ActionEvent>) event -> {
@@ -184,6 +214,12 @@ public class Controller {
         };
     }
 
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @return the event that is mapped to the Create Account button
+     */
     public static EventHandler<ActionEvent> CreateAccount(StateMachine c, Stage s, RegistrationViewBuilder rb,
                                                           DataAccessInterface dm) {
 
@@ -231,6 +267,16 @@ public class Controller {
 
     }
 
+
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param swipelist the momentary swipe list
+     * @param u the current profile user
+     * @param currTarget the user who is currently on the swipeview
+     * @return the event that is mapped to the swipe right button
+     */
     public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
                                                        ProfileUser u, int currTarget) {
         return (EventHandler<ActionEvent>) event -> {
@@ -287,7 +333,14 @@ public class Controller {
         };
 
     }
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param swipelist the momentary swipe list
+     * @param u the current profile user
+     * @return the event that is mapped to the swipe right button
+     */
     public static EventHandler<ActionEvent> SwipeLeft(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
                                                       ProfileUser u) {
         return (EventHandler<ActionEvent>) event -> {
@@ -341,7 +394,13 @@ public class Controller {
         };
 
     }
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param primary the current profile user
+     * @return the event that is mapped to the save button
+     */
     public static EventHandler<ActionEvent> Save(StateMachine c, Stage s, DataAccessInterface dm,
                                                  ProfileUser primary, SelfViewBuilder sb) {
 
@@ -404,7 +463,13 @@ public class Controller {
 
     }
 
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param primary the current profile user
+     * @return the event that is mapped to the back button
+     */
     public static EventHandler<ActionEvent> Back(StateMachine c, Stage s, DataAccessInterface dm,
                                                  ProfileUser primary, ChatViewBuilder cv) {
         return (EventHandler<ActionEvent>) event -> {
@@ -474,7 +539,13 @@ public class Controller {
             ;
         };
     }
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param user the current profile user
+     * @return the event that is mapped to the Me button
+     */
 
     public static EventHandler<ActionEvent> SelfProfile(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user) {
         SelfViewBuilder sb = new SelfViewBuilder(user);
@@ -490,7 +561,13 @@ public class Controller {
         };
 
 
-    }
+    }    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param user the current profile user
+     * @return the event that is mapped to the Matches button
+     */
 
     public static EventHandler<ActionEvent> Matches(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser user,
                                                     ArrayList<Integer> matches) {
@@ -518,7 +595,15 @@ public class Controller {
         };
 
     }
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param primary the current profile user
+     * @param secondary the secondary user
+     * @param matches the current user's list of matches
+     * @return the event that is mapped to the Message button
+     */
     public static EventHandler<ActionEvent> Message(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
                                                     ProfileUser secondary, ArrayList<Integer> matches) {
         ChatViewBuilder cb = new ChatViewBuilder(secondary.getfName(), primary.getId(), secondary.getId());
@@ -531,7 +616,15 @@ public class Controller {
             }
         };
     }
-
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param primary the current profile user
+     * @param matches the matches of the current profile user
+     * @param secondary the ID of the secondary user
+     * @return the event that is mapped to the Unmatch button
+     */
     public static EventHandler<ActionEvent> Unmatch(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
                                                     ArrayList<Integer> matches, int secondary) {
         return (EventHandler<ActionEvent>) event -> {
@@ -550,8 +643,17 @@ public class Controller {
             }
         };
     }
-
-    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessInterface dm) {
+    /**
+     * @param c the state machine
+     * @param s the main stage
+     * @param dm the data access interface
+     * @param primary the current profile user
+     * @param matches the matches of the current profile user
+     * @param secondary the ID of the secondary user
+     * @return the event that is mapped to the Unmatch button
+     */
+    public static EventHandler<ActionEvent> Send(StateMachine c, Stage s, DataAccessInterface dm, ProfileUser primary,
+                                                 ProfileUser secondary, ArrayList<Integer> matches) {
 
         return (EventHandler<ActionEvent>) event -> {
             //TODO

@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class SwipeViewBuilder implements SceneBuilder{
+public class SwipeViewBuilder implements SceneBuilder {
     Scene scene;
     HBox hb;
     StackPane sp;
@@ -60,7 +60,7 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.fnameage.setFont(new Font(20));
         this.fnameage.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
-       this.bio = new Label(u.getBio());
+        this.bio = new Label(u.getBio());
         this.bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;"
         );
 
@@ -77,10 +77,11 @@ public class SwipeViewBuilder implements SceneBuilder{
     }
 
 
-    /** Maps each button to its corresponding eventhandler.
+    /**
+     * Maps each button to its corresponding eventhandler.
      */
 
-    public void addImage(){
+    public void addImage() {
         this.sp.getChildren().add(this.image);
     }
 
@@ -95,23 +96,23 @@ public class SwipeViewBuilder implements SceneBuilder{
 
     }
 
-    public Button getLeft(){
+    public Button getLeft() {
         return this.btn;
     }
 
-    public Button getRight(){
+    public Button getRight() {
         return this.btn1;
     }
 
-    public Button getMatches(){
+    public Button getMatches() {
         return this.btn2;
     }
 
-    public Button getLogOut(){
+    public Button getLogOut() {
         return this.btn3;
     }
 
-    public Button getMe(){
+    public Button getMe() {
         return this.btn4;
     }
 
@@ -123,7 +124,6 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setCenter(v);
 
     }
-
 
 
     /**
@@ -147,16 +147,17 @@ public class SwipeViewBuilder implements SceneBuilder{
      * Sets the margin of the biggest box in the borderpane.
      */
 
-    public void addsp(){
+    public void addsp() {
         this.bp.setCenter(this.sp);
 
     }
 
-    public void addchildsp(){
+    public void addchildsp() {
         this.sp.getChildren().add(this.fnameage);
         this.sp.getChildren().add(this.bio);
 
     }
+
     @Override
     public void setMargin() {
         this.bp.setMargin(this.hb, new Insets(40, 20, 0, 150));
@@ -166,18 +167,20 @@ public class SwipeViewBuilder implements SceneBuilder{
         this.bp.setMargin(this.v, new Insets(50, 50, 50, 50));
 
         this.bp.setMargin(this.hb2, new Insets(0, 50,
-                50, this.image.getFitWidth()/2 ));
+                50, this.image.getFitWidth() / 2));
 
-        this.sp.setMargin(this.fnameage, new Insets(this.image.getFitHeight()*0.75, this.image.getFitWidth()*7/8,
-                50, this.image.getFitWidth()/8));
-        this.sp.setMargin(this.bio, new Insets(this.image.getFitHeight()*0.88, this.image.getFitWidth()*7/8,
-                50, this.image.getFitWidth()*1/8));
+        this.sp.setMargin(this.fnameage, new Insets(this.image.getFitHeight() * 0.75, this.image.getFitWidth() * 7 / 8,
+                50, this.image.getFitWidth() / 8));
+        this.sp.setMargin(this.bio, new Insets(this.image.getFitHeight() * 0.88, this.image.getFitWidth() * 7 / 8,
+                50, this.image.getFitWidth() * 1 / 8));
         this.hb2.setAlignment(Pos.BASELINE_LEFT);
 
 
     }
 
-    /** Set scene on the stage.
+    /**
+     * Set scene on the stage.
+     *
      * @param stage the mainstage where we display the scene.
      */
     @Override
@@ -187,9 +190,8 @@ public class SwipeViewBuilder implements SceneBuilder{
     }
 
 
-
     @Override
-    public void build(Stage s){
+    public void build(Stage s) {
         this.addButton();
         this.addImage();
         this.addHBox();

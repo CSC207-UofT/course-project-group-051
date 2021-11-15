@@ -93,7 +93,7 @@ time-consuming coupling in the architecture.
 ## Packaging
 Our project packages by the inside/outside pattern. We have the separation of the outer layers of our program and the inner layers outlined by our packaging. 
 For example, our Users class are our most inner classes which are purely information, this is why they are in their own package. They are separate from packages like "Views" and "Run" which are both outer layers of our program that directly output feedback to our user. This also helps us abide by clean architecture because clean architecture uses a 
-simliar philosophy, where you want to segregate the client side stuff from the back end processing and implementation for more easil
+simliar philosophy, where you want to segregate the client side stuff from the back end processing and implementation for more easily.
 
 ## Design Patterns
 The following identified design patterns are either currently implemented or can potentially be added. The project may

@@ -126,7 +126,8 @@ the above design pattern, which then allows different actions to change the view
 additions to functionality.
 ## Progress Report
 Our team has completed more than expected for Phase 1, and are focused on more efficient functionality, refactoring, and
-implementing/identifying design patterns for Phase 2.
+implementing/identifying design patterns for Phase 2. While our Phase 1 functionality is lacking, we aim to clean our
+code for phase 2 and enhance the current functionality. The only addition to functionality for phase 2 will be messaging.
 
 ### Questions
 * We need advice on how to refactor effectively, without completely destroying our code.
@@ -135,7 +136,7 @@ implementing/identifying design patterns for Phase 2.
 ### Problems
 * Healthy communication between _all_ team members
 * Using ideas from other CSC courses that other members do not know/understand
-* Code smells: data clumps, dead code, duplicate code
+* Code smells: dead code, duplicate code, comments (particularly Controller.java), long method, switch-statements
   * Result of lack of due diligence when merging, old code not being removed, and the aftermath of refactoring
 * Creating multiple branches, but not fully merging to update main with all effective code from the individual branches
 * The largest setback was due to lack of communication which lead to dead code, gaps in clean architecture, and wasted 

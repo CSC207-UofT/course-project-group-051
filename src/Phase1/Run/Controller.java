@@ -79,7 +79,7 @@ public class Controller {
                                     matches));
                             sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                             sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                            sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
+                            sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, nextid));
                             sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
                         }
                     }
@@ -145,7 +145,7 @@ public class Controller {
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, user));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, potential, user));
-                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, potential, user));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, potential, user, next));
                         sb.build(s);
 
                     } catch (Exception io) {
@@ -231,10 +231,13 @@ public class Controller {
     }
 
     public static EventHandler<ActionEvent> SwipeRight(StateMachine c, Stage s, DataAccessInterface dm, ArrayList swipelist,
-                                                       ProfileUser u) {
+                                                       ProfileUser u, int currTarget) {
         return (EventHandler<ActionEvent>) event -> {
             if (c.getState().equals(States.LoggedIn)) {
+                dm.likeUser(u.getId(), currTarget);
+                System.out.println(currTarget);
                 if (swipelist.isEmpty()) {
+
                     EmptyMainViewBuilder eb = new EmptyMainViewBuilder(u);
                     eb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                     eb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
@@ -248,6 +251,8 @@ public class Controller {
 //                            System.out.println(u.getImagePath());
 //                            Image image = new Image(f);
 //                            ImageView i = new ImageView(image);
+                        //dm.likeUser(u.getId(), currTarget);
+
                         int id = (Integer) swipelist.get(0);
                         swipelist.remove(0);
                         SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
@@ -257,9 +262,10 @@ public class Controller {
                         Image image = new Image(f);
                         ImageView i = new ImageView(image);
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
-                        dm.likeUser(u.getId(), id);
+                        //System.out.println(id);
+                        //dm.likeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, id));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
@@ -312,7 +318,7 @@ public class Controller {
 
                         dm.unlikeUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
-                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, id));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, u, dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
@@ -451,7 +457,7 @@ public class Controller {
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
                         sb.getMatches().setOnAction(Controller.Matches(c, s, dm, primary, matches));
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, primary));
-                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, primary));
+                        sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, primary, nextid));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, primary));
 
                         sb.build(s);

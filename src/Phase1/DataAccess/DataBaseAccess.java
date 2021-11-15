@@ -919,8 +919,8 @@ public class DataBaseAccess implements DataAccessInterface {
     public void setUpDB(){
         try {
             String h2 = "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (1, 'person1L', 'person1F', 'user1', 'password', 1, 'Male', 'Female', 'hi', '2', '2', '', 'Dec,01,2021', '.\\img\\img2.jpg');\n" +
-                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (2, 'person2L', 'person2F', 'user2', 'password', 1, 'Female', 'Male', 'hi', '1', '1', null, 'Dec,01,2021', '.\\img\\img2.jpg');\n" +
-                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (3, 'person3L', 'person3F', 'user3', 'password', 1, 'Female', 'Male', 'hi', null, null, null, 'Dec,01,2021', '.\\img\\img2.jpg');";
+                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (2, 'person2L', 'person2F', 'user2', 'password', 1, 'Female', 'Male', 'hi', '1', '1', '', 'Dec,01,2021', '.\\img\\img2.jpg');\n" +
+                    "INSERT INTO PUBLIC.USER (PERSONID, LASTNAME, FIRSTNAME, USERNAME, PASSWORD, AGE, GENDER, GENDERPREFERENCE, BIO, LIKES, ADMIRES, THREADS, BIRTHDAY, IMGLOCATION) VALUES (3, 'person3L', 'person3F', 'user3', 'password', 1, 'Female', 'Male', 'hi', '', '', '', 'Dec,01,2021', '.\\img\\img2.jpg');";
             stmt.execute(h2);
 
         } catch (SQLException se) {

@@ -373,6 +373,7 @@ public class Controller {
                         SwipeViewBuilder sb = new SwipeViewBuilder(i, sw);
 
                         dm.unlikeUser(u.getId(), id);
+                        dm.stopAdmiringUser(u.getId(), id);
                         sb.getMe().setOnAction(Controller.SelfProfile(c, s, dm, u));
                         sb.getRight().setOnAction(Controller.SwipeRight(c, s, dm, swipelist, u, id));
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c, s, dm, swipelist, u));

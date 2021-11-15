@@ -22,14 +22,10 @@ public class DataBaseAccess implements DataAccessInterface {
     @Override
     public ArrayList getMatches(int id){
 
-            ArrayList<Integer> liked = this.getLikes(id);
-            ArrayList<Integer> admirers = this.getAdmires(id);
-            if (liked.isEmpty() || admirers.isEmpty()){
-                return new ArrayList();
-            }
+            ArrayList<Integer> liked = this.getAdmires(id);
             ArrayList<Integer> matches = new ArrayList();
             for (Integer i: liked){
-                if (admirers.contains(i)){
+                if (getAdmires(i).contains(id)){
                     matches.add(i);
                 }
             }

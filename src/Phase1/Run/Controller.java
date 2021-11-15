@@ -57,9 +57,7 @@ public class Controller {
                          eb.build(s);
 
                      }
-                     else {
-
-                         int nextid = swipelist.get(0);
+                     else {int nextid = swipelist.get(0);
                          swipelist.remove(0);
 
                             SwipeUser user = new SwipeUser(nextid, dm.getFirstName(nextid), dm.getLastName(nextid),
@@ -307,6 +305,7 @@ public class Controller {
                         FileInputStream f = new FileInputStream(u.getImagePath());
                         Image image = new Image(f);
                         ImageView i = new ImageView(image);
+                        System.out.println(swipelist);
                         int id = (Integer)swipelist.get(0);
                         swipelist.remove(0);
                         SwipeUser sw = new SwipeUser(id, dm.getFirstName(id), dm.getLastName(id),
@@ -319,6 +318,7 @@ public class Controller {
                         sb.getLeft().setOnAction(Controller.SwipeLeft(c,s,dm,swipelist, u));
                         sb.getMatches().setOnAction(Controller.Matches(c,s,dm,u,dm.getMatches(u.getId())));
                         sb.getLogOut().setOnAction(Controller.LogOutHandler(c, s, dm));
+                        sb.build(s);
                     }
                     catch(Exception i){
                         System.out.println("SwipeUser image path invalid.");

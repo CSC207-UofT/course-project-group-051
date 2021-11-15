@@ -39,7 +39,7 @@ public class Session extends Application {
 
                 //Setting the preserve ratio of the image view
               //  imageView.setPreserveRatio(true);
-                DataAccessInterface db = new DataBaseAccess();
+                DataBaseAccess db = new DataBaseAccess();
                 LogInViewBuilder lb = new ViewBuilderFactory().lBuilder();
                 RegistrationViewBuilder rb = new RegistrationViewBuilder();
                 lb.getLogIn().setOnAction(Controller.LogInHandler(c, stage, db, lb));

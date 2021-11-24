@@ -4,8 +4,9 @@ package Phase1.DataAccess;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -21,10 +22,10 @@ public class DataBaseAccess implements DataAccessInterface {
     }
 
     @Override
-    public ArrayList getMatches(int id){
+    public ArrayList<Integer> getMatches(int id){
 
             ArrayList<Integer> liked = this.getAdmires(id);
-            ArrayList<Integer> matches = new ArrayList();
+            ArrayList<Integer> matches = new ArrayList<>();
             for (Integer i: liked){
                 if (getAdmires(i).contains(id) && !matches.contains(i)){
                     matches.add(i);
@@ -216,8 +217,11 @@ public class DataBaseAccess implements DataAccessInterface {
 
     @Override
     public int getAge(int id) {
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
         java.util.Date today = new Date();
-        long diff = today.getTime() - new Date(this.getBirthday(id)).getTime();
+        LocalDate localDate = LocalDate.parse(this.getBirthday(id));
+        long diff = today.getTime() - Date.from(localDate.atStartOfDay(defaultZoneId).toInstant()).getTime();
         int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 
         return days / 365;
@@ -655,7 +659,7 @@ public class DataBaseAccess implements DataAccessInterface {
             }
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
-                admirer.remove(admirer.indexOf(admirerID));
+                admirer.remove(admirerID);
                 if(admirer.size() != 0){
                     admire = new StringBuilder(admirer.remove(0).toString());
                     for(int x: admirer){

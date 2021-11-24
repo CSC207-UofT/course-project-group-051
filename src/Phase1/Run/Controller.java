@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +38,7 @@ public class Controller {
      */
     public static EventHandler<ActionEvent> LogInHandler(StateMachine c, Stage s, DataAccessInterface dm,
                                                          LogInViewBuilder lb) {
-        return (EventHandler<ActionEvent>) event -> {
+        return event -> {
 
             if (c.getState().equals(States.LoggedOut)) {
                 String username = lb.getUserName().getText();
@@ -46,7 +47,7 @@ public class Controller {
                 if (id != -1) {
                     try {
                         ProfileUser u = new ProfileUser(id, dm.getFirstName(id), dm.getLastName(id),
-                                new Date(dm.getBirthday(id)), username, password, dm.getImgPath(id));
+                                DateFormat.parse(dm.getBirthday(id)), username, password, dm.getImgPath(id));
                         u.setBio(dm.getBio(u.getId()));
                         u.setGender(dm.getGender(u.getId()));
                         u.setPreference(dm.getGenderPreference(u.getId()));

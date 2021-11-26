@@ -5,6 +5,7 @@ import Phase1.UserBuilders.BuildSwipeUser;
 import Phase1.Users.SwipeUser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -46,10 +47,10 @@ public class SwipeAction implements Transitionable{
 
     /**
      * This method gets the next user to swipe on from the queue.
-     * @return an array representing the data of the next user to swipe on, in the
-     * order [fname, lname, age, gender, bio, image], or null if there are none left.
+     * @return a dictionary with the keys fName, lName, age, gender, bio, image. These are String representations
+     * of the nextUser's data.
      */
-    public String[] getNextUser() {
+    public HashMap<String, String> getNextUser() {
 
         currentTarget = swipeList.poll();
 
@@ -57,17 +58,19 @@ public class SwipeAction implements Transitionable{
             return null;
         }
 
+        HashMap<String, String> map = new HashMap<>();
+
         //get currentTarget data.
-        String fName = currentTarget.getfName();
-        String lName = currentTarget.getlName();
-        String age = currentTarget.getAge();
-        String gender = currentTarget.getGender();
-        String bio = currentTarget.getBio();
-        String image = currentTarget.getImagePath();
+        map.put("fName", currentTarget.getfName());
+        map.put("lName", currentTarget.getlName());
+        map.put("age", currentTarget.getAge());
+        map.put("gender", currentTarget.getGender());
+        map.put("bio", currentTarget.getBio());
+        map.put("image", currentTarget.getImagePath());
 
         //is there a better way to do this kind of list.
 
-        return new String[]{fName, lName, age, gender, bio, image};
+        return map;
 
     }
 

@@ -1,17 +1,14 @@
-package Phase1.DataAccess;
+package Phase;
 
 
 import javafx.scene.control.Alert;
 
-import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class DataBaseAccess implements DataAccessInterface {
+public class DataBaseAccess implements Phase.DataAccessInterface {
 
     private Statement stmt = null;
     Connection conn;
@@ -218,7 +215,7 @@ public class DataBaseAccess implements DataAccessInterface {
 
     @Override
     public int getAge(int id) {
-        java.util.Date today = new Date();
+        Date today = new Date();
         long diff = today.getTime() - new Date(this.getBirthday(id)).getTime();
         int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 

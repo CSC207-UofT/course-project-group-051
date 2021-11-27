@@ -1,4 +1,4 @@
-package Phase;
+package phase2.dataaccess;
 
 
 import java.sql.SQLException;

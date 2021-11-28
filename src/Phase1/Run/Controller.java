@@ -70,7 +70,6 @@ public class Controller {
                             eb.build(s);
 
                         } else {
-
                             int nextid = swipelist.get(0);
                             swipelist.remove(0);
 

@@ -196,7 +196,8 @@ public class SwipeView implements View{
 
     }
 
-    /** Set scene on the stage.
+    /**
+     * Set scene on the stage.
      * @param stage the mainstage where we display the scene.
      */
     private void setScene(Stage stage) {

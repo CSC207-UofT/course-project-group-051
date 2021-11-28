@@ -19,88 +19,62 @@ public class LoginView implements View{
 
     Scene scene;
     HBox hb1;
-    Button bt1;
-    Button bt2;
+    Button createAccount;
+    Button loginButton;
     BorderPane bp;
     VBox v;
     VBox v1;
-    TextField tf1;
-    PasswordField pf1;
-    Label label1;
-    Label label2;
-    Text message;
+    TextField username;
+    PasswordField password;
+    Label usernameLabel;
+    Label passwordLabel;
+    Text warning;
     boolean error;
     DataAccessInterface db;
     Stage stage;
 
-    public LoginView(boolean error, DataAccessInterface db,Stage stage){
+    public LoginView(boolean error, DataAccessInterface db, Stage stage){
+
         this.db = db;
         this.bp = new BorderPane();
-        this.bt1 = new Button("Create new account");
-        this.bt2 = new Button("Log In");
-        this.label1 = new Label("Username:");
-        this.label2 = new Label("Password:");
-        this.tf1 = new TextField ();
-        this.pf1 = new PasswordField();
+        this.createAccount = new Button("Create new account");
+        this.loginButton = new Button("Log In");
+        this.usernameLabel = new Label("Username:");
+        this.passwordLabel = new Label("Password:");
+        this.username = new TextField ();
+        this.password = new PasswordField();
         this.v = new VBox();
         this.v1 = new VBox();
         this.hb1 = new HBox();
-        this.message = new Text();
+        this.warning = new Text();
         this.error = error;
         this.stage = stage;
     }
 
     @Override
     public void build() {
-        if(error){
-            this.invalidCredential();
-        }
+
+
         this.addButton();
         this.addVBox();
         this.addTextField();
-        this.addText();
+        if(error){
+            this.v1.getChildren().add(ErrorMessage.loginWarning());
+        }
         this.addHBox();
         this.setSpacing();
         this.setMargin();
-        this.setScene(stage);
         this.setOnActions();
+        this.setScene(stage);
     }
 
     private void setOnActions(){
-        LogInController controller = new LogInController(db, stage, tf1, pf1);
-        bt1.setOnAction(controller.login());
-        bt2.setOnAction(controller.register());
+
+        LogInController controller = new LogInController(db, stage, username, password);
+        createAccount.setOnAction(controller.register());
+        loginButton.setOnAction(controller.login());
     }
 
-    /**
-     * Sets the invalid credential message when the credential is invalid.
-     */
-    public void invalidCredential(){
-        this.message.setFill(Color.RED);
-        this.message.setText("Invalid Credential. Please try again.");
-    }
-
-    /**
-     * adds the message to the scene.
-     */
-
-    public void addText(){
-        this.v1.getChildren().add(this.message);
-    }
-
-    /** returns the username inputted in the textfield.
-     * @return the username in String.
-     */
-    public TextField getUserName(){
-        return this.tf1;
-    }
-
-    /** returns the inputted password in passwordfield.
-     * @return the password in String.
-     */
-    public TextField getPassword(){
-        return this.pf1;
-    }
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -111,21 +85,13 @@ public class LoginView implements View{
     }
 
 
-    /** Maps each button to its corresponding eventhandler.
+    /** Maps each button to its corresponding EventHandler.
      */
 
     public void addButton() {
-        this.hb1.getChildren().add(this.bt1);
-        this.hb1.getChildren().add(this.bt2);
+        this.hb1.getChildren().add(this.createAccount);
+        this.hb1.getChildren().add(this.loginButton);
 
-    }
-
-    public Button getCreateAccount(){
-        return this.bt1;
-    }
-
-    public Button getLogIn(){
-        return this.bt2;
     }
 
 
@@ -133,19 +99,19 @@ public class LoginView implements View{
      * Creates all the VBoxes necessary for the scene.
      */
     public void addVBox() {
-        this.v1.getChildren().add(this.v);
 
+        this.v1.getChildren().add(this.v);
         this.bp.setCenter(v1);
     }
 
 
     /**
-     * Adds textfield to the corresponding box.
+     * Adds TextField to the corresponding box.
      */
     public void addTextField() {
-        this.v.getChildren().addAll(this.label1,
-                this.tf1);
-        this.v.getChildren().addAll(this.label2, this.pf1);
+
+        this.v.getChildren().addAll(this.usernameLabel, this.username);
+        this.v.getChildren().addAll(this.passwordLabel, this.password);
     }
 
     /**
@@ -163,15 +129,15 @@ public class LoginView implements View{
      */
     public void setMargin() {
 
-        this.bp.setMargin(this.v1, new Insets(50, 50, 50, 50));
+        BorderPane.setMargin(this.v1, new Insets(50, 50, 50, 50));
 
     }
 
     /** Set scene on the stage.
-     * @param stage the mainstage where we display the scene.
+     * @param stage the MainStage where we display the scene.
      */
     public void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, 450, 300);
+        this.scene = new Scene(this.bp, 450, 350);
         stage.setScene(this.scene);
     }
 }

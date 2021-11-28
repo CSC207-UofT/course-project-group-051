@@ -70,14 +70,14 @@ public class SwipeView implements View{
     @Override
     public void build() {
 
+        setUserData();
+        setOnActions();
         addButton();
         addHBox();
         addVBox();
         addTextField();
         setSpacing();
         addsp();
-        setOnActions();
-        setUserData();
         setMargin();
         setScene(stage);
 
@@ -125,36 +125,36 @@ public class SwipeView implements View{
      * Adds the text elements to the Scrollpane.
      */
     private void addText(){
-        this.sp.getChildren().add(this.fNameAge);
-        this.sp.getChildren().add(this.bio);
+        sp.getChildren().add(fNameAge);
+        sp.getChildren().add(bio);
 
     }
 
     /**
-     * Creates the HBoxes necessary for the scene.
+     * Adds the HBoxes to the BorderPane.
      */
     private void addHBox() {
-        this.bp.setTop(this.hb);
-        this.bp.setBottom(this.hb2);
+        bp.setTop(hb);
+        bp.setBottom(hb2);
     }
 
     /**
-     * Creates all the VBoxes necessary for the scene.
+     * Adds the VBoxes to the BorderPane.
      */
     private void addVBox() {
-        this.bp.setCenter(v);
+        bp.setCenter(v);
 
     }
 
     /**
-     * Adds the buttons to the scene
+     * Adds the buttons to the scene.
      */
     private void addButton() {
-        this.bp.setLeft(noButton);
-        this.bp.setRight(yesButton);
-        this.hb.getChildren().add(matchesButton);
-        this.hb.getChildren().add(logoutButton);
-        this.hb.getChildren().add(myProfileButton);
+        bp.setLeft(noButton);
+        bp.setRight(yesButton);
+        hb.getChildren().add(matchesButton);
+        hb.getChildren().add(logoutButton);
+        hb.getChildren().add(myProfileButton);
 
     }
 

@@ -23,10 +23,8 @@ public class MatchController {
         return db.getMatches(userID);
     }
     public String getFirstName(Integer userID){
-        event = e -> {
-            //TODO
-        };
-        return event;
+
+        return null;
     }
     public EventHandler<ActionEvent> switchMessage(Integer userID){
         event = e -> {

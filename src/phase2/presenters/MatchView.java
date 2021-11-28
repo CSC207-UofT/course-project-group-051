@@ -20,10 +20,10 @@ public class MatchView implements View{
     ScrollPane scrollPane;
     VBox vb;
     BorderPane bp;
-    ArrayList<Integer> matches;
     DataAccessInterface db;
     Stage stage;
     int userID;
+
     public MatchView(DataAccessInterface db, Stage stage, int userID){
         this.db = db;
         this.stage = stage;
@@ -33,6 +33,7 @@ public class MatchView implements View{
         this.back = new Button("Back");
         this.hb = new HBox();
         this.userID = userID;
+
     }
 
 
@@ -40,11 +41,17 @@ public class MatchView implements View{
 
         MatchController controller = new MatchController(db, stage, userID);
         ArrayList<Integer> matches = controller.getMatches();
-        for(Integer i: matches){
-            Button b = new Button(controller.getFirstName(i));
-            this.vb.getChildren().add(b);
-            b.setOnAction(controller.switchMessage(i));
-        }
+//        for(Integer i: matches){
+//            Button b = new Button(controller.getFirstName(i));
+//            this.vb.getChildren().add(b);
+//            b.setOnAction(controller.switchMessage(i));
+//        }
+        Button b = new Button("controller.getFirstName(i)");
+        this.vb.getChildren().add(b);
+        Button d = new Button("controller.sdagetFirstName(i)");
+        this.vb.getChildren().add(d);
+        //b.setOnAction(controller.switchMessage(i));
+
         back.setOnAction(controller.back());
     }
 
@@ -134,6 +141,7 @@ public class MatchView implements View{
         this.addHBox();
         this.setMargin();
         this.setSpacing();
+        this.setOnActions();
         this.setScene(stage);
     }
 }

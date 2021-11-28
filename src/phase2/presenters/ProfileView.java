@@ -144,7 +144,6 @@ public class ProfileView implements View {
     /** Sets the scene on the stage
      * @param stage the main stage
      */
-    @Override
     public void setScene(Stage stage) {
         this.scene = new Scene(this.bp, 450, 500);
         stage.setScene(this.scene);
@@ -160,7 +159,6 @@ public class ProfileView implements View {
     /**
      * Adds the buttons to the scene
      */
-    @Override
     public void addButton() {
 
         this.hb.getChildren().add(this.bt);
@@ -227,14 +225,12 @@ public class ProfileView implements View {
     /**
      * Adds the HBoxes necessary for the scene.
      */
-    @Override
     public void addHBox() {
         this.vb.getChildren().add(hb);
     }
 
     /** Adds the vboxes to the scene.
      */
-    @Override
     public void addVBox() {
         this.sp.setContent(this.vb);
 
@@ -243,7 +239,6 @@ public class ProfileView implements View {
     /**
      * Adds all the textfields to the scene.
      */
-    @Override
     public void addTextField() {
 
         this.vb.getChildren().addAll(this.l1, this.tf);
@@ -263,7 +258,6 @@ public class ProfileView implements View {
     /**
      * Sets the margin for the scene.
      */
-    @Override
     public void setMargin() {
         this.bp.setMargin(this.sp, new Insets(50, 50, 20,20));
         this.sp.setBorder(Border.EMPTY);
@@ -275,7 +269,6 @@ public class ProfileView implements View {
     /**
      * Sets the internal spacing for each box.
      */
-    @Override
     public void setSpacing() {
         this.hb.setSpacing(90);
         this.vb.setSpacing(20);
@@ -285,7 +278,6 @@ public class ProfileView implements View {
     /** Builds the view on given stage
      * @param s main stage
      */
-    @Override
     public void build() {
         this.addVBox();
         this.addHBox();

@@ -1,7 +1,6 @@
 package phase2.presenters;
 
 import Phase1.DataAccess.DataAccessInterface;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

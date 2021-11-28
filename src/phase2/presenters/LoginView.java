@@ -31,8 +31,9 @@ public class LoginView implements View{
     Text message;
     boolean error;
     DataAccessInterface db;
+    Stage stage;
 
-    public LoginView(boolean error, DataAccessInterface db){
+    public LoginView(boolean error, DataAccessInterface db,Stage stage){
         this.db = db;
         this.bp = new BorderPane();
         this.bt1 = new Button("Create new account");
@@ -46,10 +47,11 @@ public class LoginView implements View{
         this.hb1 = new HBox();
         this.message = new Text();
         this.error = error;
+        this.stage = stage;
     }
 
     @Override
-    public void build(Stage stage) {
+    public void build() {
         if(error){
             this.invalidCredential();
         }
@@ -65,7 +67,7 @@ public class LoginView implements View{
     }
 
     private void setOnActions(){
-        LogInController controller = new LogInController(db, tf1, pf1);
+        LogInController controller = new LogInController(db, stage, tf1, pf1);
         bt1.setOnAction(controller.login());
         bt2.setOnAction(controller.register());
     }

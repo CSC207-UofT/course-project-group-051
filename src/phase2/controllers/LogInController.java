@@ -30,7 +30,6 @@ public class LogInController {
     }
 
 
-
     public EventHandler<ActionEvent> login(){
         event = e -> {
             LogInCase logInCase = new LogInCase(db);
@@ -49,7 +48,7 @@ public class LogInController {
 
     public EventHandler<ActionEvent> register(){
         event = e -> {
-            View view = new RegistrationView();
+            View view = new RegistrationView(db, stage);
             view.build();
         };
         return event;

@@ -26,7 +26,9 @@ public class SwipeController {
         this.swipeList = swipeList; //possibly make into list of swipeUsers?
         currentTarget = swipeList.poll();
     }
+    public EventHandler<ActionEvent> matches() {
 
+    }
     public EventHandler<ActionEvent> swipeRight() {
 
         EventHandler<ActionEvent> event;
@@ -51,6 +53,11 @@ public class SwipeController {
 
     }
 
+
+
+    public EventHandler<ActionEvent> selfView() {
+
+    }
 
     public EventHandler<ActionEvent> changeProfileView() {
 

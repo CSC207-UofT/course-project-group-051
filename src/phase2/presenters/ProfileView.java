@@ -1,12 +1,8 @@
 package phase2.presenters;
 
-import Phase1.DataAccess.DataAccessInterface;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -16,82 +12,115 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.controllers.ProfileController;
+import phase2.dataaccess.DataAccessInterface;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * The view builder for the user's personal info
  */
 public class ProfileView implements View {
-    ProfileUser u;
+    //ProfileUser u;
+    int id;
     Scene scene;
     BorderPane bp;
     HBox hb;
-    javafx.scene.control.Button bt;
-    javafx.scene.control.Button bt1;
+    javafx.scene.control.Button back;
+    javafx.scene.control.Button save;
     VBox vb;
-    Label l1;
-    Label l2;
-    Label l3;
-    Label l4;
-    Label l5;
-    Label l6;
-    Label l7;
-    Label l8;
-    Label l9;
-    TextField tf1;
-    TextField tf;
-    TextField tf2;
-    TextField tf3;
-    TextField tf4;
-    TextField tf5;
-    TextField tf6;
-    TextField tf7;
-    TextField pw;
-    Text message;
+    Label firstNameL;
+    Label lastNameL;
+    Label birthdayL;
+    Label passwordL;
+    Label imgPathL;
+    Label genderL;
+    Label genderPrefL;
+    Label usernameL;
+    Label bioL;
+    TextField firstNameT;
+    TextField lastNameT;
+    TextField birthdayT;
+    TextField imgPathT;
+    TextField genderT;
+    TextField genderPrefT;
+    TextField usernameT;
+    TextField bioT;
+    TextField passwordT;
+    Text fileError;
+    Text dateError;
     ScrollPane sp;
-    Stage s;
-    DataAccessInterface d;
-
+    Stage stage;
+    DataAccessInterface db;
+    ProfileController controller;
     /**
      * Creates a SelfViewBuilder object
-     * @param u
+     * @param db the DataAccessInterface
+     * @param stage the stage of the program
+     * @param id the id of the current user
+     * @param errors the amount of errors there is (0 is for date and 1 is for imgPath)
      */
-    public ProfileView(ProfileUser u, DataAccessInterface dm, Stage s){
-        this.d = dm;
-        this.u = u;
+    public ProfileView(DataAccessInterface db, Stage stage, int id, boolean[] errors){
+        this.stage = stage;
+        this.db = db;
+        this.id = id;
+        setJavaFX();
+        controller = new ProfileController(db, stage, id);
+        setLabel();
+        setText();
+        setError(errors);
+        setOnActions();
+
+
+    }
+    private void setJavaFX(){
         this.bp = new BorderPane();
         this.sp = new ScrollPane();
-        this.bt = new Button("Back");
-        this.bt1 = new Button("Save");
-        this.l1 = new Label("First Name:");
-        this.l2 = new Label("Last Name:");
-        this.l3 = new Label("Birthdate:");
-        this.l4 = new Label("Password:");
-        this.l5 = new Label("Profile Image Path:");
-        this.l6 = new Label("Gender:");
-        this.l7 = new Label("Preference:");
-        this.l8 = new Label("Username:");
-        this.l9 = new Label("Bio:");
-        this.tf = new TextField(u.getfName());
-        this.tf1 = new TextField(u.getlName());
-        this.tf2 = new TextField(u.getBirthdate().toString().substring(3, 7) + "," +
-                u.getBirthdate().toString().substring(8, 10) + "," +
-                u.getBirthdate().toString().substring(u.getBirthdate().toString().length() - 4,
-                        u.getBirthdate().toString().length()));
-        this.pw = new TextField(u.getPassword());
-        this.tf3 = new TextField(u.getImagePath());
-        this.tf4 = new TextField(u.getGender());
-        this.tf5 = new TextField(u.getPreference());
-        this.tf6 = new TextField(u.getUsername());
-        this.tf7 = new TextField(u.getBio());
+        this.back = new Button("Back");
+        this.save = new Button("Save");
         this.vb = new VBox();
         this.hb = new HBox();
-        this.message = new Text();
-        this.message.setFill(Color.RED);
-        this.message.setFont(new Font(15));
-        this.s = s;
+        this.fileError = new Text();
+        this.fileError.setFill(Color.RED);
+        this.fileError.setFont(new Font(15));
+        this.dateError = new Text();
+        this.dateError.setFill(Color.RED);
+        this.dateError.setFont(new Font(15));
+    }
 
+    private void setError(boolean[] errors){
+        if(errors[0]){
+            dateError.setText("Invalid date format. Please try again.");
+        }
+        if(errors[1]){
+            fileError.setText("Invalid file path. Please try again.");
+        }
+    }
 
+    private void setLabel(){
+        firstNameL = new Label("First Name:");
+        lastNameL = new Label("Last Name:");
+        birthdayL = new Label("Date of Birth(e.g. Dec,06,1999):");
+        passwordL = new Label("Password:");
+        imgPathL = new Label("Profile Image Path:");
+        genderL = new Label("Gender:");
+        genderPrefL = new Label("Gender Preference:");
+        usernameL = new Label("Username:");
+        bioL = new Label("Bio:");
+    }
+
+    private void setText(){
+        Map<String, String> info = controller.getUserInfo();
+        firstNameT = new TextField(info.get("firstNameL"));
+        lastNameT = new TextField(info.get("lastNameL"));
+        birthdayT = new TextField(info.get("birthdayL"));
+        passwordT = new TextField(info.get("passwordL"));
+        imgPathT = new TextField(info.get("imgPathL"));
+        genderT = new TextField(info.get("genderL"));
+        genderPrefT = new TextField(info.get("genderPrefL"));
+        usernameT = new TextField(info.get("usernameL"));
+        bioT = new TextField(info.get("bioL"));
     }
 
     /**
@@ -106,40 +135,20 @@ public class ProfileView implements View {
     }
 
     private void setOnActions(){
-
-        ProfileController controller = new ProfileController(dm, s, u);
-        this.bt.setOnAction(controller.back());
-        this.bt1.setOnAction(controller.save());
+        Map<String, TextInputControl> inputs = new HashMap<>();
+        inputs.put("firstNameT", firstNameT);
+        inputs.put("lastNameT", lastNameT);
+        inputs.put("birthdayT", birthdayT);
+        inputs.put("imgPathT", imgPathT);
+        inputs.put("genderT", genderT);
+        inputs.put("genderPrefT", genderPrefT);
+        inputs.put("usernameT", usernameT);
+        inputs.put("bioT", bioT);
+        inputs.put("passwordT", passwordT);
+        this.back.setOnAction(controller.back());
+        this.save.setOnAction(controller.save(inputs));
     }
 
-
-    /**
-     * @return the username textfield
-     */
-    public TextField getUsername(){
-        return this.tf6;
-    }
-
-    /**
-     * @return the bio textfield
-     */
-    public TextField getBio(){
-        return this.tf7;
-    }
-
-    /**
-     * @return the gender textfield
-     */
-    public TextField getGender(){
-        return this.tf4;
-    }
-
-    /**
-     * @return the gender preference textfield
-     */
-    public TextField getPreference(){
-        return this.tf5;
-    }
 
     /** Sets the scene on the stage
      * @param stage the main stage
@@ -149,20 +158,14 @@ public class ProfileView implements View {
         stage.setScene(this.scene);
     }
 
-    /**
-     * Displays the invalid path message
-     */
-    public void invalidPath(){
-        this.message.setText("Invalid file path. Please try again.");
-    }
 
     /**
      * Adds the buttons to the scene
      */
     public void addButton() {
 
-        this.hb.getChildren().add(this.bt);
-        this.vb.getChildren().add(this.bt1);
+        this.hb.getChildren().add(this.back);
+        this.vb.getChildren().add(this.save);
 
     }
 
@@ -174,54 +177,6 @@ public class ProfileView implements View {
 
     }
 
-    /**
-     * @return the image path textfield
-     */
-    public TextField getImagePath(){
-        return this.tf3;
-    }
-
-    /**
-     * @return the first name textfield
-     */
-    public TextField getfName(){
-        return this.tf;
-    }
-
-    /**
-     * @return the last name textfield
-     */
-    public TextField getlName(){
-        return this.tf1;
-    }
-
-    /**
-     * @return the birthday textfield
-     */
-    public TextField getBirthday(){
-        return this.tf2;
-    }
-
-    /**
-     * @return the password textfield
-     */
-    public TextField getPW(){
-        return this.pw;
-    }
-
-    /**
-     * @return the Back button
-     */
-    public Button getBack(){
-        return this.bt;
-    }
-
-    /**
-     * @return the Save button
-     */
-    public Button getSave(){
-        return this.bt1;
-    }
     /**
      * Adds the HBoxes necessary for the scene.
      */
@@ -241,16 +196,18 @@ public class ProfileView implements View {
      */
     public void addTextField() {
 
-        this.vb.getChildren().addAll(this.l1, this.tf);
-        this.vb.getChildren().addAll(this.l2, this.tf1);
-        this.vb.getChildren().addAll(this.l3, this.tf2);
-        this.vb.getChildren().addAll(this.l8, this.tf6);
-        this.vb.getChildren().addAll(this.l4, this.pw);
-        this.vb.getChildren().addAll(this.l5, this.tf3);
-        this.vb.getChildren().addAll(this.l9, this.tf7);
-        this.vb.getChildren().addAll(this.l6, this.tf4);
-        this.vb.getChildren().addAll(this.l7, this.tf5);
-        this.vb.getChildren().add(this.message);
+        this.vb.getChildren().addAll(this.firstNameL, this.firstNameT);
+        this.vb.getChildren().addAll(this.lastNameL, this.lastNameT);
+        this.vb.getChildren().addAll(this.birthdayL, this.birthdayT);
+        this.vb.getChildren().addAll(this.usernameL, this.usernameT);
+        this.vb.getChildren().addAll(this.passwordL, this.passwordT);
+        this.vb.getChildren().addAll(this.imgPathL, this.imgPathT);
+        this.vb.getChildren().addAll(this.bioL, this.bioT);
+        this.vb.getChildren().addAll(this.genderL, this.genderT);
+        this.vb.getChildren().addAll(this.genderPrefL, this.genderPrefT);
+        this.vb.getChildren().add(this.dateError);
+        this.vb.getChildren().add(this.fileError);
+
 
     }
 
@@ -276,7 +233,6 @@ public class ProfileView implements View {
     }
 
     /** Builds the view on given stage
-     * @param s main stage
      */
     public void build() {
         this.addVBox();
@@ -287,6 +243,6 @@ public class ProfileView implements View {
         this.addText();
         this.setSpacing();
         this.setMargin();
-        this.setScene(s);
+        this.setScene(stage);
     }
 }

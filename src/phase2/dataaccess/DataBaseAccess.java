@@ -1,4 +1,4 @@
-package Phase;
+package phase2.dataaccess;
 
 
 import javafx.scene.control.Alert;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class DataBaseAccess implements Phase.DataAccessInterface {
+public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
 
     private Statement stmt = null;
     Connection conn;

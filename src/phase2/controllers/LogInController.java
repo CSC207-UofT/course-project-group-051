@@ -12,16 +12,24 @@ import phase2.presenters.View;
 import phase2.usecase.LogInCase;
 import javafx.stage.Stage;
 
-
+/**
+ * The controller that delegates tasks for each button in the log in view.
+ */
 public class LogInController {
 
-    DataAccessInterface db;
-    TextField username;
-    PasswordField password;
-    EventHandler<ActionEvent> event;
-    Stage stage;
+    DataAccessInterface db; //the Data Access Interface.
+    TextField username; //the Username text field.
+    PasswordField password; //the password field.
+    EventHandler<ActionEvent> event; //the event placeholder.
+    Stage stage; //the main stage.
 
-
+    /**
+     * Creates an instance of LogInController.
+     * @param db the data access interface.
+     * @param stage the main stage.
+     * @param username the username text field.
+     * @param password the password text field.
+     */
     public LogInController(DataAccessInterface db, Stage stage, TextField username, PasswordField password){
         this.db = db;
         this.username = username;
@@ -29,7 +37,9 @@ public class LogInController {
         this.stage = stage;
     }
 
-
+    /**
+     * @return the task delegation after the log in button is pressed.
+     */
     public EventHandler<ActionEvent> login(){
         event = e -> {
             LogInCase logInCase = new LogInCase(db);
@@ -46,6 +56,9 @@ public class LogInController {
         return event;
     }
 
+    /**
+     * @return the task delegation when the register button is pressed.
+     */
     public EventHandler<ActionEvent> register(){
         event = e -> {
             View view = new RegistrationView(db, stage);

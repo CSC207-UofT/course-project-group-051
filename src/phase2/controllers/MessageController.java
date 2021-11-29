@@ -1,5 +1,4 @@
 package phase2.controllers;
-import Phase1.Views.MatchesViewBuilder;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -7,8 +6,6 @@ import javafx.stage.Stage;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MatchView;
 import phase2.presenters.MessageView;
-
-import java.util.ArrayList;
 
 /** A controller that delegates the task for each button in the message view.
  */
@@ -28,29 +25,75 @@ public class MessageController {
         this.db = db;
         this.primaryUser = primary;
         this.secondaryUser = secondary;
-        this.s = s;
+        this.s = stage;
+    }
+
+    /**
+     * @return the thread ID given the user.
+     */
+    private int getThreadID(){
+        for (Integer i : db.getThreads(primaryUser)){
+            String message = db.getThread(i).get(0);
+            Integer puserID = new Integer(message.split(",")[1]);
+            Integer suserID = new Integer(message.split(",")[2]);
+            if(puserID == primaryUser && suserID == secondaryUser){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * @return true if the user has non-empty threads, false otherwise.
+     */
+    private boolean hasThread(){
+        if (db.getThread(primaryUser).size() == 0){
+            return false;
+        }
+        else{
+            for (Integer i : db.getThreads(primaryUser)){
+                String message = db.getThread(i).get(0);
+                Integer puserID = new Integer(message.split(",")[1]);
+                Integer suserID = new Integer(message.split(",")[2]);
+                if(puserID == primaryUser && suserID == secondaryUser){
+                    return true;
+                }
+
+            }
+
+        }
+        return false;
+
     }
 
     /**
      * @return the event handler when the "Send" button is pressed.
      */
-    public EventHandler<ActionEvent> send(Thread thread){
+
+    public EventHandler<ActionEvent> send(String msg){
 
         EventHandler<ActionEvent> e = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                db.addThread(thread);
-                ArrayList t = new ArrayList();
-                ArrayList threads = db.getThreads(primaryUser);
-                for (Thread i: threads){
-                    if (i.primaryUser.equals(primaryUser) && i.secondaryUser.equals(secondaryUser)){
-                        t.add(i);
+                if (db.getThreads(primaryUser).size() > 0){
+                for (Integer i: db.getThreads(primaryUser)) {
+                    if (!hasThread()){
+                        int threadid = db.createThread(primaryUser, secondaryUser);
+                        db.createMessage(threadid, primaryUser, secondaryUser, msg);
                     }
+
+                    else {
+                        Integer threadid = new Integer(getThreadID());
+                        db.createMessage(threadid, primaryUser, secondaryUser, msg);
+                    }
+                    MessageView m = new MessageView(db, s, primaryUser, secondaryUser);
+                    m.build();
                 }
-                MessageView m = new MessageView(db, s, primaryUser, secondaryUser);
-                m.build();
+                }
             }
-        };
+
+            };
+
 
         return e;
 

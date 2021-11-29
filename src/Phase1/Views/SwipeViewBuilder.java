@@ -35,8 +35,8 @@ public class SwipeViewBuilder implements SceneBuilder{
     VBox v; // the vbox containing the scroll pane
     ImageView image;// the profile Image View of the swipeuser
     SwipeUser u;//the swipeuser
-    HBox hb2;
-    Label fnameage;
+    HBox hb2;//the second horizontal box
+    Label fnameage; //
     Label bio;
 
     /**

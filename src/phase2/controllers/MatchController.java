@@ -22,19 +22,20 @@ public class MatchController {
     public ArrayList<Integer> getMatches(){
         return db.getMatches(userID);
     }
+
     public String getFirstName(Integer userID){
 
         return null;
     }
-    public EventHandler<ActionEvent> switchMessage(Integer userID){
+    public EventHandler<ActionEvent> switchMessageView(Integer userID){
         event = e -> {
-            //TODO
+            MessageView(db, stage, userID, receiverID);
         };
         return event;
     }
     public EventHandler<ActionEvent> back(){
         event = e -> {
-            //TODO
+            SwipeView(db, stage, userID, swipeList);
         };
         return event;
     }

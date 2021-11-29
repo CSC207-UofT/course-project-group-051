@@ -1,8 +1,9 @@
-package phase2.usecase;
+package phase2.tests;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.junit.jupiter.api.Test;
+import phase2.usecase.ImageMaker;
 
 import java.io.FileInputStream;
 

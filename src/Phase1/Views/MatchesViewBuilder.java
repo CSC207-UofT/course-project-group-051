@@ -25,7 +25,7 @@ public class MatchesViewBuilder implements SceneBuilder{
     VBox vb;
     BorderPane bp;
     ArrayList<Integer> matches;
-    int secondary;
+    Stage s;
     DataAccessInterface dm;
 
     /**
@@ -34,7 +34,7 @@ public class MatchesViewBuilder implements SceneBuilder{
      * @param matches the list of matches the user has
      * @param dm dataacess interface
      */
-    public MatchesViewBuilder(ProfileUser primaryUser, ArrayList<Integer> matches, DataAccessInterface dm){
+    public MatchesViewBuilder(ProfileUser primaryUser, Stage s, ArrayList<Integer> matches, DataAccessInterface dm){
         this.user = primaryUser;
         this.matches = matches;
         this.scrollPane = new ScrollPane();
@@ -43,6 +43,7 @@ public class MatchesViewBuilder implements SceneBuilder{
         this.back = new Button("Back");
         this.hb = new HBox();
         this.dm = dm;
+        this.s = s;
 
     }
 

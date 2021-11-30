@@ -62,15 +62,15 @@ public class ProfileController {
             this.inputs = inputs;
             boolean[] errors = {false, false};
             String[] info = new String[9];
-            info[0] = inputs.get("firstNameT").getText();
-            info[1] = inputs.get("lastNameT").getText();
-            info[2] = inputs.get("birthdayT").getText();
-            info[3] = inputs.get("imgPathT").getText();
-            info[4] = inputs.get("genderT").getText();
-            info[5] = inputs.get("genderPrefT").getText();
-            info[6] = inputs.get("usernameT").getText();
-            info[7] = inputs.get("bioT").getText();
-            info[8] = inputs.get("passwordT").getText();
+            info[0] = inputs.get("fName").getText();
+            info[1] = inputs.get("lName").getText();
+            info[2] = inputs.get("birthday").getText();
+            info[3] = inputs.get("imgPath").getText();
+            info[4] = inputs.get("gender").getText();
+            info[5] = inputs.get("genderPref").getText();
+            info[6] = inputs.get("username").getText();
+            info[7] = inputs.get("bio").getText();
+            info[8] = inputs.get("password").getText();
             ProfileCase profileCase = new ProfileCase(db);
             if(!profileCase.checkValidDate(info[2])){
                 errors[0] = true;

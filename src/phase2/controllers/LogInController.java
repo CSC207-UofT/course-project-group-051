@@ -44,12 +44,12 @@ public class LogInController {
         event = e -> {
             LogInCase logInCase = new LogInCase(db);
             int logInResult = logInCase.loginUser(username.getText(), password.getText());
-            View view;
+            View view = null;
             if(logInResult == -1){
                 view = new LoginView(true, db, stage);
             }
             else{
-                view = new SwipeView();
+                //view = new SwipeView();
             }
             view.build();
         };

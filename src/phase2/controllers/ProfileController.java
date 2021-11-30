@@ -37,15 +37,15 @@ public class ProfileController {
 
     public Map<String, String> getUserInfo(){
         Map<String, String> info = new HashMap<>();
-        info.put("firstNameL", db.getFirstName(id));
-        info.put("lastNameL", db.getLastName(id));
-        info.put("birthdayL", db.getBirthday(id));
-        info.put("imgPathL", db.getImgPath(id));
-        info.put("genderL", db.getGender(id));
-        info.put("genderPrefL", db.getGenderPreference(id));
-        info.put("usernameL", db.getUsername(id));
-        info.put("bioL", db.getBio(id));
-        info.put("passwordL", db.getPassword(id));
+        info.put("firstName", db.getFirstName(id));
+        info.put("lastName", db.getLastName(id));
+        info.put("birthday", db.getBirthday(id));
+        info.put("imgPath", db.getImgPath(id));
+        info.put("gender", db.getGender(id));
+        info.put("genderPref", db.getGenderPreference(id));
+        info.put("username", db.getUsername(id));
+        info.put("bio", db.getBio(id));
+        info.put("password", db.getPassword(id));
         return info;
     }
 
@@ -62,8 +62,8 @@ public class ProfileController {
             this.inputs = inputs;
             boolean[] errors = {false, false};
             String[] info = new String[9];
-            info[0] = inputs.get("firstNameT").getText();
-            info[1] = inputs.get("lastNameT").getText();
+            info[0] = inputs.get("fNameT").getText();
+            info[1] = inputs.get("lNameT").getText();
             info[2] = inputs.get("birthdayT").getText();
             info[3] = inputs.get("imgPathT").getText();
             info[4] = inputs.get("genderT").getText();

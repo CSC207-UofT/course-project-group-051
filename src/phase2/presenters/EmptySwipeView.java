@@ -4,7 +4,6 @@ import phase2.users.User;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -19,13 +18,13 @@ import phase2.dataaccess.DataAccessInterface;
  */
 public class EmptySwipeView implements View{
 
-    User primary; // the primary user.
+    private SwipeController controller;// the primary user.
     HBox hb; // the hbox containing the buttons.
     StackPane sp; // the scroll pane.
-    Button btn1; // the matches button.
-    Button btn2; // the self view button.
-    Button btn3; // the log out button.
-    Button btn4; // the refresh button.
+    Button matchesButton; // the matches button.
+    Button myProfileButton; // the self view button.
+    Button logoutButton; // the log out button.
+    Button refreshButton; // the refresh button.
     BorderPane bp; // the main borderpane.
     VBox v; // the main vbox.
     Scene scene; // the scene corresponding to this view.
@@ -34,23 +33,25 @@ public class EmptySwipeView implements View{
     DataAccessInterface db; // the data access interface.
 
     /**
-     * @param user the current user
-     * @param s the main stage
+     * @param stage the main stage
      * @param db the data access interface
+     * @param id the current user's ID
      */
-    public EmptySwipeView(User user, Stage s, DataAccessInterface db){
-        this.primary = user;
+    public EmptySwipeView( Stage stage, DataAccessInterface db, int id){
+
+
+        controller = new SwipeController(stage, db, id);
         this.bp = new BorderPane();
         this.sp = new StackPane();
-        this.btn1 = new Button("Matches");
-        this.btn2 = new Button("Me");
-        this.btn3 = new Button("Log Out");
-        this.btn4 = new Button("Refresh");
+        this.matchesButton = new Button("Matches");
+        this.myProfileButton = new Button("Me");
+        this.logoutButton = new Button("Log Out");
+        this.refreshButton = new Button("Refresh");
         this.hb = new HBox();
         this.v = new VBox();
         this.text = new Text("There is no user to swipe at the moment,\n" +
                 " please refresh or try again later");
-        this.s = s;
+        this.s = stage;
         this.db = db;
     }
 
@@ -58,11 +59,10 @@ public class EmptySwipeView implements View{
      * Delegates the task to each button.
      */
     public void setOnAction(){
-        SwipeController sp = new SwipeController(db, s, primary.getId(), db.getSwipeList(primary.getId()));
-        this.btn4.setOnAction(sp.refresh());
-        this.btn3.setOnAction(sp.logOut());
-        this.btn2.setOnAction(sp.selfView());
-        this.btn1.setOnAction(sp.matches());
+        this.refreshButton.setOnAction(controller.refresh());
+        this.logoutButton.setOnAction(controller.logOut());
+        this.myProfileButton.setOnAction(controller.changeProfileView());
+        this.matchesButton.setOnAction(controller.changeMatchView());
 
     }
 
@@ -79,10 +79,10 @@ public class EmptySwipeView implements View{
 
 
     public void addButton() {
-        this.v.getChildren().add(btn4);
-        this.hb.getChildren().add(btn1);
-        this.hb.getChildren().add(btn2);
-        this.hb.getChildren().add(btn3);
+        this.v.getChildren().add(refreshButton);
+        this.hb.getChildren().add(matchesButton);
+        this.hb.getChildren().add(myProfileButton);
+        this.hb.getChildren().add(logoutButton);
 
 
     }
@@ -91,28 +91,28 @@ public class EmptySwipeView implements View{
      * @return the Matches button
      */
     public Button getMatches(){
-        return this.btn1;
+        return this.matchesButton;
     }
 
     /**
      * @return the LogOut button
      */
     public Button getLogOut(){
-        return this.btn3;
+        return this.logoutButton;
     }
 
     /**
      * @return the Me button.
      */
     public Button getMe(){
-        return this.btn2;
+        return this.myProfileButton;
     }
 
     /**
      * @return the refresh button.
      */
     public Button getRefresh(){
-        return this.btn4;
+        return this.refreshButton;
     }
 
     /**
@@ -153,11 +153,11 @@ public class EmptySwipeView implements View{
      * Sets the margin of the biggest box in the borderpane.
      */
     public void setMargin() {
-        this.bp.setMargin(this.hb, new Insets(40, 20, 0, 70));
-        this.bp.setMargin(this.btn1, new Insets(320, 10, 50, 50));
-        this.bp.setMargin(this.btn2, new Insets(320, 50, 50, 10));
-        this.v.setMargin(this.btn4, new Insets(0, 50, 0, 140));
-        this.v.setMargin(this.text, new Insets(150, 50, 0, 65));
+        BorderPane.setMargin(this.hb, new Insets(40, 20, 0, 70));
+        BorderPane.setMargin(this.matchesButton, new Insets(320, 10, 50, 50));
+        BorderPane.setMargin(this.myProfileButton, new Insets(320, 50, 50, 10));
+        VBox.setMargin(this.refreshButton, new Insets(0, 50, 0, 140));
+        VBox.setMargin(this.text, new Insets(150, 50, 0, 65));
 
 
 
@@ -183,10 +183,10 @@ public class EmptySwipeView implements View{
     /**
      * Builds the scene on given stage
      */
-
     @Override
     public void build() {
         this.setText();
+        this.setOnAction();
         this.addButton();
         this.addHBox();
         this.addVBox();
@@ -199,4 +199,3 @@ public class EmptySwipeView implements View{
 }
 
 
-}

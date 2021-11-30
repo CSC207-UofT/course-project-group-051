@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import phase2.presenters.LoginView;
-import phase2.presenters.ProfileView;
-import phase2.presenters.SwipeView;
-import phase2.presenters.View;
+import phase2.presenters.*;
 import phase2.usecase.SwipeCase;
 
 import java.util.Map;
@@ -17,23 +14,39 @@ import java.util.Queue;
 public class SwipeController {
 
     private final Stage stage;
-    private final SwipeCase swiper;
+    private SwipeCase swiper;
     private final int currentUser;
     private final DataAccessInterface db;
 
     /**
-     * @param db A reference to our Database so we can read and write to it.
      * @param stage the main stage where we display the scene.
+     * @param db A reference to our Database so we can read and write to it.
      * @param id the id of the currently logged-in User.
      * @param swipeList a list of IDs that the currently logged-in User can swipe on. (they have not already
      * liked any of these users.)
      */
-    public SwipeController(Stage stage, DataAccessInterface db, int id, Queue<Integer> swipeList) {
+    public SwipeController(Stage stage, DataAccessInterface db, int id, Queue<Integer> swipeList ) {
 
         this.stage = stage;
         swiper = new SwipeCase(db, id, swipeList);
         this.db = db;
         currentUser = id;
+    }
+
+    /**
+     * A constructor for when there are no people left in the swipelist.
+     * @param stage the main stage where we display the scene.
+     * @param db A reference to our Database so we can read and write to it.
+     * @param id the id of the currently logged-in User.
+     */
+    public SwipeController(Stage stage, DataAccessInterface db, int id) {
+
+        this.stage = stage;
+        this.db = db;
+        currentUser = id;
+
+
+
     }
 
     /**
@@ -50,7 +63,7 @@ public class SwipeController {
 
             View view;
             if (empty) {
-                view = new EmptySwipeView(db, stage);
+                view = new EmptySwipeView(stage, db, currentUser);
             } else {
                 view = new SwipeView(this, stage);
             }
@@ -75,7 +88,7 @@ public class SwipeController {
 
             View view;
             if (empty) {
-                view = new EmptySwipeView(db, stage);
+                view = new EmptySwipeView(stage, db, currentUser);
             } else {
                 view = new SwipeView(this, stage);
             }
@@ -124,7 +137,7 @@ public class SwipeController {
 
         event = e -> {
 
-            View view = new ProfileView(db, stage, currentUser);
+            View view = new ProfileView(db, stage, currentUser, new boolean[0]);
             view.build();
 
         };
@@ -142,7 +155,7 @@ public class SwipeController {
 
         event = e -> {
 
-            View view = new matchView(db, stage, currentUser);
+            View view = new MatchView(db, stage, currentUser);
             view.build();
 
         };

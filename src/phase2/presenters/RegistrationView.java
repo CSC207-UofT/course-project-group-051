@@ -48,9 +48,10 @@ public class RegistrationView implements View{
     Label label9;
     TextField tf9;
     ScrollPane sp;
+    Text error;
 
 
-    public RegistrationView(DataAccessInterface db, Stage stage){
+    public RegistrationView(DataAccessInterface db, Stage stage, Text error){
         this.db = db;
         this.stage = stage;
         this.bp = new BorderPane();
@@ -83,20 +84,21 @@ public class RegistrationView implements View{
         this.tf8 = new TextField ();
         this.tf9 = new TextField();
         this.createAccount = new Button("Create Account");
+        this.error = error;
     }
 
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("birthday", tf);
-        inputs.put("username", tf);
-        inputs.put("password", tf);
-        inputs.put("passwordC", tf);
-        inputs.put("profilePic", tf);
-        inputs.put("fName", tf);
-        inputs.put("lName", tf);
-        inputs.put("gender", tf);
-        inputs.put("genderPref", tf);
-        inputs.put("bio", tf);
+        inputs.put("username", tf1);
+        inputs.put("password", tf2);
+        inputs.put("passwordC", tf3);
+        inputs.put("profilePic", tf4);
+        inputs.put("fName", tf5);
+        inputs.put("lName", tf6);
+        inputs.put("gender", tf7);
+        inputs.put("genderPref", tf8);
+        inputs.put("bio", tf9);
         RegistrationController controller = new RegistrationController(db, stage, inputs);
         createAccount.setOnAction(controller.createAccount());
         login.setOnAction(controller.login());
@@ -213,6 +215,9 @@ public class RegistrationView implements View{
         this.addButton();
         this.addVBox();
         this.addMessage();
+        if(!error.getText().isEmpty()){
+            this.v1.getChildren().add(error);
+        }
         this.addHBox();
         this.setSP();
         this.setMessageFill();

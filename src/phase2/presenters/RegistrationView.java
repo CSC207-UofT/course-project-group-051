@@ -11,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.controllers.RegistrationController;
+import phase2.controllers.LogInController;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.HashMap;
@@ -99,9 +100,10 @@ public class RegistrationView implements View{
         inputs.put("gender", tf7);
         inputs.put("genderPref", tf8);
         inputs.put("bio", tf9);
-        RegistrationController controller = new RegistrationController(db, stage, inputs);
-        createAccount.setOnAction(controller.createAccount());
-        login.setOnAction(controller.login());
+        RegistrationController registrationController = new RegistrationController(db, stage, inputs);
+        LogInController logInController = new LogInController(db,stage, tf1, tf2);
+        createAccount.setOnAction(registrationController.createAccount());
+        login.setOnAction(logInController.login());
     }
 
     /**

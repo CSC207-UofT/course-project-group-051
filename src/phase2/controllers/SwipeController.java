@@ -5,10 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import phase2.presenters.LoginView;
-import phase2.presenters.ProfileView;
-import phase2.presenters.SwipeView;
-import phase2.presenters.View;
+import phase2.presenters.*;
 import phase2.usecase.SwipeCase;
 
 import java.util.Map;
@@ -142,7 +139,7 @@ public class SwipeController {
 
         event = e -> {
 
-            View view = new matchView(db, stage, currentUser);
+            View view = new MatchView(db, stage, currentUser);
             view.build();
 
         };

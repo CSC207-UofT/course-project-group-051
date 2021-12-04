@@ -3,6 +3,7 @@ package phase2.ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import phase2.controllers.States;
 import phase2.presenters.LoginView;
 import phase2.dataaccess.*;
 import java.io.FileNotFoundException;
@@ -26,6 +27,7 @@ public class Session extends Application {
 
         //Setting the preserve ratio of the image view
         //  imageView.setPreserveRatio(true);
+        static String state = States.LoggedOut;
         DataAccessInterface db = new DataBaseAccess();
         LoginView view = new LoginView(false, db, stage);
         view.build();

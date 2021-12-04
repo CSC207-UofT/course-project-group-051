@@ -24,7 +24,13 @@ public class MainController {
      * @param inputs the mapping of inputs to the textfield for profileView.
      * @return the controller for the next state.
      */
-    public Controller getController(String state, Command action, DataAccessInterface db, Stage stage, int user,
+
+    public MessageController(DataAccessInterface db, Stage stage){
+        this.db = db;
+        this.stage = stage;
+
+    }
+    public Controller getController(Command action, DataAccessInterface db, Stage stage, int user,
                                     Queue swipelist, int user2, HashMap inputs){
         if (state.equals(States.LoggedIn) && action.equals(Actions.LogOut)){
         return new LogInController(db, stage);}

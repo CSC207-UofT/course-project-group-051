@@ -60,7 +60,7 @@ public class RegistrationView implements View{
         this.v = new VBox();
         this.v1 = new VBox();
         this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
-        this.label1 = new Label("Username:");
+        this.label1 = new Label("UTorID:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
         this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
@@ -88,7 +88,7 @@ public class RegistrationView implements View{
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("birthday", tf);
-        inputs.put("username", tf);
+        inputs.put("UTorID", tf);
         inputs.put("password", tf);
         inputs.put("passwordC", tf);
         inputs.put("profilePic", tf);

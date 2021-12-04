@@ -88,7 +88,7 @@ public class RegistrationView implements View{
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("birthday", tf);
-        inputs.put("UTorID", tf);
+        inputs.put("username", tf);
         inputs.put("password", tf);
         inputs.put("passwordC", tf);
         inputs.put("profilePic", tf);

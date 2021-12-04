@@ -119,7 +119,7 @@ public class ProfileView implements View {
         imgPathT = new TextField(info.get("imgPathL"));
         genderT = new TextField(info.get("genderL"));
         genderPrefT = new TextField(info.get("genderPrefL"));
-        usernameT = new TextField(info.get("UTorIDL"));
+        usernameT = new TextField(info.get("usernameL"));
         bioT = new TextField(info.get("bioL"));
     }
 
@@ -142,7 +142,7 @@ public class ProfileView implements View {
         inputs.put("imgPathT", imgPathT);
         inputs.put("genderT", genderT);
         inputs.put("genderPrefT", genderPrefT);
-        inputs.put("UtorIDT", usernameT);
+        inputs.put("usernameT", usernameT);
         inputs.put("bioT", bioT);
         inputs.put("passwordT", passwordT);
         this.back.setOnAction(controller.back());

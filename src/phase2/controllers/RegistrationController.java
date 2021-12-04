@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.LoginView;
 import phase2.presenters.SwipeView;
@@ -24,6 +25,7 @@ public class RegistrationController extends Controller{
         this.db = db;
         this.stage = stage;
         this.inputs = inputs;
+        State.setState(States.Registration);
     }
 
     public EventHandler<ActionEvent> login(){

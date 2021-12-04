@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.usecase.SwipeCase;
 
 import java.util.Map;
@@ -25,6 +26,7 @@ public class SwipeController implements Controller {
         this.id = id; //make into a user instead?
         this.swipeList = swipeList; //possibly make into list of swipeUsers?
         currentTarget = swipeList.poll();
+        State.setState(States.LoggedIn);
     }
     public EventHandler<ActionEvent> matches() {
 

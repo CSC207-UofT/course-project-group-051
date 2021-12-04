@@ -21,7 +21,7 @@ public class State {
     /** Updates the state to the given state.
      * @param s the desired state.
      */
-    public void setState(String s){
+    public static void setState(String s){
         state = s;
     }
 }

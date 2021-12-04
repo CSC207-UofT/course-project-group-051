@@ -3,6 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MatchView;
 import phase2.presenters.MessageView;
@@ -26,6 +27,7 @@ public class MessageController extends Controller{
         this.primaryUser = primary;
         this.secondaryUser = secondary;
         this.s = stage;
+        State.setState(States.Messaging);
     }
 
     /**

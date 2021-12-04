@@ -3,11 +3,12 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.ArrayList;
 
-public class MatchController extends Controller{
+public class MatchController implements Controller{
     DataAccessInterface db;
     Stage stage;
     int userID;
@@ -17,6 +18,7 @@ public class MatchController extends Controller{
         this.db = db;
         this.stage = stage;
         this.userID = userID;
+        State.setState(States.Matches);
     }
 
     public ArrayList<Integer> getMatches(){

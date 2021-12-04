@@ -3,6 +3,7 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import javafx.event.EventHandler;
 import phase2.presenters.LoginView;
@@ -30,6 +31,7 @@ public class LogInController implements Controller{
      */
     public LogInController(DataAccessInterface db, Stage stage){
         super(db, stage);
+        State.setState(States.LoggedOut);
     }
 
     /**

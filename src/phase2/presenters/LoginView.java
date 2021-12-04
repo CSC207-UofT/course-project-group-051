@@ -64,7 +64,7 @@ public class LoginView implements View{
         this.bp = new BorderPane();
         this.createAccount = new Button("Create new account");
         this.loginButton = new Button("Log In");
-        this.usernameLabel = new Label("UTorID:");
+        this.usernameLabel = new Label("Username:");
         this.passwordLabel = new Label("Password:");
         this.username = new TextField ();
         this.password = new PasswordField();

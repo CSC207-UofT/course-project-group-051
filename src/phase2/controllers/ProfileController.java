@@ -41,7 +41,7 @@ public class ProfileController extends Controller {
         info.put("imgPath", db.getImgPath(id));
         info.put("gender", db.getGender(id));
         info.put("genderPref", db.getGenderPreference(id));
-        info.put("UTorID", db.getUsername(id));
+        info.put("username", db.getUsername(id));
         info.put("bio", db.getBio(id));
         info.put("password", db.getPassword(id));
         return info;
@@ -66,7 +66,7 @@ public class ProfileController extends Controller {
             info[3] = inputs.get("imgPathT").getText();
             info[4] = inputs.get("genderT").getText();
             info[5] = inputs.get("genderPrefT").getText();
-            info[6] = inputs.get("UTorIDT").getText();
+            info[6] = inputs.get("usernameT").getText();
             info[7] = inputs.get("bioT").getText();
             info[8] = inputs.get("passwordT").getText();
             ProfileCase profileCase = new ProfileCase(db);

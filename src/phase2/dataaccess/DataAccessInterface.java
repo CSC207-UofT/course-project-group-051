@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface DataAccessInterface {
 
     /**
-     * @param username the UTorID of the user you are trying to log into.
+     * @param username the username of the user you are trying to log into.
      * @param password the password of the user you are trying to log into.
      * @return returns the id of the user, if it is not in the database, it will return -1
      */

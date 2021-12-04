@@ -10,7 +10,7 @@ import phase2.usecase.SwipeCase;
 import java.util.Map;
 import java.util.Queue;
 
-public class SwipeController {
+public class SwipeController implements Controller {
 
     private final Stage stage;
     private final int id;

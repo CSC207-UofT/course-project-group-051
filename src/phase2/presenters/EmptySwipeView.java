@@ -4,7 +4,6 @@ import phase2.users.User;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Effect;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -199,4 +198,4 @@ public class EmptySwipeView implements View{
 }
 
 
-}
+

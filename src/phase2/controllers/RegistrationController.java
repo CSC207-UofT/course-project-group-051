@@ -13,7 +13,7 @@ import phase2.usecase.LogInCase;
 import java.util.Map;
 
 
-public class RegistrationController {
+public class RegistrationController extends Controller{
 
     DataAccessInterface db;
     Stage stage;

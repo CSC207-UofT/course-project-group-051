@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 /**
  * The controller that delegates tasks for each button in the log in view.
  */
-public class LogInController {
+public class LogInController implements Controller{
 
     DataAccessInterface db; //the Data Access Interface.
     TextField username; //the Username text field.
@@ -27,14 +27,20 @@ public class LogInController {
      * Creates an instance of LogInController.
      * @param db the data access interface.
      * @param stage the main stage.
+     */
+    public LogInController(DataAccessInterface db, Stage stage){
+        super(db, stage);
+    }
+
+    /**
+     * Sets the textfield to the given text fields.
      * @param username the username text field.
      * @param password the password text field.
      */
-    public LogInController(DataAccessInterface db, Stage stage, TextField username, PasswordField password){
-        this.db = db;
+    public void setTextField(TextField username, PasswordField password){
         this.username = username;
         this.password = password;
-        this.stage = stage;
+
     }
 
     /**

@@ -7,7 +7,7 @@ import phase2.dataaccess.DataAccessInterface;
 
 import java.util.ArrayList;
 
-public class MatchController {
+public class MatchController extends Controller{
     DataAccessInterface db;
     Stage stage;
     int userID;

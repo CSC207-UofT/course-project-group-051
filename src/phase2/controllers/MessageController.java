@@ -9,7 +9,7 @@ import phase2.presenters.MessageView;
 
 /** A controller that delegates the task for each button in the message view.
  */
-public class MessageController {
+public class MessageController extends Controller{
     DataAccessInterface db; // the data access interface.
     Stage s; // the main stage.
     int primaryUser; // the primary user ID.

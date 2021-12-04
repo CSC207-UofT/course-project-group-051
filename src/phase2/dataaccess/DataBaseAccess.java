@@ -399,8 +399,8 @@ public class DataBaseAccess implements DataAccessInterface {
     @Override
     public boolean setUsername(int id, String username) {
         boolean rs = false;
-        try { username
-            String h2 = "update user set username = '" ++"' where PERSONID = " + id + ";";
+        try {
+            String h2 = "update user set username = '" + username +"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();

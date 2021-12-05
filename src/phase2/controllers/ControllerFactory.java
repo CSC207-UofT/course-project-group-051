@@ -23,7 +23,7 @@ public class ControllerFactory {
     /**
      * Creates an instance of ControllerFactory.
      */
-    public ControllerFactory(){
+    private ControllerFactory(){
         db = new DataBaseAccess();
 
     }

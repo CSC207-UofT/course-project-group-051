@@ -6,21 +6,15 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import phase2.constants.State;
-import phase2.presenters.LoginView;
-import phase2.presenters.ProfileView;
-import phase2.presenters.SwipeView;
-import phase2.presenters.View;
+import phase2.presenters.*;
 import phase2.usecase.SwipeCase;
 
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 public class SwipeController extends Controller {
 
-    private final Stage stage;
     private final SwipeCase swiper;
     private final int currentUser;
-    private final DataAccessInterface db;
 
     /**
      * @param db A reference to our Database so we can read and write to it.
@@ -31,9 +25,6 @@ public class SwipeController extends Controller {
      */
     public SwipeController(Stage stage, DataAccessInterface db, int id, Queue<Integer> swipeList) {
         super(stage, db);
-        this.id = id; //make into a user instead?
-        this.swipeList = swipeList; //possibly make into list of swipeUsers?
-        currentTarget = swipeList.poll();
         State.setState(States.SWIPING);
         swiper = new SwipeCase(db, id, swipeList);
         currentUser = id;
@@ -49,15 +40,9 @@ public class SwipeController extends Controller {
 
         event = e -> {
 
-            boolean empty = swiper.swipeRight();
+            boolean empty = swiper.likeCurrentUser();
 
-            View view;
-            if (empty) {
-                view = new EmptySwipeView(db, stage);
-            } else {
-                view = new SwipeView(this, stage);
-            }
-            view.build();
+            refreshView(empty);
 
         };
 
@@ -74,15 +59,9 @@ public class SwipeController extends Controller {
 
         event = e -> {
 
-            boolean empty = swiper.swipeLeft();
+            boolean empty = swiper.nextUser();
 
-            View view;
-            if (empty) {
-                view = new EmptySwipeView(db, stage);
-            } else {
-                view = new SwipeView(this, stage);
-            }
-            view.build();
+            refreshView(empty);
 
         };
 
@@ -91,11 +70,35 @@ public class SwipeController extends Controller {
     }
 
     /**
+     * Refreshes and recreates the SwipeView or EmptyView depending on if the swipeList is empty.
+     * @param empty A boolean that is true if there are no more people to swipe on.
+     */
+    private void refreshView(boolean empty) {
+        View view;
+        if (empty) {
+            view = new EmptySwipeView(db, stage);
+        } else {
+            view = new SwipeView(this, stage);
+        }
+        view.build();
+    }
+
+    /**
      * @return an EventHandler that runs the refresh function.
      */
     public EventHandler<ActionEvent> refresh() {
 
-        //TODO call the filterswipelist again and recreate the usecase
+        EventHandler<ActionEvent> event;
+
+        event = e -> {
+
+            Queue<Integer> swipeList =
+
+
+
+        };
+
+        return event;
 
     }
 

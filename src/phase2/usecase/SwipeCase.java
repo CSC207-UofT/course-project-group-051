@@ -84,7 +84,7 @@ public class SwipeCase {
      * Likes the current OtherUser, and determine there are more users to swipe on.
      * @return false if the list is empty.
      */
-    public boolean swipeRight() {
+    public boolean likeCurrentUser() {
 
         db.likeUser(selfUser.getId(), currentTarget.getId());
         db.admireUser(currentTarget.getId(), selfUser.getId());
@@ -108,7 +108,7 @@ public class SwipeCase {
      * Goes to the next User, and determines if there are any more Users left to swipe on.
      * @return false if there are no more people to swipe on, otherwise true.
      */
-    public boolean swipeLeft() {
+    public boolean nextUser() {
 
         currentTarget = getNextUser();
 
@@ -133,31 +133,6 @@ public class SwipeCase {
     }
 
 
-    /**
-     * Removes all the already liked Users from the current SelfUser's list.
-     * @return a list of OtherUsers that the current SelfUser can swipe on.
-     * @param swipeList a list of IDs of Users that the currently logged in User can swipe on.
-     */
-    private Queue<OtherUser> filterSwipeList(Queue<Integer> swipeList) {
 
-        List<Integer> unfiltered = db.getSwipeList(selfUser.getId());
-        Queue<OtherUser> filtered = new LinkedList<>();
-
-        //Loop through the list of unfiltered users
-        for (int currUser : unfiltered) {
-
-            //get all the users who admired the current user we are reviewing
-            ArrayList<Integer> currentAdmirers = db.getAdmires(currUser);
-
-            //if the current SelfUser has already admired this user, then don't include him in the final list.
-            if(!currentAdmirers.contains(selfUser.getId())) {
-                OtherUser newUser = new OtherUser(currUser); //TODO use a builder here.
-                filtered.add(newUser);
-            }
-
-        }
-
-        return filtered;
-    }
 
 }

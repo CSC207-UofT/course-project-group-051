@@ -40,7 +40,11 @@ public class SwipeView implements View{
     private Label bio;
 
 
-
+    /**
+     * Creates an instance of the view, for after we have already created the SwipeController previously.
+     * @param swipeController an instance of swipeController
+     * @param stage the main stage where we display the scene.
+     */
     public SwipeView(SwipeController swipeController, Stage stage){
 
         controller = swipeController;
@@ -52,6 +56,7 @@ public class SwipeView implements View{
         sp = new StackPane();
         bp = new BorderPane();
 
+        build();
     }
     /**
      * @param db A reference to our database.

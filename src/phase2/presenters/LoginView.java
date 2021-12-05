@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.controllers.LogInController;
 import phase2.controllers.MainController;
+import phase2.controllers.States;
 import phase2.dataaccess.DataAccessInterface;
 
 public class LoginView implements View{
@@ -35,8 +36,29 @@ public class LoginView implements View{
     Stage stage;
     MainController mc;
 
-    public LoginView(boolean error, DataAccessInterface db, Stage stage, MainController mc){
+    public LoginView(LogInController logInController, MainController mc, Stage stage, boolean error){
 
+        mc.getController(States.LOGGED_OUT);
+        this.db = db;
+        this.bp = new BorderPane();
+        this.createAccount = new Button("Create new account");
+        this.loginButton = new Button("Log In");
+        this.usernameLabel = new Label("UTorID:");
+        this.passwordLabel = new Label("Password:");
+        this.username = new TextField ();
+        this.password = new PasswordField();
+        this.v = new VBox();
+        this.v1 = new VBox();
+        this.hb1 = new HBox();
+        this.warning = new Text();
+        this.error = error;
+        this.stage = stage;
+    }
+
+    public LoginView(DataAccessInterface db, Stage stage, MainController mc, boolean error){
+
+        mc.setError(error);
+        mc.getController(States.LOGGED_OUT);
         this.db = db;
         this.bp = new BorderPane();
         this.createAccount = new Button("Create new account");

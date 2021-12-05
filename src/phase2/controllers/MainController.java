@@ -3,9 +3,9 @@ package phase2.controllers;
 import javafx.stage.Stage;
 import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
+import phase2.users.OtherUser;
 
-import java.util.HashMap;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * The controller that that delegates tasks given
@@ -23,7 +23,7 @@ public class MainController extends Controller{
      * @return the controller for the next state.
      */
 
-    int user1;
+    int currentUser;
     int user2;
     HashMap registrationInputs;
     DataAccessInterface db;
@@ -44,7 +44,7 @@ public class MainController extends Controller{
      * @param id the primary user's ID.
      */
     public void setPrimaryUser(int id){
-        this.user1 = id;
+        this.currentUser = id;
     }
 
     /**
@@ -65,43 +65,56 @@ public class MainController extends Controller{
 
 
     /**
-     * @param action A command taken by the user.
+     * @param transition A command taken by the user.
      * @return the appropriate controller for the given state.
      */
     public Controller getController(String transition){
         String state = State.getState();
         if(transition.equals(States.BACK)) {
             if(state.equals(States.MESSAGING)){
-                return new MatchController(db, stage, user);
+                State.setState(States.MATCHES);
+                return new MatchController(db, stage, currentUser);
             }
             else if(state.equals(States.PROFILE) || state.equals(States.MATCHES)){
-                return new SwipeController(db, stage, user, swipelist);
+                State.setState(States.SWIPING);
+                return new SwipeController(stage, db, currentUser, filterSwipeList());
             }
             else if(state.equals(States.REGISTRATION)){
+                State.setState(States.LOGGED_OUT);
                 return new LogInController(db, stage);
             }
         }
         else if(state.equals(States.SWIPING)){
             if(transition.equals(States.LOGGED_OUT)){
+                State.setState(States.LOGGED_OUT);
                 return new LogInController(db, stage);
             }
             else if(transition.equals(States.MATCHES)){
+                State.setState(States.MATCHES);
                 return new MatchController(db, stage);
             }
             else if(transition.equals(States.PROFILE)){
-                return new ProfileController(db, stage, user);
+                State.setState(States.PROFILE);
+                return new ProfileController(db, stage, currentUser);
             }
         }
         else if(state.equals(States.LOGGED_OUT)){
             if(transition.equals(States.SWIPING)){
-                return new SwipeController(db, stage, user, swipelist);
+                State.setState(States.SWIPING);
+                return new SwipeController(stage, db, currentUser, filterSwipeList());
             }
             else if(transition.equals(States.REGISTRATION)){
+                State.setState(States.REGISTRATION);
                 return new RegistrationController(db, stage, inputs);
             }
         }
         else if(state.equals(States.MATCHES) && transition.equals(States.MESSAGING)) {
-            return new MessageController(db, stage, user, user2);
+            State.setState(States.MESSAGING);
+            return new MessageController(db, stage, currentUser, user2);
+        }
+        else if(state.equals(States.REGISTRATION) && transition.equals(States.SWIPING)) {
+            State.setState(States.SWIPING);
+            return new SwipeController(stage, db, currentUser, filterSwipeList());
         }
 
 
@@ -139,10 +152,36 @@ public class MainController extends Controller{
 //            return new RegistrationController(db, stage, inputs);
 //        }
 
-
-        return new SwipeController(db, stage, user, swipelist);
-
+        return null;
 
         }
+
+    /**
+     * Removes all the already liked Users from the current SelfUser's list.
+     * @return a list of OtherUsers that the current SelfUser can swipe on.
+     */
+    private Queue<Integer> filterSwipeList() {
+
+        List<Integer> unfiltered = db.getSwipeList(currentUser);
+        Queue<Integer> filtered = new LinkedList<>();
+
+        //Loop through the list of unfiltered users
+        for (int unfilteredUser : unfiltered) {
+
+            //get all the users who admired the current user we are reviewing
+            ArrayList<Integer> currentAdmirers = db.getAdmires(unfilteredUser);
+
+            //if the current SelfUser has already admired this user, then don't include him in the final list.
+            if(!currentAdmirers.contains(currentUser)) {
+                filtered.add(unfilteredUser);
+            }
+
+        }
+
+        return filtered;
+    }
+
+    public void setError(boolean error) {
     }
 }
+

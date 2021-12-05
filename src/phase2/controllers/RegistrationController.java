@@ -54,11 +54,9 @@ public class RegistrationController extends Controller{
                 int logInResult = logInCase.loginUser(
                         inputs.get("username").getText(),
                         inputs.get("password").getText());
-                if(logInResult == -1){
-                    view = new LoginView(false, db, stage);
-                } else {
-                    view = new SwipeView();
-                }
+
+                view = new SwipeView();
+
                 view.build();
             }
             view.build();

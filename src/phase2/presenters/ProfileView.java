@@ -106,7 +106,7 @@ public class ProfileView implements View {
         imgPathL = new Label("Profile Image Path:");
         genderL = new Label("Gender:");
         genderPrefL = new Label("Gender Preference:");
-        usernameL = new Label("UTorID:");
+        usernameL = new Label("Username:");
         bioL = new Label("Bio:");
     }
 

@@ -3,13 +3,14 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MatchView;
 import phase2.presenters.MessageView;
 
 /** A controller that delegates the task for each button in the message view.
  */
-public class MessageController {
+public class MessageController extends Controller{
     DataAccessInterface db; // the data access interface.
     Stage s; // the main stage.
     int primaryUser; // the primary user ID.
@@ -26,6 +27,7 @@ public class MessageController {
         this.primaryUser = primary;
         this.secondaryUser = secondary;
         this.s = stage;
+        State.setState(States.Messaging);
     }
 
     /**

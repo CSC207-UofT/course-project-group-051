@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
-public class ProfileController {
+public class ProfileController extends Controller {
 
     DataAccessInterface db;
     Stage stage;
@@ -29,13 +29,13 @@ public class ProfileController {
             "Sep", "Oct", "Nov", "Dec"};
 
     public ProfileController(DataAccessInterface db, Stage stage,
-                             int id){
+                             int id) {
         this.db = db;
         this.stage = stage;
         this.id = id;
     }
 
-    public Map<String, String> getUserInfo(){
+    public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
         info.put("firstName", db.getFirstName(id));
         info.put("lastName", db.getLastName(id));
@@ -49,7 +49,7 @@ public class ProfileController {
         return info;
     }
 
-    public EventHandler<ActionEvent> back(){
+    public EventHandler<ActionEvent> back() {
         event = e -> {
             View view = new SwipeView(db, stage, id, null);
             view.build();
@@ -57,7 +57,7 @@ public class ProfileController {
         return event;
     }
 
-    public EventHandler<ActionEvent> save(Map<String, TextInputControl> inputs){
+    public EventHandler<ActionEvent> save(Map<String, TextInputControl> inputs) {
         event = e -> {
             this.inputs = inputs;
             boolean[] errors = {false, false};
@@ -72,20 +72,18 @@ public class ProfileController {
             info[7] = inputs.get("bioT").getText();
             info[8] = inputs.get("passwordT").getText();
             ProfileCase profileCase = new ProfileCase(db);
-            if(!profileCase.checkValidDate(info[2])){
+            if (!profileCase.checkValidDate(info[2])) {
                 errors[0] = true;
             }
-            try{
+            try {
                 new FileInputStream(info[3]);
-            }
-            catch(FileNotFoundException io){
+            } catch (FileNotFoundException io) {
                 errors[1] = true;
             }
-            if(errors[0] || errors[1]){
+            if (errors[0] || errors[1]) {
                 View view = new ProfileView(db, stage, id, errors);
                 view.build();
-            }
-            else{
+            } else {
                 profileCase.updateUser(id, info);
                 View view = new SwipeView(db, stage, id, null);
                 view.build();
@@ -94,7 +92,8 @@ public class ProfileController {
         return event;
     }
 
-
-
-
 }
+
+
+
+

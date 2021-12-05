@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.controllers.LogInController;
+import phase2.controllers.MainController;
 import phase2.dataaccess.DataAccessInterface;
 
 public class LoginView implements View{
@@ -32,8 +33,9 @@ public class LoginView implements View{
     boolean error;
     DataAccessInterface db;
     Stage stage;
+    MainController mc;
 
-    public LoginView(boolean error, DataAccessInterface db, Stage stage){
+    public LoginView(boolean error, DataAccessInterface db, Stage stage, MainController mc){
 
         this.db = db;
         this.bp = new BorderPane();
@@ -58,8 +60,9 @@ public class LoginView implements View{
         this.addButton();
         this.addVBox();
         this.addTextField();
+        this.v1.getChildren().add(ErrorMessage.loginWarning());
         if(error){
-            this.v1.getChildren().add(ErrorMessage.loginWarning());
+            ErrorMessage.loginWarning().setText("Invalid Credential. Please try again.");
         }
         this.addHBox();
         this.setSpacing();
@@ -70,7 +73,8 @@ public class LoginView implements View{
 
     private void setOnActions(){
 
-        LogInController controller = new LogInController(db, stage, username, password);
+        LogInController controller = new LogInController(db, stage);
+        controller.setTextField(username, password);
         createAccount.setOnAction(controller.register());
         loginButton.setOnAction(controller.login());
     }

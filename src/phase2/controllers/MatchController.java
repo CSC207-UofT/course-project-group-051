@@ -3,13 +3,14 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MessageView;
 import phase2.presenters.MatchView;
 import phase2.presenters.SwipeView;
 import java.util.ArrayList;
 
-public class MatchController {
+public class MatchController implements Controller{
     DataAccessInterface db;
     Stage stage;
     int userID;
@@ -19,6 +20,7 @@ public class MatchController {
         this.db = db;
         this.stage = stage;
         this.userID = userID;
+        State.setState(States.Matches);
     }
 
     public ArrayList<Integer> getMatches(){

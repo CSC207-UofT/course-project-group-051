@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.LoginView;
 import phase2.presenters.RegistrationView;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-public class RegistrationController {
+public class RegistrationController extends Controller{
 
     DataAccessInterface db;
     Stage stage;
@@ -30,6 +31,7 @@ public class RegistrationController {
         this.db = db;
         this.stage = stage;
         this.inputs = inputs;
+        State.setState(States.Registration);
     }
 
 

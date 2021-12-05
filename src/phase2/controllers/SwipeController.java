@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.presenters.LoginView;
 import phase2.presenters.ProfileView;
 import phase2.presenters.SwipeView;
@@ -14,7 +15,7 @@ import phase2.usecase.SwipeCase;
 import java.util.Map;
 import java.util.Queue;
 
-public class SwipeController {
+public class SwipeController implements Controller {
 
     private final Stage stage;
     private final SwipeCase swiper;
@@ -31,6 +32,10 @@ public class SwipeController {
     public SwipeController(Stage stage, DataAccessInterface db, int id, Queue<Integer> swipeList) {
 
         this.stage = stage;
+        this.id = id; //make into a user instead?
+        this.swipeList = swipeList; //possibly make into list of swipeUsers?
+        currentTarget = swipeList.poll();
+        State.setState(States.LoggedIn);
         swiper = new SwipeCase(db, id, swipeList);
         this.db = db;
         currentUser = id;

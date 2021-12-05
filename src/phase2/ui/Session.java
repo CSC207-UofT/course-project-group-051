@@ -11,7 +11,7 @@ public class Session extends Application {
     @Override
     public void start(Stage stage) {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Phase1.Run.Session.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(phase2.ui.Session.class.getResource("hello-view.fxml"));
         stage.setTitle("UofT Tinder");
 
         //Setting the image view

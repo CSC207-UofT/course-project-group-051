@@ -22,8 +22,6 @@ import java.util.Map;
 
 public class RegistrationController extends Controller{
 
-    DataAccessInterface db;
-    Stage stage;
     Map<String, TextInputControl> inputs;
     EventHandler<ActionEvent> event;
 

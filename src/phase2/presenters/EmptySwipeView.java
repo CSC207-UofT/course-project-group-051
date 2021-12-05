@@ -119,7 +119,6 @@ public class EmptySwipeView implements View{
      */
     public void addVBox() {
         this.bp.setCenter(v);
-
     }
 
 

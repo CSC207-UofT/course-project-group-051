@@ -12,4 +12,8 @@ public class Controller {
         this.stage = stage;
         this.db = db;
     }
+
+    public Stage getStage(){
+        return stage;
+    }
 }

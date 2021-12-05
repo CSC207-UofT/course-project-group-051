@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import phase2.constants.States;
 import phase2.controllers.LogInController;
 import phase2.controllers.MainController;
 import phase2.controllers.States;
@@ -36,9 +37,9 @@ public class LoginView implements View{
     Stage stage;
     MainController mc;
 
-    public LoginView(LogInController logInController, MainController mc, Stage stage, boolean error){
+    public LoginView(){
 
-        mc.getController(States.LOGGED_OUT);
+        MainController.getInstance().getController(States.LOGGED_OUT);
         this.db = db;
         this.bp = new BorderPane();
         this.createAccount = new Button("Create new account");

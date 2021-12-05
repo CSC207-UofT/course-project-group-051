@@ -3,7 +3,7 @@ package phase2.ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import phase2.controllers.States;
+import phase2.constants.States;
 import phase2.presenters.LoginView;
 import phase2.dataaccess.*;
 

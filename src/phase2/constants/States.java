@@ -1,4 +1,4 @@
-package phase2.controllers;
+package phase2.constants;
 
 
 public class States {

@@ -4,12 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import phase2.constants.State;
+import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MessageView;
 import phase2.presenters.SwipeView;
 import phase2.usecase.MatchCase;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MatchController extends Controller{

@@ -28,10 +28,9 @@ public class RegistrationController extends Controller{
     EventHandler<ActionEvent> event;
 
     public RegistrationController(DataAccessInterface db, Stage stage, Map<String, TextInputControl> inputs){
-        this.db = db;
-        this.stage = stage;
+        super(stage, db);
         this.inputs = inputs;
-        State.setState(States.Registration);
+        State.setState(States.REGISTRATION);
     }
 
 
@@ -45,8 +44,8 @@ public class RegistrationController extends Controller{
 
     public EventHandler<ActionEvent> createAccount(){
         event = e -> {
-            RegistrationCase rcase = new RegistrationCase(db);
-            ArrayList<String> results = rcase.createAccount(inputs);
+            RegistrationCase registrationCase = new RegistrationCase(db);
+            ArrayList<String> results = registrationCase.createAccount(inputs);
             View view;
             if(!results.isEmpty()){
                 view = new RegistrationView(db, stage, ErrorBuilder.build(results)); // return error in view?

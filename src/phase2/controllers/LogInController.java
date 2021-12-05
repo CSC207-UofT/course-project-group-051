@@ -3,12 +3,12 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import javafx.event.EventHandler;
 import phase2.presenters.LoginView;
 import phase2.presenters.RegistrationView;
-import phase2.presenters.SwipeView;
 import phase2.presenters.View;
 import phase2.usecase.LogInCase;
 import javafx.stage.Stage;
@@ -16,13 +16,12 @@ import javafx.stage.Stage;
 /**
  * The controller that delegates tasks for each button in the log in view.
  */
-public class LogInController implements Controller{
+public class LogInController extends Controller{
 
-    DataAccessInterface db; //the Data Access Interface.
     TextField username; //the Username text field.
     PasswordField password; //the password field.
     EventHandler<ActionEvent> event; //the event placeholder.
-    Stage stage; //the main stage.
+
 
     /**
      * Creates an instance of LogInController.
@@ -30,8 +29,8 @@ public class LogInController implements Controller{
      * @param stage the main stage.
      */
     public LogInController(DataAccessInterface db, Stage stage){
-        super(db, stage);
-        State.setState(States.LoggedOut);
+        super(stage, db);
+        State.setState(States.LOGGED_OUT);
     }
 
     /**

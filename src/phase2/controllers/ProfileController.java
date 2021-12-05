@@ -28,10 +28,8 @@ public class ProfileController extends Controller {
     final public static String[] VALID_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
             "Sep", "Oct", "Nov", "Dec"};
 
-    public ProfileController(DataAccessInterface db, Stage stage,
-                             int id) {
-        this.db = db;
-        this.stage = stage;
+    public ProfileController(DataAccessInterface db, Stage stage, int id) {
+        super(stage, db);
         this.id = id;
     }
 

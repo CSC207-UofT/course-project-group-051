@@ -15,7 +15,7 @@ import phase2.usecase.SwipeCase;
 import java.util.Map;
 import java.util.Queue;
 
-public class SwipeController implements Controller {
+public class SwipeController extends Controller {
 
     private final Stage stage;
     private final SwipeCase swiper;
@@ -30,14 +30,12 @@ public class SwipeController implements Controller {
      * liked any of these users.)
      */
     public SwipeController(Stage stage, DataAccessInterface db, int id, Queue<Integer> swipeList) {
-
-        this.stage = stage;
+        super(stage, db);
         this.id = id; //make into a user instead?
         this.swipeList = swipeList; //possibly make into list of swipeUsers?
         currentTarget = swipeList.poll();
-        State.setState(States.LoggedIn);
+        State.setState(States.SWIPING);
         swiper = new SwipeCase(db, id, swipeList);
-        this.db = db;
         currentUser = id;
     }
 

@@ -6,31 +6,35 @@ import javafx.stage.Stage;
 import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MessageView;
-import phase2.presenters.MatchView;
 import phase2.presenters.SwipeView;
-import java.util.ArrayList;
+import phase2.usecase.MatchCase;
 
-public class MatchController implements Controller{
+import java.util.ArrayList;
+import java.util.List;
+
+public class MatchController extends Controller{
     DataAccessInterface db;
     Stage stage;
     int userID;
     EventHandler<ActionEvent> event;
+    MatchCase matchCase;
 
     public MatchController(DataAccessInterface db, Stage stage, int userID){
-        this.db = db;
-        this.stage = stage;
+        super(stage, db);
         this.userID = userID;
-        State.setState(States.Matches);
+        State.setState(States.MATCHES);
+        matchCase = new MatchCase(db, userID);
     }
 
-    public ArrayList<Integer> getMatches(){
-        return db.getMatches(userID);
+    public List<Integer> getMatches(){
+        return matchCase.getMatches();
     }
 
     public String getFirstName(Integer userID){
 
         return null;
     }
+
     public EventHandler<ActionEvent> switchMessageView(Integer userID, Integer receiverID){
         event = e -> {
             for (Integer id : getMatches()) {
@@ -42,6 +46,7 @@ public class MatchController implements Controller{
         };
         return event;
     }
+
     public EventHandler<ActionEvent> back() {
         event = e -> {
             SwipeView s = new SwipeView(db, stage, userID, db.getSwipeList(userID));

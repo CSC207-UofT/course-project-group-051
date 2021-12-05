@@ -3,7 +3,6 @@ package phase2.controllers;
 import javafx.stage.Stage;
 import phase2.constants.State;
 import phase2.dataaccess.DataAccessInterface;
-import phase2.usecase.Command;
 
 import java.util.HashMap;
 import java.util.Queue;
@@ -11,7 +10,7 @@ import java.util.Queue;
 /**
  * The controller that that delegates tasks given
  */
-public class MainController {
+public class MainController extends Controller{
 
     /**
      * Creates a MainController object.
@@ -29,14 +28,14 @@ public class MainController {
     HashMap registrationInputs;
     DataAccessInterface db;
     Stage stage;
+    Queue<Integer> swipeList;
 
     /** Creates an instance of MainController.
      * @param db the data access interface.
      * @param stage stage the main stage.
      */
     public MainController(DataAccessInterface db, Stage stage){
-        this.db = db;
-        this.stage = stage;
+        super(stage, db);
 
     }
 
@@ -69,43 +68,76 @@ public class MainController {
      * @param action A command taken by the user.
      * @return the appropriate controller for the given state.
      */
-    public Controller getController(Command action){
-        if (State.getState().equals(States.LoggedIn) && action.equals(Actions.LogOut)){
-        return new LogInController(db, stage);}
-        else if (State.getState().equals(States.LoggedIn) && action.equals(Actions.Matches)){
-            return new MatchController(db, stage, user);
+    public Controller getController(String transition){
+        String state = State.getState();
+        if(transition.equals(States.BACK)) {
+            if(state.equals(States.MESSAGING)){
+                return new MatchController(db, stage, user);
+            }
+            else if(state.equals(States.PROFILE) || state.equals(States.MATCHES)){
+                return new SwipeController(db, stage, user, swipelist);
+            }
+            else if(state.equals(States.REGISTRATION)){
+                return new LogInController(db, stage);
+            }
         }
-        else if (State.getState().equals(States.LoggedIn) && action.equals(Actions.SelfProfile)){
-            return new ProfileController(db, stage, user);
+        else if(state.equals(States.SWIPING)){
+            if(transition.equals(States.LOGGED_OUT)){
+                return new LogInController(db, stage);
+            }
+            else if(transition.equals(States.MATCHES)){
+                return new MatchController(db, stage);
+            }
+            else if(transition.equals(States.PROFILE)){
+                return new ProfileController(db, stage, user);
+            }
         }
-        else if (State.getState().equals(States.LoggedIn) && (action.equals(Actions.SwipeLeft || Actions.SwipeRight))){
-            return new SwipeController(db, stage, id, swipelist);}
-
-        else if (State.getState().equals(States.Matches) && action.equals(Actions.Message)){
+        else if(state.equals(States.LOGGED_OUT)){
+            if(transition.equals(States.SWIPING)){
+                return new SwipeController(db, stage, user, swipelist);
+            }
+            else if(transition.equals(States.REGISTRATION)){
+                return new RegistrationController(db, stage, inputs);
+            }
+        }
+        else if(state.equals(States.MATCHES) && transition.equals(States.MESSAGING)) {
             return new MessageController(db, stage, user, user2);
-
-            }
-        else if (State.getState().equals(States.SelfProfile) && action.equals(Actions.Back)){
-            return new SwipeController(db, stage, user, swipelist);
-            }
-
-        else if (State.getState().equals(States.Matches) && action.equals(Actions.Back)){
-            return new SwipeController(db, stage, user, swipelist);
-        }
-        else if (State.getState().equals(States.Messaging) && action.equals(Actions.Back)){
-            return new MatchController(db, stage, user);
-        }
-        else if (State.getState().equals(States.Registration) && action.equals(Actions.LogIn)){
-            return new LogInController(db, stage);
         }
 
-        else if (State.getState().equals(States.LoggedOut) && action.equals(Actions.LogIn)){
-            return new SwipeController(db, stage, user, swipelist);
-        }
 
-        else if (State.getState().equals(States.LoggedOut) && action.equals(Actions.CreateAccount)){
-            return new RegistrationController(db, stage, inputs);
-        }
+//        if (state.equals(States.SWIPING) && transition.equals(States.LOGGED_OUT)){
+//            return new LogInController(db, stage);
+//        }
+//        else if (state.equals(States.SWIPING) && transition.equals(States.MATCHES)){
+//            return new MatchController(db, stage, user);
+//        }
+//        else if (state.equals(States.SWIPING) && transition.equals(States.PROFILE)){
+//            return new ProfileController(db, stage, user);
+//        }
+//        else if (state.equals(States.SWIPING) && (transition.equals(States.SWIPING))){
+//            return new SwipeController(db, stage, id, swipelist);
+//        }
+//        else if (state.equals(States.MATCHES) && transition.equals(States.MESSAGING)){
+//            return new MessageController(db, stage, user, user2);
+//        }
+//        else if ((state.equals(States.PROFILE) || state.equals(States.MATCHES)) && transition.equals(States.BACK)){
+//            return new SwipeController(db, stage, user, swipelist);
+//        }
+//
+//        else if (state.equals(States.MESSAGING) && transition.equals(States.BACK)){
+//            return new MatchController(db, stage, user);
+//        }
+//        else if (state.equals(States.REGISTRATION) && transition.equals(States.BACK)){
+//            return new LogInController(db, stage);
+//        }
+//
+//        else if (state.equals(States.LOGGED_OUT) && transition.equals(States.SWIPING)){
+//            return new SwipeController(db, stage, user, swipelist);
+//        }
+//
+//        else if (state.equals(States.LOGGED_OUT) && transition.equals(States.REGISTRATION)){
+//            return new RegistrationController(db, stage, inputs);
+//        }
 
 
         return new SwipeController(db, stage, user, swipelist);

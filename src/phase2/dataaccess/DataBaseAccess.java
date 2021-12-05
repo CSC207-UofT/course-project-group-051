@@ -5,10 +5,8 @@ import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
-public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
+public class DataBaseAccess implements DataAccessInterface {
 
     private Statement stmt = null;
     Connection conn;
@@ -19,19 +17,6 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
         connectDB();
     }
 
-    @Override
-    public ArrayList getMatches(int id){
-
-            ArrayList<Integer> liked = this.getAdmires(id);
-            ArrayList<Integer> matches = new ArrayList();
-            for (Integer i: liked){
-                if (getAdmires(i).contains(id) && !matches.contains(i)){
-                    matches.add(i);
-                }
-            }
-            return matches;
-
-    }
 
     private int getNextUser(){
         int id = -1;
@@ -213,14 +198,6 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
         return genderPreference;
     }
 
-    @Override
-    public int getAge(int id) {
-        Date today = new Date();
-        long diff = today.getTime() - new Date(this.getBirthday(id)).getTime();
-        int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-
-        return days / 365;
-    }
 
     @Override
     public String getImgPath(int id) {
@@ -340,13 +317,13 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
     }
 
     @Override
-    public ArrayList<String> getThread(int threadID) {
-        ArrayList<String> thread = new ArrayList<>();
+    public ArrayList<String[]> getThread(int threadID) {
+        ArrayList<String[]> thread = new ArrayList<>();
         try {
-            String h2 = "select Messages, userID1, userID2 from threads where threadID = "+ threadID +";";
+            String h2 = "select Messages from threads where threadID = "+ threadID +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
-                String[] Messages = rs.getString("Messages").split(",", -1);
+                String[] Messages = rs.getString("Messages").split(",");
                 for(String x: Messages){
                     if(!x.equals(""))
                     {
@@ -365,17 +342,15 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
         return thread;
     }
 
-    //@Override
-    private String getMessage(int messageID) {
-        String message = "";
+    private String[] getMessage(int messageID) {
+        String[] message = new String[3];
         try {
             String h2 = "select Messages, sender, receiver from messages where messageID = "+ messageID +";";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
-                message = rs.getString("Messages");
-                String sender = rs.getString("sender");
-                String receiver = rs.getString("receiver");
-                message = message + "," + sender + "," + receiver;
+                message[0] = rs.getString("Messages");
+                message[1] = rs.getString("sender");
+                message[2] = rs.getString("receiver");
             }
             rs.close();
         } catch (SQLException se) {
@@ -424,8 +399,8 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
     @Override
     public boolean setUsername(int id, String username) {
         boolean rs = false;
-        try {
-            String h2 = "update user set username = '" + username +"' where PERSONID = " + id + ";";
+        try { username
+            String h2 = "update user set username = '" ++"' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -474,22 +449,6 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
         boolean rs = false;
         try {
             String h2 = "update user set bio = '" + bio +"' where PERSONID = " + id + ";";
-            rs= stmt.execute(h2);
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    @Override
-    public boolean setAge(int id, int age) {
-        boolean rs = false;
-        try {
-            String h2 = "update user set age = " + age +" where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -574,7 +533,6 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
                 }
             }
 
-
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -595,6 +553,7 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
             }
             else{
                 ArrayList<Integer> likes = this.getLikes(currUser);
+                likes.remove((Integer) likeID);
                 if(likes.size() != 0){
                     like = new StringBuilder(likes.remove(0).toString());
                     for(int x: likes){
@@ -654,7 +613,7 @@ public class DataBaseAccess implements phase2.dataaccess.DataAccessInterface {
             }
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
-                admirer.remove(admirer.indexOf(admirerID));
+                admirer.remove((Integer) admirerID);
                 if(admirer.size() != 0){
                     admire = new StringBuilder(admirer.remove(0).toString());
                     for(int x: admirer){

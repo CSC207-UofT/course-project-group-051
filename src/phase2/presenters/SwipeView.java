@@ -1,6 +1,6 @@
 package phase2.presenters;
 
-import Phase1.DataAccess.DataAccessInterface;
+import phase2.dataaccess.DataAccessInterface;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,6 +41,18 @@ public class SwipeView implements View{
 
 
 
+    public SwipeView(SwipeController swipeController, Stage stage){
+
+        controller = swipeController;
+        this.stage = stage;
+        labelButtons();
+        hb = new HBox();
+        hb2 = new HBox();
+        v = new VBox();
+        sp = new StackPane();
+        bp = new BorderPane();
+
+    }
     /**
      * @param db A reference to our database.
      * @param stage the main stage where we display the scene.
@@ -49,14 +61,9 @@ public class SwipeView implements View{
      */
     public SwipeView(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
 
-        controller = new SwipeController(db, stage, id, swipeList);
+        controller = new SwipeController(stage, db, id, swipeList);
         this.stage = stage;
-
-        noButton = new Button("No");
-        yesButton = new Button("Yes");
-        matchesButton = new Button("Matches");
-        logoutButton = new Button("Log Out");
-        myProfileButton = new Button("My Profile");
+        labelButtons();
         hb = new HBox();
         hb2 = new HBox();
         v = new VBox();
@@ -64,6 +71,14 @@ public class SwipeView implements View{
         bp = new BorderPane();
 
         build();
+    }
+
+    private void labelButtons() {
+        noButton = new Button("No");
+        yesButton = new Button("Yes");
+        matchesButton = new Button("Matches");
+        logoutButton = new Button("Log Out");
+        myProfileButton = new Button("My Profile");
     }
 
     @Override

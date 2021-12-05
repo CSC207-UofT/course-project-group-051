@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import phase2.constants.State;
 import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
+import phase2.dataaccess.DataBaseAccess;
 import phase2.users.OtherUser;
 
 import java.util.*;
@@ -11,7 +12,7 @@ import java.util.*;
 /**
  * The controller that that delegates tasks given
  */
-public class MainController extends Controller{
+public class MainController {
 
     /**
      * Creates a MainController object.
@@ -30,16 +31,23 @@ public class MainController extends Controller{
     DataAccessInterface db;
     Stage stage;
     Queue<Integer> swipeList;
+    final static MainController mainController = new MainController();
 
     /** Creates an instance of MainController.
      * @param db the data access interface.
      * @param stage stage the main stage.
      */
-    public MainController(DataAccessInterface db, Stage stage){
-        super(stage, db);
+    public MainController(){
+        db = new DataBaseAccess();
 
     }
 
+    public static MainController getInstance(){
+        return mainController;
+    }
+    public void setStage(Stage stage){
+        this.stage = stage;
+    }
     /**
      * Sets the primary user.
      * @param id the primary user's ID.

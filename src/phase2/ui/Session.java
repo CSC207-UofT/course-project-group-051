@@ -3,7 +3,9 @@ package phase2.ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import phase2.constants.State;
 import phase2.constants.States;
+import phase2.controllers.MainController;
 import phase2.presenters.LoginView;
 import phase2.dataaccess.*;
 
@@ -26,9 +28,10 @@ public class Session extends Application {
 
         //Setting the preserve ratio of the image view
         //  imageView.setPreserveRatio(true);
-        static String state = States.LOGGED_OUT;
+        State.setState(States.LOGGED_OUT);
         DataAccessInterface db = new DataBaseAccess();
-        LoginView view = new LoginView(false, db, stage);
+        MainController.getInstance().setStage(stage);
+        LoginView view = new LoginView();
         view.build();
         stage.setResizable(false);
         stage.show();

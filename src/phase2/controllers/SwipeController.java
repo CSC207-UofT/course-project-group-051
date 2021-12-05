@@ -1,5 +1,6 @@
 package phase2.controllers;
 
+import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,10 +18,8 @@ import java.util.Queue;
 
 public class SwipeController extends Controller {
 
-    private final Stage stage;
     private final SwipeCase swiper;
     private final int currentUser;
-    private final DataAccessInterface db;
 
     /**
      * @param db A reference to our Database so we can read and write to it.

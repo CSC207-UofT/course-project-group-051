@@ -1,14 +1,11 @@
 package phase2.usecase.Registration;
 
 import javafx.scene.control.TextInputControl;
+import phase2.constants.Errors;
 import phase2.dataaccess.DataAccessInterface;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
 public class RegistrationCase {
@@ -26,13 +23,13 @@ public class RegistrationCase {
         ArrayList<String> errors = new ArrayList<>(); // make into 1 string
         int days;
         if (data.containsValue("")){
-            errors.add(RegistrationError.MISSING); // ADD THESE MESSAGES
+            errors.add(Errors.MISSING); // ADD THESE MESSAGES
         }
         if (db.logIn(data.get("username").getText(), data.get("pw1").getText()) != -1){
-            errors.add(RegistrationError.EXISTS); // ADD THESE MESSAGES
+            errors.add(Errors.EXISTS); // ADD THESE MESSAGES
         }
         if (data.get("pw1") != data.get("pw2")){
-            errors.add(RegistrationError.PASSWORD_MATCH); // ADD THESE MESSAGES
+            errors.add(Errors.PASSWORD_MATCH); // ADD THESE MESSAGES
         }
 
         if(errors.isEmpty()) {

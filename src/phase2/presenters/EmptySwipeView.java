@@ -1,41 +1,44 @@
-package Phase1.Views;
+package phase2.presenters;
 
-import Phase1.Users.ProfileUser;
+import phase2.users.User;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import phase2.controllers.SwipeController;
+import phase2.dataaccess.DataAccessInterface;
 
 /**
- * The builder for Empty swipe view
+ * The view being displayed when the user reaches the end of swipe list.
  */
-public class EmptyMainViewBuilder implements SceneBuilder{
-    ProfileUser primary;
-    HBox hb;
-    StackPane sp;
-    Button btn1;
-    Button btn2;
-    Button btn3;
-    Button btn4;
-    Button btn5;
-    BorderPane bp;
-    VBox v;
-    Scene scene;
-    Effect effect;
-    Text text;
+public class EmptySwipeView implements View{
+
+    User primary; // the primary user.
+    HBox hb; // the hbox containing the buttons.
+    StackPane sp; // the scroll pane.
+    Button btn1; // the matches button.
+    Button btn2; // the self view button.
+    Button btn3; // the log out button.
+    Button btn4; // the refresh button.
+    BorderPane bp; // the main borderpane.
+    VBox v; // the main vbox.
+    Scene scene; // the scene corresponding to this view.
+    Text text; // the message on the view.
+    Stage s; // the main stage.
+    DataAccessInterface db; // the data access interface.
 
     /**
      * @param user the current user
+     * @param s the main stage
+     * @param db the data access interface
      */
-    public EmptyMainViewBuilder(ProfileUser user){
+    public EmptySwipeView(User user, Stage s, DataAccessInterface db){
         this.primary = user;
         this.bp = new BorderPane();
         this.sp = new StackPane();
@@ -47,13 +50,25 @@ public class EmptyMainViewBuilder implements SceneBuilder{
         this.v = new VBox();
         this.text = new Text("There is no user to swipe at the moment,\n" +
                 " please refresh or try again later");
+        this.s = s;
+        this.db = db;
     }
 
+    /**
+     * Delegates the task to each button.
+     */
+    public void setOnAction(){
+        SwipeController sp = new SwipeController(db, s, primary.getId(), db.getSwipeList(primary.getId()));
+        this.btn4.setOnAction(sp.refresh());
+        this.btn3.setOnAction(sp.logOut());
+        this.btn2.setOnAction(sp.selfView());
+        this.btn1.setOnAction(sp.matches());
+
+    }
 
     /**
      * Creates the HBoxes necessary for the scene.
      */
-    @Override
     public void addHBox() {
         this.bp.setTop(this.hb);
     }
@@ -63,7 +78,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
      */
 
 
-    @Override
     public void addButton() {
         this.v.getChildren().add(btn4);
         this.hb.getChildren().add(btn1);
@@ -104,7 +118,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     /**
      * Creates all the VBoxes necessary for the scene.
      */
-    @Override
     public void addVBox() {
         this.bp.setCenter(v);
 
@@ -115,7 +128,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     /**
      * Adds textfield to the corresponding box.
      */
-    @Override
     public void addTextField() {
     }
 
@@ -123,7 +135,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     /**
      * Sets the spacing for each box.
      */
-    @Override
     public void setSpacing() {
         this.v.setSpacing(30);
         this.hb.setSpacing(30);
@@ -141,7 +152,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     /**
      * Sets the margin of the biggest box in the borderpane.
      */
-    @Override
     public void setMargin() {
         this.bp.setMargin(this.hb, new Insets(40, 20, 0, 70));
         this.bp.setMargin(this.btn1, new Insets(320, 10, 50, 50));
@@ -156,7 +166,6 @@ public class EmptyMainViewBuilder implements SceneBuilder{
     /** Set scene on the stage.
      * @param stage the mainstage where we display the scene.
      */
-    @Override
     public void setScene(Stage stage) {
         this.scene = new Scene(this.sp, 350, 490);
         stage.setScene(this.scene);
@@ -173,10 +182,10 @@ public class EmptyMainViewBuilder implements SceneBuilder{
 
     /**
      * Builds the scene on given stage
-     * @param s the main stage
      */
+
     @Override
-    public void build(Stage s){
+    public void build() {
         this.setText();
         this.addButton();
         this.addHBox();
@@ -185,7 +194,9 @@ public class EmptyMainViewBuilder implements SceneBuilder{
         this.addbp();
         this.setMargin();
         this.setScene(s);
-    }
 
+    }
 }
 
+
+}

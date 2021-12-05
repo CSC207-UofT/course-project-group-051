@@ -62,7 +62,7 @@ public class RegistrationView implements View{
         this.v = new VBox();
         this.v1 = new VBox();
         this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
-        this.label1 = new Label("Username:");
+        this.label1 = new Label("UTorID:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
         this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
@@ -91,19 +91,19 @@ public class RegistrationView implements View{
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("birthday", tf);
-        inputs.put("username", tf1);
-        inputs.put("password", tf2);
-        inputs.put("passwordC", tf3);
-        inputs.put("profilePic", tf4);
-        inputs.put("fName", tf5);
-        inputs.put("lName", tf6);
-        inputs.put("gender", tf7);
-        inputs.put("genderPref", tf8);
-        inputs.put("bio", tf9);
-        RegistrationController registrationController = new RegistrationController(db, stage, inputs);
-        LogInController logInController = new LogInController(db,stage, tf1, tf2);
-        createAccount.setOnAction(registrationController.createAccount());
-        login.setOnAction(logInController.login());
+        inputs.put("UTorID", tf);
+        inputs.put("password", tf);
+        inputs.put("passwordC", tf);
+        inputs.put("profilePic", tf);
+        inputs.put("fName", tf);
+        inputs.put("lName", tf);
+        inputs.put("gender", tf);
+        inputs.put("genderPref", tf);
+        inputs.put("bio", tf);
+        RegistrationController controller = new RegistrationController(db, stage, inputs);
+        createAccount.setOnAction(controller.createAccount());
+        login.setOnAction(controller.login());
+
     }
 
     /**

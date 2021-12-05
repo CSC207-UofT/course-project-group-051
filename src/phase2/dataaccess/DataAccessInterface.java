@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public interface DataAccessInterface {
 
     /**
-     * @param username the username of the user you are trying to log into.
+     * @param username the UTorID of the user you are trying to log into.
      * @param password the password of the user you are trying to log into.
      * @return returns the id of the user, if it is not in the database, it will return -1
      */
@@ -58,11 +58,6 @@ public interface DataAccessInterface {
      */
     String getGenderPreference(int id);
 
-    /**
-     * @param id the id of the user's info you are requesting
-     * return the age of the user with the id, return -1 if id doesn't exist
-     */
-    int getAge(int id);
 
     /**
      * @param id the id of the user's info you are requesting
@@ -94,12 +89,12 @@ public interface DataAccessInterface {
 
     /**
      * @param threadID the thread's id
-     * @return the thread with the given threadID as an arraylist of Strings in the format below
-     * "msg1,senderID,receiverID"
-     * "msg2,senderID,receiverID"
-     * "msg3,senderID,receiverID"
+     * @return the thread with the given threadID as an arraylist of String[] in the format below
+     * {"msg1","senderID","receiverID"}
+     * {"msg2","senderID","receiverID"}
+     * {"msg3","senderID","receiverID"}
      */
-    ArrayList<String> getThread(int threadID);
+    ArrayList<String[]> getThread(int threadID);
 
     /**
      * no longer in user unless decided otherwise
@@ -154,14 +149,6 @@ public interface DataAccessInterface {
      * @return false if failed
      */
     boolean setBio(int id, String bio);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param age the age you are trying to set
-     * takes the user's id and the bio and set said user's bio as bio
-     * @return false if failed
-     */
-    boolean setAge(int id, int age);
 
     /**
      * @param id the id of the user's info you are changing
@@ -272,5 +259,4 @@ public interface DataAccessInterface {
 
     void closeDB() throws SQLException;
 
-    ArrayList getMatches(int id);
 }

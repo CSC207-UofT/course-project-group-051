@@ -1,5 +1,6 @@
 package phase2.presenters;
 
+import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
@@ -159,6 +160,7 @@ public class SwipeView implements View{
     private void setSpacing() {
 
         this.hb.setSpacing(200);
+        this.hb.setAlignment(Pos.CENTER);
     }
 
 
@@ -196,7 +198,7 @@ public class SwipeView implements View{
      * Adds the VBoxes to the BorderPane.
      */
     private void addVBox() {
-        bp.setCenter(v);
+        bp.setCenter(this.v);
 
     }
 
@@ -205,7 +207,7 @@ public class SwipeView implements View{
      * Sets the margin of the biggest box in the borderpane.
      */
     private void addsp(){
-        this.bp.setCenter(this.sp);
+        this.v.getChildren().add(this.sp);
 
     }
 
@@ -215,14 +217,13 @@ public class SwipeView implements View{
      */
     private void setMargin() {
 
-        BorderPane.setMargin(hb, Positioner.BUTTON_POSITION);
+        this.bp.setMargin(hb, Positioner.BUTTON_POSITION);
 
+        this.bp.setMargin(v, Positioner.VBOX_POSITION);
 
-        BorderPane.setMargin(v, Positioner.VBOX_POSITION);
+        this.sp.setMargin(fNameAge, Positioner.namePositioner(image));
 
-        StackPane.setMargin(fNameAge, Positioner.namePositioner(image));
-
-        StackPane.setMargin(bio, Positioner.bioPositioner(image));
+        this.sp.setMargin(bio, Positioner.bioPositioner(image));
 
 
 
@@ -238,7 +239,7 @@ public class SwipeView implements View{
         Scene scene;
 
 
-        scene = new Scene(this.bp, 1000, 1000);
+        scene = new Scene(this.bp, 800, 800);
 
 
         stage.setScene(scene);

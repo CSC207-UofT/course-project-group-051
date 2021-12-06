@@ -37,7 +37,6 @@ public class MatchView implements View{
     @Override
     public void build() {
         this.addVBox();
-        //this.addButton();
         this.addText();
         this.addScrollPane();
         this.orientScrollPane();

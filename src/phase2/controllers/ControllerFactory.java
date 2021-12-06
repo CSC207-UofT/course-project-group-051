@@ -1,5 +1,6 @@
 package phase2.controllers;
 
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.constants.State;
 import phase2.constants.States;
@@ -97,7 +98,7 @@ public class ControllerFactory {
      */
     public RegistrationController getRegistrationController(){
 
-        return new RegistrationController(db, stage, currentUser); //constructor seems wrong here.
+        return new RegistrationController(db, stage); //constructor seems wrong here.
 
     }
 

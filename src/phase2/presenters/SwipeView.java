@@ -22,14 +22,8 @@ public class SwipeView implements View{
 
     //TODO: rename boxes.
     private SwipeController controller;
-    private Button noButton;
-    private Button yesButton;
-    private Button matchesButton;
-    private Button logoutButton;
-    private Button myProfileButton;
-    private Button refreshButton;
     private HBox hb;// The HBox containing the buttons.
-    private HBox hb2;
+    private HBox hb1;
     private VBox v; // The VBox containing the scroll pane.
     private StackPane sp;// The stack pane for the photo, first name and bio.
     private BorderPane bp;// The borderpane containing the VBox.
@@ -46,9 +40,8 @@ public class SwipeView implements View{
     public SwipeView(SwipeController swipeController){
 
         controller = swipeController;
-        labelButtons();
         hb = new HBox();
-        hb2 = new HBox();
+        hb1 = new HBox();
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
@@ -61,57 +54,66 @@ public class SwipeView implements View{
     public SwipeView() {
 
         controller = ControllerFactory.getInstance().getSwipeController();
-        labelButtons();
         hb = new HBox();
-        hb2 = new HBox();
+        hb1 = new HBox();
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
     }
 
-
-    /**
-     * Labels the buttons.
-     */
-    private void labelButtons() {
-
-        noButton = new Button("No");
-        yesButton = new Button("Yes");
-        matchesButton = new Button("Matches");
-        logoutButton = new Button("Log Out");
-        myProfileButton = new Button("My Profile");
-        refreshButton = new Button("Refresh");
-    }
-
     @Override
     public void build() {
 
-        setUserData();
 
-
-        addHBox();
+        if (!controller.isEmpty()) {
+            setUserData();
+        }
         addVBox();
-        setSpacing();
         addsp();
-        setMargin();
-        addButton();
         setOnActions();
+        addHBox();
         setScene(controller.getStage());
 
     }
-
 
     /**
      * Set the actions to the buttons of this view.
      */
     private void setOnActions() {
-        noButton.setOnAction(controller.swipeLeft());
-        yesButton.setOnAction(controller.swipeRight());
+
+        //Instantiate buttons
+        Button noButton = new Button("No");
+        Button yesButton = new Button("Yes");
+        Button matchesButton = new Button("Matches");
+        Button logoutButton = new Button("Log Out");
+        Button myProfileButton = new Button("My Profile");
+        Button refreshButton = new Button("Refresh");
+
+
+        BorderPane.setMargin(noButton, Positioner.NO_POSITION);
+
+        BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
+
+        //Set the buttons to their positions and add their actions
+        if (controller.isEmpty()){
+            sp.getChildren().add(refreshButton);
+            refreshButton.setOnAction(controller.refresh());
+        } else {
+            bp.setLeft(noButton);
+            bp.setRight(yesButton);
+            noButton.setOnAction(controller.swipeLeft());
+            yesButton.setOnAction(controller.swipeRight());
+        }
+        hb.getChildren().add(matchesButton);
+        hb.getChildren().add(logoutButton);
+        hb.getChildren().add(myProfileButton);
         matchesButton.setOnAction(controller.changeMatchView());
         logoutButton.setOnAction(controller.logOut());
         myProfileButton.setOnAction(controller.changeProfileView());
-        refreshButton.setOnAction(controller.refresh());
+
     }
+
+
 
 
     /**
@@ -140,6 +142,16 @@ public class SwipeView implements View{
 
 
     /**
+     * Sets the spacing for each box.
+     */
+    private void setSpacing() {
+
+        hb.setSpacing(this.image.getFitWidth() / 4);
+        hb1.setSpacing(50000);
+    }
+
+
+    /**
      * Adds the text elements to the Scrollpane.
      */
     private void addText(){
@@ -154,7 +166,9 @@ public class SwipeView implements View{
      */
     private void addHBox() {
         bp.setTop(hb);
-        bp.setBottom(hb2);
+        bp.setBottom(hb1);
+
+        setSpacing();
     }
 
 
@@ -164,34 +178,6 @@ public class SwipeView implements View{
     private void addVBox() {
         bp.setCenter(v);
 
-    }
-
-
-    /**
-     * Adds the buttons to the scene. Determines which buttons are needed.
-     */
-    private void addButton() {
-
-        if (controller.isEmpty()){
-            sp.getChildren().add(refreshButton);
-        } else {
-            bp.setLeft(noButton);
-            bp.setRight(yesButton);
-        }
-        hb.getChildren().add(matchesButton);
-        hb.getChildren().add(logoutButton);
-        hb.getChildren().add(myProfileButton);
-
-
-    }
-
-
-    /**
-     * Sets the spacing for each box.
-     */
-    private void setSpacing() {
-
-        hb.setSpacing(this.image.getFitWidth() / 4);
     }
 
 
@@ -211,9 +197,6 @@ public class SwipeView implements View{
 
         BorderPane.setMargin(hb, Positioner.BUTTON_POSITION);
 
-        BorderPane.setMargin(noButton, Positioner.NO_POSITION);
-
-        BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
 
         BorderPane.setMargin(v, Positioner.VBOX_POSITION);
 
@@ -221,7 +204,7 @@ public class SwipeView implements View{
 
         StackPane.setMargin(bio, Positioner.bioPositioner(image));
 
-        hb2.setAlignment(Pos.BASELINE_LEFT);
+        hb1.setAlignment(Pos.BASELINE_LEFT);
 
 
     }
@@ -232,7 +215,15 @@ public class SwipeView implements View{
      * @param stage the mainstage where we display the scene.
      */
     private void setScene(Stage stage) {
-        Scene scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
+
+        Scene scene;
+
+        if (controller.isEmpty()){
+            scene = new Scene(this.bp, 300, 250);
+        } else {
+            scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
+        }
+
         stage.setScene(scene);
     }
 

@@ -17,7 +17,7 @@ public class SwipeCase {
     DataAccessInterface db;
     Queue<OtherUser> swipeList;
     SelfUser selfUser;
-    OtherUser currentTarget;
+    public OtherUser currentTarget;
 
 
     /**
@@ -79,6 +79,9 @@ public class SwipeCase {
 
     }
 
+    public boolean isEmpty(){
+        return currentTarget == null;
+    }
 
     /**
      * Likes the current OtherUser, and determine there are more users to swipe on.

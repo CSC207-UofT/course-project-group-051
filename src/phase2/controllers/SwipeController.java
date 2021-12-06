@@ -12,8 +12,7 @@ import java.util.*;
 
 public class SwipeController extends Controller {
 
-    private final SwipeCase swiper;
-    private final Queue<Integer> swipeList;
+    public SwipeCase swiper;
 
     /**
      * @param db A reference to our Database so we can read and write to it.
@@ -24,12 +23,11 @@ public class SwipeController extends Controller {
      */
     public SwipeController(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
         super(db, stage);
-        this.swipeList = swipeList;
         swiper = new SwipeCase(db, id, swipeList);
     }
 
     public boolean isEmpty(){
-        return swipeList.isEmpty();
+        return swiper.isEmpty();
     }
 
 
@@ -45,7 +43,7 @@ public class SwipeController extends Controller {
 
             boolean empty = swiper.likeCurrentUser();
 
-            updateView(empty);
+            updateView();
 
         };
 
@@ -64,7 +62,7 @@ public class SwipeController extends Controller {
 
             boolean empty = swiper.nextUser();
 
-            updateView(empty);
+            updateView();
 
         };
 
@@ -74,9 +72,8 @@ public class SwipeController extends Controller {
 
     /**
      * Refreshes and recreates the SwipeView.
-     * @param empty A boolean that is true if there are no more people to swipe on.
      */
-    private void updateView(boolean empty) {
+    private void updateView() {
         View view = new SwipeView(this);
         view.build();
     }
@@ -89,7 +86,10 @@ public class SwipeController extends Controller {
 
         EventHandler<ActionEvent> event;
 
-        event = e -> new SwipeView();
+        event = e -> {
+            View view = new SwipeView();
+            view.build();
+        };
 
         return event;
 

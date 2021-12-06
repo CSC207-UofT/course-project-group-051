@@ -26,7 +26,6 @@ public class ControllerFactory {
      */
     private ControllerFactory(){
         db = new DataBaseAccess();
-
     }
 
 

@@ -11,28 +11,6 @@ public class ProfileCase {
         this.db = db;
     }
 
-    public boolean checkValidDate(String birthday){
-        String[] date = birthday.split(",");
-        if(date.length != 3 || !Arrays.asList(ProfileController.VALID_MONTH).contains(date[0]) ||
-                !(date[1].length() == 2 && this.isNumeric(date[1])) || !(date[2].length() == 4 && this.isNumeric(date[1]))){
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isNumeric(String string) {
-
-        if(string == null || string.equals("")) {
-            return false;
-        }
-        try {
-            Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException ignored) {
-        }
-        return false;
-    }
-
     public void updateUser(int id, String[] info){
         db.setFirstName(id, info[0]);
         db.setLastName(id, info[1]);

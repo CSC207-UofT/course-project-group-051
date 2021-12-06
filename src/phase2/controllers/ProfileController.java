@@ -48,7 +48,7 @@ public class ProfileController extends Controller {
 
     public EventHandler<ActionEvent> back() {
         event = e -> {
-            View view = new SwipeView(db, stage, id, null);
+            View view = new SwipeView();
             view.build();
         };
         return event;
@@ -84,7 +84,7 @@ public class ProfileController extends Controller {
                 view.build();
             } else {
                 profileCase.updateUser(id, info);
-                View view = new SwipeView(db, stage, id, null);
+                View view = new SwipeView();
                 view.build();
             }
         };

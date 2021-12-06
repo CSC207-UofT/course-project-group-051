@@ -49,7 +49,7 @@ public class RegistrationController extends Controller{
                 int logInResult = logInCase.loginUser(
                         inputs.get("username").getText(),
                         inputs.get("password").getText());
-
+                ControllerFactory.getInstance().setCurrentUser(logInResult);
                 view = new SwipeView();
 
                 view.build();

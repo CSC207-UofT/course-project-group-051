@@ -58,7 +58,7 @@ public class LogInController extends Controller{
         event = e -> {
             LogInCase logInCase = new LogInCase(db);
             int logInResult = logInCase.loginUser(username.getText(), password.getText());
-            View view = null;
+            View view;
             if(logInResult == -1){
                 ArrayList<String> error = new ArrayList<>();
                 error.add(Errors.INVALID_CREDENTIAL);

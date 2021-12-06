@@ -57,14 +57,14 @@ public class MatchView implements View{
         Map<String, Integer> matches = controller.getMatches();
         for (String name: matches.keySet()) {
             Button b = new Button(name);
-            b.setOnAction(controller.switchMessageView(matches.get(name)));
             vb.getChildren().add(b);
-
+            b.setOnAction(controller.switchMessageView(matches.get(name)));
         }
 
         Button back = new Button("Back");
-        back.setOnAction(controller.back());
         vb.getChildren().add(back);
+        back.setOnAction(controller.back());
+
     }
 
 

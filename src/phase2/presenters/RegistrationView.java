@@ -19,8 +19,6 @@ import java.util.Map;
 
 public class RegistrationView implements View{
 
-    DataAccessInterface db;
-    Stage stage;
     HBox hb1;
     Button back;
     Button createAccount;
@@ -31,7 +29,6 @@ public class RegistrationView implements View{
     TextField tf1;
     PasswordField tf2;
     PasswordField tf3;
-    TextField tf4;
     TextField tf5;
     TextField tf6;
     TextField tf7;
@@ -41,13 +38,10 @@ public class RegistrationView implements View{
     Label label1;
     Label label2;
     Label label3;
-    Label label4;
     Label label5;
     Label label6;
     Label label7;
     Label label8;
-    Label label9;
-    TextField tf9;
     ScrollPane sp;
     RegistrationController controller;
 
@@ -63,12 +57,10 @@ public class RegistrationView implements View{
         this.label1 = new Label("UTorID:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
-        this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
-        this.label7 = new Label("Gender(Male or Female):");
+        this.label7 = new Label("Gender:");
         this.label8 = new Label("Gender Preference:");
-        this.label9 = new Label("Bio:");
         this.tf = new TextField (); //BD
         this.tf1 = new TextField (); //userbname
         this.message = new Text();
@@ -76,12 +68,10 @@ public class RegistrationView implements View{
         this.sp = new ScrollPane();
         this.tf2 = new PasswordField();//pw
         this.tf3 = new PasswordField();
-        this.tf4 = new TextField ();
         this.tf5 = new TextField ();
         this.tf6 = new TextField ();
         this.tf7 = new TextField ();
         this.tf8 = new TextField ();
-        this.tf9 = new TextField();
         this.createAccount = new Button("Create Account");
         this.v1.getChildren().add(error);
     }
@@ -98,12 +88,10 @@ public class RegistrationView implements View{
         this.label1 = new Label("UTorID:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
-        this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
         this.label5 = new Label("First Name:");
         this.label6 = new Label("Last Name:");
-        this.label7 = new Label("Gender(Male or Female):");
+        this.label7 = new Label("Gender:");
         this.label8 = new Label("Gender Preference:");
-        this.label9 = new Label("Bio:");
         this.tf = new TextField (); //BD
         this.tf1 = new TextField (); //userbname
         this.message = new Text();
@@ -111,27 +99,24 @@ public class RegistrationView implements View{
         this.sp = new ScrollPane();
         this.tf2 = new PasswordField();//pw
         this.tf3 = new PasswordField();
-        this.tf4 = new TextField ();
         this.tf5 = new TextField ();
         this.tf6 = new TextField ();
         this.tf7 = new TextField ();
         this.tf8 = new TextField ();
-        this.tf9 = new TextField();
         this.createAccount = new Button("Create Account");
+
     }
 
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("age", tf);
-        inputs.put("UTorID", tf);
-        inputs.put("password", tf);
-        inputs.put("passwordC", tf);
-        inputs.put("profilePic", tf);
-        inputs.put("fName", tf);
-        inputs.put("lName", tf);
-        inputs.put("gender", tf);
-        inputs.put("genderPref", tf);
-        inputs.put("bio", tf);
+        inputs.put("UTorID", tf1);
+        inputs.put("password", tf2);
+        inputs.put("passwordC", tf3);
+        inputs.put("fName", tf5);
+        inputs.put("lName", tf6);
+        inputs.put("gender", tf7);
+        inputs.put("genderPref", tf8);
         createAccount.setOnAction(controller.createAccount(inputs));
         back.setOnAction(controller.back());
 
@@ -169,19 +154,14 @@ public class RegistrationView implements View{
      */
     public void addTextField() {
 
-        this.v.getChildren().addAll(label,
-                this.tf);
+        this.v.getChildren().addAll(label, this.tf);
+        this.v.getChildren().addAll(label1, this.tf1);
+        this.v.getChildren().addAll(label2, this.tf2);
+        this.v.getChildren().addAll(label3, this.tf3);
         this.v.getChildren().addAll(label5, this.tf5);
         this.v.getChildren().addAll(label6, this.tf6);
-        this.v.getChildren().addAll(label1,
-                this.tf1);
-        this.v.getChildren().addAll(label2,
-                this.tf2);
-        this.v.getChildren().addAll(label3, this.tf3);
-        this.v.getChildren().addAll(label4, this.tf4);
         this.v.getChildren().addAll(label7, this.tf7);
         this.v.getChildren().addAll(label8, this.tf8);
-        this.v.getChildren().addAll(label9, this.tf9);
 
     }
 
@@ -231,7 +211,7 @@ public class RegistrationView implements View{
      */
     public void setScene() {
         Scene scene = new Scene(this.bp, 550, 500);
-        stage.setScene(scene);
+        controller.getStage().setScene(scene);
     }
 
     /** Displays the success message
@@ -255,6 +235,7 @@ public class RegistrationView implements View{
         this.addTextField();
         this.setSpacing();
         this.setMargin();
+        setOnActions();
         this.setScene();
     }
 }

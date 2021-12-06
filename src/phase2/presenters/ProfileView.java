@@ -130,7 +130,7 @@ public class ProfileView implements View {
         inputs.put("imgPathT", imgPathT);
         inputs.put("genderT", genderT);
         inputs.put("genderPrefT", genderPrefT);
-        inputs.put("UtorIDT", usernameT);
+        inputs.put("UTorIDT", usernameT);
         inputs.put("bioT", bioT);
         inputs.put("passwordT", passwordT);
         this.back.setOnAction(controller.back());
@@ -230,6 +230,6 @@ public class ProfileView implements View {
         this.addText();
         this.setSpacing();
         this.setMargin();
-        this.setScene(stage);
+        this.setScene(controller.getStage());
     }
 }

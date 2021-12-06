@@ -19,8 +19,6 @@ import java.util.*;
 
 public class ProfileController extends Controller {
 
-    DataAccessInterface db;
-    Stage stage;
     int id;
     Map<String, TextInputControl> inputs;
     EventHandler<ActionEvent> event;
@@ -34,9 +32,12 @@ public class ProfileController extends Controller {
 
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
+
         info.put("firstName", db.getFirstName(id));
+
         info.put("lastName", db.getLastName(id));
-        info.put("age", db.getBirthday(id));
+
+        info.put("age", Integer.toString(db.getAge(id)));
         info.put("imgPath", db.getImgPath(id));
         info.put("gender", db.getGender(id));
         info.put("genderPref", db.getGenderPreference(id));
@@ -59,8 +60,8 @@ public class ProfileController extends Controller {
             this.inputs = inputs;
             ArrayList<String> errors = new ArrayList<>();
             String[] info = new String[9];
-            info[0] = inputs.get("fNameT").getText();
-            info[1] = inputs.get("lNameT").getText();
+            info[0] = inputs.get("firstNameT").getText();
+            info[1] = inputs.get("lastNameT").getText();
             info[2] = inputs.get("ageT").getText();
             info[3] = inputs.get("imgPathT").getText();
             info[4] = inputs.get("genderT").getText();

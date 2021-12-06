@@ -52,8 +52,8 @@ public class MatchController extends Controller{
      */
     public EventHandler<ActionEvent> back() {
         event = e -> {
-            SwipeView swipeView = new SwipeView();
-            swipeView.build();
+            View view = new SwipeView();
+            view.build();
         };
         return event;
     }

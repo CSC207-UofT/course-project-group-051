@@ -85,13 +85,15 @@ public class SwipeView implements View{
     public void build() {
 
         setUserData();
-        setOnActions();
-        addButton();
+
+
         addHBox();
         addVBox();
         setSpacing();
         addsp();
         setMargin();
+        addButton();
+        setOnActions();
         setScene(controller.getStage());
 
     }

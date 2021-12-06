@@ -60,6 +60,7 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
 
     }
 
+    @Override
     public Map<String, String> getUserInfo(int id){
         Map<String, String> info = new HashMap<>();
         info.put("uTID", getUsername(id));
@@ -70,25 +71,23 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         info.put("gender", getGender(id));
         info.put("genderPref", getGenderPreference(id));
         info.put("Bio", getBio(id));
-        info.put("imgLocation", getImgPath(id));
-        return info;
-    }
-
-    public Map<String, String> updateUserInfo(int id, Map<String, String> info){
-
-        setUsername(id, info.get("uTID"));           info.put("uTID", getUsername(id));
-        setPassword(id, info.get())           info.put("password", getPassword(id));
-        setFirstName(id, info.get())           info.put("firstName", getFirstName(id));
-        setLastName(id, info.get())           info.put("lastName", getLastName(id));
-        setAge(id, Integer.parseInt(info.get("age")))           info.put("age", getAge(id));
-                   info.put("gender", getGender(id));
-                   info.put("genderPref", getGenderPreference(id));
-                   info.put("Bio", getBio(id));
-                   info.put("imgLocation", getImgPath(id));
         return info;
     }
 
     @Override
+    public void updateUserInfo(int id, Map<String, String> info){
+
+        setUsername(id, info.get("uTID"));
+        setPassword(id, info.get("password"));
+        setFirstName(id, info.get("firstName"));
+        setLastName(id, info.get("lastName"));
+        setAge(id, Integer.parseInt(info.get("age")));
+        setGender(id, info.get("gender"));
+        setGenderPreference(id, info.get("genderPref"));
+        setBio(id, info.get("Bio"));
+        setImgPath(id, info.get("imgPath"));
+    }
+
     public String getFirstName(int id) {
         String name = null;
         try {
@@ -108,7 +107,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return name;
     }
 
-    @Override
     public String getLastName(int id) {
         String name = null;
         try {
@@ -128,7 +126,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return name;
     }
 
-    @Override
     public String getUsername(int id) {
         String username = null;
         try {
@@ -148,7 +145,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return username;
     }
 
-    @Override
     public String getPassword(int id) {
         String password = null;
         try {
@@ -168,7 +164,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return password;
     }
 
-    @Override
     public String getGender(int id) {
         String gender = null;
         try {
@@ -188,7 +183,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return gender;
     }
 
-    @Override
     public String getBio(int id) {
         String bio = null;
         try {
@@ -208,7 +202,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return bio;
     }
 
-    @Override
     public String getGenderPreference(int id) {
         String genderPreference = null;
         try {
@@ -228,8 +221,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return genderPreference;
     }
 
-
-    @Override
     public String getImgPath(int id) {
         String path = null;
         try {
@@ -266,26 +257,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
             e.printStackTrace();
         }
         return age.toString();
-    }
-
-    @Override
-    public String getBirthday(int id) {
-        String birthday = null;
-        try {
-            String h2 = "select birthday from USER where PersonID = "+ id +";";
-            ResultSet rs = stmt.executeQuery(h2);
-            while (rs.next()) {
-                birthday = rs.getString("birthday");
-            }
-            rs.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-            Alert a = new Alert(Alert.AlertType.ERROR);
-            a.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return birthday;
     }
 
     @Override
@@ -413,7 +384,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
 
     }
 
-    @Override
     public boolean setFirstName(int id, String firstName) {
         boolean rs = false;
         try {
@@ -429,7 +399,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setLastName(int id, String lastName) {
         boolean rs = false;
         try {
@@ -445,11 +414,10 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setUsername(int id, String username) {
         boolean rs = false;
-        try { username
-            String h2 = "update user set username = '" ++"' where PERSONID = " + id + ";";
+        try {
+            String h2 = "update user set username = '" + username + "' where PERSONID = " + id + ";";
             rs= stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -461,7 +429,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setPassword(int id, String password) {
         boolean rs = false;
         try {
@@ -477,7 +444,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setGender(int id, String gender) {
         boolean rs = false;
         try {
@@ -493,7 +459,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setBio(int id, String bio) {
         boolean rs = false;
         try {
@@ -509,7 +474,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setBirthday(int id, String birthday) {
         boolean rs = false;
         try {
@@ -540,8 +504,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-
-    @Override
     public boolean setImgPath(int id, String path) {
         boolean rs = false;
         try {
@@ -557,7 +519,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
-    @Override
     public boolean setGenderPreference(int id, String genderPreference) {
         boolean rs = false;
         try {
@@ -572,8 +533,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         }
         return rs;
     }
-
-
 
     @Override
     public boolean likeUser(int currUser, int likeID) {
@@ -667,6 +626,17 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
         return rs;
     }
 
+    private int checkConversation(int userID1, int userID12) {
+        ArrayList<Integer> threads1 = this.getThreads(userID1);
+        ArrayList<Integer> threads2 = this.getThreads(userID12);
+        for(int x: threads1){
+            if(threads2.contains(x)){
+                return x;
+            }
+        }
+        return -1;
+    }
+
     @Override
     public boolean stopAdmiringUser(int currUser, int admirerID) {
         boolean rs = false;
@@ -696,18 +666,6 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
             e.printStackTrace();
         }
         return rs;
-    }
-
-    @Override
-    public int checkConversation(int userID1, int userID12) {
-        ArrayList<Integer> threads1 = this.getThreads(userID1);
-        ArrayList<Integer> threads2 = this.getThreads(userID12);
-        for(int x: threads1){
-            if(threads2.contains(x)){
-                return x;
-            }
-        }
-        return -1;
     }
 
     @Override
@@ -882,10 +840,13 @@ public class DataBaseAccess2 implements DataAccessInterface2 {
     }
 
     @Override
-    public int createUser(String lastName, String firstName, String password, String username, int age, String gender, String genderPreference, String birthday) {
+    public int createUser(Map<String, String> userInfo) {
         int id = this.getNextUser();
         try {
-            String h2 = "insert into user values ("+id+", '"+lastName+"', '"+firstName+"', '"+username+"', '"+password+"', "+age+", '"+gender+"', '"+genderPreference+"', '', '', '', '', '"+ birthday+"', '');";
+            String h2 = "insert into user values ("+id+", '" + userInfo.get("lastName") + "', '" +
+                    userInfo.get("firstName") + "', '" + userInfo.get("uTID") + "', '" + userInfo.get("password") +
+                    "', " + userInfo.get("age") + ", '" + userInfo.get("gender") + "', '" +
+                    userInfo.get("genderPreference") + "', 'No Bio', '', '', '', '', '.\\img\\img1.jpg');";
             stmt.execute(h2);
 
         } catch (SQLException se) {

@@ -96,6 +96,7 @@ public interface DataAccessInterface {
      */
     ArrayList<String[]> getThread(int threadID);
 
+    public int getAge(int id);
     /**
      * no longer in user unless decided otherwise
      * msg,senderID,receiverID
@@ -255,7 +256,7 @@ public interface DataAccessInterface {
      * @returns their PersonID and -1 if invalid parameters are given.
      */
     int createUser(String lastName, String firstName, String password, String username, int age, String gender,
-                   String genderPreference, String birthday);
+                   String genderPreference);
 
     void closeDB() throws SQLException;
 

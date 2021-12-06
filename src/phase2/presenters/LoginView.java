@@ -30,7 +30,6 @@ public class LoginView implements View{
     PasswordField password;
     Label usernameLabel;
     Label passwordLabel;
-    DataAccessInterface db;
     Stage stage;
     LogInController controller;
 
@@ -72,12 +71,10 @@ public class LoginView implements View{
         this.setSpacing();
         this.setMargin();
         this.setOnActions();
-        this.setScene(stage);
+        this.setScene(controller.getStage());
     }
 
     private void setOnActions(){
-
-        LogInController controller = new LogInController(db, stage);
         controller.setTextField(username, password);
         createAccount.setOnAction(controller.register());
         loginButton.setOnAction(controller.login());
@@ -146,6 +143,6 @@ public class LoginView implements View{
      */
     public void setScene(Stage stage) {
         this.scene = new Scene(this.bp, 450, 350);
-        stage.setScene(this.scene);
+        stage.setScene(scene);
     }
 }

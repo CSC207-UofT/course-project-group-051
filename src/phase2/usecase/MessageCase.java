@@ -56,7 +56,6 @@ public class MessageCase {
         return -1;
     }
 
-
     /**
      * Calls the Database to create a new thread between the currentUser and Receiver.
      * @return The Id of the newly created thread.

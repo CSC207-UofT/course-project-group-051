@@ -3,6 +3,7 @@ package phase2.dataaccess;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * An interface that defines the methods that interact with the database.
@@ -45,78 +46,9 @@ public interface DataAccessInterface2 {
      */
     ArrayList<String[]> getThread(int threadID);
 
+    public Map<String, String> getUserInfo(int id);
 
-    /**
-     * @param id the id of the user's info you are changing
-     * @param firstName the first name you are trying to set
-     * takes the user's id and the firstName and set said user's first name as firstName
-     * @return false if failed
-     */
-    boolean setFirstName(int id, String firstName);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param lastName the last name you are trying to set
-     * takes the user's id and the lastName and set said user's last name as lastName
-     * @return false if failed
-     */
-    boolean setLastName(int id, String lastName);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param username the username you are trying to set
-     * takes the user's id and the username and set said user's username as username
-     * @return false if failed
-     */
-    boolean setUsername(int id, String username);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param password the password you are trying to set
-     * takes the user's id and the password and set said user's password as password
-     * @return false if failed
-     */
-    boolean setPassword(int id, String password);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param gender the gender you are trying to set
-     * takes the user's id and the gender and set said user's gender as gender
-     * @return false if failed
-     */
-    boolean setGender(int id, String gender);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param bio the bio you are trying to set
-     * takes the user's id and the bio and set said user's bio as bio
-     * @return false if failed
-     */
-    boolean setBio(int id, String bio);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param birthday the birthday you are trying to set
-     * takes the user's id and the birthday and set said user's birthday as birthday
-     * @return false if failed
-     */
-    boolean setBirthday(int id, String birthday);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param path the image path you are trying to set
-     * takes the user's id and the path and set said user's imgLocation as path
-     * @return false if failed
-     */
-    boolean setImgPath(int id, String path);
-
-    /**
-     * @param id the id of the user's info you are changing
-     * @param genderPreference the genderPreference you are trying to set
-     * takes the user's id and the genderPreference and set said user's gender preference as genderPreference
-     * @return false if failed
-     */
-    boolean setGenderPreference(int id, String genderPreference);
+    public void updateUserInfo(int id, Map<String, String> info);
 
     /**
      * @param currUser the current user id
@@ -156,14 +88,6 @@ public interface DataAccessInterface2 {
 
     /**
      * @param userID1 the id of user1
-     * @param userID12 the id of user2
-     * checks if two user have a thread between them if yes
-     * @return the threadID between the two user, if no thread exists return -1
-     */
-    int checkConversation(int userID1, int userID12);
-
-    /**
-     * @param userID1 the id of user1
      * @param userID2 the if of user2
      * takes two users' id and create a thread between them
      * @return -1 if there is already a thread and the threadId if there is no thread between them
@@ -198,8 +122,7 @@ public interface DataAccessInterface2 {
      * creates a new user in the database using the parameters below.
      * @returns their PersonID and -1 if invalid parameters are given.
      */
-    int createUser(String lastName, String firstName, String password, String username, int age, String gender,
-                   String genderPreference, String birthday);
+    int createUser(Map<String, String> userInfo);
 
     void closeDB() throws SQLException;
 

@@ -39,7 +39,7 @@ public class MessageView implements View{
 
     public MessageView(int receiver){
 
-        ControllerFactory.getInstance().getMessageController(receiver);
+        controller = ControllerFactory.getInstance().getMessageController(receiver);
         this.scrollPane = new ScrollPane();
         this.bp = new BorderPane();
         this.vb = new VBox();
@@ -57,6 +57,7 @@ public class MessageView implements View{
     @Override
     public void build() {
         this.addVBox();
+
         this.addText();
         this.addScrollPane();
         this.orientScrollPane();
@@ -65,6 +66,7 @@ public class MessageView implements View{
         this.addButton();
         this.setMargin();
         this.setSpacing();
+        addTextField();
         this.setOnActions();
         this.setScene(controller.getStage());
     }
@@ -135,6 +137,7 @@ public class MessageView implements View{
      * Adds the Matches title to the scene
      */
     public void addText(){
+        System.out.println(controller.getReciever());
         this.hb.getChildren().add(new Text(controller.getReciever()));
     }
 

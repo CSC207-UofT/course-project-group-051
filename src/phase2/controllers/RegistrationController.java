@@ -17,6 +17,7 @@ import phase2.usecase.LogInCase;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -40,6 +41,7 @@ public class RegistrationController extends Controller{
     public EventHandler<ActionEvent> createAccount(Map<String, TextInputControl> inputs){
         event = e -> {
             RegistrationCase registrationCase = new RegistrationCase(db);
+
             ArrayList<String> results = registrationCase.createAccount(inputs);
             View view;
             if(!results.isEmpty()){
@@ -47,7 +49,7 @@ public class RegistrationController extends Controller{
             } else {
                 LogInCase logInCase = new LogInCase(db);
                 int logInResult = logInCase.loginUser(
-                        inputs.get("username").getText(),
+                        inputs.get("UTorID").getText(),
                         inputs.get("password").getText());
                 ControllerFactory.getInstance().setCurrentUser(logInResult);
                 view = new SwipeView();

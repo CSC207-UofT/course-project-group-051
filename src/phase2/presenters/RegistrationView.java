@@ -10,8 +10,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import phase2.controllers.ControllerFactory;
 import phase2.controllers.RegistrationController;
-import phase2.controllers.LogInController;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class RegistrationView implements View{
     DataAccessInterface db;
     Stage stage;
     HBox hb1;
-    Button login;
+    Button back;
     Button createAccount;
     BorderPane bp;
     VBox v;
@@ -49,19 +49,17 @@ public class RegistrationView implements View{
     Label label9;
     TextField tf9;
     ScrollPane sp;
-    Text error;
+    RegistrationController controller;
 
-
-    public RegistrationView(DataAccessInterface db, Stage stage, Text error){
-        this.db = db;
-        this.stage = stage;
+    public RegistrationView(Text error){
+        controller = ControllerFactory.getInstance().getRegistrationController();
         this.bp = new BorderPane();
         this.message = new Text();
         this.hb1 = new HBox();
-        this.login = new Button("Log In");
+        this.back = new Button("Back");
         this.v = new VBox();
         this.v1 = new VBox();
-        this.label = new Label("Date of Birth(e.g. Dec,06,1999):");
+        this.label = new Label("Age");
         this.label1 = new Label("UTorID:");
         this.label2 = new Label("Password:");
         this.label3 = new Label("Confirm Password:");
@@ -85,12 +83,46 @@ public class RegistrationView implements View{
         this.tf8 = new TextField ();
         this.tf9 = new TextField();
         this.createAccount = new Button("Create Account");
-        this.error = error;
+        this.v1.getChildren().add(error);
+    }
+
+    public RegistrationView(){
+        controller = ControllerFactory.getInstance().getRegistrationController();
+        this.bp = new BorderPane();
+        this.message = new Text();
+        this.hb1 = new HBox();
+        this.back = new Button("Back");
+        this.v = new VBox();
+        this.v1 = new VBox();
+        this.label = new Label("Age");
+        this.label1 = new Label("UTorID:");
+        this.label2 = new Label("Password:");
+        this.label3 = new Label("Confirm Password:");
+        this.label4 = new Label("Please enter your profile picture path(use double backslash as separator):");
+        this.label5 = new Label("First Name:");
+        this.label6 = new Label("Last Name:");
+        this.label7 = new Label("Gender(Male or Female):");
+        this.label8 = new Label("Gender Preference:");
+        this.label9 = new Label("Bio:");
+        this.tf = new TextField (); //BD
+        this.tf1 = new TextField (); //userbname
+        this.message = new Text();
+        this.message.setFont(new Font(15));
+        this.sp = new ScrollPane();
+        this.tf2 = new PasswordField();//pw
+        this.tf3 = new PasswordField();
+        this.tf4 = new TextField ();
+        this.tf5 = new TextField ();
+        this.tf6 = new TextField ();
+        this.tf7 = new TextField ();
+        this.tf8 = new TextField ();
+        this.tf9 = new TextField();
+        this.createAccount = new Button("Create Account");
     }
 
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
-        inputs.put("birthday", tf);
+        inputs.put("age", tf);
         inputs.put("UTorID", tf);
         inputs.put("password", tf);
         inputs.put("passwordC", tf);
@@ -100,9 +132,8 @@ public class RegistrationView implements View{
         inputs.put("gender", tf);
         inputs.put("genderPref", tf);
         inputs.put("bio", tf);
-        RegistrationController controller = new RegistrationController(db, stage, inputs);
-        createAccount.setOnAction(controller.createAccount());
-        login.setOnAction(controller.login());
+        createAccount.setOnAction(controller.createAccount(inputs));
+        back.setOnAction(controller.back());
 
     }
 
@@ -122,7 +153,7 @@ public class RegistrationView implements View{
     }
 
     public void addButton() {
-        this.hb1.getChildren().add(this.login);
+        this.hb1.getChildren().add(this.back);
         this.hb1.getChildren().add(this.createAccount);
 
     }
@@ -217,9 +248,6 @@ public class RegistrationView implements View{
         this.addButton();
         this.addVBox();
         this.addMessage();
-        if(!error.getText().isEmpty()){
-            this.v1.getChildren().add(error);
-        }
         this.addHBox();
         this.setSP();
         this.setMessageFill();

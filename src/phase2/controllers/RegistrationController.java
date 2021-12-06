@@ -53,8 +53,6 @@ public class RegistrationController extends Controller{
                         inputs.get("password").getText());
                 ControllerFactory.getInstance().setCurrentUser(logInResult);
                 view = new SwipeView();
-
-                view.build();
             }
             view.build();
         };

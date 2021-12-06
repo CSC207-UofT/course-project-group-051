@@ -167,8 +167,9 @@ public class SwipeView implements View{
     private void addHBox() {
         bp.setTop(hb);
         bp.setBottom(hb1);
-
-        setSpacing();
+        if(!controller.isEmpty()){
+            setSpacing();
+        }
     }
 
 

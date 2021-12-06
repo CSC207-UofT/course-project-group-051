@@ -46,7 +46,6 @@ problem sets while simultaneously meeting their future life partner.
         + Classes for _creation/updating_ purposes are in `package.phase2.controllers`
         + Classes facilitating _backend_ updating are in `package.phase2.dataaccess`
 
-
 3. Interactors
     + Initial problem: Duplicate code being used to build/interact with multiple use cases.
     + Solution: As a result of refactoring controllers, interactors for enhanced flow between entities
@@ -54,7 +53,8 @@ problem sets while simultaneously meeting their future life partner.
       the interactors have a single use for assisting the flow of data to and from the controller package.
 
 ## Clean Architecture
-CRC Cards
+As described in the forthcoming packaging session, our entities, use cases, controllers, and user interface are organized
+explicitly by feature. Here is the CRC model
 
 ## SOLID Design
 The building of this application was centred at the implementation and adherence to clean architecture and SOLID design

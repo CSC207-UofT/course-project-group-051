@@ -20,12 +20,11 @@ problem sets while simultaneously meeting their future life partner.
     * retrieve/view past messages.
 * The application must store, adjust, and actively update the database with new matches, admirers, unmatches,
   and messaging threads.
-* Since this application is still a prototype, users can send messages, but will not receive
-  messages from other users.
+* Users can theoretically message one another, since the database saves the thread in memory, but each
+user would have to be on the same running program, which is not a realistic use.
     * The framework would be easily adaptable to a web source database, due to the adherence to SOLID
       design principles and choice of design patterns.
 
-## maybe class diagram
 ## Design Decisions
 1. Refactoring Use Cases
     + Initial problem: Use cases relied completely on functionality of controller, causing an overloaded class.
@@ -36,7 +35,7 @@ problem sets while simultaneously meeting their future life partner.
         + `LogInController`+`LogInCase`
         + `SwipeController`+`SwipeCase`+`ImageMaker`
         + `ProfileController`+`ProfileCase`
-
+        
 
 2. Refactoring Controllers
     + Initial problem: Overloading our single controller class to handle the presentation and facilitation.
@@ -46,12 +45,13 @@ problem sets while simultaneously meeting their future life partner.
         + Classes for _creation/updating_ purposes are in `package.phase2.controllers`
         + Classes facilitating _backend_ updating are in `package.phase2.dataaccess`
 
+
 3. Interactors
     + Initial problem: Duplicate code being used to build/interact with multiple use cases.
     + Solution: As a result of refactoring controllers, interactors for enhanced flow between entities
       and controllers were implemented. By eliminating over dependency on a single controller,
       the interactors have a single use for assisting the flow of data to and from the controller package.
-
+    
 ## Clean Architecture
 As described in the forthcoming packaging session, our entities, use cases, controllers, and user interface are organized
 explicitly by feature. Here is the CRC model
@@ -122,7 +122,7 @@ applied, and examples of their usage in our code. By focussing on only a few pat
 to utilize all the benefits from Singleton, Factory, and Builder design patterns, whereas our phase 1 lacked focus. This
 strategy enabled proper implementation of design patterns.
 
-### Simple Factory Design Pattern
+### Simple Factory Method Design Pattern
 This pattern is used for aiding the interactions between the user interface and controllers. When users provide
 context, the program activates only the necessary controllers. Consider `package.controllers` and `package.presenters`:
 their use depends on the desired action inputted by the user via the interface, without requiring any unnecessary flow of
@@ -134,7 +134,15 @@ This pattern is used for aiding the flow of data from `package.users` to `packag
 As mentioned in the Liskov Substitution subsection, our program needs definitions for a current and opposing user.
 By adding interactors in `package.userbuilders`, the responsibility of user entities is purely informational, while the
 controllers are only providing functionality that directly applies to the user interface. Code smells of duplicate code
-are also easily eliminated when using this patter, as each build has separate subclasses.
+are also easily eliminated when using this pattern, as each build has separate subclasses.
+
+### Singleton Design Pattern
+This pattern is used to facilitate the use of our `package.database`, via class `ControllerFactory`. This class
+ensures only a single instantiation of `DataBaseAccess` is created, therefore adding security to the retrieval and updating 
+of data. The singleton instantiation of type `DataBaseAccess` is then used with our simple factory implementation, using 
+the accessor methods within the scope of class `DataBaseAccess`. This pattern is integral to the code organization of 
+the project, since it determines the flow of data from entities to user interface.
+
 
 ## Progress Report
 Our team developed more civil and productive communication, while respecting the abilities and constraints of each
@@ -192,9 +200,11 @@ benefited our group, and a summary of each team members' contribution.
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
+    * Adding singleton patter
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
     * Implementation of Use-Cases
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
+    * Adding singleton patter

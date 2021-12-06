@@ -71,7 +71,6 @@ public class SwipeView implements View{
             setUserData();
             this.imageSizer();
             this.setMargin();
-            this.setSpacing();
         }
         else{
             this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
@@ -80,7 +79,7 @@ public class SwipeView implements View{
         this.addsp();
         this.setOnActions();
         this.addHBox();
-
+        this.setSpacing();
 
 
         this.setScene(controller.getStage());
@@ -158,8 +157,8 @@ public class SwipeView implements View{
      * Sets the spacing for each box.
      */
     private void setSpacing() {
-
-        hb.setSpacing(this.image.getFitWidth() / 4);
+        hb.setSpacing(270);
+        //hb.setSpacing(this.image.getFitWidth() / 4);
         hb1.setSpacing(50000);
     }
 

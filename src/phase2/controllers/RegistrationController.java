@@ -27,7 +27,7 @@ public class RegistrationController extends Controller{
     EventHandler<ActionEvent> event;
 
     public RegistrationController(DataAccessInterface db, Stage stage, Map<String, TextInputControl> inputs){
-        super(stage, db);
+        super(db, stage);
         this.inputs = inputs;
         State.setState(States.REGISTRATION);
     }

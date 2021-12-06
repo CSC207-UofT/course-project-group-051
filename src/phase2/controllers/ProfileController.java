@@ -29,7 +29,7 @@ public class ProfileController extends Controller {
             "Sep", "Oct", "Nov", "Dec"};
 
     public ProfileController(DataAccessInterface db, Stage stage, int id) {
-        super(stage, db);
+        super(db, stage);
         this.id = id;
     }
 

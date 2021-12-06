@@ -2,30 +2,36 @@ package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MatchCase {
 
     DataAccessInterface db;
-    int userID;
+    int currentUser;
 
-    public MatchCase(DataAccessInterface db, int userID){
+    public MatchCase(DataAccessInterface db, int currentUser){
         this.db = db;
-        this.userID = userID;
+        this.currentUser = currentUser;
     }
 
-    public List<Integer> getMatches(){
-        List<Integer> likes = db.getLikes(userID);
-        List<Integer> admires = db.getAdmires(userID);
-        List<Integer> matches = new ArrayList<>();
+    /**
+     * @return a Map in the form of <User's Name, User's Id>, where each User has matched with the currentUser.
+     */
+    public Map<String, Integer> getMatches(){
+
+        List<Integer> likes = db.getLikes(currentUser);
+        List<Integer> admires = db.getAdmires(currentUser);
+        Map<String, Integer> matches = new HashMap<>();
 
         for(Integer id: likes){
             if(admires.contains(id)){
-                matches.add(id);
+                matches.put(db.getFirstName(id), id);
             }
         }
 
         return matches;
+
     }
 }

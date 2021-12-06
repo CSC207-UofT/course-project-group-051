@@ -6,7 +6,6 @@ import phase2.users.SelfUser;
 public class SelfUserBuilder extends UserBuilder<SelfUser> {
 
     DataAccessInterface db;
-    SelfUser result;
 
     /**
      * @param db A reference to our database so we can read and write from it.

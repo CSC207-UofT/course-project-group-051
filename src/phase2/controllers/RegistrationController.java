@@ -1,6 +1,5 @@
 package phase2.controllers;
 
-import com.oracle.tools.packager.Log;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
@@ -13,7 +12,7 @@ import phase2.presenters.RegistrationView;
 import phase2.presenters.SwipeView;
 import phase2.presenters.View;
 import phase2.usecase.ErrorBuilder;
-import phase2.usecase.Registration.RegistrationCase;
+import phase2.usecase.RegistrationCase;
 import phase2.usecase.LogInCase;
 
 
@@ -23,31 +22,28 @@ import java.util.Map;
 
 public class RegistrationController extends Controller{
 
-    Map<String, TextInputControl> inputs;
     EventHandler<ActionEvent> event;
 
-    public RegistrationController(DataAccessInterface db, Stage stage, Map<String, TextInputControl> inputs){
+    public RegistrationController(DataAccessInterface db, Stage stage){
         super(db, stage);
-        this.inputs = inputs;
-        State.setState(States.REGISTRATION);
     }
 
 
     public EventHandler<ActionEvent> back(){
         event = e -> {
-            View view = new LoginView(false, db, stage);
+            View view = new LoginView(ErrorBuilder.build(new ArrayList<>()));
             view.build();
         };
         return event;
     }
 
-    public EventHandler<ActionEvent> createAccount(){
+    public EventHandler<ActionEvent> createAccount(Map<String, TextInputControl> inputs){
         event = e -> {
             RegistrationCase registrationCase = new RegistrationCase(db);
             ArrayList<String> results = registrationCase.createAccount(inputs);
             View view;
             if(!results.isEmpty()){
-                view = new RegistrationView(db, stage, ErrorBuilder.build(results)); // return error in view?
+                view = new RegistrationView(ErrorBuilder.build(results)); // return error in view?
             } else {
                 LogInCase logInCase = new LogInCase(db);
                 int logInResult = logInCase.loginUser(

@@ -3,6 +3,8 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import phase2.constants.Errors;
 import phase2.constants.State;
 import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
@@ -10,8 +12,11 @@ import javafx.event.EventHandler;
 import phase2.presenters.LoginView;
 import phase2.presenters.RegistrationView;
 import phase2.presenters.View;
+import phase2.usecase.ErrorBuilder;
 import phase2.usecase.LogInCase;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * The controller that delegates tasks for each button in the log in view.
@@ -19,8 +24,9 @@ import javafx.stage.Stage;
 public class LogInController extends Controller{
 
     TextField username; //the Username text field.
-    PasswordField password; //the password field.
+    PasswordField password; //the Password text field.
     EventHandler<ActionEvent> event; //the event placeholder.
+    Text error;
 
 
     /**
@@ -34,7 +40,7 @@ public class LogInController extends Controller{
     }
 
     /**
-     * Sets the textfield to the given text fields.
+     * Sets the text field to the given text fields.
      * @param username the username text field.
      * @param password the password text field.
      */
@@ -45,7 +51,7 @@ public class LogInController extends Controller{
     }
 
     /**
-     * @return the task delegation after the log in button is pressed.
+     * @return the task delegation after the login button is pressed.
      */
     public EventHandler<ActionEvent> login(){
         event = e -> {
@@ -53,7 +59,9 @@ public class LogInController extends Controller{
             int logInResult = logInCase.loginUser(username.getText(), password.getText());
             View view = null;
             if(logInResult == -1){
-                view = new LoginView(true, db, stage);
+                ArrayList<String> error = new ArrayList<>();
+                error.add(Errors.INVALID_CREDENTIAL);
+                view = new LoginView(ErrorBuilder.build(error));
             }
             else{
                 //view = new SwipeView();
@@ -68,7 +76,7 @@ public class LogInController extends Controller{
      */
     public EventHandler<ActionEvent> register(){
         event = e -> {
-            View view = new RegistrationView(db, stage);
+            View view = new RegistrationView();
             view.build();
         };
         return event;

@@ -12,7 +12,7 @@ public class Positioner {
     public static final Insets BUTTON_POSITION = new Insets(40, 20, 0, 150);
     public static final Insets NO_POSITION = new Insets(320, 10, 50, 50);
     public static final Insets YES_POSITION = new Insets(320, 50, 50, 10);
-    public static final Insets VBOX_POSITION = new Insets(50, 50, 50, 50);
+    public static final Insets VBOX_POSITION = new Insets(0, 0, 0, 0);
 
     /**
      * @param image Image to position around.
@@ -20,11 +20,10 @@ public class Positioner {
      */
     public static Insets namePositioner(ImageView image) {
 
-        return new Insets(
-                image.getFitHeight()*0.75,
-                image.getFitWidth()*7/8,
-                50,
-                image.getFitWidth()/8);
+        return new Insets( 600,
+                460,
+                300,
+                30);
 
     }
 
@@ -35,10 +34,10 @@ public class Positioner {
     public static Insets bioPositioner(ImageView image) {
 
         return new Insets(
-                image.getFitHeight()*0.88,
-                image.getFitWidth()*7/8,
-                50,
-                image.getFitWidth()*1/8);
+                650,
+                500,
+                250,
+                30);
 
     }
 

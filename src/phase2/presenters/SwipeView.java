@@ -1,5 +1,6 @@
 package phase2.presenters;
 
+import javafx.scene.text.Font;
 import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -39,12 +40,12 @@ public class SwipeView implements View{
      */
     public SwipeView(SwipeController swipeController){
 
-        controller = swipeController;
-        hb = new HBox();
-        hb1 = new HBox();
-        v = new VBox();
-        sp = new StackPane();
-        bp = new BorderPane();
+        this.controller = swipeController;
+        this.hb = new HBox();
+        this.hb1 = new HBox();
+        this.v = new VBox();
+        this.sp = new StackPane();
+        this.bp = new BorderPane();
     }
 
 
@@ -53,26 +54,35 @@ public class SwipeView implements View{
      */
     public SwipeView() {
 
-        controller = ControllerFactory.getInstance().getSwipeController();
-        hb = new HBox();
-        hb1 = new HBox();
-        v = new VBox();
-        sp = new StackPane();
-        bp = new BorderPane();
+        this.controller = ControllerFactory.getInstance().getSwipeController();
+        this.hb = new HBox();
+        this.hb1 = new HBox();
+        this.v = new VBox();
+        this.sp = new StackPane();
+        this.bp = new BorderPane();
     }
 
     @Override
     public void build() {
 
-
-        if (!controller.isEmpty()) {
+        if (!this.controller.isEmpty()) {
             setUserData();
+            this.imageSizer();
+            this.setMargin();
+
         }
-        addVBox();
-        addsp();
-        setOnActions();
-        addHBox();
-        setScene(controller.getStage());
+        else{
+            this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
+        }
+        this.addVBox();
+        this.addsp();
+        this.setOnActions();
+        this.addHBox();
+
+        this.setSpacing();
+
+        this.setScene(controller.getStage());
+
 
     }
 
@@ -88,8 +98,6 @@ public class SwipeView implements View{
         Button logoutButton = new Button("Log Out");
         Button myProfileButton = new Button("My Profile");
         Button refreshButton = new Button("Refresh");
-
-
         BorderPane.setMargin(noButton, Positioner.NO_POSITION);
 
         BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
@@ -122,13 +130,17 @@ public class SwipeView implements View{
     private void setUserData() {
 
         Map<String, String> userData = controller.getUserData();
-        image = controller.getCurrentImage();
-
-        fNameAge = new Label(userData.get("fNameAge"));
-        bio = new Label(userData.get("bio"));
+        this.image = this.controller.getCurrentImage();
+        fNameAge = new Label(userData.get("fName") + ", " + userData.get("Age"));
+        fNameAge.setFont(new Font(20));
+        fNameAge.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+        bio = new Label(userData.get("Bio"));
+        bio.setFont(new Font(20));
+        bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
         addImage();
         addText();
+
 
     }
 
@@ -146,8 +158,7 @@ public class SwipeView implements View{
      */
     private void setSpacing() {
 
-        hb.setSpacing(this.image.getFitWidth() / 4);
-        hb1.setSpacing(50000);
+        this.hb.setSpacing(200);
     }
 
 
@@ -155,8 +166,8 @@ public class SwipeView implements View{
      * Adds the text elements to the Scrollpane.
      */
     private void addText(){
-        sp.getChildren().add(fNameAge);
-        sp.getChildren().add(bio);
+        this.sp.getChildren().add(fNameAge);
+        this.sp.getChildren().add(bio);
 
     }
 
@@ -165,11 +176,19 @@ public class SwipeView implements View{
      * Adds the HBoxes to the BorderPane.
      */
     private void addHBox() {
-        bp.setTop(hb);
-        bp.setBottom(hb1);
+        this.bp.setTop(this.hb);
+        this.bp.setBottom(hb1);
         if(!controller.isEmpty()){
             setSpacing();
         }
+    }
+
+    /**
+     * Sizes the image dimension to a default.
+     */
+    private void imageSizer(){
+        this.image.setFitWidth(600);
+        this.image.setFitHeight(600);
     }
 
 
@@ -205,7 +224,6 @@ public class SwipeView implements View{
 
         StackPane.setMargin(bio, Positioner.bioPositioner(image));
 
-        hb1.setAlignment(Pos.BASELINE_LEFT);
 
 
     }
@@ -219,11 +237,9 @@ public class SwipeView implements View{
 
         Scene scene;
 
-        if (controller.isEmpty()){
-            scene = new Scene(this.bp, 300, 250);
-        } else {
-            scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
-        }
+
+        scene = new Scene(this.bp, 1000, 1000);
+
 
         stage.setScene(scene);
     }

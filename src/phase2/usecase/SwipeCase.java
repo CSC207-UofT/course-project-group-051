@@ -56,7 +56,6 @@ public class SwipeCase {
      * @return The ImageView representation of the image associated with the current otherUser.
      */
     public ImageView getImage() {
-
         return ImageMaker.getImage(currentTarget.getImagePath());
 
     }

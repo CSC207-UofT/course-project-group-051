@@ -735,7 +735,6 @@ public class DataBaseAccess implements DataAccessInterface {
             String h2 = "insert into MESSAGES values ("+id+", '"+msg+"', '"+sender+"', '"+ receiver +"');";
             stmt.execute(h2);
             this.addMessage(id, threadID);
-            this.addMessage(id, threadID);
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);

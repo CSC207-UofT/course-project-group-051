@@ -96,12 +96,13 @@ public class MessageView implements View{
     public void loadThread(){
 
         List<String[]> messages = controller.getThread();
-
+        System.out.println(messages);
         for (String[] message: messages) {
 
             String content = message[0];
 
             String colour = controller.determineSender(message[1]);
+
 
             Label l = new Label(content);
             l.setMinWidth(Region.USE_PREF_SIZE);

@@ -1,6 +1,5 @@
 package phase2.presenters;
 
-import phase2.constants.States;
 import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -52,8 +51,6 @@ public class SwipeView implements View{
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
-
-        build();
     }
 
 
@@ -69,8 +66,6 @@ public class SwipeView implements View{
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
-
-        build();
     }
 
 
@@ -78,6 +73,7 @@ public class SwipeView implements View{
      * Labels the buttons.
      */
     private void labelButtons() {
+
         noButton = new Button("No");
         yesButton = new Button("Yes");
         matchesButton = new Button("Matches");
@@ -202,19 +198,19 @@ public class SwipeView implements View{
      */
     private void setMargin() {
 
-        BorderPane.setMargin(this.hb, Positioner.BUTTON_POSITION);
+        BorderPane.setMargin(hb, Positioner.BUTTON_POSITION);
 
-        BorderPane.setMargin(this.noButton, Positioner.NO_POSITION);
+        BorderPane.setMargin(noButton, Positioner.NO_POSITION);
 
-        BorderPane.setMargin(this.yesButton, Positioner.YES_POSITION);
+        BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
 
-        BorderPane.setMargin(this.v, Positioner.VBOX_POSITION);
+        BorderPane.setMargin(v, Positioner.VBOX_POSITION);
 
-        StackPane.setMargin(this.fNameAge, Positioner.namePositioner(image));
+        StackPane.setMargin(fNameAge, Positioner.namePositioner(image));
 
-        StackPane.setMargin(this.bio, Positioner.bioPositioner(image));
+        StackPane.setMargin(bio, Positioner.bioPositioner(image));
 
-        this.hb2.setAlignment(Pos.BASELINE_LEFT);
+        hb2.setAlignment(Pos.BASELINE_LEFT);
 
 
     }

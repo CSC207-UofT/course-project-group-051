@@ -27,6 +27,7 @@ public class SwipeView implements View{
     private Button matchesButton;
     private Button logoutButton;
     private Button myProfileButton;
+    private Button refreshButton;
     private HBox hb;// The HBox containing the buttons.
     private HBox hb2;
     private VBox v; // The VBox containing the scroll pane.
@@ -79,6 +80,7 @@ public class SwipeView implements View{
         matchesButton = new Button("Matches");
         logoutButton = new Button("Log Out");
         myProfileButton = new Button("My Profile");
+        refreshButton = new Button("Refresh");
     }
 
     @Override
@@ -108,6 +110,7 @@ public class SwipeView implements View{
         matchesButton.setOnAction(controller.changeMatchView());
         logoutButton.setOnAction(controller.logOut());
         myProfileButton.setOnAction(controller.changeProfileView());
+        refreshButton.setOnAction(controller.refresh());
     }
 
 
@@ -165,14 +168,20 @@ public class SwipeView implements View{
 
 
     /**
-     * Adds the buttons to the scene.
+     * Adds the buttons to the scene. Determines which buttons are needed.
      */
     private void addButton() {
-        bp.setLeft(noButton);
-        bp.setRight(yesButton);
+
+        if (controller.isEmpty()){
+            sp.getChildren().add(refreshButton);
+        } else {
+            bp.setLeft(noButton);
+            bp.setRight(yesButton);
+        }
         hb.getChildren().add(matchesButton);
         hb.getChildren().add(logoutButton);
         hb.getChildren().add(myProfileButton);
+
 
     }
 

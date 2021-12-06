@@ -1,6 +1,5 @@
 UofT Tinder
 ===========
-
 UofT Tinder is the prototype for a dating application that appeals to CS students, gamers,
 and the general University of Toronto population. This application allows students to complete
 problem sets while simultaneously meeting their future life partner.

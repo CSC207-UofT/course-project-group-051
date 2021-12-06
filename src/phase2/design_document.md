@@ -54,6 +54,7 @@ problem sets while simultaneously meeting their future life partner.
       the interactors have a single use for assisting the flow of data to and from the controller package.
 
 ## Clean Architecture
+CRC Cards
 
 ## SOLID Design
 The building of this application was centred at the implementation and adherence to clean architecture and SOLID design

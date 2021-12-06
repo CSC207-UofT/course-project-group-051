@@ -6,7 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import phase2.presenters.*;
-import phase2.usecase.ErrorBuilder;
 import phase2.usecase.SwipeCase;
 
 import java.util.*;
@@ -14,6 +13,7 @@ import java.util.*;
 public class SwipeController extends Controller {
 
     private final SwipeCase swiper;
+    private final Queue<Integer> swipeList;
 
     /**
      * @param db A reference to our Database so we can read and write to it.
@@ -24,7 +24,12 @@ public class SwipeController extends Controller {
      */
     public SwipeController(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
         super(db, stage);
+        this.swipeList = swipeList;
         swiper = new SwipeCase(db, id, swipeList);
+    }
+
+    public boolean isEmpty(){
+        return swipeList.isEmpty();
     }
 
 

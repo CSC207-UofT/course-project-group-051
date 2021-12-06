@@ -8,6 +8,8 @@ import phase2.users.User;
  */
 public abstract class UserBuilder<T extends User> {
 
+    T result;
+
     public abstract void buildSpecificUser();
 
     public abstract T getResult();

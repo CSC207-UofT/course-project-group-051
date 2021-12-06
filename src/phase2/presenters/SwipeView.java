@@ -1,6 +1,6 @@
 package phase2.presenters;
 
-import phase2.dataaccess.DataAccessInterface;
+import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import phase2.controllers.SwipeController;
 
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * Represents the view when swiping on other people.
@@ -23,8 +22,6 @@ public class SwipeView implements View{
 
     //TODO: rename boxes.
     private SwipeController controller;
-    private Stage stage;
-    private Scene scene;
     private Button noButton;
     private Button yesButton;
     private Button matchesButton;
@@ -41,44 +38,42 @@ public class SwipeView implements View{
 
 
     /**
-     * Creates an instance of the view, for after we have already created the SwipeController previously.
-     * @param swipeController an instance of swipeController
-     * @param stage the main stage where we display the scene.
+     * Creates an instance of the view, and accepts a SwipeController so that we do not need to create a new one.
+     * Accepting the SwipeController allows us to keep track of the same swipeList between view updates.
+     * @param swipeController an instance of swipeController.
      */
-    public SwipeView(SwipeController swipeController, Stage stage){
+    public SwipeView(SwipeController swipeController){
 
         controller = swipeController;
-        this.stage = stage;
         labelButtons();
         hb = new HBox();
         hb2 = new HBox();
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
-
-        build();
     }
+
+
     /**
-     * @param db A reference to our database.
-     * @param stage the main stage where we display the scene.
-     * @param id Id of the currently logged-in User.
-     * @param swipeList List of people this user can swipe on.
+     * Creates an instance of swipeview and a new SwipeController and displays it.
      */
-    public SwipeView(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
+    public SwipeView() {
 
-        controller = new SwipeController(stage, db, id, swipeList);
-        this.stage = stage;
+        controller = ControllerFactory.getInstance().getSwipeController();
         labelButtons();
         hb = new HBox();
         hb2 = new HBox();
         v = new VBox();
         sp = new StackPane();
         bp = new BorderPane();
-
-        build();
     }
 
+
+    /**
+     * Labels the buttons.
+     */
     private void labelButtons() {
+
         noButton = new Button("No");
         yesButton = new Button("Yes");
         matchesButton = new Button("Matches");
@@ -94,17 +89,13 @@ public class SwipeView implements View{
         addButton();
         addHBox();
         addVBox();
-        addTextField();
         setSpacing();
         addsp();
         setMargin();
-        setScene(stage);
+        setScene(controller.getStage());
 
     }
 
-    //Why is this here?
-    private void addTextField() {
-    }
 
     /**
      * Set the actions to the buttons of this view.
@@ -116,6 +107,7 @@ public class SwipeView implements View{
         logoutButton.setOnAction(controller.logOut());
         myProfileButton.setOnAction(controller.changeProfileView());
     }
+
 
     /**
      * Gets the data of the user to be swiped on, so that we can display it.
@@ -133,12 +125,14 @@ public class SwipeView implements View{
 
     }
 
+
     /**
      * Adds the imageview to the view.
      */
     private void addImage(){
         sp.getChildren().add(image);
     }
+
 
     /**
      * Adds the text elements to the Scrollpane.
@@ -149,6 +143,7 @@ public class SwipeView implements View{
 
     }
 
+
     /**
      * Adds the HBoxes to the BorderPane.
      */
@@ -157,6 +152,7 @@ public class SwipeView implements View{
         bp.setBottom(hb2);
     }
 
+
     /**
      * Adds the VBoxes to the BorderPane.
      */
@@ -164,6 +160,7 @@ public class SwipeView implements View{
         bp.setCenter(v);
 
     }
+
 
     /**
      * Adds the buttons to the scene.
@@ -177,6 +174,7 @@ public class SwipeView implements View{
 
     }
 
+
     /**
      * Sets the spacing for each box.
      */
@@ -184,6 +182,7 @@ public class SwipeView implements View{
 
         hb.setSpacing(this.image.getFitWidth() / 4);
     }
+
 
     /**
      * Sets the margin of the biggest box in the borderpane.
@@ -193,35 +192,37 @@ public class SwipeView implements View{
 
     }
 
+
     /**
      * Sets the margin for the view.
      */
     private void setMargin() {
 
-        BorderPane.setMargin(this.hb, Positioner.BUTTON_POSITION);
+        BorderPane.setMargin(hb, Positioner.BUTTON_POSITION);
 
-        BorderPane.setMargin(this.noButton, Positioner.NO_POSITION);
+        BorderPane.setMargin(noButton, Positioner.NO_POSITION);
 
-        BorderPane.setMargin(this.yesButton, Positioner.YES_POSITION);
+        BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
 
-        BorderPane.setMargin(this.v, Positioner.VBOX_POSITION);
+        BorderPane.setMargin(v, Positioner.VBOX_POSITION);
 
-        StackPane.setMargin(this.fNameAge, Positioner.namePositioner(image));
+        StackPane.setMargin(fNameAge, Positioner.namePositioner(image));
 
-        StackPane.setMargin(this.bio, Positioner.bioPositioner(image));
+        StackPane.setMargin(bio, Positioner.bioPositioner(image));
 
-        this.hb2.setAlignment(Pos.BASELINE_LEFT);
+        hb2.setAlignment(Pos.BASELINE_LEFT);
 
 
     }
+
 
     /**
      * Set scene on the stage.
      * @param stage the mainstage where we display the scene.
      */
     private void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
-        stage.setScene(this.scene);
+        Scene scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
+        stage.setScene(scene);
     }
 
 }

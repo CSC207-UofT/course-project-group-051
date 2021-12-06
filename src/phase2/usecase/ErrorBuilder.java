@@ -6,9 +6,6 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 
 public class ErrorBuilder {
-    public final static String Credential_ERROR_1 = "Invalid Credential";
-    public final static String FILE_PATH_ERROR = "Invalid image file path";
-    public final static String whatever_error = "sadasdas";
 
     public static Text build(ArrayList<String> errors) {
         Text e_message = new Text();

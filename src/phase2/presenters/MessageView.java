@@ -96,7 +96,6 @@ public class MessageView implements View{
     public void loadThread(){
 
         List<String[]> messages = controller.getThread();
-        System.out.println(messages);
         for (String[] message: messages) {
 
             String content = message[0];
@@ -138,7 +137,6 @@ public class MessageView implements View{
      * Adds the Matches title to the scene
      */
     public void addText(){
-        System.out.println(controller.getReciever());
         this.hb.getChildren().add(new Text(controller.getReciever()));
     }
 

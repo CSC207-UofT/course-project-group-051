@@ -103,7 +103,7 @@ class DataBaseAccessTest {
 //        int age = db.getAge(1);
 //        Assertions.assertEquals(age, 2);
 
-        db.setImgPath(1,".\\img\\profilepic.jpg");
+        db.setImgPath(1,".\\img\\img5.jpg");
         String imgPath = db.getImgPath(1);
         Assertions.assertEquals(imgPath, ".\\img\\im2.jpg");
 

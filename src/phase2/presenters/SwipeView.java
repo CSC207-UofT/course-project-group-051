@@ -41,12 +41,12 @@ public class SwipeView implements View{
      */
     public SwipeView(SwipeController swipeController){
 
-        this.controller = swipeController;
-        this.hb = new HBox();
-        this.hb1 = new HBox();
-        this.v = new VBox();
-        this.sp = new StackPane();
-        this.bp = new BorderPane();
+        controller = swipeController;
+        hb = new HBox();
+        hb1 = new HBox();
+        v = new VBox();
+        sp = new StackPane();
+        bp = new BorderPane();
     }
 
 
@@ -55,22 +55,23 @@ public class SwipeView implements View{
      */
     public SwipeView() {
 
-        this.controller = ControllerFactory.getInstance().getSwipeController();
-        this.hb = new HBox();
-        this.hb1 = new HBox();
-        this.v = new VBox();
-        this.sp = new StackPane();
-        this.bp = new BorderPane();
+        controller = ControllerFactory.getInstance().getSwipeController();
+        hb = new HBox();
+        hb1 = new HBox();
+        v = new VBox();
+        sp = new StackPane();
+        bp = new BorderPane();
     }
 
     @Override
     public void build() {
 
-        if (!this.controller.isEmpty()) {
+
+        if (!controller.isEmpty()) {
             setUserData();
             this.imageSizer();
             this.setMargin();
-
+            this.setSpacing();
         }
         else{
             this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
@@ -80,7 +81,7 @@ public class SwipeView implements View{
         this.setOnActions();
         this.addHBox();
 
-        this.setSpacing();
+
 
         this.setScene(controller.getStage());
 
@@ -129,7 +130,6 @@ public class SwipeView implements View{
      * Gets the data of the user to be swiped on, so that we can display it.
      */
     private void setUserData() {
-
         Map<String, String> userData = controller.getUserData();
         this.image = this.controller.getCurrentImage();
         fNameAge = new Label(userData.get("fName") + ", " + userData.get("Age"));
@@ -159,8 +159,8 @@ public class SwipeView implements View{
      */
     private void setSpacing() {
 
-        this.hb.setSpacing(200);
-        this.hb.setAlignment(Pos.CENTER);
+        hb.setSpacing(this.image.getFitWidth() / 4);
+        hb1.setSpacing(50000);
     }
 
 

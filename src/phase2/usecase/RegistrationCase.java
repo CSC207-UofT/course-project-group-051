@@ -18,10 +18,6 @@ public class RegistrationCase {
         this.db = db;
     }
 
-    public int loginUser(String username, String password){
-        return db.logIn(username, password);
-    }
-
     public ArrayList<String> createAccount(Map<String, TextInputControl> data){ //maybe return the constants for error in views?
         Map<String, String> info = getStringMap(data);
         ArrayList<String> errors = new ArrayList<>(); // make into 1 string

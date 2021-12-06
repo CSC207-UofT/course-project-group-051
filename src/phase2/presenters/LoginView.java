@@ -13,9 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.constants.States;
+import phase2.controllers.ControllerFactory;
 import phase2.controllers.LogInController;
-import phase2.controllers.MainController;
-import phase2.controllers.States;
 import phase2.dataaccess.DataAccessInterface;
 
 public class LoginView implements View{
@@ -31,16 +30,11 @@ public class LoginView implements View{
     PasswordField password;
     Label usernameLabel;
     Label passwordLabel;
-    Text warning;
-    boolean error;
-    DataAccessInterface db;
     Stage stage;
-    MainController mc;
+    LogInController controller;
 
-    public LoginView(){
-
-        MainController.getInstance().getController(States.LOGGED_OUT);
-        this.db = db;
+    public LoginView(Text error){
+        controller = ControllerFactory.getInstance().getLogInController();
         this.bp = new BorderPane();
         this.createAccount = new Button("Create new account");
         this.loginButton = new Button("Log In");
@@ -50,17 +44,12 @@ public class LoginView implements View{
         this.password = new PasswordField();
         this.v = new VBox();
         this.v1 = new VBox();
+        v1.getChildren().add(error);
         this.hb1 = new HBox();
-        this.warning = new Text();
-        this.error = error;
-        this.stage = stage;
     }
 
-    public LoginView(DataAccessInterface db, Stage stage, MainController mc, boolean error){
-
-        mc.setError(error);
-        mc.getController(States.LOGGED_OUT);
-        this.db = db;
+    public LoginView(){
+        controller = ControllerFactory.getInstance().getLogInController();
         this.bp = new BorderPane();
         this.createAccount = new Button("Create new account");
         this.loginButton = new Button("Log In");
@@ -71,32 +60,21 @@ public class LoginView implements View{
         this.v = new VBox();
         this.v1 = new VBox();
         this.hb1 = new HBox();
-        this.warning = new Text();
-        this.error = error;
-        this.stage = stage;
     }
 
     @Override
     public void build() {
-
-
         this.addButton();
         this.addVBox();
         this.addTextField();
-        this.v1.getChildren().add(ErrorMessage.loginWarning());
-        if(error){
-            ErrorMessage.loginWarning().setText("Invalid Credential. Please try again.");
-        }
         this.addHBox();
         this.setSpacing();
         this.setMargin();
         this.setOnActions();
-        this.setScene(stage);
+        this.setScene(controller.getStage());
     }
 
     private void setOnActions(){
-
-        LogInController controller = new LogInController(db, stage);
         controller.setTextField(username, password);
         createAccount.setOnAction(controller.register());
         loginButton.setOnAction(controller.login());
@@ -165,6 +143,6 @@ public class LoginView implements View{
      */
     public void setScene(Stage stage) {
         this.scene = new Scene(this.bp, 450, 350);
-        stage.setScene(this.scene);
+        stage.setScene(scene);
     }
 }

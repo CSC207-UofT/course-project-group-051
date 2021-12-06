@@ -1,6 +1,8 @@
 package phase2.presenters;
 
-import phase2.dataaccess.DataAccessInterface;
+import javafx.geometry.Insets;
+import javafx.scene.text.Font;
+import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +16,6 @@ import javafx.stage.Stage;
 import phase2.controllers.SwipeController;
 
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * Represents the view when swiping on other people.
@@ -23,15 +24,8 @@ public class SwipeView implements View{
 
     //TODO: rename boxes.
     private SwipeController controller;
-    private Stage stage;
-    private Scene scene;
-    private Button noButton;
-    private Button yesButton;
-    private Button matchesButton;
-    private Button logoutButton;
-    private Button myProfileButton;
     private HBox hb;// The HBox containing the buttons.
-    private HBox hb2;
+    private HBox hb1;
     private VBox v; // The VBox containing the scroll pane.
     private StackPane sp;// The stack pane for the photo, first name and bio.
     private BorderPane bp;// The borderpane containing the VBox.
@@ -41,81 +35,95 @@ public class SwipeView implements View{
 
 
     /**
-     * Creates an instance of the view, for after we have already created the SwipeController previously.
-     * @param swipeController an instance of swipeController
-     * @param stage the main stage where we display the scene.
+     * Creates an instance of the view, and accepts a SwipeController so that we do not need to create a new one.
+     * Accepting the SwipeController allows us to keep track of the same swipeList between view updates.
+     * @param swipeController an instance of swipeController.
      */
-    public SwipeView(SwipeController swipeController, Stage stage){
+    public SwipeView(SwipeController swipeController){
 
-        controller = swipeController;
-        this.stage = stage;
-        labelButtons();
-        hb = new HBox();
-        hb2 = new HBox();
-        v = new VBox();
-        sp = new StackPane();
-        bp = new BorderPane();
-
-        build();
+        this.controller = swipeController;
+        this.hb = new HBox();
+        this.hb1 = new HBox();
+        this.v = new VBox();
+        this.sp = new StackPane();
+        this.bp = new BorderPane();
     }
+
+
     /**
-     * @param db A reference to our database.
-     * @param stage the main stage where we display the scene.
-     * @param id Id of the currently logged-in User.
-     * @param swipeList List of people this user can swipe on.
+     * Creates an instance of swipeview and a new SwipeController and displays it.
      */
-    public SwipeView(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
+    public SwipeView() {
 
-        controller = new SwipeController(stage, db, id, swipeList);
-        this.stage = stage;
-        labelButtons();
-        hb = new HBox();
-        hb2 = new HBox();
-        v = new VBox();
-        sp = new StackPane();
-        bp = new BorderPane();
-
-        build();
-    }
-
-    private void labelButtons() {
-        noButton = new Button("No");
-        yesButton = new Button("Yes");
-        matchesButton = new Button("Matches");
-        logoutButton = new Button("Log Out");
-        myProfileButton = new Button("My Profile");
+        this.controller = ControllerFactory.getInstance().getSwipeController();
+        this.hb = new HBox();
+        this.hb1 = new HBox();
+        this.v = new VBox();
+        this.sp = new StackPane();
+        this.bp = new BorderPane();
     }
 
     @Override
     public void build() {
 
-        setUserData();
-        setOnActions();
-        addButton();
-        addHBox();
-        addVBox();
-        addTextField();
-        setSpacing();
-        addsp();
-        setMargin();
-        setScene(stage);
+        if (!this.controller.isEmpty()) {
+            setUserData();
+            this.imageSizer();
+            this.setMargin();
 
-    }
+        }
+        else{
+            this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
+        }
+        this.addVBox();
+        this.addsp();
+        this.setOnActions();
+        this.addHBox();
 
-    //Why is this here?
-    private void addTextField() {
+        this.setSpacing();
+
+        this.setScene(controller.getStage());
+
+
     }
 
     /**
      * Set the actions to the buttons of this view.
      */
     private void setOnActions() {
-        noButton.setOnAction(controller.swipeLeft());
-        yesButton.setOnAction(controller.swipeRight());
+
+        //Instantiate buttons
+        Button noButton = new Button("No");
+        Button yesButton = new Button("Yes");
+        Button matchesButton = new Button("Matches");
+        Button logoutButton = new Button("Log Out");
+        Button myProfileButton = new Button("My Profile");
+        Button refreshButton = new Button("Refresh");
+        BorderPane.setMargin(noButton, Positioner.NO_POSITION);
+
+        BorderPane.setMargin(yesButton, Positioner.YES_POSITION);
+
+        //Set the buttons to their positions and add their actions
+        if (controller.isEmpty()){
+            sp.getChildren().add(refreshButton);
+            refreshButton.setOnAction(controller.refresh());
+        } else {
+            bp.setLeft(noButton);
+            bp.setRight(yesButton);
+            noButton.setOnAction(controller.swipeLeft());
+            yesButton.setOnAction(controller.swipeRight());
+        }
+        hb.getChildren().add(matchesButton);
+        hb.getChildren().add(logoutButton);
+        hb.getChildren().add(myProfileButton);
         matchesButton.setOnAction(controller.changeMatchView());
         logoutButton.setOnAction(controller.logOut());
         myProfileButton.setOnAction(controller.changeProfileView());
+
     }
+
+
+
 
     /**
      * Gets the data of the user to be swiped on, so that we can display it.
@@ -123,15 +131,20 @@ public class SwipeView implements View{
     private void setUserData() {
 
         Map<String, String> userData = controller.getUserData();
-        image = controller.getCurrentImage();
-
-        fNameAge = new Label(userData.get("fNameAge"));
-        bio = new Label(userData.get("bio"));
+        this.image = this.controller.getCurrentImage();
+        fNameAge = new Label(userData.get("fName") + ", " + userData.get("Age"));
+        fNameAge.setFont(new Font(20));
+        fNameAge.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
+        bio = new Label(userData.get("Bio"));
+        bio.setFont(new Font(20));
+        bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 
         addImage();
         addText();
 
+
     }
+
 
     /**
      * Adds the imageview to the view.
@@ -140,88 +153,96 @@ public class SwipeView implements View{
         sp.getChildren().add(image);
     }
 
-    /**
-     * Adds the text elements to the Scrollpane.
-     */
-    private void addText(){
-        sp.getChildren().add(fNameAge);
-        sp.getChildren().add(bio);
-
-    }
-
-    /**
-     * Adds the HBoxes to the BorderPane.
-     */
-    private void addHBox() {
-        bp.setTop(hb);
-        bp.setBottom(hb2);
-    }
-
-    /**
-     * Adds the VBoxes to the BorderPane.
-     */
-    private void addVBox() {
-        bp.setCenter(v);
-
-    }
-
-    /**
-     * Adds the buttons to the scene.
-     */
-    private void addButton() {
-        bp.setLeft(noButton);
-        bp.setRight(yesButton);
-        hb.getChildren().add(matchesButton);
-        hb.getChildren().add(logoutButton);
-        hb.getChildren().add(myProfileButton);
-
-    }
 
     /**
      * Sets the spacing for each box.
      */
     private void setSpacing() {
 
-        hb.setSpacing(this.image.getFitWidth() / 4);
+        this.hb.setSpacing(200);
+        this.hb.setAlignment(Pos.CENTER);
     }
+
+
+    /**
+     * Adds the text elements to the Scrollpane.
+     */
+    private void addText(){
+        this.sp.getChildren().add(fNameAge);
+        this.sp.getChildren().add(bio);
+
+    }
+
+
+    /**
+     * Adds the HBoxes to the BorderPane.
+     */
+    private void addHBox() {
+        this.bp.setTop(this.hb);
+        this.bp.setBottom(hb1);
+        if(!controller.isEmpty()){
+            setSpacing();
+        }
+    }
+
+    /**
+     * Sizes the image dimension to a default.
+     */
+    private void imageSizer(){
+        this.image.setFitWidth(600);
+        this.image.setFitHeight(600);
+    }
+
+
+    /**
+     * Adds the VBoxes to the BorderPane.
+     */
+    private void addVBox() {
+        bp.setCenter(this.v);
+
+    }
+
 
     /**
      * Sets the margin of the biggest box in the borderpane.
      */
     private void addsp(){
-        this.bp.setCenter(this.sp);
+        this.v.getChildren().add(this.sp);
 
     }
+
 
     /**
      * Sets the margin for the view.
      */
     private void setMargin() {
 
-        BorderPane.setMargin(this.hb, Positioner.BUTTON_POSITION);
+        this.bp.setMargin(hb, Positioner.BUTTON_POSITION);
 
-        BorderPane.setMargin(this.noButton, Positioner.NO_POSITION);
+        this.bp.setMargin(v, Positioner.VBOX_POSITION);
 
-        BorderPane.setMargin(this.yesButton, Positioner.YES_POSITION);
+        this.sp.setMargin(fNameAge, Positioner.namePositioner(image));
 
-        BorderPane.setMargin(this.v, Positioner.VBOX_POSITION);
+        this.sp.setMargin(bio, Positioner.bioPositioner(image));
 
-        StackPane.setMargin(this.fNameAge, Positioner.namePositioner(image));
-
-        StackPane.setMargin(this.bio, Positioner.bioPositioner(image));
-
-        this.hb2.setAlignment(Pos.BASELINE_LEFT);
 
 
     }
+
 
     /**
      * Set scene on the stage.
      * @param stage the mainstage where we display the scene.
      */
     private void setScene(Stage stage) {
-        this.scene = new Scene(this.bp, this.image.getFitWidth() + 300, this.image.getFitHeight() + 250);
-        stage.setScene(this.scene);
+
+        Scene scene;
+
+
+        scene = new Scene(this.bp, 800, 800);
+
+
+        stage.setScene(scene);
     }
 
 }

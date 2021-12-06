@@ -1,5 +1,3 @@
-package phase2.tests;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.junit.jupiter.api.Test;

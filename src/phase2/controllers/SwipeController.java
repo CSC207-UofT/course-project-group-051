@@ -23,7 +23,7 @@ public class SwipeController extends Controller {
      * liked any of these users.)
      */
     public SwipeController(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
-        super(stage, db);
+        super(db, stage);
         swiper = new SwipeCase(db, id, swipeList);
     }
 

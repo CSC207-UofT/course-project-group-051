@@ -8,50 +8,61 @@ import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.MessageView;
 import phase2.presenters.SwipeView;
+import phase2.presenters.View;
 import phase2.usecase.MatchCase;
 
-import java.util.List;
+import java.util.Map;
 
+/**
+ * Defines the buttons needed for the Matches screen.
+ */
 public class MatchController extends Controller{
-    DataAccessInterface db;
-    Stage stage;
-    int userID;
+
+
     EventHandler<ActionEvent> event;
     MatchCase matchCase;
 
-    public MatchController(DataAccessInterface db, Stage stage, int userID){
-        super(stage, db);
-        this.userID = userID;
-        State.setState(States.MATCHES);
-        matchCase = new MatchCase(db, userID);
+    /**
+     * @param db A reference to our Database.
+     * @param stage A reference to the stage so we can display things.
+     * @param currentUser the ID of the currentUser.
+     */
+    public MatchController(DataAccessInterface db, Stage stage, int currentUser){
+        super(db, stage);
+        matchCase = new MatchCase(db, currentUser);
     }
 
-    public List<Integer> getMatches(){
+
+    /**
+     * @param receiverID the ID of the user who you want to message.
+     * @return an eventhandler that switches to MessageView and allows messaging of the receiver.
+     */
+    public EventHandler<ActionEvent> switchMessageView(Integer receiverID){
+        event = e -> {
+
+            View view = new MessageView(receiverID);
+            view.build();
+
+        };
+        return event;
+    }
+
+    /**
+     * @return an eventhandler that brings the program back to the swiping screen.
+     */
+    public EventHandler<ActionEvent> back() {
+        event = e -> {
+            SwipeView swipeView = new SwipeView();
+            swipeView.build();
+        };
+        return event;
+    }
+
+    /**
+     * @return A map in the form <User's name, User's Id> where each User has matched with the currentUser.
+     */
+    public Map<String, Integer> getMatches(){
         return matchCase.getMatches();
     }
 
-    public String getFirstName(Integer userID){
-
-        return null;
-    }
-
-    public EventHandler<ActionEvent> switchMessageView(Integer userID, Integer receiverID){
-        event = e -> {
-            for (Integer id : getMatches()) {
-                if (id.equals(receiverID)) {
-                    MessageView m = new MessageView(db, stage, userID, receiverID);
-                    m.build();
-                }
-            }
-        };
-        return event;
-    }
-
-    public EventHandler<ActionEvent> back() {
-        event = e -> {
-            SwipeView s = new SwipeView(db, stage, userID, db.getSwipeList(userID));
-            s.build();
-        };
-        return event;
-    }
 }

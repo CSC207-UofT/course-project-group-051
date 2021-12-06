@@ -25,8 +25,7 @@ public class RegistrationController extends Controller{
     EventHandler<ActionEvent> event;
 
     public RegistrationController(DataAccessInterface db, Stage stage){
-        super(stage, db);
-        State.setState(States.REGISTRATION);
+        super(db, stage);
     }
 
 

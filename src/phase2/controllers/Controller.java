@@ -5,12 +5,12 @@ import phase2.dataaccess.DataAccessInterface;
 
 public class Controller {
 
-    Stage stage; //the main stage.
     DataAccessInterface db; //the Data Access Interface.
+    Stage stage; //the main stage.
 
-    public Controller(Stage stage, DataAccessInterface db){
-        this.stage = stage;
+    public Controller(DataAccessInterface db, Stage stage){
         this.db = db;
+        this.stage = stage;
     }
 
     public Stage getStage(){

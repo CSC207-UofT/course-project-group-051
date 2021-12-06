@@ -35,7 +35,7 @@ public class LogInController extends Controller{
      * @param stage the main stage.
      */
     public LogInController(DataAccessInterface db, Stage stage){
-        super(stage, db);
+        super(db, stage);
         State.setState(States.LOGGED_OUT);
     }
 

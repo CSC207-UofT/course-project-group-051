@@ -25,7 +25,7 @@ public class MessageController extends Controller{
      * @param secondary the id of secondary user.
      */
     public MessageController(DataAccessInterface db, Stage stage, int primary, int secondary){
-        super(stage, db);
+        super(db, stage);
         this.primaryUser = primary;
         this.secondaryUser = secondary;
         State.setState(States.MESSAGING);

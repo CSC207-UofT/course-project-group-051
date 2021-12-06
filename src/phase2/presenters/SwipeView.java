@@ -80,11 +80,7 @@ public class SwipeView implements View{
         this.setOnActions();
         this.addHBox();
         this.setSpacing();
-
-
         this.setScene(controller.getStage());
-
-
     }
 
     /**

@@ -4,6 +4,8 @@ import javafx.scene.control.TextInputControl;
 import phase2.constants.Errors;
 import phase2.dataaccess.DataAccessInterface;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -26,9 +28,6 @@ public class RegistrationCase {
         }
         if (db.logIn(data.get("username").getText(), data.get("pw1").getText()) != -1){
             errors.add(Errors.EXISTS); // ADD THESE MESSAGES
-        }
-        if (data.get("pw1") != data.get("pw2")){
-            errors.add(Errors.PASSWORD_MATCH); // ADD THESE MESSAGES
         }
         if(errors.isEmpty()) {
             db.createUser(data.get("lName").getText(), data.get("fName").getText(), data.get("pw1").getText(),

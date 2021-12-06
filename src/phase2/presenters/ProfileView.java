@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import phase2.controllers.ControllerFactory;
 import phase2.controllers.ProfileController;
 import phase2.dataaccess.DataAccessInterface;
 
@@ -54,26 +55,28 @@ public class ProfileView implements View {
     Stage stage;
     DataAccessInterface db;
     ProfileController controller;
-    /**
-     * Creates a SelfViewBuilder object
-     * @param db the DataAccessInterface
-     * @param stage the stage of the program
-     * @param id the id of the current user
-     * @param errors the amount of errors there is (0 is for date and 1 is for imgPath)
-     */
-    public ProfileView(DataAccessInterface db, Stage stage, int id, boolean[] errors){
-        this.stage = stage;
-        this.db = db;
-        this.id = id;
+
+    public ProfileView(Text errors){
         setJavaFX();
-        controller = new ProfileController(db, stage, id);
+        controller = ControllerFactory.getInstance().getProfileController();
+        stage = controller.getStage();
         setLabel();
         setText();
-        setError(errors);
         setOnActions();
-
+        this.vb.getChildren().add(errors);
 
     }
+
+    public ProfileView(){
+        setJavaFX();
+        controller = ControllerFactory.getInstance().getProfileController();
+        stage = controller.getStage();
+        setLabel();
+        setText();
+        setOnActions();
+
+    }
+
     private void setJavaFX(){
         this.bp = new BorderPane();
         this.sp = new ScrollPane();
@@ -81,27 +84,12 @@ public class ProfileView implements View {
         this.save = new Button("Save");
         this.vb = new VBox();
         this.hb = new HBox();
-        this.fileError = new Text();
-        this.fileError.setFill(Color.RED);
-        this.fileError.setFont(new Font(15));
-        this.dateError = new Text();
-        this.dateError.setFill(Color.RED);
-        this.dateError.setFont(new Font(15));
-    }
-
-    private void setError(boolean[] errors){
-        if(errors[0]){
-            dateError.setText("Invalid date format. Please try again.");
-        }
-        if(errors[1]){
-            fileError.setText("Invalid file path. Please try again.");
-        }
     }
 
     private void setLabel(){
         firstNameL = new Label("First Name:");
         lastNameL = new Label("Last Name:");
-        birthdayL = new Label("Date of Birth(e.g. Dec,06,1999):");
+        birthdayL = new Label("Age:");
         passwordL = new Label("Password:");
         imgPathL = new Label("Profile Image Path:");
         genderL = new Label("Gender:");
@@ -112,15 +100,15 @@ public class ProfileView implements View {
 
     private void setText(){
         Map<String, String> info = controller.getUserInfo();
-        firstNameT = new TextField(info.get("firstNameL"));
-        lastNameT = new TextField(info.get("lastNameL"));
-        birthdayT = new TextField(info.get("birthdayL"));
-        passwordT = new TextField(info.get("passwordL"));
-        imgPathT = new TextField(info.get("imgPathL"));
-        genderT = new TextField(info.get("genderL"));
-        genderPrefT = new TextField(info.get("genderPrefL"));
-        usernameT = new TextField(info.get("UTorIDL"));
-        bioT = new TextField(info.get("bioL"));
+        firstNameT = new TextField(info.get("firstName"));
+        lastNameT = new TextField(info.get("lastName"));
+        birthdayT = new TextField(info.get("age"));
+        passwordT = new TextField(info.get("password"));
+        imgPathT = new TextField(info.get("imgPath"));
+        genderT = new TextField(info.get("gender"));
+        genderPrefT = new TextField(info.get("genderPref"));
+        usernameT = new TextField(info.get("UTorID"));
+        bioT = new TextField(info.get("bio"));
     }
 
     /**
@@ -138,7 +126,7 @@ public class ProfileView implements View {
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("firstNameT", firstNameT);
         inputs.put("lastNameT", lastNameT);
-        inputs.put("birthdayT", birthdayT);
+        inputs.put("ageT", birthdayT);
         inputs.put("imgPathT", imgPathT);
         inputs.put("genderT", genderT);
         inputs.put("genderPrefT", genderPrefT);
@@ -205,8 +193,7 @@ public class ProfileView implements View {
         this.vb.getChildren().addAll(this.bioL, this.bioT);
         this.vb.getChildren().addAll(this.genderL, this.genderT);
         this.vb.getChildren().addAll(this.genderPrefL, this.genderPrefT);
-        this.vb.getChildren().add(this.dateError);
-        this.vb.getChildren().add(this.fileError);
+
 
 
     }

@@ -782,8 +782,7 @@ public class DataBaseAccess implements DataAccessInterface {
             for(int x: messages){
                 message.append(",").append(x);
             }
-
-            String h2 = "update THREADS set MESSAGEs = " + message +" where THREADID = " + threadID + ";";;
+            String h2 = "update THREADS set MESSAGES = '" + message + "' where THREADID = " + threadID + ";";;
             stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();

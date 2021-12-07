@@ -230,30 +230,30 @@ a more even spread of the workload. This section highlights some questions that 
     * Design Document
     * Styling/Cleaning code
     * Identifying code smells and design patterns
-    * Relevant Pull Request:[Design Document, Updated Specification, Progress Report, & Accessibility Report](https://github.com/CSC207-UofT/course-project-group-051/blob/ef0d1a6d5822636d2dc63ad474a0e30c47bb9785/src/phase2/design_document.md)
+    * Relevant Pull Request: [Design Document, Updated Specification, Progress Report, & Accessibility Report](https://github.com/CSC207-UofT/course-project-group-051/blob/ef0d1a6d5822636d2dc63ad474a0e30c47bb9785/src/phase2/design_document.md)
 * Senan Kassem
     * Implementation of use-cases and entity classes
     * Writing and tidying Javadocs
     * Organization of team meetings and communications
     * Aiding Alex in adhering to clean architecture
     * Refactoring controllers and use cases
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request: [Put a brief description of the pull](url)
 * Anjian Chen
     * Identifying design patterns to be implemented
     * Refactoring use-cases
     * Implementation and continuing use-case refactoring
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request: [Put a brief description of the pull](url)
 * Fei Yu Guan
     * Controller refactoring
     * User interface refactoring
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request: [Put a brief description of the pull](url)
 * Sheng He Xiao
     * Data Base functionality and refactoring
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
     * Adding singleton patter
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request: [Put a brief description of the pull](url)
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
@@ -261,4 +261,4 @@ a more even spread of the workload. This section highlights some questions that 
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
     * Adding singleton patter
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request: [Put a brief description of the pull](url)

@@ -203,11 +203,9 @@ Prospective investors would include any company expanding their social-media sec
 As described in the marketing proposal, this application is directly focused on the experience of UofT students. Since the application is not affiliated with the University of Toronto, it cannot actively check that the UTorID's entered as usernames are valid. The downside of this is that some users may be providing false information on their profiles. Naturally, the application will generate interest in those who are students at UofT, and a lower interest in non-UofT viewers. Since the application is targeted on the restricted domain of those with valid UTorID's, the lack of interest from other university students is key part in upholding UofT Tinder's validity and exclusivity. The development team's choice to limit the scope of the project was intentional, in order to appeal to the single UofT community.
 
 ### Questions
-+ A constant issue was determining what the entities, use cases, and controllers should do or not do to abide by
++ A constant question was determining what the entities, use cases, and controllers should do or not do to abide by
   clean architecture
     + This is a resolved issue, but possibly adding more information on this during lectures would be helpful
-
-### Issues
 + GitHub: while the tutorial sessions during the first semester were helpful, our team still had unanswered questions about
   how to utilize the commit, checkout, push, and pull features.
     + What is the expected process for multiple developers working on a single branch?

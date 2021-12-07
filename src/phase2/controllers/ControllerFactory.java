@@ -1,9 +1,6 @@
 package phase2.controllers;
 
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import phase2.constants.State;
-import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
 

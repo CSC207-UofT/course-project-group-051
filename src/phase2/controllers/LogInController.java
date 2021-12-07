@@ -3,10 +3,7 @@ package phase2.controllers;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import phase2.constants.Errors;
-import phase2.constants.State;
-import phase2.constants.States;
 import phase2.dataaccess.DataAccessInterface;
 import javafx.event.EventHandler;
 import phase2.presenters.LoginView;
@@ -27,7 +24,6 @@ public class LogInController extends Controller{
     TextField username; //the Username text field.
     PasswordField password; //the Password text field.
     EventHandler<ActionEvent> event; //the event placeholder.
-    Text error;
 
 
     /**
@@ -37,7 +33,6 @@ public class LogInController extends Controller{
      */
     public LogInController(DataAccessInterface db, Stage stage){
         super(db, stage);
-        State.setState(States.LOGGED_OUT);
     }
 
     /**

@@ -2,8 +2,6 @@ package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
 
-import javax.xml.crypto.Data;
-
 public class LogInCase {
 
     DataAccessInterface db;

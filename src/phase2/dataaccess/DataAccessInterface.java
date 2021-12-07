@@ -1,7 +1,6 @@
 package phase2.dataaccess;
 
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -96,120 +95,86 @@ public interface DataAccessInterface {
      */
     ArrayList<String[]> getThread(int threadID);
 
-    public int getAge(int id);
-    /**
-     * no longer in user unless decided otherwise
-     * msg,senderID,receiverID
-     */
-    //String getMessage(int messageID);
+    int getAge(int id);
 
     /**
      * @param id the id of the user's info you are changing
      * @param firstName the first name you are trying to set
      * takes the user's id and the firstName and set said user's first name as firstName
-     * @return false if failed
      */
-    boolean setFirstName(int id, String firstName);
+    void setFirstName(int id, String firstName);
 
     /**
      * @param id the id of the user's info you are changing
      * @param lastName the last name you are trying to set
      * takes the user's id and the lastName and set said user's last name as lastName
-     * @return false if failed
      */
-    boolean setLastName(int id, String lastName);
+    void setLastName(int id, String lastName);
 
     /**
      * @param id the id of the user's info you are changing
      * @param username the username you are trying to set
      * takes the user's id and the username and set said user's username as username
-     * @return false if failed
      */
-    boolean setUsername(int id, String username);
+    void setUsername(int id, String username);
 
     /**
      * @param id the id of the user's info you are changing
      * @param password the password you are trying to set
      * takes the user's id and the password and set said user's password as password
-     * @return false if failed
      */
-    boolean setPassword(int id, String password);
+    void setPassword(int id, String password);
 
     /**
      * @param id the id of the user's info you are changing
      * @param gender the gender you are trying to set
      * takes the user's id and the gender and set said user's gender as gender
-     * @return false if failed
      */
-    boolean setGender(int id, String gender);
+    void setGender(int id, String gender);
 
     /**
      * @param id the id of the user's info you are changing
      * @param bio the bio you are trying to set
      * takes the user's id and the bio and set said user's bio as bio
-     * @return false if failed
      */
-    boolean setBio(int id, String bio);
+    void setBio(int id, String bio);
 
     /**
      * @param id the id of the user's info you are changing
      * @param birthday the birthday you are trying to set
      * takes the user's id and the birthday and set said user's birthday as birthday
-     * @return false if failed
      */
-    boolean setBirthday(int id, String birthday);
+    void setBirthday(int id, String birthday);
 
     /**
      * @param id the id of the user's info you are changing
      * @param path the image path you are trying to set
      * takes the user's id and the path and set said user's imgLocation as path
-     * @return false if failed
      */
-    boolean setImgPath(int id, String path);
+    void setImgPath(int id, String path);
 
     /**
      * @param id the id of the user's info you are changing
      * @param genderPreference the genderPreference you are trying to set
      * takes the user's id and the genderPreference and set said user's gender preference as genderPreference
-     * @return false if failed
      */
-    boolean setGenderPreference(int id, String genderPreference);
+    void setGenderPreference(int id, String genderPreference);
 
     /**
      * @param currUser the current user id
      * @param likeID the id of the user you are trying to like
      * takes the current user's id and the person they like's id.
      * add the likeID to the currUser's list of likes
-     * @return false if failed
      */
-    boolean likeUser(int currUser, int likeID);
-
-    /**
-     * @param currUser the current user id
-     * @param likeID the id of the user you are trying to unlike
-     * takes the current user's id and the person they like's id.
-     * remove the likeID from the currUser's list of likes
-     * @return false if failed
-     */
-    boolean unlikeUser(int currUser, int likeID);
+    void likeUser(int currUser, int likeID);
 
     /**
      * @param currUser the current user id
      * @param admirerID the id of the user you are trying to admire
      * takes the current user's id and the person they admires' id.
      * add the admirerID to the currUser's list of admires
-     * @return false if failed
      */
-    boolean admireUser(int currUser, int admirerID);
-
-    /**
-     * @param currUser the current user id
-     * @param admirerID the id of the user you are trying to stop admire
-     * takes the current user's id and the person they admires' id.
-     * remove the admirerID from the currUser's list of admires
-     * @return false if failed
-     */
-    boolean stopAdmiringUser(int currUser, int admirerID);
+    void admireUser(int currUser, int admirerID);
 
     /**
      * @param userID1 the id of user1
@@ -244,6 +209,7 @@ public interface DataAccessInterface {
     ArrayList<Integer> getSwipeList(int id);
 
     /**
+     * creates a new user in the database using the parameters below.
      * @param lastName the last name of the new user
      * @param firstName the first name of the new user
      * @param password the password of the new user
@@ -251,13 +217,8 @@ public interface DataAccessInterface {
      * @param age the age of the new user
      * @param gender the gender of the new user
      * @param genderPreference the gender preference of the new user
-     * @param birthday the birthday of the new user
-     * creates a new user in the database using the parameters below.
-     * @returns their PersonID and -1 if invalid parameters are given.
      */
-    int createUser(String lastName, String firstName, String password, String username, int age, String gender,
-                   String genderPreference);
-
-    void closeDB() throws SQLException;
+    void createUser(String lastName, String firstName, String password, String username, int age, String gender,
+                    String genderPreference);
 
 }

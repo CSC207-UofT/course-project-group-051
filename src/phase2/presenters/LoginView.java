@@ -9,13 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import phase2.constants.States;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.LogInController;
-import phase2.dataaccess.DataAccessInterface;
 
 public class LoginView implements View{
 
@@ -30,7 +27,6 @@ public class LoginView implements View{
     PasswordField password;
     Label usernameLabel;
     Label passwordLabel;
-    Stage stage;
     LogInController controller;
 
     public LoginView(Text error){

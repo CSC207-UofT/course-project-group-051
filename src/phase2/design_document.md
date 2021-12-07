@@ -1,9 +1,8 @@
 UofT Tinder
 ===========
 
-UofT Tinder is the prototype for a dating application that appeals to CS students, gamers,
-and the general University of Toronto population. This application allows students to complete
-problem sets while simultaneously meeting their future life partner.
+UofT Tinder is the prototype for a dating application that appeals to the general University of Toronto population. 
+This application allows students to complete problem sets while simultaneously meeting their future life partner.
 
 ## Updated Specification
 * Running the application allows a new user to register with the specified parameters, including a UTorID, to then
@@ -148,12 +147,6 @@ of data. The singleton instantiation of type `DataBaseAccess` is then used with 
 the accessor methods within the scope of class `DataBaseAccess`. This pattern is integral to the code organization of 
 the project, since it determines the flow of data from entities to user interface.
 
-## Progress Report
-Our team developed more civil and productive communication, while respecting the abilities and constraints of each
-individual member. Throughout phase 2, communication via discord video/voice calls during scheduled meeting times enabled
-a more even spread of the workload. The rest of this report describes remaining questions, issues, team work strategies that
-benefited our group, and a summary of each team members' contribution.
-
 ## Accessibility Report
 Defined in this section are how the features of the application abide by the _National Disability Authority's_ 7 Principles of Universal Design, a brief marketing proposal, and a brief examination of demographics.
 
@@ -201,6 +194,11 @@ Prospective investors would include any company expanding their social-media sec
 
 ### Demographic Analysis
 As described in the marketing proposal, this application is directly focused on the experience of UofT students. Since the application is not affiliated with the University of Toronto, it cannot actively check that the UTorID's entered as usernames are valid. The downside of this is that some users may be providing false information on their profiles. Naturally, the application will generate interest in those who are students at UofT, and a lower interest in non-UofT viewers. Since the application is targeted on the restricted domain of those with valid UTorID's, the lack of interest from other university students is key part in upholding UofT Tinder's validity and exclusivity. The development team's choice to limit the scope of the project was intentional, in order to appeal to the single UofT community.
+
+## Progress Report
+Our team developed more civil and productive communication, while respecting the abilities and constraints of each
+individual member. Throughout phase 2, communication via discord video/voice calls during scheduled meeting times enabled
+a more even spread of the workload. This section highlights some questions that lingered during phase 2, strategies that promoted efficient and well-balanced development, and the individual contributions of each member.
 
 ### Questions
 + A constant question was determining what the entities, use cases, and controllers should do or not do to abide by

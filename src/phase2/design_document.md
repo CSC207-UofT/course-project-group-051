@@ -244,8 +244,9 @@ a more even spread of the workload. This section highlights some questions that 
     * Implementation and continuing use-case refactoring
     * Relevant Pull Request: [Put a brief description of the pull](url)
 * Fei Yu Guan
-    * Controller refactoring
-    * User interface refactoring
+    * Creating and debugging views
+    * Incorporating JavaFX
+    * Incorporating the central controller
     * Relevant Pull Request: [Put a brief description of the pull](url)
 * Sheng He Xiao
     * Data Base functionality and refactoring

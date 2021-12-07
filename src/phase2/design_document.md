@@ -230,7 +230,7 @@ a more even spread of the workload. This section highlights some questions that 
     * Design Document
     * Styling/Cleaning code
     * Identifying code smells and design patterns
-    * Relevant Pull Request:[Put a brief description of the pull](url)
+    * Relevant Pull Request:[Design Document, Updated Specification, Progress Report, & Accessibility Report](https://github.com/CSC207-UofT/course-project-group-051/blob/ef0d1a6d5822636d2dc63ad474a0e30c47bb9785/src/phase2/design_document.md)
 * Senan Kassem
     * Implementation of use-cases and entity classes
     * Writing and tidying Javadocs

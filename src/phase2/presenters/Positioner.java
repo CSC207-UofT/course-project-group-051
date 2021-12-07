@@ -21,7 +21,7 @@ public class Positioner {
     public static Insets namePositioner(ImageView image) {
 
         return new Insets( 600,
-                460,
+                400,
                 300,
                 30);
 
@@ -35,7 +35,7 @@ public class Positioner {
 
         return new Insets(
                 650,
-                500,
+                450,
                 250,
                 30);
 

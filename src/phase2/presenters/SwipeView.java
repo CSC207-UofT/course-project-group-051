@@ -74,6 +74,7 @@ public class SwipeView implements View{
         }
         else{
             this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
+            this.hb.setAlignment(Pos.TOP_CENTER);
         }
         this.addVBox();
         this.addsp();
@@ -101,7 +102,7 @@ public class SwipeView implements View{
 
         //Set the buttons to their positions and add their actions
         if (controller.isEmpty()){
-            sp.getChildren().add(refreshButton);
+            this.bp.setCenter(refreshButton);
             refreshButton.setOnAction(controller.refresh());
         } else {
             bp.setLeft(noButton);

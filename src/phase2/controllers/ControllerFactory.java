@@ -17,6 +17,7 @@ public class ControllerFactory {
     int currentUser; //The id of the currently logged-in User.
     final static ControllerFactory controllerFactory = new ControllerFactory(); //The single Factory instance.
 
+        //TODO remove later but trying to find branch
 
     /**
      * Creates an instance of ControllerFactory.

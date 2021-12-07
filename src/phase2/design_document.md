@@ -148,6 +148,54 @@ individual member. Throughout phase 2, communication via discord video/voice cal
 a more even spread of the workload. The rest of this report describes remaining questions, issues, team work strategies that
 benefited our group, and a summary of each team members' contribution.
 
+## Accessibility Report
+Defined in this section are how the features of the application abide by the _National Disability Authority's_ 7 Principles of Universal Design, a brief marketing proposal, and a brief examination of demographics.
+
+### Principles and UofT Tinder's Adherence
++ Principle 1: Equitable Use
+  + This principle is applicable only when restricting the scope of users to UofT's population. 
+  + The application is marketable toward students who are interested in a dating platform which is more similar to discord and less similar to iOS applications.
+  + Identical means of use are provided to the restricted scope of users
+  + Providing a more than 2 options for sexual preference would decrease stigmatization and segregation. Adding this did not fit within the time allotted, but an additional phase would allow for a more inclusive dating experience on UofT Tinder.
+  + Since the design is purely a prototype, there is currently no need for user/client based privacy, security, or safety measures. 
+  
++ Principle 2: Flexibility in Use
+  + Users can choose to do as they wish with the application, since it is fully controlled by the user interface. The option to navigate to any state at any point is offered by 'button' prompts
+  + Accommodations for left/right-handed access and use are exemplified in the 'button' prompts for user actions, i.e. users can choose to use the keyboard, touch-pad, and any other adapter on their device.
+  + The facilitation of user accuracy and precision is exemplified in the 'Back' button prompt, error messages when a mis-use occurs, and the option to update/change your profile information at any point.
+  + The user's pace sets the pace for the application. User's can remain static or dynamic depending on their use of 'button' prompts.
+  
++ Principle 3: Simple Intuitive Use
+  + Unnecessary complexity is eliminated by the explicit namings and prompts of possible actions to be taken by users.
+  + In line with our code organization, the user-facing functions are named intuitively and explicitly with simple formatting.
+  + This application is only available in English-Canadian. Since the targeted group of users is the population of UofT, there is an expectation for students to use conversational to fluent english.
+  + Information is arranged consistently based on importance by updating possible matches, and offering new 'button' prompts in each state.
+  + Refer to Principle 2 - point 3 to see how the application provides effective prompting and feedback.
+  
++ Principle 4: Perceptible Information
+  + This principle is well exemplified in the simplicity of the user interface. Contrasts are used to define 'button' prompts, errors, and to define which user is the sender vs receiver.
+  + Since the user interface abides by the settings on a user's device, any changes to lighting, definition, and other accessibility features on said device can be applied to the application.
+  
++ Principle 5: Tolerance for Error
+  + The nature of UofT Tinder is low-risk, therefore not requiring a tolerance for error in the case of hazardous and adverse consequences. 
+  + There are no consequences for a mis-use of the application, and a 'Back' button allows for easy navigation to 'reverse' certain actions.
+  + There do not exist any hazardous elements within the application, or as a result of its use, regardless of the way it is used.
+  
++ Principle 6: Low Physical Effort
+  + The ease of use is exemplified in the simplicity and closeness of each 'button' prompt.
+  + Users can choose at any point to close the application and/or adjust accessibility features on their device.
+  + There exist only 6 actions, where users are given the option to use 'Back' or directly navigate to the desired state, therefore limiting repetitive actions.
+  
++ Principle 7: Size and Space for Approach and Use
+  + By use of standard margins, font size, and contrasting colours, all components are accessible for a variety of body positions.
+  + The extent of mobility requirements are the ability to press buttons and use their own device's functionality, therefore not requiring additional space or specific body measurements.
+ 
+### Marketing Proposal
+Prospective investors would include any company expanding their social-media sector. To market an application centred around the common interest and requirement for social relationships during university, an emphasis on the common behaviours of students is required. By marketing this application as a way for students at University of Toronto to meet and socialize with more than just their peers in class, investors can capitalize on the idea of reputation. Most of those who applied and accepted offers of admission from the University of Toronto were interested in the status, history, and overall reputation of the school. As members of a community that is unlike any university in Canada, students seek interactions and relationships with like-minded individuals. Creating an application that targets this group fills a gap in the current array of dating/socializing applications. In short, UofT students are immediately more interested in other UofT students, so why is there no app capitalizing on these 95k+ individuals?
+
+### Demographic Analysis
+As described in the marketing proposal, this application is directly focused on the experience of UofT students. Since the application is not affiliated with the University of Toronto, it cannot actively check that the UTorID's entered as usernames are valid. The downside of this is that some users may be providing false information on their profiles. Naturally, the application will generate interest in those who are students at UofT, and a lower interest in non-UofT viewers. Since the application is targeted on the restricted domain of those with valid UTorID's, the lack of interest from other university students is key part in upholding UofT Tinder's validity and exclusivity. The development team's choice to limit the scope of the project was intentional, in order to appeal to the single UofT community.
+
 ### Questions
 + A constant issue was determining what the entities, use cases, and controllers should do or not do to abide by
   clean architecture
@@ -180,6 +228,7 @@ benefited our group, and a summary of each team members' contribution.
     * Design Document
     * Styling/Cleaning code
     * Identifying code smells and design patterns
+    * Relevant Pull Request:![alt text](url)
 * Senan Kassem
     * Implementation of use-cases and entity classes
     * Writing and tidying Javadocs
@@ -193,12 +242,14 @@ benefited our group, and a summary of each team members' contribution.
 * Fei Yu Guan
     * Controller refactoring
     * User interface refactoring
+    * Relevant Pull Request:![alt text](url)
 * Sheng He Xiao
     * Data Base functionality and refactoring
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
     * Adding singleton patter
+    * Relevant Pull Request:![alt text](url)
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
@@ -206,3 +257,4 @@ benefited our group, and a summary of each team members' contribution.
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
     * Adding singleton patter
+    * Relevant Pull Request:![alt text](url)

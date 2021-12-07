@@ -53,7 +53,13 @@ user would have to be on the same running program, which is not a realistic use.
       the interactors have a single use for assisting the flow of data to and from the controller package.
 
 ## Clean Architecture
-As described in the forthcoming packaging session, our entities, use cases, controllers, and user interface are organized inside/outside. Here is the CRC model: ![Link to CRC Model:](https://cdn.discordapp.com/attachments/894721851966779503/917541949764931614/CRC_2.jpg)
+As described in the forthcoming packaging section, our entities, use cases, controllers, and user interface are 
+organized by the inside/outside strategy. This choice of organization forced a stricter adherence to clean 
+architecture, while inhibiting mindless violations to SOLID design principles. This is better understood by our CRC model.
+Visually it is explicitly defined by entity, use case, controller, and user interface, allowing any developer to use 
+and add adapters or increased functionality. Here is the CRC model displaying an improved organization strategy: 
+
+![Link to CRC Model:](https://cdn.discordapp.com/attachments/894721851966779503/917541949764931614/CRC_2.jpg)
 
 ## SOLID Design
 The building of this application was centred at the implementation and adherence to clean architecture and SOLID design
@@ -118,8 +124,8 @@ efficient and readable code.
 From Phase 1, UofT Tinder lacked the explicit definitions of design patterns. This phase allowed for an improved sense of
 code organization, decrease of code smells, and an increased efficiency of work allocation. Below are the design patterns
 applied, and examples of their usage in our code. By focussing on only a few patterns, the team was able
-to utilize all the benefits from Singleton, Factory, and Builder design patterns, whereas our phase 1 lacked focus. This
-strategy enabled proper implementation of design patterns.
+to utilize all the benefits from Singleton, Factory, and Builder design patterns, whereas our phase 1 lacked the focus 
+to do so. This new strategy enabled proper implementation of design patterns.
 
 ### Simple Factory Method Design Pattern
 This pattern is used for aiding the interactions between the user interface and controllers. When users provide
@@ -155,12 +161,12 @@ Defined in this section are how the features of the application abide by the _Na
 + Principle 1: Equitable Use
   + This principle is applicable only when restricting the scope of users to UofT's population. 
   + The application is marketable toward students who are interested in a dating platform which is more similar to discord and less similar to iOS applications.
-  + Identical means of use are provided to the restricted scope of users
+  + Identical means of use are provided to the restricted scope of users.
   + Providing a more than 2 options for sexual preference would decrease stigmatization and segregation. Adding this did not fit within the time allotted, but an additional phase would allow for a more inclusive dating experience on UofT Tinder.
   + Since the design is purely a prototype, there is currently no need for user/client based privacy, security, or safety measures. 
   
 + Principle 2: Flexibility in Use
-  + Users can choose to do as they wish with the application, since it is fully controlled by the user interface. The option to navigate to any state at any point is offered by 'button' prompts
+  + Users can choose to do as they wish with the application, since it is fully controlled by the user interface. The option to navigate to any state at any point is offered by 'button' prompts.
   + Accommodations for left/right-handed access and use are exemplified in the 'button' prompts for user actions, i.e. users can choose to use the keyboard, touch-pad, and any other adapter on their device.
   + The facilitation of user accuracy and precision is exemplified in the 'Back' button prompt, error messages when a mis-use occurs, and the option to update/change your profile information at any point.
   + The user's pace sets the pace for the application. User's can remain static or dynamic depending on their use of 'button' prompts.

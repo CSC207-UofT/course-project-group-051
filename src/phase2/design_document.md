@@ -234,28 +234,30 @@ As described in the marketing proposal, this application is directly focused on 
     * Design Document
     * Styling/Cleaning code
     * Identifying code smells and design patterns
-    * Relevant Pull Request:![alt text](url)
+    * Relevant Pull Request:[Put a brief description of the pull](url)
 * Senan Kassem
     * Implementation of use-cases and entity classes
     * Writing and tidying Javadocs
     * Organization of team meetings and communications
     * Aiding Alex in adhering to clean architecture
     * Refactoring controllers and use cases
+    * Relevant Pull Request:[Put a brief description of the pull](url)
 * Anjian Chen
     * Identifying design patterns to be implemented
     * Refactoring use-cases
     * Implementation and continuing use-case refactoring
+    * Relevant Pull Request:[Put a brief description of the pull](url)
 * Fei Yu Guan
     * Controller refactoring
     * User interface refactoring
-    * Relevant Pull Request:![alt text](url)
+    * Relevant Pull Request:[Put a brief description of the pull](url)
 * Sheng He Xiao
     * Data Base functionality and refactoring
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
     * Adding singleton patter
-    * Relevant Pull Request:![alt text](url)
+    * Relevant Pull Request:[Put a brief description of the pull](url)
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
@@ -263,4 +265,4 @@ As described in the marketing proposal, this application is directly focused on 
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
     * Adding singleton patter
-    * Relevant Pull Request:![alt text](url)
+    * Relevant Pull Request:[Put a brief description of the pull](url)

@@ -2,6 +2,9 @@ package phase2.constants;
 
 import phase2.usecase.ErrorBuilder;
 
+/** Class of Error Constants that are used for error rendering for
+ *  users and consistency throughout the application.
+ */
 public class Errors extends ErrorBuilder {
 
     public static final String EXISTS = "Account already exists.";

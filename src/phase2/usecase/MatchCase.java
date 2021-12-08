@@ -8,11 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/** A use case for matching user functions
+ */
 public class MatchCase {
 
     DataAccessInterface db;
     SelfUser currentUser;
 
+    /** Creates an instances of MatchCase
+     *
+     * @param db, the data access interface
+     * @param currentUser, an instance of SelfUser
+     */
     public MatchCase(DataAccessInterface db, SelfUser currentUser){
         this.db = db;
         this.currentUser = currentUser;

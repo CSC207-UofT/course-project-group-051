@@ -8,6 +8,8 @@ public class User {
     private int id;
     private String fName;
     private String lName;
+    private String age;
+    private String bio;
 
     /**
      * @param id the id representing this User in the database.
@@ -38,5 +40,21 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }

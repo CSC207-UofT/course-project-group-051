@@ -6,8 +6,6 @@ package phase2.users;
  */
 public class SelfUser extends User{
 
-    private String age;
-    private String bio;
     private String imagePath;
     private String gender;
     private String genderPreference;
@@ -19,22 +17,6 @@ public class SelfUser extends User{
      */
     public SelfUser(int id) {
         super(id);
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
     }
 
     public String getImagePath() {

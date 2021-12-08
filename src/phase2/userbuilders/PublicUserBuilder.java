@@ -1,6 +1,6 @@
 package phase2.userbuilders;
 
-import phase2.dataaccess.DataAccessInterface2;
+import phase2.dataaccess.DataAccessInterface;
 import phase2.users.PublicUser;
 
 import java.util.Map;
@@ -14,7 +14,7 @@ public class PublicUserBuilder{
     /**
      * @return a fully filled in PublicUser.
      */
-    public static PublicUser build(DataAccessInterface2 db, int id) {
+    public static PublicUser build(DataAccessInterface db, int id) {
 
         PublicUser publicUser = new PublicUser(id);
         updateUser(db.getUserInfo(id), publicUser);

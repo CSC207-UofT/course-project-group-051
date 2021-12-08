@@ -2,19 +2,20 @@ package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
 import phase2.userbuilders.PublicUserBuilder;
+import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 
 /**
- * Provides the processes needed to send messages betweeen Users.
+ * Provides the processes needed to send messages between Users.
  */
 public class MessageCase {
 
-    SelfUser currentUser; // the primary user ID.
-    int receiver; // the secondary user ID
-    DataAccessInterface db;
-    int threadID;
+    private final SelfUser currentUser;
+    private final PublicUser receiver;
+    private final DataAccessInterface db;
+    private int threadID;
 
     /**
      * @param currentUser The currently logged-in User.
@@ -23,7 +24,7 @@ public class MessageCase {
      */
     public MessageCase(DataAccessInterface db, SelfUser currentUser, int receiver){
         this.currentUser = currentUser;
-        this.receiver = receiver;
+        this.receiver = PublicUserBuilder.build(db, receiver);
         this.db = db;
 
         threadID = getThreadID();
@@ -39,7 +40,7 @@ public class MessageCase {
      */
     public void sendMessage(String msg){
 
-        db.createMessage(threadID, currentUser.getId(), receiver, msg);
+        db.createMessage(threadID, currentUser.getId(), receiver.getId(), msg);
     }
 
 
@@ -49,7 +50,7 @@ public class MessageCase {
      */
     private int getThreadID(){
         ArrayList<Integer> senderThreads = db.getThreads(currentUser.getId());
-        ArrayList<Integer> receiverThreads = db.getThreads(receiver);
+        ArrayList<Integer> receiverThreads = db.getThreads(receiver.getId());
         for(int id: senderThreads){
             if(receiverThreads.contains(id)){
                 return id;
@@ -60,10 +61,10 @@ public class MessageCase {
 
     /**
      * Calls the Database to create a new thread between the currentUser and Receiver.
-     * @return The Id of the newly created thread.
+     * @return The ID of the newly created thread.
      */
     private int createThread(){
-        return db.createThread(currentUser.getId(), receiver);
+        return db.createThread(currentUser.getId(), receiver.getId());
     }
 
     /**
@@ -71,7 +72,7 @@ public class MessageCase {
      */
     public String getReceiverName() {
 
-        return PublicUserBuilder.build(db, receiver).getFirstName();
+        return PublicUserBuilder.build(db, receiver.getId()).getFirstName();
 
     }
 

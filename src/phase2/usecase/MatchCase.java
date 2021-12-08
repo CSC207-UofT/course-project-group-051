@@ -8,11 +8,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Provides the actions needed when using the matches page.
+ */
 public class MatchCase {
 
-    DataAccessInterface db;
-    SelfUser currentUser;
+    private final DataAccessInterface db;
+    private final SelfUser currentUser;
 
+    /**
+     * @param db A reference to our database.
+     * @param currentUser The currently logged-in user.
+     */
     public MatchCase(DataAccessInterface db, SelfUser currentUser){
         this.db = db;
         this.currentUser = currentUser;

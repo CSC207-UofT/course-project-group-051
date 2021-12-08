@@ -62,7 +62,7 @@ public class SwipeController extends Controller {
 
         event = e -> {
 
-            boolean empty = swiper.nextUser();
+            swiper.nextUser();
 
             updateView();
 

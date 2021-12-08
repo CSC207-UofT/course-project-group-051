@@ -138,7 +138,6 @@ public class SwipeView implements View{
         addImage();
         addText();
 
-
     }
 
 

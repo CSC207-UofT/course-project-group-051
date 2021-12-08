@@ -3,7 +3,7 @@ package phase2.controllers;
 import javafx.stage.Stage;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
-import phase2.usecase.SwipeListCase;
+import phase2.usecase.SwipeListMaker;
 import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 
@@ -108,7 +108,7 @@ public class ControllerFactory {
      */
     public SwipeController getSwipeController(){
 
-        Queue<PublicUser> swipeList = SwipeListCase.filterSwipeList(db, currentUser);
+        Queue<PublicUser> swipeList = SwipeListMaker.filterSwipeList(db, currentUser);
         return new SwipeController(db, stage, currentUser, swipeList);
 
     }

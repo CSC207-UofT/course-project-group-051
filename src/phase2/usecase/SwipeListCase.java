@@ -1,6 +1,6 @@
 package phase2.usecase;
 
-import phase2.userbuilders.OtherUserBuilder;
+import phase2.userbuilders.PublicUserBuilder;
 import phase2.userbuilders.SelfUserBuilder;
 import phase2.userbuilders.UserBuilder;
 import phase2.users.PublicUser;
@@ -18,12 +18,9 @@ public class SwipeListCase {
 
     public SwipeListCase(DataAccessInterface db, SelfUser currentUser) {
         this.db = db;
+        this.currentUser = currentUser;
 
-        //Build the current User.
-        UserBuilder<SelfUser> selfUserBuilder = new SelfUserBuilder(db, currentUser.getId());
-        currentUser = selfUserBuilder.getResult();
-
-        public Queue<PublicUser> filterSwipeList(DataAccessInterface db, SelfUser currentUser) {
+        public Queue<PublicUser> filterSwipeList(){
 
             List<Integer> unfiltered = db.getSwipeList(currentUser.getId());
             Queue<PublicUser> filtered = new LinkedList<>();
@@ -36,7 +33,7 @@ public class SwipeListCase {
 
                 //if the current SelfUser has already admired this user, then don't include him in the final list.
                 if (!currentAdmirers.contains(currentUser.getId())) {
-                    filtered.add(new PublicUser(unfilteredUser));
+                    filtered.add(PublicUserBuilder.build(db, unfilteredUser));
                 }
 
             }
@@ -50,7 +47,7 @@ public class SwipeListCase {
 
             for (int user : swipeList) {
 
-                UserBuilder<PublicUser> builder = new OtherUserBuilder(db, user);
+                UserBuilder<PublicUser> builder = new PublicUserBuilder.build(db, user);
                 userList.add(builder.getResult());
 
             }

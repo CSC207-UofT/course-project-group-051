@@ -4,10 +4,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ErrorBuilder {
 
-    public static Text build(ArrayList<String> errors) {
+    public static Text build(List<String> errors) {
         Text e_message = new Text();
         e_message.setFill(Color.RED);
         StringBuilder final_error = new StringBuilder();

@@ -70,7 +70,7 @@ public class DataBaseAccess implements DataAccessInterface {
         info.put("age", getAge(id));
         info.put("gender", getGender(id));
         info.put("genderPref", getGenderPreference(id));
-        info.put("Bio", getBio(id));
+        info.put("bio", getBio(id));
         info.put("imgPath", getImgPath(id));
         return info;
     }
@@ -84,7 +84,7 @@ public class DataBaseAccess implements DataAccessInterface {
         setAge(id, Integer.parseInt(info.get("age")));
         setGender(id, info.get("gender"));
         setGenderPreference(id, info.get("genderPref"));
-        setBio(id, info.get("Bio"));
+        setBio(id, info.get("bio"));
         setImgPath(id, info.get("imgPath"));
     }
 
@@ -365,10 +365,10 @@ public class DataBaseAccess implements DataAccessInterface {
     private String[] getMessage(int messageID) {
         String[] message = new String[3];
         try {
-            String h2 = "select Messages, sender, receiver from messages where messageID = "+ messageID +";";
-            ResultSet rs = stmt.executeQuery(h2);
+            String h2 = "select Message, sender, receiver from messages where messageID = "+ messageID +";";
+            ResultSet rs = conn.createStatement().executeQuery(h2);
             while (rs.next()) {
-                message[0] = rs.getString("Messages");
+                message[0] = rs.getString("Message");
                 message[1] = rs.getString("sender");
                 message[2] = rs.getString("receiver");
             }
@@ -630,7 +630,7 @@ public class DataBaseAccess implements DataAccessInterface {
             String h2 = "select count(threadID) from threads;";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
-                id = rs.getInt("count(PersonID)");
+                id = rs.getInt("count(threadID)");
             }
             rs.close();
         } catch (SQLException se) {
@@ -649,7 +649,6 @@ public class DataBaseAccess implements DataAccessInterface {
         try {
             String h2 = "insert into MESSAGES values ("+id+", '"+msg+"', '"+sender+"', '"+ receiver +"');";
             stmt.execute(h2);
-            this.addMessage(id, threadID);
             this.addMessage(id, threadID);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -697,8 +696,7 @@ public class DataBaseAccess implements DataAccessInterface {
             for(int x: messages){
                 message.append(",").append(x);
             }
-
-            String h2 = "update THREADS set MESSAGES = " + message +" where THREADID = " + threadID + ";";
+            String h2 = "update THREADS set MESSAGES = '" + message + "' where THREADID = " + threadID + ";";;
             stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
@@ -715,7 +713,7 @@ public class DataBaseAccess implements DataAccessInterface {
             String h2 = "select count(MessageID) from Messages;";
             ResultSet rs = stmt.executeQuery(h2);
             while (rs.next()) {
-                id = rs.getInt("count(PersonID)");
+                id = rs.getInt("count(MessageID)");
             }
             rs.close();
         } catch (SQLException se) {
@@ -760,7 +758,7 @@ public class DataBaseAccess implements DataAccessInterface {
             String h2 = "insert into user values ("+id+", '" + userInfo.get("lastName") + "', '" +
                     userInfo.get("firstName") + "', '" + userInfo.get("uTID") + "', '" + userInfo.get("password") +
                     "', " + userInfo.get("age") + ", '" + userInfo.get("gender") + "', '" +
-                    userInfo.get("genderPreference") + "', 'No Bio', '', '', '', '', '.\\img\\default.jpg');";
+                    userInfo.get("genderPref") + "', 'No Bio', '', '', '', '', '.\\img\\default.jpg');";
             stmt.execute(h2);
 
         } catch (SQLException se) {

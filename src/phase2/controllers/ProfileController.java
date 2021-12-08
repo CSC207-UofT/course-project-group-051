@@ -32,12 +32,13 @@ public class ProfileController extends Controller {
 
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
-        int id = this.currentUser.getId();
         info.put("firstName", currentUser.getFirstName());
 
         info.put("lastName", currentUser.getLastName());
 
         info.put("age", currentUser.getAge());
+        System.out.println(currentUser.getImagePath());
+        System.out.println(currentUser.getBio());
         info.put("imgPath", currentUser.getImagePath());
         info.put("gender", currentUser.getGender());
         info.put("genderPref", currentUser.getGenderPreference());
@@ -58,28 +59,34 @@ public class ProfileController extends Controller {
     public EventHandler<ActionEvent> save(Map<String, TextInputControl> inputs) {
         event = e -> {
             this.inputs = inputs;
-            ArrayList<String> errors = new ArrayList<>();
-            String[] info = new String[9];
-            info[0] = inputs.get("firstNameT").getText();
-            info[1] = inputs.get("lastNameT").getText();
-            info[2] = inputs.get("ageT").getText();
-            info[3] = inputs.get("imgPathT").getText();
-            info[4] = inputs.get("genderT").getText();
-            info[5] = inputs.get("genderPrefT").getText();
-            info[6] = inputs.get("UTorIDT").getText();
-            info[7] = inputs.get("bioT").getText();
-            info[8] = inputs.get("passwordT").getText();
+            List<String> errors = new ArrayList<>();
+            Map<String, String> info = new HashMap<>();
+            info.put("uTID", inputs.get("UTorIDT").getText());
+            info.put("password", inputs.get("passwordT").getText());
+            info.put("firstName", inputs.get("firstNameT").getText());
+            info.put("lastName", inputs.get("lastNameT").getText());
+            info.put("age", inputs.get("ageT").getText());
+            info.put("gender", inputs.get("genderT").getText());
+            info.put("genderPref",inputs.get("genderPrefT").getText());
+            info.put("bio", inputs.get("bioT").getText());
+            info.put("imgPath", inputs.get("imgPathT").getText());
             ProfileCase profileCase = new ProfileCase(db);
-            for(int x = 0; x < 9; x++){
-                if(info[x] == "" || info[x] == null){
-                    errors.add(Errors.MISSING_PROFILE);
+            if(info.containsValue("") || info.containsValue(null)){
+                errors.add(Errors.MISSING_PROFILE);
+            }
+            else{
+                try {
+                    Integer.parseInt(info.get("age"));
+                } catch (NumberFormatException io) {
+                    errors.add(Errors.AGE);
                 }
             }
             try {
-                new FileInputStream(info[3]);
+                new FileInputStream(info.get("imgPath"));
             } catch (FileNotFoundException io) {
                 errors.add(Errors.IMAGE_PATH);
             }
+
             if (!errors.isEmpty()) {
                 View view = new ProfileView(ErrorBuilder.build(errors));
                 view.build();

@@ -65,7 +65,7 @@ public class MessageController extends Controller{
     /**
      * @return A String representation of the receiver of the messages.
      */
-    public String getReciever() {
+    public String getReceiver() {
 
         return messageCase.getReceiverName();
 

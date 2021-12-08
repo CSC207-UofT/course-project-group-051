@@ -1,6 +1,7 @@
 package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
+import phase2.userbuilders.PublicUserBuilder;
 import phase2.users.SelfUser;
 
 import java.util.ArrayList;
@@ -70,12 +71,13 @@ public class MessageCase {
      */
     public String getReceiverName() {
 
-        return db.getFirstName(receiver);
+        return PublicUserBuilder.build(db, receiver).getFirstName();
 
     }
 
 
     public ArrayList<String[]> getFullThread(){
+        System.out.println(db.getThread(threadID));
         return db.getThread(threadID);
     }
 

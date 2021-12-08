@@ -10,4 +10,5 @@ public class Errors extends ErrorBuilder {
     public static final String PASSWORD_MATCH = "Passwords did not match.";
     public static final String INVALID_CREDENTIAL = "Invalid Credential. Please try again.";
     public static final String IMAGE_PATH = "Invalid file path. Please try again.";
+    public static final String AGE = "Please enter a numeric value for age.";
 }

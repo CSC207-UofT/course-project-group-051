@@ -24,16 +24,22 @@ public class RegistrationCase {
         if (info.containsValue("")){
             errors.add(Errors.MISSING); // ADD THESE MESSAGES
         }
+        else{
+            try {
+                Integer.parseInt(info.get("age"));
+            } catch (NumberFormatException io) {
+                errors.add(Errors.AGE);
+            }
+        }
         if(!info.get("password").equals(info.get("passwordC"))){
             errors.add(Errors.PASSWORD_MATCH);
         }
-        if (db.logIn(info.get("UTorID"), info.get("password")) != -1){
+        if (db.logIn(info.get("uTID"), info.get("password")) != -1){
             errors.add(Errors.EXISTS); // ADD THESE MESSAGES
         }
+
         if(errors.isEmpty()) {
-            db.createUser(info.get("lName"), info.get("fName"), info.get("password"),
-                    info.get("UTorID"), Integer.parseInt(info.get("age")) , info.get("gender"),
-                    info.get("genderPref"));
+            db.createUser(info);
             return errors; //return Integer.toString(id);
 
         }

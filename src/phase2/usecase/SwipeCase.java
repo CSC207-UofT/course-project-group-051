@@ -28,9 +28,9 @@ public class SwipeCase {
         this.db = db;
 
         //Build the current User.
-        this.selfUser = currentUser;
-
-        currentTarget = this.swipeList.poll();
+        selfUser = currentUser;
+        this.swipeList = swipeList;
+        currentTarget = swipeList.poll();
 
     }
 

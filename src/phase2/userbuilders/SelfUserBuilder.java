@@ -3,6 +3,7 @@ package phase2.userbuilders;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.SelfUser;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,27 +21,29 @@ public class SelfUserBuilder{
         return selfUser;
 
     }
-    /**
-     * @return a fully filled in SelfUser from map i.e. registrationCase.
-     */
-    public SelfUser build(Map<String, String> data, DataAccessInterface db) {
-        int id = db.createUser(data);
-        SelfUser selfUser = new SelfUser(id);
-        updateUser(data, selfUser);
-        return selfUser;
-    }
+//    /**
+//     * @return a fully filled in SelfUser from map i.e. registrationCase.
+//     */
+//    public SelfUser build(Map<String, String> data, DataAccessInterface db) {
+//        int id = db.createUser(data);
+//        SelfUser selfUser = new SelfUser(id);
+//        updateUser(data, selfUser);
+//        return selfUser;
+//    }
 
     /**
      * adds data specific to SelfUser.
      */
-    public static void updateUser(Map<String, String> data, SelfUser selfUser) {
-        selfUser.setLastName(data.get("lName"));
-        selfUser.setFirstName(data.get("fName"));
+    private static void updateUser(Map<String, String> data, SelfUser selfUser) {
+        selfUser.setLastName(data.get("lastName"));
+        selfUser.setFirstName(data.get("firstName"));
         selfUser.setPassword(data.get("password"));
-        selfUser.setUsername(data.get("UTorID"));
+        selfUser.setUsername(data.get("uTID"));
         selfUser.setAge(data.get("age"));
         selfUser.setGender(data.get("gender"));
         selfUser.setGenderPreference(data.get("genderPref"));
+        selfUser.setImagePath(data.get("imgPath"));
+        selfUser.setBio(data.get("bio"));
     }
 
 }

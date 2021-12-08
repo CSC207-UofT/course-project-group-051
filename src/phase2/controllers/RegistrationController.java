@@ -49,7 +49,7 @@ public class RegistrationController extends Controller{
             } else {
                 LogInCase logInCase = new LogInCase(db);
                 int logInResult = logInCase.loginUser(
-                        inputs.get("UTorID").getText(),
+                        inputs.get("uTID").getText(),
                         inputs.get("password").getText());
                 ControllerFactory.getInstance().setCurrentUser(SelfUserBuilder.build(db, logInResult));
                 view = new SwipeView();

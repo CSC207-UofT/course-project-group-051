@@ -110,11 +110,11 @@ public class RegistrationView implements View{
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("age", tf);
-        inputs.put("UTorID", tf1);
+        inputs.put("uTID", tf1);
         inputs.put("password", tf2);
         inputs.put("passwordC", tf3);
-        inputs.put("fName", tf5);
-        inputs.put("lName", tf6);
+        inputs.put("firstName", tf5);
+        inputs.put("lastName", tf6);
         inputs.put("gender", tf7);
         inputs.put("genderPref", tf8);
         createAccount.setOnAction(controller.createAccount(inputs));

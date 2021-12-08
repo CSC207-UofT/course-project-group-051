@@ -1,6 +1,7 @@
 package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
+import phase2.userbuilders.PublicUserBuilder;
 import phase2.users.SelfUser;
 
 import java.util.HashMap;
@@ -28,7 +29,7 @@ public class MatchCase {
 
         for(Integer id: likes){
             if(admires.contains(id)){
-                matches.put(db.getFirstName(id), id);
+                matches.put(PublicUserBuilder.build(db, id).getFirstName(), id);
             }
         }
 

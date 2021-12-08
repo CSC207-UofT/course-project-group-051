@@ -25,8 +25,8 @@ public class PublicUserBuilder{
      * adds data to specific to this PublicUser.
      */
     public static void updateUser(Map<String, String> data, PublicUser publicUser) {
-        publicUser.setlName(data.get("lName"));
-        publicUser.setfName(data.get("fName"));
+        publicUser.setLastName(data.get("lName"));
+        publicUser.setFirstName(data.get("fName"));
         publicUser.setBio(data.get("bio"));
         publicUser.setImagePath(data.get("imgPath"));
         publicUser.setAge(data.get("age"));

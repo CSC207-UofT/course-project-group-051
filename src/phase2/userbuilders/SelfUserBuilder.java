@@ -34,8 +34,8 @@ public class SelfUserBuilder{
      * adds data specific to SelfUser.
      */
     public static void updateUser(Map<String, String> data, SelfUser selfUser) {
-        selfUser.setlName(data.get("lName"));
-        selfUser.setfName(data.get("fName"));
+        selfUser.setLastName(data.get("lName"));
+        selfUser.setFirstName(data.get("fName"));
         selfUser.setPassword(data.get("password"));
         selfUser.setUsername(data.get("UTorID"));
         selfUser.setAge(data.get("age"));

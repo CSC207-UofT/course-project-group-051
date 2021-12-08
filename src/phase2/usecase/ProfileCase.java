@@ -4,6 +4,8 @@ import phase2.controllers.ProfileController;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileCase {
     DataAccessInterface db;
@@ -12,14 +14,18 @@ public class ProfileCase {
     }
 
     public void updateUser(int id, String[] info){
-        db.setFirstName(id, info[0]);
-        db.setLastName(id, info[1]);
-        db.setBirthday(id, info[2]);
-        db.setImgPath(id, info[3]);
-        db.setGender(id, info[4]);
-        db.setGenderPreference(id, info[5]);
-        db.setUsername(id, info[6]);
-        db.setBio(id, info[7]);
-        db.setPassword(id, info[8]);
+        Map<String, String> updates = new HashMap<>();
+        updates.put("uTID", info[0]);
+        updates.put("password", info[0]);
+        updates.put("firstName", info[0]);
+        updates.put("lastName", info[0]);
+        updates.put("age", info[0]);
+        updates.put("gender", info[0]);
+        updates.put("genderPref", info[0]);
+        updates.put("Bio", info[0]);
+        updates.put("imgPath", info[0]);
+        db.updateUserInfo(id, updates);
     }
+
+
 }

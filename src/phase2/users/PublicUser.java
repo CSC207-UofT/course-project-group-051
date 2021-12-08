@@ -21,6 +21,7 @@ public class PublicUser{
     }
     public int getId() {
         return id;
+    }
       
     public String getImagePath() {
         return imagePath;
@@ -38,29 +39,22 @@ public class PublicUser{
         this.gender = gender;
     }
 
-    public String getfName() {
+    public String getFirstName() {
         return fName;
     }
 
-    public void setfName(String fName) {
+    public void setFirstName(String fName) {
         this.fName = fName;
     }
 
-    public String getlName() {
+    public String getLastName() {
         return lName;
     }
 
-    public void setlName(String lName) {
+    public void setLastName(String lName) {
         this.lName = lName;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAge() {
         return age;
@@ -76,21 +70,5 @@ public class PublicUser{
 
     public void setBio(String bio) {
         this.bio = bio;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
     }
 }

@@ -92,18 +92,7 @@ public interface DataAccessInterface {
      */
     ArrayList<Integer> getSwipeList(int id);
 
-    /**
-     * @param lastName the last name of the new user
-     * @param firstName the first name of the new user
-     * @param password the password of the new user
-     * @param username the username of the new user
-     * @param age the age of the new user
-     * @param gender the gender of the new user
-     * @param genderPreference the gender preference of the new user
-     * @param birthday the birthday of the new user
-     * creates a new user in the database using the parameters below.
-     * @returns their PersonID and -1 if invalid parameters are given.
-     */
+
     int createUser(Map<String, String> userInfo);
 
 }

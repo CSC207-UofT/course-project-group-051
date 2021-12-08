@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import phase2.constants.Errors;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.ProfileView;
-import phase2.presenters.RegistrationView;
 import phase2.presenters.SwipeView;
 import phase2.presenters.View;
 import phase2.usecase.ErrorBuilder;
@@ -34,17 +33,17 @@ public class ProfileController extends Controller {
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
         int id = this.currentUser.getId();
-        info.put("firstName", db.getFirstName(id));
+        info.put("firstName", currentUser.getFirstName());
 
-        info.put("lastName", db.getLastName(id));
+        info.put("lastName", currentUser.getLastName());
 
-        info.put("age", Integer.toString(db.getAge(id)));
-        info.put("imgPath", db.getImgPath(id));
-        info.put("gender", db.getGender(id));
-        info.put("genderPref", db.getGenderPreference(id));
-        info.put("UTorID", db.getUsername(id));
-        info.put("bio", db.getBio(id));
-        info.put("password", db.getPassword(id));
+        info.put("age", currentUser.getAge());
+        info.put("imgPath", currentUser.getImagePath());
+        info.put("gender", currentUser.getGender());
+        info.put("genderPref", currentUser.getGenderPreference());
+        info.put("UTorID", currentUser.getUsername());
+        info.put("bio", currentUser.getBio());
+        info.put("password", currentUser.getPassword());
         return info;
     }
 

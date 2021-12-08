@@ -4,10 +4,8 @@ package phase2.users;
  * This represents a User that is logged in, it contains all the information about themselves that they can change or
  * view.
  */
-public class SelfUser extends User{
+public class SelfUser extends PublicUser{
 
-    private String imagePath;
-    private String gender;
     private String genderPreference;
     private String username;
     private String password;
@@ -17,22 +15,6 @@ public class SelfUser extends User{
      */
     public SelfUser(int id) {
         super(id);
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public String getGenderPreference() {

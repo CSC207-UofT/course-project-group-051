@@ -1,58 +1,54 @@
 package phase2.userbuilders;
 
 import phase2.dataaccess.DataAccessInterface;
+import phase2.dataaccess.DataAccessInterface2;
+import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 
-public class SelfUserBuilder extends UserBuilder<SelfUser> {
+import java.util.Map;
 
-    DataAccessInterface db;
+public class SelfUserBuilder implements UserBuilder {
 
     /**
-     * @param db A reference to our database so we can read and write from it.
-     * @param id The ID of the User you want to create a User object of.
+     * @return a fully filled in SelfUser from db i.e. loginCase.
      */
-    public SelfUserBuilder(DataAccessInterface db, int id) {
+    public SelfUser build(DataAccessInterface2 db, int id) {
 
-        this.db = db;
-        result = new SelfUser(id);
+        SelfUser selfUser = new SelfUser(id);
+        updateUser(db.getUserInfo(id), selfUser);
+        return selfUser;
 
+    }
+    /**
+     * @return a fully filled in PublicUser from map i.e. registrationCase.
+     */
+    public SelfUser build(Map<String, String> data, DataAccessInterface2 db) {
+        int id = db.createUser(data);
+        SelfUser selfUser = new SelfUser(id);
+        updateUser(data, selfUser);
+        return selfUser;
     }
 
     /**
-     * adds the data to the result specific to a SelfUser.
+     * adds data to selfUser.
      */
-    @Override
-    public void buildSpecificUser() {
-
-        int id = result.getId();
-
-        //get data from database.
-        String age = Integer.toString(db.getAge(id));
-        String bio = db.getBio(id);
-        String imagePath = db.getImgPath(id);
-        String gender = db.getGender(id);
-        String genderPreference = db.getGenderPreference(id);
-        String username = db.getUsername(id);
-        String password= db.getPassword(id);
-
-        //set the data into the user.
-        result.setAge(age);
-        result.setBio(bio);
-        result.setImagePath(imagePath);
-        result.setGender(gender);
-        result.setUsername(genderPreference);
-        result.setGenderPreference(username);
-        result.setPassword(password);
-
+    public void updateUser(Map<String, String> data, SelfUser selfUser) {
+        selfUser.setlName(data.get("lName"));
+        selfUser.setfName(data.get("fName"));
+        selfUser.setPassword(data.get("password"));
+        selfUser.setUsername(data.get("UTorID"));
+        selfUser.setAge(data.get("age"));
+        selfUser.setGender(data.get("gender"));
+        selfUser.setGenderPreference(data.get("genderPref"));
     }
-
     /**
      * @return a fully filled in SelfUser.
      */
-    @Override
-    public SelfUser getResult() {
-        buildBaseUser(result, db);
-        buildSpecificUser();
-        return result;
-    }
+//    @Override
+//    public SelfUser getResult() {
+//        buildBaseUser(result, db);
+//        buildSpecificUser();
+//        return result;
+//    }
+
 }

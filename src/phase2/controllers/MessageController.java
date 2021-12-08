@@ -8,6 +8,7 @@ import phase2.presenters.MatchView;
 import phase2.presenters.MessageView;
 import phase2.presenters.View;
 import phase2.usecase.MessageCase;
+import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class MessageController extends Controller{
 
 
-    int currentUser; // the primary user ID.
+    SelfUser currentUser; // the primary user ID.
     int receiver; // the secondary user ID
     MessageCase messageCase;
 
@@ -26,7 +27,7 @@ public class MessageController extends Controller{
      * @param currentUser the id of currentUser user.
      * @param receiver the id of receiver user.
      */
-    public MessageController(DataAccessInterface db, Stage stage, int currentUser, int receiver){
+    public MessageController(DataAccessInterface db, Stage stage, SelfUser currentUser, int receiver){
         super(db, stage);
         this.currentUser = currentUser;
         this.receiver = receiver;
@@ -90,7 +91,7 @@ public class MessageController extends Controller{
 
         int senderID = Integer.parseInt(sender);
 
-        if (senderID == currentUser) {
+        if (senderID == currentUser.getId()) {
             return "-fx-background-color: lightblue; -fx-background-radius: 10;";
         }
 

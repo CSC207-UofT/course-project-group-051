@@ -3,6 +3,9 @@ package phase2.controllers;
 import javafx.stage.Stage;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
+import phase2.usecase.SwipeListCase;
+import phase2.users.PublicUser;
+import phase2.users.SelfUser;
 
 import java.util.*;
 
@@ -14,7 +17,7 @@ public class ControllerFactory {
 
     DataAccessInterface db; //A reference to our Database.
     Stage stage; //A reference to the Stage where we display the views.
-    int currentUser; //The id of the currently logged-in User.
+    SelfUser currentUser; //The id of the currently logged-in User.
     final static ControllerFactory controllerFactory = new ControllerFactory(); //The single Factory instance.
 
         //TODO remove later but trying to find branch
@@ -42,10 +45,10 @@ public class ControllerFactory {
 
     /**
      * Sets the currentUser.
-     * @param id the currentUser's ID.
+     * @param user the currentUser.
      */
-    public void setCurrentUser(int id){
-        this.currentUser = id;
+    public void setCurrentUser(SelfUser user){
+        this.currentUser = user;
     }
 
 
@@ -106,7 +109,7 @@ public class ControllerFactory {
      */
     public SwipeController getSwipeController(){
 
-        Queue<Integer> swipeList = filterSwipeList();
+        Queue<PublicUser> swipeList = SwipeListCase.filterSwipeList(db, currentUser);
         return new SwipeController(db, stage, currentUser, swipeList);
 
     }
@@ -116,10 +119,10 @@ public class ControllerFactory {
      * Removes all the already liked Users from the currentUser's potential swipes.
      * @return a list of IDs that the current SelfUser can swipe on.
      */
-    private Queue<Integer> filterSwipeList() {
+    private Queue<PublicUser> filterSwipeList() {
 
-        List<Integer> unfiltered = db.getSwipeList(currentUser);
-        Queue<Integer> filtered = new LinkedList<>();
+        List<Integer> unfiltered = db.getSwipeList(currentUser.getId());
+        Queue<PublicUser> filtered = new LinkedList<>();
 
         //Loop through the list of unfiltered users
         for (int unfilteredUser : unfiltered) {
@@ -128,8 +131,8 @@ public class ControllerFactory {
             ArrayList<Integer> currentAdmirers = db.getAdmires(unfilteredUser);
 
             //if the current SelfUser has already admired this user, then don't include him in the final list.
-            if(!currentAdmirers.contains(currentUser)) {
-                filtered.add(unfilteredUser);
+            if(!currentAdmirers.contains(currentUser.getId())) {
+                filtered.add(new PublicUser(unfilteredUser));
             }
 
         }

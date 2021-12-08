@@ -5,7 +5,7 @@ import phase2.dataaccess.DataAccessInterface;
 import phase2.userbuilders.OtherUserBuilder;
 import phase2.userbuilders.SelfUserBuilder;
 import phase2.userbuilders.UserBuilder;
-import phase2.users.OtherUser;
+import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 import java.util.*;
 
@@ -15,26 +15,26 @@ import java.util.*;
 public class SwipeCase {
 
     DataAccessInterface db;
-    Queue<OtherUser> swipeList;
+    Queue<PublicUser> swipeList;
     SelfUser selfUser;
-    public OtherUser currentTarget;
+    public PublicUser currentTarget;
 
 
     /**
      * @param db A reference to our Database so we can read and write to it.
-     * @param id The ID of the currently logged-in User.
+     * @param currentUser The currently logged-in User.
      * @param swipeList A list of IDs of potential users that the current User can swipe on.
      *                  It is assumed there are no repeats, and no already liked Users within the list.
      */
-    public SwipeCase(DataAccessInterface db, int id, Queue<Integer> swipeList) {
+    public SwipeCase(DataAccessInterface db, SelfUser currentUser, Queue<PublicUser> swipeList) {
 
         this.db = db;
 
         //Build the current User.
-        UserBuilder<SelfUser> selfUserBuilder = new SelfUserBuilder(db, id);
+        UserBuilder<SelfUser> selfUserBuilder = new SelfUserBuilder(db, currentUser.getId());
         selfUser = selfUserBuilder.getResult();
 
-        this.swipeList = createSwipeList(swipeList);
+        this.swipeList = SwipeListCase.createSwipeList(swipeList);
 
         currentTarget = this.swipeList.poll();
 
@@ -43,7 +43,7 @@ public class SwipeCase {
     /**
      * @return the nextUser in the list to swipe on, or null if there are none left.
      */
-    private OtherUser getNextUser() {
+    private PublicUser getNextUser() {
 
         //Return null if there are none left.
 
@@ -119,13 +119,13 @@ public class SwipeCase {
     }
 
 
-    private Queue<OtherUser> createSwipeList(Queue<Integer> swipeList) {
+    private Queue<PublicUser> createSwipeList(Queue<Integer> swipeList) {
 
-        Queue<OtherUser> userList = new LinkedList<>();
+        Queue<PublicUser> userList = new LinkedList<>();
 
         for (int user : swipeList) {
 
-            UserBuilder<OtherUser> builder = new OtherUserBuilder(db, user);
+            UserBuilder<PublicUser> builder = new OtherUserBuilder(db, user);
             userList.add(builder.getResult());
 
         }

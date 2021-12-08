@@ -12,6 +12,7 @@ import phase2.presenters.SwipeView;
 import phase2.presenters.View;
 import phase2.usecase.ErrorBuilder;
 import phase2.usecase.ProfileCase;
+import phase2.users.SelfUser;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,20 +20,20 @@ import java.util.*;
 
 public class ProfileController extends Controller {
 
-    int id;
+    SelfUser currentUser;
     Map<String, TextInputControl> inputs;
     EventHandler<ActionEvent> event;
     final public static String[] VALID_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
             "Sep", "Oct", "Nov", "Dec"};
 
-    public ProfileController(DataAccessInterface db, Stage stage, int id) {
+    public ProfileController(DataAccessInterface db, Stage stage, SelfUser currentUser) {
         super(db, stage);
-        this.id = id;
+        this.currentUser = currentUser;
     }
 
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
-
+        int id = this.currentUser.getId();
         info.put("firstName", db.getFirstName(id));
 
         info.put("lastName", db.getLastName(id));
@@ -84,7 +85,7 @@ public class ProfileController extends Controller {
                 View view = new ProfileView(ErrorBuilder.build(errors));
                 view.build();
             } else {
-                profileCase.updateUser(id, info);
+                profileCase.updateUser(currentUser.getId(), info);
                 View view = new SwipeView();
                 view.build();
             }

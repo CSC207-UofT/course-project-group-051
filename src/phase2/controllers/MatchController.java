@@ -8,6 +8,7 @@ import phase2.presenters.MessageView;
 import phase2.presenters.SwipeView;
 import phase2.presenters.View;
 import phase2.usecase.MatchCase;
+import phase2.users.SelfUser;
 
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class MatchController extends Controller{
      * @param stage A reference to the stage so we can display things.
      * @param currentUser the ID of the currentUser.
      */
-    public MatchController(DataAccessInterface db, Stage stage, int currentUser){
+    public MatchController(DataAccessInterface db, Stage stage, SelfUser currentUser){
         super(db, stage);
         matchCase = new MatchCase(db, currentUser);
     }

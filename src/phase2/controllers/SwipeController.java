@@ -7,6 +7,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import phase2.presenters.*;
 import phase2.usecase.SwipeCase;
+import phase2.users.PublicUser;
+import phase2.users.SelfUser;
 
 import java.util.*;
 
@@ -17,13 +19,13 @@ public class SwipeController extends Controller {
     /**
      * @param db A reference to our Database so we can read and write to it.
      * @param stage the main stage where we display the scene.
-     * @param id the id of the currently logged-in User.
+     * @param currentUser the currently logged-in User.
      * @param swipeList a list of IDs that the currently logged-in User can swipe on. (they have not already
      * liked any of these users.)
      */
-    public SwipeController(DataAccessInterface db, Stage stage, int id, Queue<Integer> swipeList) {
+    public SwipeController(DataAccessInterface db, Stage stage, SelfUser currentUser, Queue<PublicUser> swipeList) {
         super(db, stage);
-        swiper = new SwipeCase(db, id, swipeList);
+        swiper = new SwipeCase(db, currentUser, swipeList);
     }
 
     public boolean isEmpty(){

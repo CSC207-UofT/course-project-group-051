@@ -12,6 +12,8 @@ import phase2.presenters.View;
 import phase2.usecase.ErrorBuilder;
 import phase2.usecase.RegistrationCase;
 import phase2.usecase.LogInCase;
+import phase2.userbuilders.SelfUserBuilder;
+import phase2.users.SelfUser;
 
 
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ public class RegistrationController extends Controller{
                 int logInResult = logInCase.loginUser(
                         inputs.get("UTorID").getText(),
                         inputs.get("password").getText());
-                ControllerFactory.getInstance().setCurrentUser(logInResult);
+                ControllerFactory.getInstance().setCurrentUser(SelfUserBuilder.build(logInResult));
                 view = new SwipeView();
             }
             view.build();

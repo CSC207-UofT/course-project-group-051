@@ -1,6 +1,7 @@
 package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
+import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  */
 public class MessageCase {
 
-    int currentUser; // the primary user ID.
+    SelfUser currentUser; // the primary user ID.
     int receiver; // the secondary user ID
     DataAccessInterface db;
     int threadID;
@@ -19,7 +20,7 @@ public class MessageCase {
      * @param receiver The User who the message will be sent to.
      * @param db A reference to our database.
      */
-    public MessageCase( DataAccessInterface db, int currentUser, int receiver){
+    public MessageCase(DataAccessInterface db, SelfUser currentUser, int receiver){
         this.currentUser = currentUser;
         this.receiver = receiver;
         this.db = db;
@@ -37,7 +38,7 @@ public class MessageCase {
      */
     public void sendMessage(String msg){
 
-        db.createMessage(threadID, currentUser, receiver, msg);
+        db.createMessage(threadID, currentUser.getId(), receiver, msg);
     }
 
 
@@ -46,7 +47,7 @@ public class MessageCase {
      * @return The threadID of a Thread between the currentUser and the Receiver or -1 if there isn't one.
      */
     private int getThreadID(){
-        ArrayList<Integer> senderThreads = db.getThreads(currentUser);
+        ArrayList<Integer> senderThreads = db.getThreads(currentUser.getId());
         ArrayList<Integer> receiverThreads = db.getThreads(receiver);
         for(int id: senderThreads){
             if(receiverThreads.contains(id)){
@@ -61,7 +62,7 @@ public class MessageCase {
      * @return The Id of the newly created thread.
      */
     private int createThread(){
-        return db.createThread(currentUser, receiver);
+        return db.createThread(currentUser.getId(), receiver);
     }
 
     /**

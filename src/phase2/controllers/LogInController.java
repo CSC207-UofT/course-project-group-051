@@ -13,6 +13,8 @@ import phase2.presenters.View;
 import phase2.usecase.ErrorBuilder;
 import phase2.usecase.LogInCase;
 import javafx.stage.Stage;
+import phase2.userbuilders.SelfUserBuilder;
+import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 
@@ -60,7 +62,7 @@ public class LogInController extends Controller{
                 view = new LoginView(ErrorBuilder.build(error));
             }
             else{
-                ControllerFactory.getInstance().setCurrentUser(logInResult);
+                ControllerFactory.getInstance().setCurrentUser(SelfUserBuilder.build(db, logInResult));
                 view = new SwipeView();
             }
             view.build();

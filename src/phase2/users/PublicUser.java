@@ -1,17 +1,17 @@
 package phase2.users;
 
 /**
- * Represents a User other than the one who is logged in. It holds the public information of a User.
+ * Represents a User in our system and holds their information.
  */
 public class PublicUser{
 
-    private String age;
-    private String bio;
-    private String imagePath;
-    private String gender;
     private int id;
     private String fName;
     private String lName;
+    private String age;
+    private String bio;
+    private String gender;
+    private String imagePath;
 
     /**
      * @param id the id representing this User in the database.
@@ -19,7 +19,9 @@ public class PublicUser{
     public PublicUser(int id) {
         this.id = id;
     }
-
+    public int getId() {
+        return id;
+      
     public String getImagePath() {
         return imagePath;
     }
@@ -74,5 +76,21 @@ public class PublicUser{
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

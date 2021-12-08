@@ -1,4 +1,4 @@
-package Phase1.Tests;
+package dataaccess;
 
 import phase2.dataaccess.DataBaseAccess;
 import org.junit.jupiter.api.Assertions;

@@ -127,7 +127,7 @@ public class SwipeView implements View{
      */
     private void setUserData() {
         Map<String, String> userData = controller.getUserData();
-        this.image = this.controller.getCurrentImage();
+        this.image = ImageMaker.getImage(controller.getCurrentImage());
         fNameAge = new Label(userData.get("fName") + ", " + userData.get("Age"));
         fNameAge.setFont(new Font(20));
         fNameAge.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
@@ -156,7 +156,7 @@ public class SwipeView implements View{
     private void setSpacing() {
         hb.setSpacing(270);
         //hb.setSpacing(this.image.getFitWidth() / 4);
-        hb1.setSpacing(50000);
+        hb1.setSpacing(10);
     }
 
 

@@ -1,4 +1,4 @@
-package phase2.usecase;
+package phase2.presenters;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

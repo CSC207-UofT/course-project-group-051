@@ -1,7 +1,9 @@
+package presenters;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import org.junit.jupiter.api.Test;
-import phase2.usecase.ImageMaker;
+import phase2.presenters.ImageMaker;
 
 import java.io.FileInputStream;
 
@@ -12,19 +14,16 @@ class ImageMakerTest {
     @Test
     void testGetImageTrue() {
 
-        ImageView actual = ImageMaker.getImage("//img//img1.jpg");
+        ImageView actual = ImageMaker.getImage(".\\img\\img2.jpg");
 
         ImageView expected;
         try {
-            FileInputStream f = new FileInputStream("//img//img1.jpg");
+            FileInputStream f = new FileInputStream(".\\img\\img2.jpg");
             expected = new ImageView(new Image(f));
+            assertEquals(expected, actual);
         } catch (Exception e) {
-            expected = null;
-            System.out.println("file name invalid.");
+            fail("file name invalid.");
         }
-
-        assertEquals(expected, actual);
-
     }
 
     @Test

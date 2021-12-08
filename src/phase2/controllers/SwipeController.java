@@ -153,7 +153,7 @@ public class SwipeController extends Controller {
     /**
      * @return an EventHandler that runs the getCurrentImage function.
      */
-    public ImageView getCurrentImage() {
+    public String getCurrentImage() {
 
         return swiper.getImage();
 

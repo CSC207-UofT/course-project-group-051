@@ -2,7 +2,6 @@ package phase2.usecase;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
 import java.util.List;
 
 /**

@@ -13,23 +13,28 @@ import phase2.usecase.ErrorBuilder;
 import phase2.usecase.RegistrationCase;
 import phase2.usecase.LogInCase;
 import phase2.userbuilders.SelfUserBuilder;
-import phase2.users.SelfUser;
-
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
+/** A controller that registers non-existing users
+ */
 public class RegistrationController extends Controller{
 
     EventHandler<ActionEvent> event;
 
+    /** Creates instance of RegistrationController
+     *
+     * @param db, an instance of data access interface
+     * @param stage, the main stage
+     */
     public RegistrationController(DataAccessInterface db, Stage stage){
         super(db, stage);
     }
 
-
+    /** @return EventHandler that returns the LoginView
+     */
     public EventHandler<ActionEvent> back(){
         event = e -> {
             View view = new LoginView(ErrorBuilder.build(new ArrayList<>()));
@@ -38,6 +43,10 @@ public class RegistrationController extends Controller{
         return event;
     }
 
+    /** @return EventHandler that adds a new user to the db
+     *
+     * @param inputs, data from RegistrationView submission
+     */
     public EventHandler<ActionEvent> createAccount(Map<String, TextInputControl> inputs){
         event = e -> {
             RegistrationCase registrationCase = new RegistrationCase(db);

@@ -22,10 +22,10 @@ public class MessageController extends Controller{
     MessageCase messageCase;
 
     /** Creates an instance of MessageController.
-     * @param db the data access interface.
-     * @param stage the main stage.
-     * @param currentUser the id of currentUser user.
-     * @param receiver the id of receiver user.
+     * @param db, the data access interface.
+     * @param stage, the main stage.
+     * @param currentUser,  an instance of selfUser.
+     * @param receiver, the id of receiver user.
      */
     public MessageController(DataAccessInterface db, Stage stage, SelfUser currentUser, int receiver){
         super(db, stage);

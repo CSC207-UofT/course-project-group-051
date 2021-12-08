@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import phase2.controllers.ControllerFactory;
 import phase2.presenters.LoginView;
 
+/** The run page that will display the application
+ */
 public class Session extends Application {
     @Override
     public void start(Stage stage) {

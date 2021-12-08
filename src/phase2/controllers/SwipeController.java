@@ -3,7 +3,6 @@ package phase2.controllers;
 import phase2.dataaccess.DataAccessInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import phase2.presenters.*;
 import phase2.usecase.SwipeCase;
@@ -41,13 +40,7 @@ public class SwipeController extends Controller {
 
         EventHandler<ActionEvent> event;
 
-        event = e -> {
-
-            boolean empty = swiper.likeCurrentUser();
-
-            updateView();
-
-        };
+        event = e -> updateView();
 
         return event;
     }
@@ -60,13 +53,7 @@ public class SwipeController extends Controller {
 
         EventHandler<ActionEvent> event;
 
-        event = e -> {
-
-            swiper.nextUser();
-
-            updateView();
-
-        };
+        event = e -> updateView();
 
         return event;
 

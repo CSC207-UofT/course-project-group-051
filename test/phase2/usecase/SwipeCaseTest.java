@@ -21,7 +21,7 @@ class SwipeCaseTest {
     @BeforeEach
     void setUp() {
 
-        db = new DataBaseAccess();
+        db.resetDB();
         db.setUpDB();
 
         currentUser = SelfUserBuilder.build(db, 1);
@@ -36,7 +36,7 @@ class SwipeCaseTest {
     @Test
     void getImageTest() {
 
-        String expected = currentUser.getImagePath();
+        String expected = publicUser.getImagePath();
         String actual = swipeCase.getImage();
 
         assertEquals(expected, actual);
@@ -89,7 +89,7 @@ class SwipeCaseTest {
         Set<String> actualValues = new HashSet<>(userData.values());
 
         Set<String> expectedKeys = new HashSet<>(Arrays.asList("Age", "Bio", "fName", "lName"));
-        Set<String> expectedValues = new HashSet<>(Arrays.asList("1", "hi", "person2F", "person2L"));
+        Set<String> expectedValues = new HashSet<>(Arrays.asList("19", "hi", "person2F", "person2L"));
 
         assertEquals(expectedKeys, actualKeys, "Keys are wrong");
         assertEquals(expectedValues, actualValues, "Values are wrong");

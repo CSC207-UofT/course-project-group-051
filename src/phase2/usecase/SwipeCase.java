@@ -45,7 +45,6 @@ public class SwipeCase {
 
     /**
      * Returns the relevant public info of the current OtherUser.
-     *
      * @return a Map containing Age, Bio, fName, and lName, of the current OtherUser.
      */
     public Map<String, String> getData() {
@@ -71,7 +70,6 @@ public class SwipeCase {
 
     /**
      * Likes the current OtherUser, and determine there are more users to swipe on.
-     *
      */
     public void likeCurrentUser() {
 

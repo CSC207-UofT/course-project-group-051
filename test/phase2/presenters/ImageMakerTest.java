@@ -1,4 +1,4 @@
-package presenters;
+package phase2.presenters;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

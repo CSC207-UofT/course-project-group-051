@@ -176,17 +176,19 @@ benefited our group, and a summary of each team members' contribution.
     * Identifying code smells and design patterns
 * Senan Kassem
     * Implementation of use-cases and entity classes
+    * Implementation of Builders and Registration related.
     * Writing and tidying Javadocs
     * Organization of team meetings and communications
-    * Aiding Alex in adhering to clean architecture
+    * Aiding Alex in adhering to clean architecture and creating test classes
     * Refactoring controllers and use cases
 * Anjian Chen
     * Identifying design patterns to be implemented
     * Refactoring use-cases
     * Implementation and continuing use-case refactoring
-* Fei Yu Guan
-    * Controller refactoring
-    * User interface refactoring
+* Fei Yu Guan 
+  * Javafx knowledge and original View classes design.
+  * Controller refactoring: Messaging features and Matches Features
+  * User interface refactoring
 * Sheng He Xiao
     * Data Base functionality and refactoring
     * Leader for explaining project organization each meeting

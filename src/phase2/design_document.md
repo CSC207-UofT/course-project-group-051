@@ -185,7 +185,10 @@ benefited our group, and a summary of each team members' contribution.
     * Identifying design patterns to be implemented
     * Refactoring use-cases
     * Implementation and continuing use-case refactoring
-* Fei Yu Guan 
+    * Refactoring our entities:
+      * ps://github.com/CSC207-UofT/course-project-group-051/pull/63
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/37
+* Fei Yu Guan
   * Javafx knowledge and original View classes design.
   * Controller refactoring: Messaging features and Matches Features
   * User interface refactoring
@@ -197,6 +200,8 @@ benefited our group, and a summary of each team members' contribution.
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
-    * Implementation of Use-Cases
+    * Implementation of Use-Cases and some testing.
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
+    * Created the Swipe Related code:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/34

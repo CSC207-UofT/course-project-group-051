@@ -30,11 +30,11 @@ public class RegistrationCase {
      * @return A list of errors that came from this attempt at creating an account (returns an empty list if there
      * are none).
      */
-    public ArrayList<String> createAccount(Map<String, TextInputControl> data){ //maybe return the constants for error in views?
+    public ArrayList<String> createAccount(Map<String, TextInputControl> data){
         Map<String, String> info = getStringMap(data);
-        ArrayList<String> errors = new ArrayList<>(); // make into 1 string
+        ArrayList<String> errors = new ArrayList<>();
         if (info.containsValue("")){
-            errors.add(Errors.MISSING); // ADD THESE MESSAGES
+            errors.add(Errors.MISSING);
         }
         else{
             try {
@@ -47,12 +47,12 @@ public class RegistrationCase {
             errors.add(Errors.PASSWORD_MATCH);
         }
         if (db.logIn(info.get(UserInfoConstants.UT_ID), info.get(UserInfoConstants.PASSWORD)) != -1){
-            errors.add(Errors.EXISTS); // ADD THESE MESSAGES
+            errors.add(Errors.EXISTS);
         }
 
         if(errors.isEmpty()) {
             db.createUser(info);
-            return errors; //return Integer.toString(id);
+            return errors;
 
         }
         return errors;

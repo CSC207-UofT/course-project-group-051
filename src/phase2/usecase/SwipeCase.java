@@ -1,7 +1,6 @@
 package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
-import phase2.userbuilders.SelfUserBuilder;
 import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 import java.util.*;
@@ -11,10 +10,10 @@ import java.util.*;
  */
 public class SwipeCase {
 
-    DataAccessInterface db;
-    Queue<PublicUser> swipeList;
-    SelfUser selfUser;
-    public PublicUser currentTarget;
+    private final DataAccessInterface db;
+    private final Queue<PublicUser> swipeList;
+    private final SelfUser selfUser;
+    private PublicUser currentTarget;
 
 
     /**
@@ -31,17 +30,6 @@ public class SwipeCase {
         selfUser = currentUser;
         this.swipeList = swipeList;
         currentTarget = swipeList.poll();
-
-    }
-
-    /**
-     * @return the nextUser in the list to swipe on, or null if there are none left.
-     */
-    private PublicUser getNextUser() {
-
-        //Return null if there are none left.
-
-        return swipeList.poll();
 
     }
 
@@ -73,6 +61,9 @@ public class SwipeCase {
 
     }
 
+    /**
+     * @return True if there is no one left for the current User to swipe on.
+     */
     public boolean isEmpty() {
         return currentTarget == null;
     }
@@ -93,25 +84,6 @@ public class SwipeCase {
         // check if there is a next User.
         return currentTarget != null;
 
-
-//        //Check the admirers of the current User for the User they just liked.
-//        List<Integer> admirers = db.getAdmires(selfUser.getId());
-//
-//        //If the User they liked also admires them, then there is a match.
-//        return admirers.contains(currentTarget.getId());
-
     }
 
-    /**
-     * Goes to the next User, and determines if there are any more Users left to swipe on.
-     *
-     * @return false if there are no more people to swipe on, otherwise true.
-     */
-    public boolean nextUser() {
-
-        currentTarget = getNextUser();
-
-        return currentTarget != null;
-
-    }
 }

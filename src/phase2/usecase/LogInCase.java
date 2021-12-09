@@ -2,25 +2,25 @@ package phase2.usecase;
 
 import phase2.dataaccess.DataAccessInterface;
 
-/** A use case to log in the user to the application
+/**
+ * Provides the actions for allowing a User to log in.
  */
 public class LogInCase {
 
-    DataAccessInterface db;
+    private final DataAccessInterface db;
 
-    /** Creates an instance of LogInCase
-     *
-     * @param db, the data access interface
+    /**
+     * @param db A reference to our database.
      */
     public LogInCase(DataAccessInterface db){
         this.db = db;
     }
 
-    /** Attempts to log the user into the application
-     *
-     * @param username, submitted username from LogInView
-     * @param password, submitted password from LogInView
-     * @return int, an Integer representation of a Boolean value, -1 is False
+    /**
+     * Tries to log in a user with the given username, and password, returns the result.
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @return The result of the login attempt. (user's ID if successful, -1 if failed)
      */
     public int loginUser(String username, String password){
         return db.logIn(username, password);

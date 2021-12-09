@@ -1,6 +1,5 @@
 package phase2.presenters;
 
-import javafx.geometry.Insets;
 import javafx.scene.text.Font;
 import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
@@ -22,13 +21,12 @@ import java.util.Map;
  */
 public class SwipeView implements View{
 
-    //TODO: rename boxes.
-    private SwipeController controller;
-    private HBox hb;// The HBox containing the buttons.
-    private HBox hb1;
-    private VBox v; // The VBox containing the scroll pane.
-    private StackPane sp;// The stack pane for the photo, first name and bio.
-    private BorderPane bp;// The borderpane containing the VBox.
+    private final SwipeController controller;
+    private final HBox hb;// The HBox containing the buttons.
+    private final HBox hb1;
+    private final VBox v; // The VBox containing the scroll pane.
+    private final StackPane sp;// The stack pane for the photo, first name and bio.
+    private final BorderPane bp;// The borderpane containing the VBox.
     private ImageView image;// The profile ImageView of the user to be swiped on.
     private Label fNameAge;
     private Label bio;
@@ -51,7 +49,7 @@ public class SwipeView implements View{
 
 
     /**
-     * Creates an instance of swipeview and a new SwipeController and displays it.
+     * Creates an instance of SwipeView and a new SwipeController and displays it.
      */
     public SwipeView() {
 
@@ -63,6 +61,7 @@ public class SwipeView implements View{
         bp = new BorderPane();
     }
 
+
     @Override
     public void build() {
 
@@ -73,16 +72,17 @@ public class SwipeView implements View{
             this.setMargin();
         }
         else{
-            this.bp.setMargin(this.hb, Positioner.BUTTON_POSITION);
+            BorderPane.setMargin(this.hb, Positioner.BUTTON_POSITION);
             this.hb.setAlignment(Pos.TOP_CENTER);
         }
         this.addVBox();
-        this.addsp();
+        this.addSP();
         this.setOnActions();
         this.addHBox();
         this.setSpacing();
         this.setScene(controller.getStage());
     }
+
 
     /**
      * Set the actions to the buttons of this view.
@@ -120,8 +120,6 @@ public class SwipeView implements View{
     }
 
 
-
-
     /**
      * Gets the data of the user to be swiped on, so that we can display it.
      */
@@ -137,7 +135,6 @@ public class SwipeView implements View{
 
         addImage();
         addText();
-
 
     }
 
@@ -161,7 +158,7 @@ public class SwipeView implements View{
 
 
     /**
-     * Adds the text elements to the Scrollpane.
+     * Adds the text elements to the ScrollPane.
      */
     private void addText(){
         this.sp.getChildren().add(fNameAge);
@@ -202,7 +199,7 @@ public class SwipeView implements View{
     /**
      * Sets the margin of the biggest box in the borderpane.
      */
-    private void addsp(){
+    private void addSP(){
         this.v.getChildren().add(this.sp);
 
     }
@@ -213,22 +210,20 @@ public class SwipeView implements View{
      */
     private void setMargin() {
 
-        this.bp.setMargin(hb, Positioner.BUTTON_POSITION);
+        BorderPane.setMargin(hb, Positioner.BUTTON_POSITION);
 
-        this.bp.setMargin(v, Positioner.VBOX_POSITION);
+        BorderPane.setMargin(v, Positioner.VBOX_POSITION);
 
-        this.sp.setMargin(fNameAge, Positioner.namePositioner(image));
+        StackPane.setMargin(fNameAge, Positioner.NAME_POSITION);
 
-        this.sp.setMargin(bio, Positioner.bioPositioner(image));
-
-
+        StackPane.setMargin(bio, Positioner.BIO_POSITION);
 
     }
 
 
     /**
      * Set scene on the stage.
-     * @param stage the mainstage where we display the scene.
+     * @param stage the main stage where we display the scene.
      */
     private void setScene(Stage stage) {
 

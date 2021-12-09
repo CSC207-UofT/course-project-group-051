@@ -13,7 +13,7 @@ import java.util.*;
 
 public class SwipeController extends Controller {
 
-    public SwipeCase swiper;
+    public final SwipeCase swiper;
 
     /**
      * @param db A reference to our Database so we can read and write to it.

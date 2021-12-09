@@ -18,13 +18,15 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-/** A controller that registers non-existing users
+/**
+ * A controller that registers non-existing users
  */
 public class RegistrationController extends Controller{
 
     EventHandler<ActionEvent> event;
 
-    /** Creates instance of RegistrationController
+    /**
+     * Creates instance of RegistrationController
      *
      * @param db, an instance of data access interface
      * @param stage, the main stage

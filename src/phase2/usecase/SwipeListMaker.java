@@ -1,7 +1,6 @@
 package phase2.usecase;
 
 import phase2.userbuilders.PublicUserBuilder;
-import phase2.userbuilders.SelfUserBuilder;
 import phase2.users.PublicUser;
 
 import java.util.ArrayList;
@@ -11,10 +10,17 @@ import java.util.Queue;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.SelfUser;
 
-public class SwipeListCase {
-    DataAccessInterface db;
-    SelfUser currentUser;
+/**
+ * Has a method which simplifies the creation of a proper swipeList.
+ */
+public class SwipeListMaker {
 
+    /**
+     * Checks the list of potential matches for the currentUser and removes all the people who he already liked.
+     * @param db A reference to our database.
+     * @param currentUser The currently logged-in user.
+     * @return A queue with only Users who have already been liked.
+     */
     public static Queue<PublicUser> filterSwipeList(DataAccessInterface db, SelfUser currentUser){
         List<Integer> unfiltered = db.getSwipeList(currentUser.getId());
         Queue<PublicUser> filtered = new LinkedList<>();
@@ -29,16 +35,6 @@ public class SwipeListCase {
         }
         return filtered;
     }
-//    public Queue<PublicUser> createSwipeList(Queue<PublicUser> swipeList) {
-//        Queue<PublicUser> userList = new LinkedList<>();
-//        for (int user : swipeList) {
-//            UserBuilder<PublicUser> builder = new PublicUserBuilder.build(db, user);
-//            userList.add(builder.getResult());
-//        }
-//        return userList;
-//    }
-
-
 
 }
 

@@ -3,7 +3,7 @@ package phase2.controllers;
 import javafx.stage.Stage;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
-import phase2.usecase.SwipeListCase;
+import phase2.usecase.SwipeListMaker;
 import phase2.users.PublicUser;
 import phase2.users.SelfUser;
 
@@ -15,7 +15,7 @@ import java.util.*;
 public class ControllerFactory {
 
 
-    DataAccessInterface db; //A reference to our Database.
+    final DataAccessInterface db; //A reference to our Database.
     Stage stage; //A reference to the Stage where we display the views.
     SelfUser currentUser; //The id of the currently logged-in User.
     final static ControllerFactory controllerFactory = new ControllerFactory(); //The single Factory instance.
@@ -108,7 +108,7 @@ public class ControllerFactory {
      */
     public SwipeController getSwipeController(){
 
-        Queue<PublicUser> swipeList = SwipeListCase.filterSwipeList(db, currentUser);
+        Queue<PublicUser> swipeList = SwipeListMaker.filterSwipeList(db, currentUser);
         return new SwipeController(db, stage, currentUser, swipeList);
 
     }

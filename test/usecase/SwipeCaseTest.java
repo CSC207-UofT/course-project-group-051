@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
 import phase2.usecase.SwipeCase;
+import phase2.userbuilders.PublicUserBuilder;
+import phase2.userbuilders.SelfUserBuilder;
+import phase2.users.*;
 
 import java.util.*;
 
@@ -12,10 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SwipeCaseTest {
 
-    DataAccessInterface db;
-    SwipeCase swipeCase;
-    static final int currentUser = 1;
-    static final int otherUser = 2;
+    private DataAccessInterface db;
+    private SwipeCase swipeCase;
+    private static SelfUser currentUser;
+    private static PublicUser publicUser;
 
     @BeforeEach
     void setUp() {
@@ -23,8 +26,11 @@ class SwipeCaseTest {
         db = new DataBaseAccess();
         //db.setUp();
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(otherUser);
+        currentUser = SelfUserBuilder.build(db, 1);
+        publicUser = PublicUserBuilder.build(db, 2);
+
+        Queue<PublicUser> queue = new LinkedList<>();
+        queue.add(publicUser);
 
         swipeCase = new SwipeCase(db, currentUser, queue);
     }
@@ -32,7 +38,7 @@ class SwipeCaseTest {
     @Test
     void getImageTest() {
 
-        String expected = db.getImgPath(currentUser);
+        String expected = currentUser.getImagePath();
         String actual = swipeCase.getImage();
 
         assertEquals(expected, actual);
@@ -66,10 +72,10 @@ class SwipeCaseTest {
         swipeCase.likeCurrentUser();
 
         //get all the people who the currentUser liked.
-        List<Integer> dbLikes = db.getLikes(currentUser);
+        List<Integer> dbLikes = db.getLikes(currentUser.getId());
 
         //get all the people who have liked the otherUser.
-        List<Integer> dbAdmirers = db.getAdmires(otherUser);
+        List<Integer> dbAdmirers = db.getAdmires(publicUser.getId());
 
         assertTrue(dbLikes.contains(2), "currentUser did not like the otherUser.");
         assertTrue(dbAdmirers.contains(1), "otherUser did not get admired by the currentUser.");

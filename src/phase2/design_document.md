@@ -25,9 +25,7 @@ problem sets while simultaneously meeting their future life partner.
   * The framework would be easily adaptable to a web source database, due to the adherence to SOLID
     design principles and choice of design patterns.
     
-##UML Diagram:
-
-https://i.imgur.com/EQMzcHA.png
+UML Diagram: https://i.imgur.com/EQMzcHA.png
 
 
 ## Design Decisions

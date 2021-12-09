@@ -19,11 +19,11 @@ public class MatchController extends Controller{
 
 
     EventHandler<ActionEvent> event;
-    MatchCase matchCase;
+    final MatchCase matchCase;
 
     /**
      * @param db A reference to our Database.
-     * @param stage A reference to the stage so we can display things.
+     * @param stage A reference to the stage, so we can display things.
      * @param currentUser the ID of the currentUser.
      */
     public MatchController(DataAccessInterface db, Stage stage, SelfUser currentUser){
@@ -34,7 +34,7 @@ public class MatchController extends Controller{
 
     /**
      * @param receiverID the ID of the user who you want to message.
-     * @return an eventhandler that switches to MessageView and allows messaging of the receiver.
+     * @return an EventHandler that switches to MessageView and allows messaging of the receiver.
      */
     public EventHandler<ActionEvent> switchMessageView(Integer receiverID){
         event = e -> {
@@ -47,7 +47,7 @@ public class MatchController extends Controller{
     }
 
     /**
-     * @return an eventhandler that brings the program back to the swiping screen.
+     * @return an EventHandler that brings the program back to the swiping screen.
      */
     public EventHandler<ActionEvent> back() {
         event = e -> {

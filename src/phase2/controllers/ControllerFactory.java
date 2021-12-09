@@ -15,7 +15,7 @@ import java.util.*;
 public class ControllerFactory {
 
 
-    DataAccessInterface db; //A reference to our Database.
+    final DataAccessInterface db; //A reference to our Database.
     Stage stage; //A reference to the Stage where we display the views.
     SelfUser currentUser; //The id of the currently logged-in User.
     final static ControllerFactory controllerFactory = new ControllerFactory(); //The single Factory instance.
@@ -112,31 +112,5 @@ public class ControllerFactory {
         return new SwipeController(db, stage, currentUser, swipeList);
 
     }
-
-
-//    /**
-//     * Removes all the already liked Users from the currentUser's potential swipes.
-//     * @return a list of IDs that the current SelfUser can swipe on.
-//     */
-//    private Queue<PublicUser> filterSwipeList() {
-//
-//        List<Integer> unfiltered = db.getSwipeList(currentUser.getId());
-//        Queue<PublicUser> filtered = new LinkedList<>();
-//
-//        //Loop through the list of unfiltered users
-//        for (int unfilteredUser : unfiltered) {
-//
-//            //get all the users who admired the current user we are reviewing
-//            ArrayList<Integer> currentAdmirers = db.getAdmires(unfilteredUser);
-//
-//            //if the current SelfUser has already admired this user, then don't include him in the final list.
-//            if(!currentAdmirers.contains(currentUser.getId())) {
-//                filtered.add(new PublicUser(unfilteredUser));
-//            }
-//
-//        }
-//
-//        return filtered;
-//    }
 }
 

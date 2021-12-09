@@ -24,7 +24,7 @@ class SwipeCaseTest {
     void setUp() {
 
         db = new DataBaseAccess();
-        db.setUp();
+        //db.setUp();
 
         currentUser = SelfUserBuilder.build(db, 1);
         publicUser = PublicUserBuilder.build(db, 2);

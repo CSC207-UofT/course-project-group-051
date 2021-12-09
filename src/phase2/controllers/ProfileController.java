@@ -17,28 +17,36 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+/**
+ * A controller that delegates the task for each button in the profile view.
+ */
 public class ProfileController extends Controller {
 
-    SelfUser currentUser;
-    Map<String, TextInputControl> inputs;
+    final SelfUser currentUser;
     EventHandler<ActionEvent> event;
-    final public static String[] VALID_MONTH = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
-            "Sep", "Oct", "Nov", "Dec"};
 
+    /**
+     * Creates an instance of ProfileController
+     *
+     * @param db, the data access interface
+     * @param stage, the main stage
+     * @param currentUser, an instance of selfUser
+     */
     public ProfileController(DataAccessInterface db, Stage stage, SelfUser currentUser) {
         super(db, stage);
         this.currentUser = currentUser;
     }
 
+    /**
+     * Packages info from selfUser into a map
+     *
+     * @return info, data from selfUser to be updated in the db
+     */
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
         info.put("firstName", currentUser.getFirstName());
-
         info.put("lastName", currentUser.getLastName());
-
         info.put("age", currentUser.getAge());
-        System.out.println(currentUser.getImagePath());
-        System.out.println(currentUser.getBio());
         info.put("imgPath", currentUser.getImagePath());
         info.put("gender", currentUser.getGender());
         info.put("genderPref", currentUser.getGenderPreference());
@@ -48,6 +56,9 @@ public class ProfileController extends Controller {
         return info;
     }
 
+    /**
+     * @return An EventHandler that returns the SwipeView
+     */
     public EventHandler<ActionEvent> back() {
         event = e -> {
             View view = new SwipeView();
@@ -56,9 +67,11 @@ public class ProfileController extends Controller {
         return event;
     }
 
+    /**
+     * @return An EventHandler that updates the User in db and currentUser.
+     */
     public EventHandler<ActionEvent> save(Map<String, TextInputControl> inputs) {
         event = e -> {
-            this.inputs = inputs;
             List<String> errors = new ArrayList<>();
             Map<String, String> info = new HashMap<>();
             info.put("uTID", inputs.get("UTorIDT").getText());

@@ -16,11 +16,11 @@ import java.util.Map;
 
 public class MatchView implements View{
 
-    MatchController controller;
-    HBox hb;
-    ScrollPane scrollPane;
-    VBox vb;
-    BorderPane bp;
+    final MatchController controller;
+    final HBox hb;
+    final ScrollPane scrollPane;
+    final VBox vb;
+    final BorderPane bp;
 
 
     public MatchView(){
@@ -76,15 +76,6 @@ public class MatchView implements View{
 
     }
 
-
-//    /**
-//     * Adds the Back button to the view
-//     */
-//    public void addButton() {
-//        this.hb.getChildren().add(this.backButton);
-//    }
-//
-//
     /**
      * Adds the Matches title to the scene
      */

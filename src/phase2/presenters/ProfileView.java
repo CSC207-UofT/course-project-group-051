@@ -7,13 +7,10 @@ import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.ProfileController;
-import phase2.dataaccess.DataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,8 +20,7 @@ import java.util.Map;
  * The view builder for the user's personal info
  */
 public class ProfileView implements View {
-    //ProfileUser u;
-    int id;
+
     Scene scene;
     BorderPane bp;
     HBox hb;
@@ -49,17 +45,13 @@ public class ProfileView implements View {
     TextField usernameT;
     TextField bioT;
     TextField passwordT;
-    Text fileError;
-    Text dateError;
     ScrollPane sp;
-    Stage stage;
-    DataAccessInterface db;
-    ProfileController controller;
+    final ProfileController controller;
+
 
     public ProfileView(Text errors){
         setJavaFX();
         controller = ControllerFactory.getInstance().getProfileController();
-        stage = controller.getStage();
         setLabel();
         setText();
         setOnActions();
@@ -67,14 +59,28 @@ public class ProfileView implements View {
 
     }
 
+
     public ProfileView(){
         setJavaFX();
         controller = ControllerFactory.getInstance().getProfileController();
-        stage = controller.getStage();
         setLabel();
         setText();
         setOnActions();
 
+    }
+
+
+    @Override
+    public void build() {
+        this.addVBox();
+        this.addHBox();
+        this.setSP();
+        this.addTextField();
+        this.addButton();
+        this.addText();
+        this.setSpacing();
+        this.setMargin();
+        this.setScene(controller.getStage());
     }
 
     private void setJavaFX(){
@@ -172,7 +178,7 @@ public class ProfileView implements View {
         this.vb.getChildren().add(hb);
     }
 
-    /** Adds the vboxes to the scene.
+    /** Adds the VBoxes to the scene.
      */
     public void addVBox() {
         this.sp.setContent(this.vb);
@@ -180,7 +186,7 @@ public class ProfileView implements View {
     }
 
     /**
-     * Adds all the textfields to the scene.
+     * Adds all the TextFields to the scene.
      */
     public void addTextField() {
 
@@ -203,7 +209,7 @@ public class ProfileView implements View {
      * Sets the margin for the scene.
      */
     public void setMargin() {
-        this.bp.setMargin(this.sp, new Insets(50, 50, 20,20));
+        BorderPane.setMargin(this.sp, new Insets(50, 50, 20,20));
         this.sp.setBorder(Border.EMPTY);
         this.bp.setBorder(Border.EMPTY);
 
@@ -217,19 +223,5 @@ public class ProfileView implements View {
         this.hb.setSpacing(90);
         this.vb.setSpacing(20);
 
-    }
-
-    /** Builds the view on given stage
-     */
-    public void build() {
-        this.addVBox();
-        this.addHBox();
-        this.setSP();
-        this.addTextField();
-        this.addButton();
-        this.addText();
-        this.setSpacing();
-        this.setMargin();
-        this.setScene(controller.getStage());
     }
 }

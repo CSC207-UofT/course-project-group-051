@@ -3,7 +3,6 @@ package phase2.userbuilders;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.SelfUser;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,15 +20,6 @@ public class SelfUserBuilder{
         return selfUser;
 
     }
-//    /**
-//     * @return a fully filled in SelfUser from map i.e. registrationCase.
-//     */
-//    public SelfUser build(Map<String, String> data, DataAccessInterface db) {
-//        int id = db.createUser(data);
-//        SelfUser selfUser = new SelfUser(id);
-//        updateUser(data, selfUser);
-//        return selfUser;
-//    }
 
     /**
      * adds data specific to SelfUser.

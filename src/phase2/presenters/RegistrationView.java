@@ -9,41 +9,40 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.RegistrationController;
-import phase2.dataaccess.DataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RegistrationView implements View{
 
-    HBox hb1;
-    Button back;
-    Button createAccount;
-    BorderPane bp;
-    VBox v;
-    VBox v1;
-    TextField tf;
-    TextField tf1;
-    PasswordField tf2;
-    PasswordField tf3;
-    TextField tf5;
-    TextField tf6;
-    TextField tf7;
-    TextField tf8;
+    final HBox hb1;
+    final Button back;
+    final Button createAccount;
+    final BorderPane bp;
+    final VBox v;
+    final VBox v1;
+    final TextField tf;
+    final TextField tf1;
+    final PasswordField tf2;
+    final PasswordField tf3;
+    final TextField tf5;
+    final TextField tf6;
+    final TextField tf7;
+    final TextField tf8;
     Text message;
-    Label label;
-    Label label1;
-    Label label2;
-    Label label3;
-    Label label5;
-    Label label6;
-    Label label7;
-    Label label8;
-    ScrollPane sp;
-    RegistrationController controller;
+    final Label label;
+    final Label label1;
+    final Label label2;
+    final Label label3;
+    final Label label5;
+    final Label label6;
+    final Label label7;
+    final Label label8;
+    final ScrollPane sp;
+    final RegistrationController controller;
+
 
     public RegistrationView(Text error){
         controller = ControllerFactory.getInstance().getRegistrationController();
@@ -62,7 +61,7 @@ public class RegistrationView implements View{
         this.label7 = new Label("Gender:");
         this.label8 = new Label("Gender Preference:");
         this.tf = new TextField (); //BD
-        this.tf1 = new TextField (); //userbname
+        this.tf1 = new TextField (); //username
         this.message = new Text();
         this.message.setFont(new Font(15));
         this.sp = new ScrollPane();
@@ -75,6 +74,7 @@ public class RegistrationView implements View{
         this.createAccount = new Button("Create Account");
         this.v1.getChildren().add(error);
     }
+
 
     public RegistrationView(){
         controller = ControllerFactory.getInstance().getRegistrationController();
@@ -93,7 +93,7 @@ public class RegistrationView implements View{
         this.label7 = new Label("Gender:");
         this.label8 = new Label("Gender Preference:");
         this.tf = new TextField (); //BD
-        this.tf1 = new TextField (); //userbname
+        this.tf1 = new TextField (); //username
         this.message = new Text();
         this.message.setFont(new Font(15));
         this.sp = new ScrollPane();
@@ -107,6 +107,10 @@ public class RegistrationView implements View{
 
     }
 
+
+    /**
+     * Names the TextFields and sets the button actions.
+     */
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("age", tf);
@@ -122,12 +126,14 @@ public class RegistrationView implements View{
 
     }
 
+
     /**
-     * Sets the Vbar policy for the scroll pane.
+     * Sets the VBar policy for the scroll pane.
      */
     public void setSP(){
         this.sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
     }
+
 
     /**
      * Creates the HBoxes necessary for the scene.
@@ -137,11 +143,13 @@ public class RegistrationView implements View{
 
     }
 
+
     public void addButton() {
         this.hb1.getChildren().add(this.back);
         this.hb1.getChildren().add(this.createAccount);
 
     }
+
 
     public void addVBox() {
         this.v1.getChildren().add(this.v);
@@ -149,8 +157,9 @@ public class RegistrationView implements View{
 
     }
 
+
     /**
-     * Adds textfield to the corresponding box.
+     * Adds TextField to the corresponding box.
      */
     public void addTextField() {
 
@@ -165,6 +174,7 @@ public class RegistrationView implements View{
 
     }
 
+
     /**
      * Adds the message board to the scene
      */
@@ -173,12 +183,14 @@ public class RegistrationView implements View{
 
     }
 
+
     /**
      * Sets the message font for the scene
      */
     public void setMessageFont(){
         this.message.setFont(new Font(15));
     }
+
 
     /**
      * Sets the message color for the scene
@@ -187,6 +199,7 @@ public class RegistrationView implements View{
         this.message.setFill(Color.RED);
 
     }
+
 
     /**
      * Sets the spacing for each box.
@@ -207,21 +220,14 @@ public class RegistrationView implements View{
 
     }
 
-    /** Set scene on the stage.
+    /**
+     * Set scene on the stage.
      */
     public void setScene() {
         Scene scene = new Scene(this.bp, 550, 500);
         controller.getStage().setScene(scene);
     }
 
-    /** Displays the success message
-     * @param id the ID of the user
-     */
-
-    public void success(int id){
-        this.message.setFill(Color.GREEN);
-        this.message.setText("Sucess! ID: " + Integer.toString(id));
-    }
 
     @Override
     public void build() {

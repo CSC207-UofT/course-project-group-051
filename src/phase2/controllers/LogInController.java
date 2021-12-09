@@ -14,7 +14,6 @@ import phase2.usecase.ErrorBuilder;
 import phase2.usecase.LogInCase;
 import javafx.stage.Stage;
 import phase2.userbuilders.SelfUserBuilder;
-import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 

@@ -33,17 +33,6 @@ public class SwipeCase {
 
     }
 
-    /**
-     * @return the nextUser in the list to swipe on, or null if there are none left.
-     */
-    private PublicUser getNextUser() {
-
-        //Return null if there are none left.
-
-        return swipeList.poll();
-
-    }
-
 
     /**
      * @return The String representation of the image associated with the current otherUser.
@@ -97,12 +86,4 @@ public class SwipeCase {
 
     }
 
-    /**
-     * Goes to the next User, and determines if there are any more Users left to swipe on.
-     */
-    public void nextUser() {
-
-        currentTarget = getNextUser();
-
-    }
 }

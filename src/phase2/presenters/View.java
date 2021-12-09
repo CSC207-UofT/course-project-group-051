@@ -1,6 +1,5 @@
 package phase2.presenters;
 
-import javafx.stage.Stage;
 
 public interface View {
 

@@ -21,6 +21,8 @@ public class PublicUserBuilder{
         return publicUser;
 
     }
+
+
     /**
      * adds data to specific to this PublicUser.
      */

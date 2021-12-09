@@ -12,20 +12,22 @@ import phase2.users.SelfUser;
 
 import java.util.ArrayList;
 
-/** A controller that delegates the task for each button in the message view.
+/**
+ * A controller that delegates the task for each button in the message view.
  */
 public class MessageController extends Controller{
 
 
-    SelfUser currentUser; // the primary user ID.
-    int receiver; // the secondary user ID
-    MessageCase messageCase;
+    final SelfUser currentUser; // the primary user ID.
+    final int receiver; // the secondary user ID
+    final MessageCase messageCase;
 
-    /** Creates an instance of MessageController.
-     * @param db the data access interface.
-     * @param stage the main stage.
-     * @param currentUser the id of currentUser user.
-     * @param receiver the id of receiver user.
+    /**
+     * Creates an instance of MessageController.
+     * @param db, the data access interface.
+     * @param stage, the main stage.
+     * @param currentUser,  an instance of selfUser.
+     * @param receiver, the id of receiver user.
      */
     public MessageController(DataAccessInterface db, Stage stage, SelfUser currentUser, int receiver){
         super(db, stage);

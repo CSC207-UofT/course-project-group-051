@@ -1,12 +1,10 @@
 package phase2.usecase;
 
-import javafx.scene.control.TextInputControl;
 import phase2.constants.Errors;
 import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -26,17 +24,16 @@ public class RegistrationCase {
 
     /**
      * Attempts to create an account with the values in data, returns a list of errors if there are any.
-     * @param data A Map containing all the User's inputs for their registration. (name, age, bio, etc.)
+     * @param info A Map containing all the User's inputs for their registration. (name, age, bio, etc.)
      * @return A list of errors that came from this attempt at creating an account (returns an empty list if there
      * are none).
      */
-    public ArrayList<String> createAccount(Map<String, TextInputControl> data){
-        Map<String, String> info = getStringMap(data);
+    public ArrayList<String> createAccount(Map<String, String> info){
         ArrayList<String> errors = new ArrayList<>();
         if (info.containsValue("")){
             errors.add(Errors.MISSING);
         }
-        else{
+        if (!info.get(UserInfoConstants.AGE).equals("")) {
             try {
                 Integer.parseInt(info.get(UserInfoConstants.AGE));
             } catch (NumberFormatException io) {
@@ -56,17 +53,5 @@ public class RegistrationCase {
 
         }
         return errors;
-    }
-
-    /**
-     * @param data A Map  where the values are of type TextInputControl.
-     * @return A new Map where the values have been converted to Strings.
-     */
-    private Map<String, String> getStringMap(Map<String, TextInputControl> data){
-        Map<String, String> info = new HashMap<>();
-        for(String key: data.keySet()){
-            info.put(key, data.get(key).getText());
-        }
-        return info;
     }
 }

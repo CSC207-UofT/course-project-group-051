@@ -503,14 +503,10 @@ public class DataBaseAccess implements DataAccessInterface {
     }
 
     @Override
-    public boolean likeUser(int currUser, int likeID) {
-        boolean rs = false;
+    public void likeUser(int currUser, int likeID) {
         StringBuilder like;
         try {
-            if(this.getLikes(currUser).contains(likeID)){
-                return false;
-            }
-            else{
+            if(!this.getLikes(currUser).contains(likeID)){
                 ArrayList<Integer> likes = this.getLikes(currUser);
                 likes.add(likeID);
                 like = new StringBuilder(likes.remove(0).toString());
@@ -518,7 +514,7 @@ public class DataBaseAccess implements DataAccessInterface {
                     like.append(",").append(x);
                 }
                 String h2 = "update user set likes = '" + like +"' where PERSONID = " + currUser + ";";
-                rs= stmt.execute(h2);
+                stmt.execute(h2);
             }
 
         } catch (SQLException se) {
@@ -528,16 +524,14 @@ public class DataBaseAccess implements DataAccessInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rs;
     }
 
     @Override
-    public boolean admireUser(int currUser, int admirerID) {
-        boolean rs = false;
+    public void admireUser(int currUser, int admirerID) {
         StringBuilder admire;
         try {
             if(this.getAdmires(currUser).contains(admirerID)){
-                return false;
+                return;
             }
             else{
                 ArrayList<Integer> admirer = this.getAdmires(currUser);
@@ -549,7 +543,7 @@ public class DataBaseAccess implements DataAccessInterface {
             }
 
             String h2 = "update user set ADMIRES = '" + admire +"' where PERSONID = " + currUser + ";";
-            rs= stmt.execute(h2);
+            stmt.execute(h2);
         } catch (SQLException se) {
             se.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR);
@@ -557,7 +551,6 @@ public class DataBaseAccess implements DataAccessInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rs;
     }
 
     private int checkConversation(int userID1, int userID12) {
@@ -741,7 +734,7 @@ public class DataBaseAccess implements DataAccessInterface {
     }
 
     @Override
-    public int createUser(Map<String, String> userInfo) {
+    public void createUser(Map<String, String> userInfo) {
         int id = this.getNextUser();
         try {
             String h2 = "insert into user values ("+id+", '" + userInfo.get(UserInfoConstants.LAST_NAME) + "', '" +
@@ -759,7 +752,6 @@ public class DataBaseAccess implements DataAccessInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return id;
     }
 
 

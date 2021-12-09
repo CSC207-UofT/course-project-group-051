@@ -1,7 +1,5 @@
 package phase2.dataaccess;
 
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -17,23 +15,22 @@ public interface DataAccessInterface {
      */
     int logIn(String username, String password);
 
-    /**
-     * @param id the id of the user's info you are requesting
-     * @return the first name of the user with the id, return null if id doesn't exist
-     */
 
     /**
-     * @param id the id of the user's info you are requesting, return an ArrayList of integers representing the id of user's likes
+     * @param id the id of the user's info you are requesting
+     * @return an ArrayList of integers representing the id of user's likes
      */
     ArrayList<Integer> getLikes(int id);
 
     /**
-     * @param id the id of the user's info you are requesting, return an ArrayList of integers representing the id of user's admires
+     * @param id the id of the user's info you are requesting
+     * @return an ArrayList of integers representing the id of user's admires
      */
     ArrayList<Integer> getAdmires(int id);
 
     /**
-     * @param id the id of the user's info you are requesting, return an ArrayList of integers representing the id of user's Threads
+     * @param id the id of the user's info you are requesting
+     * @return an ArrayList of integers representing the id of user's Threads
      */
     ArrayList<Integer> getThreads(int id);
 
@@ -46,8 +43,17 @@ public interface DataAccessInterface {
      */
     ArrayList<String[]> getThread(int threadID);
 
+    /**
+     * @param id the id of the user
+     * @return the user's info in a Map with the keys being the UserInfoConstants
+     */
     Map<String, String> getUserInfo(int id);
 
+    /**
+     * @param id the if of the user
+     * @param info the user's info in a Map with the keys being the UserInfoConstants
+     * updates the user's info in the database with info
+     */
     void updateUserInfo(int id, Map<String, String> info);
 
     /**
@@ -55,18 +61,16 @@ public interface DataAccessInterface {
      * @param likeID the id of the user you are trying to like
      * takes the current user's id and the person they like's id.
      * add the likeID to the currUser's list of likes
-     * @return false if failed
      */
-    boolean likeUser(int currUser, int likeID);
+    void likeUser(int currUser, int likeID);
 
     /**
      * @param currUser the current user id
      * @param admirerID the id of the user you are trying to admire
      * takes the current user's id and the person they admires' id.
      * add the admirerID to the currUser's list of admires
-     * @return false if failed
      */
-    boolean admireUser(int currUser, int admirerID);
+    void admireUser(int currUser, int admirerID);
 
     /**
      * @param userID1 the id of user1
@@ -93,6 +97,9 @@ public interface DataAccessInterface {
     ArrayList<Integer> getSwipeList(int id);
 
 
-    int createUser(Map<String, String> userInfo);
+    /**
+     * @param userInfo the user's info in a Map with the keys being the UserInfoConstants without the ImagePath
+     */
+    void createUser(Map<String, String> userInfo);
 
 }

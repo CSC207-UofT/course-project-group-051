@@ -176,31 +176,35 @@ benefited our group, and a summary of each team members' contribution.
     * Identifying code smells and design patterns
 * Senan Kassem
     * Implementation of use-cases and entity classes
-    * Implementation of Builders and Registration related.
+    * Implementation of  Registration related classes.
     * Writing and tidying Javadocs
     * Organization of team meetings and communications
-    * Aiding Alex in adhering to clean architecture and creating test classes
+    * Aiding Alex in adhering to clean architecture
+    * Creating test classes with Alex.
     * Refactoring controllers and use cases
+    * Refactoring of users and builders:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/62
 * Anjian Chen
     * Identifying design patterns to be implemented
     * Refactoring use-cases
     * Implementation and continuing use-case refactoring
     * Refactoring our entities:
-      * ps://github.com/CSC207-UofT/course-project-group-051/pull/63
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/63
       * https://github.com/CSC207-UofT/course-project-group-051/pull/37
 * Fei Yu Guan
   * Javafx knowledge and original View classes design.
   * Controller refactoring: Messaging features and Matches Features
   * User interface refactoring
 * Sheng He Xiao
-    * Data Base functionality and refactoring
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
+    * Data Base functionality and refactoring:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/6
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
-    * Implementation of Use-Cases and some testing.
+    * Implementation of Use-Cases and some testing with Senan.
     * Refactoring controller and creating use-cases
     * Adding functionality of messaging
     * Created the Swipe Related code:

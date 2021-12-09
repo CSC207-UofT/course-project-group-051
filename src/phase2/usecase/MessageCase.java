@@ -72,7 +72,7 @@ public class MessageCase {
      */
     public String getReceiverName() {
 
-        return PublicUserBuilder.build(db, receiver.getId()).getFirstName();
+        return receiver.getFirstName();
 
     }
 

@@ -26,7 +26,10 @@ problem sets while simultaneously meeting their future life partner.
     design principles and choice of design patterns.
     
 ##UML Diagram:
+
 https://i.imgur.com/EQMzcHA.png
+
+
 ## Design Decisions
 1. Refactoring Use Cases
     + Initial problem: Use cases relied completely on functionality of controller, causing an overloaded class.

@@ -17,10 +17,10 @@ public class SwipeCase {
 
 
     /**
-     * @param db          A reference to our Database so we can read and write to it.
+     * @param db A reference to our Database so we can read and write to it.
      * @param currentUser The currently logged-in User.
-     * @param swipeList   A list of IDs of potential users that the current User can swipe on.
-     *                    It is assumed there are no repeats, and no already liked Users within the list.
+     * @param swipeList A list of IDs of potential users that the current User can swipe on.
+     * It is assumed there are no repeats, and no already liked Users within the list.
      */
     public SwipeCase(DataAccessInterface db, SelfUser currentUser, Queue<PublicUser> swipeList) {
 
@@ -44,7 +44,6 @@ public class SwipeCase {
 
     /**
      * Returns the relevant public info of the current OtherUser.
-     *
      * @return a Map containing Age, Bio, fName, and lName, of the current OtherUser.
      */
     public Map<String, String> getData() {
@@ -70,7 +69,6 @@ public class SwipeCase {
 
     /**
      * Likes the current OtherUser, and determine there are more users to swipe on.
-     *
      */
     public void likeCurrentUser() {
 

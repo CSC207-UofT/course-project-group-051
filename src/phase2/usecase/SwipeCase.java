@@ -71,9 +71,8 @@ public class SwipeCase {
     /**
      * Likes the current OtherUser, and determine there are more users to swipe on.
      *
-     * @return false if the list is empty.
      */
-    public boolean likeCurrentUser() {
+    public void likeCurrentUser() {
 
         db.likeUser(selfUser.getId(), currentTarget.getId());
         db.admireUser(currentTarget.getId(), selfUser.getId());
@@ -82,7 +81,6 @@ public class SwipeCase {
         currentTarget = swipeList.poll();
 
         // check if there is a next User.
-        return currentTarget != null;
 
     }
 

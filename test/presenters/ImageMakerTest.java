@@ -27,7 +27,7 @@ class ImageMakerTest {
     }
 
     @Test
-    void testGetImageFalse() {
+     void testGetImageFalse() {
 
         ImageView actual = ImageMaker.getImage("abc");
 

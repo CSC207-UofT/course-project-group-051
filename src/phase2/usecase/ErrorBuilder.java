@@ -5,13 +5,14 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 /**
- * Provides a method that allows you to create errors.
+ * Provides a method that constructs a list of errors to return to the user when rendering views.
  */
 public class ErrorBuilder {
 
     /**
-     * @param errors A list of Strings that represent the errrors that need to be displayed.
-     * @return A Text which is a combination of all the errors, each on the next line.
+     * Builds an error message to be displayed based on a given list of error constants.
+     * @param errors, a list of strings that represent error constant values.
+     * @return An instance of javafx.scene.text.Text which is a combination of all the errors, each on the next line.
      */
     public static Text build(List<String> errors) {
         Text e_message = new Text();

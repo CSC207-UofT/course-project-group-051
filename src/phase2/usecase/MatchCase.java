@@ -17,8 +17,8 @@ public class MatchCase {
     private final SelfUser currentUser;
 
     /**
-     * @param db A reference to our database.
-     * @param currentUser The currently logged-in user.
+     * @param db A reference to access our database.
+     * @param currentUser an instance of SelfUser.
      */
     public MatchCase(DataAccessInterface db, SelfUser currentUser){
         this.db = db;

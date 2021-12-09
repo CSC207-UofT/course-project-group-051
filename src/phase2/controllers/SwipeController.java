@@ -13,7 +13,7 @@ import java.util.*;
 
 public class SwipeController extends Controller {
 
-    public SwipeCase swiper;
+    public final SwipeCase swiper;
 
     /**
      * @param db A reference to our Database so we can read and write to it.
@@ -41,11 +41,9 @@ public class SwipeController extends Controller {
         EventHandler<ActionEvent> event;
 
         event = e -> {
-
             swiper.likeCurrentUser();
             updateView();
         };
-
         return event;
     }
 

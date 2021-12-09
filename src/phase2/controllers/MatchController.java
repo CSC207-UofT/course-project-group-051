@@ -19,7 +19,7 @@ public class MatchController extends Controller{
 
 
     EventHandler<ActionEvent> event;
-    MatchCase matchCase;
+    final MatchCase matchCase;
 
     /**
      * @param db A reference to our Database.

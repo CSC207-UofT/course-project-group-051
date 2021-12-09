@@ -5,7 +5,7 @@ package phase2.users;
  */
 public class PublicUser{
 
-    private int id;
+    private final int id;
     private String fName;
     private String lName;
     private String age;
@@ -19,6 +19,7 @@ public class PublicUser{
     public PublicUser(int id) {
         this.id = id;
     }
+
     public int getId() {
         return id;
     }

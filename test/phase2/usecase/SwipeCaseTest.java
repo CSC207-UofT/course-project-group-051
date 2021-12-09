@@ -2,9 +2,7 @@ package phase2.usecase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import phase2.dataaccess.DataAccessInterface;
 import phase2.dataaccess.DataBaseAccess;
-import phase2.usecase.SwipeCase;
 import phase2.userbuilders.PublicUserBuilder;
 import phase2.userbuilders.SelfUserBuilder;
 import phase2.users.*;

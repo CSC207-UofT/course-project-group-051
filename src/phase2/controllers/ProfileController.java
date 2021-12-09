@@ -17,15 +17,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-/** A controller that delegates the task for each button in the profile view.
+/**
+ * A controller that delegates the task for each button in the profile view.
  */
 public class ProfileController extends Controller {
 
-    SelfUser currentUser;
-    Map<String, TextInputControl> inputs;
+    final SelfUser currentUser;
     EventHandler<ActionEvent> event;
 
-    /** Creates an instance of ProfileController
+    /**
+     * Creates an instance of ProfileController
      *
      * @param db, the data access interface
      * @param stage, the main stage
@@ -36,15 +37,19 @@ public class ProfileController extends Controller {
         this.currentUser = currentUser;
     }
 
-    /** Packages info from selfUser into a map
-     *
+    /**
+     * Packages info from selfUser into a map
      * @return info, data from selfUser to be updated in the db
      */
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
         info.put("firstName", currentUser.getFirstName());
+
         info.put("lastName", currentUser.getLastName());
+
         info.put("age", currentUser.getAge());
+        System.out.println(currentUser.getImagePath());
+        System.out.println(currentUser.getBio());
         info.put("imgPath", currentUser.getImagePath());
         info.put("gender", currentUser.getGender());
         info.put("genderPref", currentUser.getGenderPreference());
@@ -54,7 +59,8 @@ public class ProfileController extends Controller {
         return info;
     }
 
-    /** @return An EventHandler that returns the SwipeView
+    /**
+     * @return An EventHandler that returns the SwipeView
      */
     public EventHandler<ActionEvent> back() {
         event = e -> {
@@ -69,7 +75,6 @@ public class ProfileController extends Controller {
      */
     public EventHandler<ActionEvent> save(Map<String, TextInputControl> inputs) {
         event = e -> {
-            this.inputs = inputs;
             List<String> errors = new ArrayList<>();
             Map<String, String> info = new HashMap<>();
             info.put("uTID", inputs.get("UTorIDT").getText());

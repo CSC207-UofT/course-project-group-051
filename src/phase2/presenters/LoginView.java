@@ -17,17 +17,17 @@ import phase2.controllers.LogInController;
 public class LoginView implements View{
 
     Scene scene;
-    HBox hb1;
-    Button createAccount;
-    Button loginButton;
-    BorderPane bp;
-    VBox v;
-    VBox v1;
-    TextField username;
-    PasswordField password;
-    Label usernameLabel;
-    Label passwordLabel;
-    LogInController controller;
+    final HBox hb1;
+    final Button createAccount;
+    final Button loginButton;
+    final BorderPane bp;
+    final VBox v;
+    final VBox v1;
+    final TextField username;
+    final PasswordField password;
+    final Label usernameLabel;
+    final Label passwordLabel;
+    final LogInController controller;
 
     public LoginView(Text error){
         controller = ControllerFactory.getInstance().getLogInController();

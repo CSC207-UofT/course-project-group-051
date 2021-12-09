@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.MessageController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,16 +24,15 @@ import java.util.List;
  */
 public class MessageView implements View{
 
-    private MessageController controller;
-    private HBox hb; // the top HBox.
-    private TextField tf; // the textfield that stores the message.
-    private Button backButton; // the Back button.
-    private ScrollPane scrollPane; // the scroll pane that stores the messages.
-    private VBox vb; // the vbox that stores the messages.
-    private BorderPane bp; //the main border pane.
-    private Button sendButton; // the send button.
-    private ArrayList<Integer> threads; // the arraylist consisting of the threads for the given primary user.
-    private HBox hb1; //the bottom HBox.
+    private final MessageController controller;
+    private final HBox hb; // the top HBox.
+    private final TextField tf; // the TextField that stores the message.
+    private final Button backButton; // the Back button.
+    private final ScrollPane scrollPane; // the scroll pane that stores the messages.
+    private final VBox vb; // the vbox that stores the messages.
+    private final BorderPane bp; //the main border pane.
+    private final Button sendButton; // the send button.
+    private final HBox hb1; //the bottom HBox.
 
 
     public MessageView(int receiver){
@@ -83,7 +81,7 @@ public class MessageView implements View{
 
 
     /**
-     * Adds the textfield to the scene.
+     * Adds the TextField to the scene.
      */
     public void addTextField(){
         this.hb1.getChildren().add(this.tf);
@@ -117,7 +115,7 @@ public class MessageView implements View{
 
 
     /**
-     * Adds the vboxes to the scene
+     * Adds the VBoxes to the scene
      */
     public void addVBox() {
 

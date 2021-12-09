@@ -15,7 +15,7 @@ import java.util.*;
 public class ControllerFactory {
 
 
-    DataAccessInterface db; //A reference to our Database.
+    final DataAccessInterface db; //A reference to our Database.
     Stage stage; //A reference to the Stage where we display the views.
     SelfUser currentUser; //The id of the currently logged-in User.
     final static ControllerFactory controllerFactory = new ControllerFactory(); //The single Factory instance.

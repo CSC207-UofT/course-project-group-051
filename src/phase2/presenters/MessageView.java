@@ -94,7 +94,6 @@ public class MessageView implements View{
     public void loadThread(){
 
         List<String[]> messages = controller.getThread();
-        System.out.println(messages);
         for (String[] message: messages) {
 
             String content = message[0];

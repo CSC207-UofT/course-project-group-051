@@ -22,10 +22,11 @@ problem sets while simultaneously meeting their future life partner.
   and messaging threads.
 * Since this application is still a prototype, users can send messages, but will not receive
   messages from other users.
-    * The framework would be easily adaptable to a web source database, due to the adherence to SOLID
-      design principles and choice of design patterns.
-
-## maybe class diagram
+  * The framework would be easily adaptable to a web source database, due to the adherence to SOLID
+    design principles and choice of design patterns.
+    
+##UML Diagram:
+https://i.imgur.com/EQMzcHA.png
 ## Design Decisions
 1. Refactoring Use Cases
     + Initial problem: Use cases relied completely on functionality of controller, causing an overloaded class.

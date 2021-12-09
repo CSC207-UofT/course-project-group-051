@@ -98,7 +98,7 @@ public interface DataAccessInterface {
 
 
     /**
-     * @param userInfo the user's info in a Map with the keys being the UserInfoConstants without the ImagePath
+     * @param userInfo the user's info in a Map with the keys being the UserInfoConstants without the ImagePath or Bio
      */
     void createUser(Map<String, String> userInfo);
 

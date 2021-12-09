@@ -779,7 +779,7 @@ public class DataBaseAccess implements DataAccessInterface {
         try {
             // I want to delete the entire table, so there shouldn't be a where to specify
             //which part I want to delete
-            String h2 = "delete from USER;";
+            String h2 = "delete from USER; delete from THREADS; delete from MESSAGES;";
             stmt.execute(h2);
 
         } catch (SQLException se) {

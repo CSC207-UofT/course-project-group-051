@@ -1,15 +1,18 @@
 package dataaccess;
 
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataBaseAccess;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class DataBaseAccessTest {
 
-    DataBaseAccess db;
+    private DataBaseAccess db;
     @BeforeEach
     void setUp() {
         db = new DataBaseAccess();
@@ -27,99 +30,113 @@ class DataBaseAccessTest {
     }
 
     @Test
-    void testGetters(){
-        String firstName = db.getFirstName(1);
-        Assertions.assertEquals(firstName, "person1F");
-
-        String lastName = db.getLastName(1);
-        Assertions.assertEquals(lastName, "person1L");
-
-        String username = db.getUsername(1);
-        Assertions.assertEquals(username, "user1");
-
-        String password = db.getPassword(1);
-        Assertions.assertEquals(password, "password");
-
-        String gender = db.getGender(1);
-        Assertions.assertEquals(gender, "Male");
-
-        String bio = db.getBio(1);
-        Assertions.assertEquals(bio,"hi");
-
-        String genderPref = db.getGenderPreference(1);
-        Assertions.assertEquals(genderPref, "Female");
-
-//        int age = db.getAge(1);
-//        Assertions.assertEquals(age, 1);
-
-        String imgPath = db.getImgPath(1);
-        Assertions.assertEquals(imgPath, ".\\img\\im2.jpg");
-
-        String birthday = db.getBirthday(1);
-        Assertions.assertEquals(birthday,"Dec,01,2021");
-
-        ArrayList<Integer> likes = db.getLikes(1);
-        ArrayList<Integer> actual = new ArrayList<>();
-        actual.add(2);
-        Assertions.assertEquals(likes, actual);
-
-        ArrayList<Integer> admires = db.getLikes(1);
-        ArrayList<Integer> actualAdmires = new ArrayList<>();
-        actualAdmires.add(2);
-        Assertions.assertEquals(admires, actualAdmires);
+    void testGetUserInfo(){
+        Map<String, String> info = db.getUserInfo(1);
+        Assertions.assertEquals(info.get(UserInfoConstants.UT_ID), "user1");
+        Assertions.assertEquals(info.get(UserInfoConstants.PASSWORD), "password");
+        Assertions.assertEquals(info.get(UserInfoConstants.FIRST_NAME), "person1F");
+        Assertions.assertEquals(info.get(UserInfoConstants.LAST_NAME), "person1L");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER), "Male");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER_PREFERENCE), "Female");
+        Assertions.assertEquals(info.get(UserInfoConstants.BIO), "hi");
+        Assertions.assertEquals(info.get(UserInfoConstants.AGE), "19");
+        Assertions.assertEquals(info.get(UserInfoConstants.IMAGE_PATH), ".\\img\\img1.jpg");
     }
 
     @Test
-    void testSetters(){
-        db.setFirstName(1, "test");
-        String firstName = db.getFirstName(1);
-        Assertions.assertEquals(firstName, "test");
+    void testUpdateUserInfo(){
+        Map<String, String> info = new HashMap<>();
+        info.put(UserInfoConstants.UT_ID, "userChanged");
+        info.put(UserInfoConstants.PASSWORD, "1234");
+        info.put(UserInfoConstants.FIRST_NAME, "first");
+        info.put(UserInfoConstants.LAST_NAME, "last");
+        info.put(UserInfoConstants.GENDER, "Female");
+        info.put(UserInfoConstants.GENDER_PREFERENCE, "Male");
+        info.put(UserInfoConstants.BIO, "bye");
+        info.put(UserInfoConstants.AGE, "20");
+        info.put(UserInfoConstants.IMAGE_PATH, ".\\img\\img2.jpg");
 
-        db.setLastName(1, "test");
-        String lastName = db.getLastName(1);
-        Assertions.assertEquals(lastName, "test");
+        db.updateUserInfo(1, info);
 
-        db.setUsername(1, "test");
-        String username = db.getUsername(1);
-        Assertions.assertEquals(username, "test");
+        info = db.getUserInfo(1);
 
-        db.setPassword(1, "pass");
-        String password = db.getPassword(1);
-        Assertions.assertEquals(password, "pass");
+        Assertions.assertEquals(info.get(UserInfoConstants.UT_ID), "userChanged");
+        Assertions.assertEquals(info.get(UserInfoConstants.PASSWORD), "1234");
+        Assertions.assertEquals(info.get(UserInfoConstants.FIRST_NAME), "first");
+        Assertions.assertEquals(info.get(UserInfoConstants.LAST_NAME), "last");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER), "Female");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER_PREFERENCE), "Male");
+        Assertions.assertEquals(info.get(UserInfoConstants.BIO), "bye");
+        Assertions.assertEquals(info.get(UserInfoConstants.AGE), "20");
+        Assertions.assertEquals(info.get(UserInfoConstants.IMAGE_PATH), ".\\img\\img2.jpg");
 
-        db.setGender(1, "Female");
-        String gender = db.getGender(1);
-        Assertions.assertEquals(gender, "Female");
+    }
 
-        db.setBio(1,"bio");
-        String bio = db.getBio(1);
-        Assertions.assertEquals(bio,"bio");
+    @Test
+    void testCreateUser(){
+        Map<String, String> info = new HashMap<>();
+        info.put(UserInfoConstants.UT_ID, "user4");
+        info.put(UserInfoConstants.PASSWORD, "password");
+        info.put(UserInfoConstants.FIRST_NAME, "person4F");
+        info.put(UserInfoConstants.LAST_NAME, "person4L");
+        info.put(UserInfoConstants.GENDER, "Male");
+        info.put(UserInfoConstants.GENDER_PREFERENCE, "Female");
+        info.put(UserInfoConstants.AGE, "20");
 
-        db.setGenderPreference(1, "Male");
-        String genderPref = db.getGenderPreference(1);
-        Assertions.assertEquals(genderPref, "Male");
+        db.createUser(info);
 
-//        db.setAge(1,2);
-//        int age = db.getAge(1);
-//        Assertions.assertEquals(age, 2);
+        info = db.getUserInfo(4);
 
-        db.setImgPath(1,".\\img\\default.jpg");
-        String imgPath = db.getImgPath(1);
-        Assertions.assertEquals(imgPath, ".\\img\\im2.jpg");
+        Assertions.assertEquals(info.get(UserInfoConstants.UT_ID), "user4");
+        Assertions.assertEquals(info.get(UserInfoConstants.PASSWORD), "password");
+        Assertions.assertEquals(info.get(UserInfoConstants.FIRST_NAME), "person4F");
+        Assertions.assertEquals(info.get(UserInfoConstants.LAST_NAME), "person4L");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER), "Male");
+        Assertions.assertEquals(info.get(UserInfoConstants.GENDER_PREFERENCE), "Female");
+        Assertions.assertEquals(info.get(UserInfoConstants.BIO), "No Bio");
+        Assertions.assertEquals(info.get(UserInfoConstants.AGE), "20");
+        Assertions.assertEquals(info.get(UserInfoConstants.IMAGE_PATH), ".\\img\\default.jpg");
 
-        db.setBirthday(1, "Dec,02,2021");
-        String birthday = db.getBirthday(1);
-        Assertions.assertEquals(birthday,"Dec,02,2021");
+    }
 
-        db.likeUser(2,3);
-        ArrayList<Integer> likes = db.getLikes(2);
-        ArrayList<Integer> actual = new ArrayList<>();
-        actual.add(3);
-        Assertions.assertEquals(likes, actual);
+    @Test
+    void testGetSwipeList(){
+        ArrayList<Integer> swipeList = db.getSwipeList(1);
+        ArrayList<Integer> expected = new ArrayList<>();
+        expected.add(2);
+        expected.add(3);
+        Assertions.assertEquals(swipeList, expected);
+    }
 
-        ArrayList<Integer> admires = db.getLikes(3);
-        ArrayList<Integer> actualAdmires = new ArrayList<>();
-        actualAdmires.add(2);
-        Assertions.assertEquals(admires, actualAdmires);
+    @Test
+    void testLikingAndMessaging(){
+        db.likeUser(1, 2);
+        db.admireUser(2, 1);
+        ArrayList<Integer> likes = db.getLikes(1);
+        ArrayList<Integer> admires = db.getAdmires(2);
+
+        ArrayList<Integer> expectedLikes = new ArrayList<>();
+        ArrayList<Integer> expectedAdmires = new ArrayList<>();
+        expectedLikes.add(2);
+        expectedAdmires.add(1);
+        Assertions.assertEquals(likes, expectedLikes);
+        Assertions.assertEquals(admires, expectedAdmires);
+
+        int threadID = db.createThread(1, 2);
+        Assertions.assertEquals(threadID, 1);
+
+        db.createMessage(threadID, 1, 2, "hi");
+
+        ArrayList<Integer> threads = db.getThreads(1);
+
+        ArrayList<Integer> expectedThreads = new ArrayList<>();
+        expectedThreads.add(1);
+        Assertions.assertEquals(threads, expectedThreads);
+
+        ArrayList<String[]> thread = db.getThread(1);
+
+        ArrayList<String[]> expectedThread = new ArrayList<>();
+        expectedThread.add(new String[]{"hi", "1", "2"});
+        Assertions.assertArrayEquals(thread.get(0), expectedThread.get(0));
     }
 }

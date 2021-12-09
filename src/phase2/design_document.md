@@ -195,12 +195,16 @@ benefited our group, and a summary of each team members' contribution.
   * Javafx knowledge and original View classes design.
   * Controller refactoring: Messaging features and Matches Features
   * User interface refactoring
+  * Profile View Changes:
+    * https://github.com/CSC207-UofT/course-project-group-051/pull/33/files
 * Sheng He Xiao
     * Leader for explaining project organization each meeting
     * Designing messaging functionality, and continuing the implementation of design patterns with clean
       architecture
     * Data Base functionality and refactoring:
       * https://github.com/CSC207-UofT/course-project-group-051/pull/6
+    * Profile View classes:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/36
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture
     * Ensuring SOLID design principles are used
@@ -209,3 +213,5 @@ benefited our group, and a summary of each team members' contribution.
     * Adding functionality of messaging
     * Created the Swipe Related code:
       * https://github.com/CSC207-UofT/course-project-group-051/pull/34
+    * Some Messenger class related changes:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/59

@@ -4667,6 +4667,7 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "genderPreference" not found [42
 	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
 	at java.lang.Thread.run(Thread.java:748)
+<<<<<<< HEAD
 2021-11-14 21:53:59 database: flush
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
@@ -4693,6 +4694,15 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.h2.Driver.connect(Driver.java:69)
 	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:629)
 	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
+=======
+2021-11-11 15:33:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "update user set bio = 'hello it's a me[*]' where PERSONID = 13;"; SQL statement:
+update user set bio = 'hello it's a me' where PERSONID = 13; [42000-200]
+2021-11-11 20:49:28 jdbc[3]: exception
+java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
+	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
+	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
+>>>>>>> main
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -4710,6 +4720,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -4720,6 +4731,9 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 35 more
 2021-11-14 21:53:59 database: flush
+=======
+2021-11-11 15:52:55 database: flush
+>>>>>>> main
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
@@ -4743,6 +4757,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
 	at org.h2.Driver.connect(Driver.java:69)
+<<<<<<< HEAD
 	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:629)
 	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -4766,12 +4781,37 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.I
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 41 more
+=======
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at Phase1.DataAccess.DataBaseAccess.connectDB(DataBaseAccess.java:878)
+	at Phase1.DataAccess.DataBaseAccess.<init>(DataBaseAccess.java:16)
+	at Phase1.Run.Session.start(Session.java:42)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$8(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$7(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$5(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$6(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 36 more
+>>>>>>> main
 Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
+<<<<<<< HEAD
 	... 35 more
 2021-11-14 21:54:11 jdbc[3]: exception
+=======
+	... 30 more
+2021-11-11 20:58:39 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -4792,7 +4832,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-11-14 21:54:18 jdbc[3]: exception
+=======
+2021-11-11 20:59:10 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -4813,6 +4857,7 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-11-14 22:06:07 database: flush
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
@@ -4970,6 +5015,9 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 35 more
 2021-11-14 22:06:14 database: flush
+=======
+2021-11-11 15:59:49 database: flush
+>>>>>>> main
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
@@ -4993,6 +5041,7 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:173)
 	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:152)
 	at org.h2.Driver.connect(Driver.java:69)
+<<<<<<< HEAD
 	at com.intellij.database.remote.jdbc.helpers.JdbcHelperImpl.connect(JdbcHelperImpl.java:629)
 	at com.intellij.database.remote.jdbc.impl.RemoteDriverImpl.connect(RemoteDriverImpl.java:54)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -5256,11 +5305,32 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.I
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 36 more
+=======
+	at java.sql.DriverManager.getConnection(DriverManager.java:664)
+	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+	at Phase1.DataAccess.DataBaseAccess.connectDB(DataBaseAccess.java:878)
+	at Phase1.DataAccess.DataBaseAccess.<init>(DataBaseAccess.java:16)
+	at Phase1.Run.Session.start(Session.java:42)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$8(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$7(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$5(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$6(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$3(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	... 36 more
+>>>>>>> main
 Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 30 more
+<<<<<<< HEAD
 2021-11-14 22:13:44 jdbc[3]: exception
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
@@ -10531,6 +10601,9 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
 2021-12-08 22:20:47 jdbc[5]: exception
+=======
+2021-11-11 21:01:16 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -10551,7 +10624,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-12-09 02:06:24 jdbc[3]: exception
+=======
+2021-11-12 05:05:56 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -10572,7 +10649,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-12-09 02:06:38 jdbc[4]: exception
+=======
+2021-11-12 05:06:51 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -10593,7 +10674,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-12-09 02:06:47 jdbc[5]: exception
+=======
+2021-11-12 05:29:29 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -10614,7 +10699,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-12-08 21:10:00 database: flush
+=======
+2021-11-12 00:49:20 database: flush
+>>>>>>> main
 org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
@@ -10640,9 +10729,15 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at org.h2.Driver.connect(Driver.java:69)
 	at java.sql.DriverManager.getConnection(DriverManager.java:664)
 	at java.sql.DriverManager.getConnection(DriverManager.java:247)
+<<<<<<< HEAD
 	at phase2.dataaccess.DataBaseAccess.connectDB(DataBaseAccess.java:775)
 	at phase2.dataaccess.DataBaseAccess.<init>(DataBaseAccess.java:20)
 	at phase2.ui.testing.main(testing.java:7)
+=======
+	at Phase1.DataAccess.DataBaseAccess.connectDB(DataBaseAccess.java:895)
+	at Phase1.DataAccess.DataBaseAccess.<init>(DataBaseAccess.java:21)
+	at Phase1.Tests.DBTesting.main(DBTesting.java:16)
+>>>>>>> main
 Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/IdeaProjects/course-project-group-051/DB/Users.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
@@ -10652,7 +10747,11 @@ Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/HP/
 	at org.h2.mvstore.FileStore.open(FileStore.java:172)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
 	... 21 more
+<<<<<<< HEAD
 2021-12-09 02:10:29 jdbc[3]: exception
+=======
+2021-11-12 05:49:34 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)
@@ -10673,7 +10772,11 @@ java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supporte
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:829)
+<<<<<<< HEAD
 2021-12-09 03:10:35 jdbc[3]: exception
+=======
+2021-11-12 05:50:04 jdbc[3]: exception
+>>>>>>> main
 java.sql.SQLClientInfoException: Client info name 'ApplicationName' not supported.
 	at org.h2.jdbc.JdbcConnection.setClientInfo(JdbcConnection.java:1749)
 	at com.intellij.database.remote.jdbc.impl.RemoteConnectionImpl.setClientInfo(RemoteConnectionImpl.java:470)

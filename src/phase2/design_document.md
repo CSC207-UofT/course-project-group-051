@@ -171,7 +171,8 @@ benefited our group, and a summary of each team members' contribution.
 
 ### Members Contributions
 * Juliana Dellaviola
-    * Design Document
+    * Design Document:
+      * https://github.com/CSC207-UofT/course-project-group-051/pull/52/files
     * Styling/Cleaning code
     * Identifying code smells and design patterns
 * Senan Kassem
@@ -203,7 +204,7 @@ benefited our group, and a summary of each team members' contribution.
       architecture
     * Data Base functionality and refactoring:
       * https://github.com/CSC207-UofT/course-project-group-051/pull/6
-    * Profile View classes:
+    * Profile View changes:
       * https://github.com/CSC207-UofT/course-project-group-051/pull/36
 * Alexander Mathioudakis
     * Ensuring the project abides by clean architecture

@@ -52,7 +52,3 @@
 ### Tips
 - here is a video detailing how to use the **H2 database**:
   https://www.youtube.com/watch?v=QfYV64bJG5Q&ab_channel=Prof.Vanselow
-
-- And Here are pictures of all of our pages:
-
-## Login

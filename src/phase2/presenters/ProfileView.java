@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import phase2.constants.UserInfoConstants;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.ProfileController;
 
@@ -38,7 +39,7 @@ public class ProfileView implements View {
     Label bioL;
     TextField firstNameT;
     TextField lastNameT;
-    TextField birthdayT;
+    TextField ageT;
     TextField imgPathT;
     TextField genderT;
     TextField genderPrefT;
@@ -106,15 +107,15 @@ public class ProfileView implements View {
 
     private void setText(){
         Map<String, String> info = controller.getUserInfo();
-        firstNameT = new TextField(info.get("firstName"));
-        lastNameT = new TextField(info.get("lastName"));
-        birthdayT = new TextField(info.get("age"));
-        passwordT = new TextField(info.get("password"));
-        imgPathT = new TextField(info.get("imgPath"));
-        genderT = new TextField(info.get("gender"));
-        genderPrefT = new TextField(info.get("genderPref"));
-        usernameT = new TextField(info.get("UTorID"));
-        bioT = new TextField(info.get("bio"));
+        firstNameT = new TextField(info.get(UserInfoConstants.FIRST_NAME));
+        lastNameT = new TextField(info.get(UserInfoConstants.LAST_NAME));
+        ageT = new TextField(info.get(UserInfoConstants.AGE));
+        passwordT = new TextField(info.get(UserInfoConstants.PASSWORD));
+        imgPathT = new TextField(info.get(UserInfoConstants.IMAGE_PATH));
+        genderT = new TextField(info.get(UserInfoConstants.GENDER));
+        genderPrefT = new TextField(info.get(UserInfoConstants.GENDER_PREFERENCE));
+        usernameT = new TextField(info.get(UserInfoConstants.UT_ID));
+        bioT = new TextField(info.get(UserInfoConstants.BIO));
     }
 
     /**
@@ -132,7 +133,7 @@ public class ProfileView implements View {
         Map<String, TextInputControl> inputs = new HashMap<>();
         inputs.put("firstNameT", firstNameT);
         inputs.put("lastNameT", lastNameT);
-        inputs.put("ageT", birthdayT);
+        inputs.put("ageT", ageT);
         inputs.put("imgPathT", imgPathT);
         inputs.put("genderT", genderT);
         inputs.put("genderPrefT", genderPrefT);
@@ -192,7 +193,7 @@ public class ProfileView implements View {
 
         this.vb.getChildren().addAll(this.firstNameL, this.firstNameT);
         this.vb.getChildren().addAll(this.lastNameL, this.lastNameT);
-        this.vb.getChildren().addAll(this.birthdayL, this.birthdayT);
+        this.vb.getChildren().addAll(this.birthdayL, this.ageT);
         this.vb.getChildren().addAll(this.usernameL, this.usernameT);
         this.vb.getChildren().addAll(this.passwordL, this.passwordT);
         this.vb.getChildren().addAll(this.imgPathL, this.imgPathT);

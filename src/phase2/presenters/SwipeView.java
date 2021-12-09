@@ -1,6 +1,8 @@
 package phase2.presenters;
 
 import javafx.scene.text.Font;
+import phase2.constants.Positioner;
+import phase2.constants.UserInfoConstants;
 import phase2.controllers.ControllerFactory;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -126,10 +128,11 @@ public class SwipeView implements View{
     private void setUserData() {
         Map<String, String> userData = controller.getUserData();
         this.image = ImageMaker.getImage(controller.getCurrentImage());
-        fNameAge = new Label(userData.get("fName") + ", " + userData.get("Age"));
+        fNameAge = new Label(userData.get(UserInfoConstants.FIRST_NAME) + ", " +
+                userData.get(UserInfoConstants.AGE));
         fNameAge.setFont(new Font(20));
         fNameAge.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
-        bio = new Label(userData.get("Bio"));
+        bio = new Label(userData.get(UserInfoConstants.BIO));
         bio.setFont(new Font(20));
         bio.setStyle("-fx-background-color: lightblue; -fx-background-radius: 10;");
 

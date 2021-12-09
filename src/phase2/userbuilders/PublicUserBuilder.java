@@ -1,5 +1,6 @@
 package phase2.userbuilders;
 
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.PublicUser;
 
@@ -27,12 +28,12 @@ public class PublicUserBuilder{
      * adds data to specific to this PublicUser.
      */
     private static void updateUser(Map<String, String> data, PublicUser publicUser) {
-        publicUser.setLastName(data.get("lastName"));
-        publicUser.setFirstName(data.get("firstName"));
-        publicUser.setBio(data.get("bio"));
-        publicUser.setImagePath(data.get("imgPath"));
-        publicUser.setAge(data.get("age"));
-        publicUser.setGender(data.get("gender"));
+        publicUser.setLastName(data.get(UserInfoConstants.LAST_NAME));
+        publicUser.setFirstName(data.get(UserInfoConstants.FIRST_NAME));
+        publicUser.setBio(data.get(UserInfoConstants.BIO));
+        publicUser.setImagePath(data.get(UserInfoConstants.IMAGE_PATH));
+        publicUser.setAge(data.get(UserInfoConstants.AGE));
+        publicUser.setGender(data.get(UserInfoConstants.GENDER));
     }
 
 }

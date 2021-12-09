@@ -1,5 +1,6 @@
 package phase2.usecase;
 
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.PublicUser;
 import phase2.users.SelfUser;
@@ -17,10 +18,10 @@ public class SwipeCase {
 
 
     /**
-     * @param db          A reference to our Database so we can read and write to it.
+     * @param db A reference to our Database so we can read and write to it.
      * @param currentUser The currently logged-in User.
-     * @param swipeList   A list of IDs of potential users that the current User can swipe on.
-     *                    It is assumed there are no repeats, and no already liked Users within the list.
+     * @param swipeList A list of IDs of potential users that the current User can swipe on.
+     * It is assumed there are no repeats, and no already liked Users within the list.
      */
     public SwipeCase(DataAccessInterface db, SelfUser currentUser, Queue<PublicUser> swipeList) {
 
@@ -51,10 +52,10 @@ public class SwipeCase {
 
         Map<String, String> userData = new HashMap<>();
 
-        userData.put("Age", currentTarget.getAge());
-        userData.put("Bio", currentTarget.getBio());
-        userData.put("fName", currentTarget.getFirstName());
-        userData.put("lName", currentTarget.getLastName());
+        userData.put(UserInfoConstants.AGE, currentTarget.getAge());
+        userData.put(UserInfoConstants.BIO, currentTarget.getBio());
+        userData.put(UserInfoConstants.FIRST_NAME, currentTarget.getFirstName());
+        userData.put(UserInfoConstants.LAST_NAME, currentTarget.getLastName());
 
         return userData;
 

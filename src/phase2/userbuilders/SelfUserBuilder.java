@@ -1,5 +1,6 @@
 package phase2.userbuilders;
 
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.users.SelfUser;
 
@@ -25,15 +26,15 @@ public class SelfUserBuilder{
      * adds data specific to SelfUser.
      */
     private static void updateUser(Map<String, String> data, SelfUser selfUser) {
-        selfUser.setLastName(data.get("lastName"));
-        selfUser.setFirstName(data.get("firstName"));
-        selfUser.setPassword(data.get("password"));
-        selfUser.setUsername(data.get("uTID"));
-        selfUser.setAge(data.get("age"));
-        selfUser.setGender(data.get("gender"));
-        selfUser.setGenderPreference(data.get("genderPref"));
-        selfUser.setImagePath(data.get("imgPath"));
-        selfUser.setBio(data.get("bio"));
+        selfUser.setLastName(data.get(UserInfoConstants.LAST_NAME));
+        selfUser.setFirstName(data.get(UserInfoConstants.FIRST_NAME));
+        selfUser.setPassword(data.get(UserInfoConstants.PASSWORD));
+        selfUser.setUsername(data.get(UserInfoConstants.UT_ID));
+        selfUser.setAge(data.get(UserInfoConstants.AGE));
+        selfUser.setGender(data.get(UserInfoConstants.GENDER));
+        selfUser.setGenderPreference(data.get(UserInfoConstants.GENDER_PREFERENCE));
+        selfUser.setImagePath(data.get(UserInfoConstants.IMAGE_PATH));
+        selfUser.setBio(data.get(UserInfoConstants.BIO));
     }
 
 }

@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
 import phase2.constants.Errors;
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.ProfileView;
 import phase2.presenters.SwipeView;
@@ -43,19 +44,15 @@ public class ProfileController extends Controller {
      */
     public Map<String, String> getUserInfo() {
         Map<String, String> info = new HashMap<>();
-        info.put("firstName", currentUser.getFirstName());
-
-        info.put("lastName", currentUser.getLastName());
-
-        info.put("age", currentUser.getAge());
-        System.out.println(currentUser.getImagePath());
-        System.out.println(currentUser.getBio());
-        info.put("imgPath", currentUser.getImagePath());
-        info.put("gender", currentUser.getGender());
-        info.put("genderPref", currentUser.getGenderPreference());
-        info.put("UTorID", currentUser.getUsername());
-        info.put("bio", currentUser.getBio());
-        info.put("password", currentUser.getPassword());
+        info.put(UserInfoConstants.UT_ID, currentUser.getUsername());
+        info.put(UserInfoConstants.PASSWORD, currentUser.getPassword());
+        info.put(UserInfoConstants.FIRST_NAME, currentUser.getFirstName());
+        info.put(UserInfoConstants.LAST_NAME, currentUser.getLastName());
+        info.put(UserInfoConstants.AGE, currentUser.getAge());
+        info.put(UserInfoConstants.GENDER, currentUser.getGender());
+        info.put(UserInfoConstants.GENDER_PREFERENCE, currentUser.getGenderPreference());
+        info.put(UserInfoConstants.BIO, currentUser.getBio());
+        info.put(UserInfoConstants.IMAGE_PATH, currentUser.getImagePath());
         return info;
     }
 
@@ -77,15 +74,15 @@ public class ProfileController extends Controller {
         event = e -> {
             List<String> errors = new ArrayList<>();
             Map<String, String> info = new HashMap<>();
-            info.put("uTID", inputs.get("UTorIDT").getText());
-            info.put("password", inputs.get("passwordT").getText());
-            info.put("firstName", inputs.get("firstNameT").getText());
-            info.put("lastName", inputs.get("lastNameT").getText());
-            info.put("age", inputs.get("ageT").getText());
-            info.put("gender", inputs.get("genderT").getText());
-            info.put("genderPref",inputs.get("genderPrefT").getText());
-            info.put("bio", inputs.get("bioT").getText());
-            info.put("imgPath", inputs.get("imgPathT").getText());
+            info.put(UserInfoConstants.UT_ID, inputs.get("UTorIDT").getText());
+            info.put(UserInfoConstants.PASSWORD, inputs.get("passwordT").getText());
+            info.put(UserInfoConstants.FIRST_NAME, inputs.get("firstNameT").getText());
+            info.put(UserInfoConstants.LAST_NAME, inputs.get("lastNameT").getText());
+            info.put(UserInfoConstants.AGE, inputs.get("ageT").getText());
+            info.put(UserInfoConstants.GENDER, inputs.get("genderT").getText());
+            info.put(UserInfoConstants.GENDER_PREFERENCE,inputs.get("genderPrefT").getText());
+            info.put(UserInfoConstants.BIO, inputs.get("bioT").getText());
+            info.put(UserInfoConstants.IMAGE_PATH, inputs.get("imgPathT").getText());
             ProfileCase profileCase = new ProfileCase(db);
             if(info.containsValue("") || info.containsValue(null)){
                 errors.add(Errors.MISSING_PROFILE);

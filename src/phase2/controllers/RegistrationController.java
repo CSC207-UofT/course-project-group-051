@@ -16,6 +16,7 @@ import phase2.usecase.LogInCase;
 import phase2.userbuilders.SelfUserBuilder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -55,7 +56,8 @@ public class RegistrationController extends Controller{
         event = e -> {
             RegistrationCase registrationCase = new RegistrationCase(db);
 
-            ArrayList<String> results = registrationCase.createAccount(inputs);
+            Map<String, String> data = getStringMap(inputs);
+            ArrayList<String> results = registrationCase.createAccount(data);
             View view;
             if(!results.isEmpty()){
                 view = new RegistrationView(ErrorBuilder.build(results)); // return error in view?
@@ -70,5 +72,12 @@ public class RegistrationController extends Controller{
             view.build();
         };
         return event;
+    }
+    private Map<String, String> getStringMap(Map<String, TextInputControl> data){
+        Map<String, String> info = new HashMap<>();
+        for(String key: data.keySet()){
+            info.put(key, data.get(key).getText());
+        }
+        return info;
     }
 }

@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import phase2.constants.UserInfoConstants;
 import phase2.controllers.ControllerFactory;
 import phase2.controllers.RegistrationController;
 
@@ -113,14 +114,14 @@ public class RegistrationView implements View{
      */
     private void setOnActions(){
         Map<String, TextInputControl> inputs = new HashMap<>();
-        inputs.put("age", tf);
-        inputs.put("uTID", tf1);
-        inputs.put("password", tf2);
-        inputs.put("passwordC", tf3);
-        inputs.put("firstName", tf5);
-        inputs.put("lastName", tf6);
-        inputs.put("gender", tf7);
-        inputs.put("genderPref", tf8);
+        inputs.put(UserInfoConstants.AGE, tf);
+        inputs.put(UserInfoConstants.UT_ID, tf1);
+        inputs.put(UserInfoConstants.PASSWORD, tf2);
+        inputs.put(UserInfoConstants.PASSWORD_C, tf3);
+        inputs.put(UserInfoConstants.FIRST_NAME, tf5);
+        inputs.put(UserInfoConstants.LAST_NAME, tf6);
+        inputs.put(UserInfoConstants.GENDER, tf7);
+        inputs.put(UserInfoConstants.GENDER_PREFERENCE, tf8);
         createAccount.setOnAction(controller.createAccount(inputs));
         back.setOnAction(controller.back());
 

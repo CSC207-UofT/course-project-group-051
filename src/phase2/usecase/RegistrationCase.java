@@ -2,6 +2,7 @@ package phase2.usecase;
 
 import javafx.scene.control.TextInputControl;
 import phase2.constants.Errors;
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 
 import java.util.ArrayList;
@@ -37,15 +38,15 @@ public class RegistrationCase {
         }
         else{
             try {
-                Integer.parseInt(info.get("age"));
+                Integer.parseInt(info.get(UserInfoConstants.AGE));
             } catch (NumberFormatException io) {
                 errors.add(Errors.AGE);
             }
         }
-        if(!info.get("password").equals(info.get("passwordC"))){
+        if(!info.get(UserInfoConstants.PASSWORD).equals(info.get(UserInfoConstants.PASSWORD_C))){
             errors.add(Errors.PASSWORD_MATCH);
         }
-        if (db.logIn(info.get("uTID"), info.get("password")) != -1){
+        if (db.logIn(info.get(UserInfoConstants.UT_ID), info.get(UserInfoConstants.PASSWORD)) != -1){
             errors.add(Errors.EXISTS); // ADD THESE MESSAGES
         }
 

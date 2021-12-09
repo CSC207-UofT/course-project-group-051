@@ -2,6 +2,7 @@ package phase2.dataaccess;
 
 
 import javafx.scene.control.Alert;
+import phase2.constants.UserInfoConstants;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -63,29 +64,29 @@ public class DataBaseAccess implements DataAccessInterface {
     @Override
     public Map<String, String> getUserInfo(int id){
         Map<String, String> info = new HashMap<>();
-        info.put("uTID", getUsername(id));
-        info.put("password", getPassword(id));
-        info.put("firstName", getFirstName(id));
-        info.put("lastName", getLastName(id));
-        info.put("age", getAge(id));
-        info.put("gender", getGender(id));
-        info.put("genderPref", getGenderPreference(id));
-        info.put("bio", getBio(id));
-        info.put("imgPath", getImgPath(id));
+        info.put(UserInfoConstants.UT_ID, getUsername(id));
+        info.put(UserInfoConstants.PASSWORD, getPassword(id));
+        info.put(UserInfoConstants.FIRST_NAME, getFirstName(id));
+        info.put(UserInfoConstants.LAST_NAME, getLastName(id));
+        info.put(UserInfoConstants.AGE, getAge(id));
+        info.put(UserInfoConstants.GENDER, getGender(id));
+        info.put(UserInfoConstants.GENDER_PREFERENCE, getGenderPreference(id));
+        info.put(UserInfoConstants.BIO, getBio(id));
+        info.put(UserInfoConstants.IMAGE_PATH, getImgPath(id));
         return info;
     }
 
     @Override
     public void updateUserInfo(int id, Map<String, String> info){
-        setUsername(id, info.get("uTID"));
-        setPassword(id, info.get("password"));
-        setFirstName(id, info.get("firstName"));
-        setLastName(id, info.get("lastName"));
-        setAge(id, Integer.parseInt(info.get("age")));
-        setGender(id, info.get("gender"));
-        setGenderPreference(id, info.get("genderPref"));
-        setBio(id, info.get("bio"));
-        setImgPath(id, info.get("imgPath"));
+        setUsername(id, info.get(UserInfoConstants.UT_ID));
+        setPassword(id, info.get(UserInfoConstants.PASSWORD));
+        setFirstName(id, info.get(UserInfoConstants.FIRST_NAME));
+        setLastName(id, info.get(UserInfoConstants.LAST_NAME));
+        setAge(id, Integer.parseInt(info.get(UserInfoConstants.AGE)));
+        setGender(id, info.get(UserInfoConstants.GENDER));
+        setGenderPreference(id, info.get(UserInfoConstants.GENDER_PREFERENCE));
+        setBio(id, info.get(UserInfoConstants.BIO));
+        setImgPath(id, info.get(UserInfoConstants.IMAGE_PATH));
     }
 
     private String getFirstName(int id) {
@@ -743,10 +744,12 @@ public class DataBaseAccess implements DataAccessInterface {
     public int createUser(Map<String, String> userInfo) {
         int id = this.getNextUser();
         try {
-            String h2 = "insert into user values ("+id+", '" + userInfo.get("lastName") + "', '" +
-                    userInfo.get("firstName") + "', '" + userInfo.get("uTID") + "', '" + userInfo.get("password") +
-                    "', " + userInfo.get("age") + ", '" + userInfo.get("gender") + "', '" +
-                    userInfo.get("genderPref") + "', 'No Bio', '', '', '', '', '.\\img\\default.jpg');";
+            String h2 = "insert into user values ("+id+", '" + userInfo.get(UserInfoConstants.LAST_NAME) + "', '" +
+                    userInfo.get(UserInfoConstants.FIRST_NAME) + "', '" + userInfo.get(UserInfoConstants.UT_ID) + "', '"
+                    + userInfo.get(UserInfoConstants.PASSWORD) + "', " + userInfo.get(UserInfoConstants.AGE) + ", '"
+                    + userInfo.get(UserInfoConstants.GENDER) + "', '" +
+                    userInfo.get(UserInfoConstants.GENDER_PREFERENCE) +
+                    "', 'No Bio', '', '', '', '', '.\\img\\default.jpg');";
             stmt.execute(h2);
 
         } catch (SQLException se) {

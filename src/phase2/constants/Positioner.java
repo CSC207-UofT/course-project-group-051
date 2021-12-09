@@ -1,4 +1,4 @@
-package phase2.presenters;
+package phase2.constants;
 
 
 import javafx.geometry.Insets;

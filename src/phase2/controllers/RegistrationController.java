@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.stage.Stage;
+import phase2.constants.UserInfoConstants;
 import phase2.dataaccess.DataAccessInterface;
 import phase2.presenters.LoginView;
 import phase2.presenters.RegistrationView;
@@ -61,8 +62,8 @@ public class RegistrationController extends Controller{
             } else {
                 LogInCase logInCase = new LogInCase(db);
                 int logInResult = logInCase.loginUser(
-                        inputs.get("uTID").getText(),
-                        inputs.get("password").getText());
+                        inputs.get(UserInfoConstants.UT_ID).getText(),
+                        inputs.get(UserInfoConstants.PASSWORD).getText());
                 ControllerFactory.getInstance().setCurrentUser(SelfUserBuilder.build(db, logInResult));
                 view = new SwipeView();
             }

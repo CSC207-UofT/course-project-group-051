@@ -1,4 +1,4 @@
-package usecase;
+package phase2.usecase;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SwipeCaseTest {
 
-    private DataAccessInterface db;
+    private DataBaseAccess db = new DataBaseAccess();
     private SwipeCase swipeCase;
     private static SelfUser currentUser;
     private static PublicUser publicUser;
@@ -24,7 +24,7 @@ class SwipeCaseTest {
     void setUp() {
 
         db = new DataBaseAccess();
-        db.setUp();
+        db.setUpDB();
 
         currentUser = SelfUserBuilder.build(db, 1);
         publicUser = PublicUserBuilder.build(db, 2);

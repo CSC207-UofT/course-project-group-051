@@ -40,7 +40,11 @@ public class SwipeController extends Controller {
 
         EventHandler<ActionEvent> event;
 
-        event = e -> updateView();
+        event = e -> {
+
+            swiper.likeCurrentUser();
+            updateView();
+        };
 
         return event;
     }
